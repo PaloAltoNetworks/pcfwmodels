@@ -1,0 +1,49 @@
+{
+  "$extends": [],
+  "$modelName": "VpcUsedSubnet",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "vpcusedsubnets",
+  "$modelRestName": "vpcusedsubnet",
+  "additionalProperties": true,
+  "properties": {
+    "VPCID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "availabilityZones": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "subnetCIDRs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "VpcUsedSubnet",
+  "type": "object"
+}

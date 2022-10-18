@@ -1,0 +1,40 @@
+$queryable:
+  entries:
+  - name: q
+    description: Filtering query. Consequent `q` parameters will form an or.
+    type: string
+    multiple: true
+    example_value: tags contains ['hello=world'] or mode == 'TAP'
+
+$timewindow:
+  required:
+  - - - endRelative
+    - - startRelative
+    - - startRelative
+      - endRelative
+    - - startRelative
+      - endAbsolute
+    - - startAbsolute
+      - endRelative
+    - - startAbsolute
+      - endAbsolute
+  entries:
+  - name: endAbsolute
+    description: Set the absolute end of the time window.
+    type: time
+    example_value: 2018/04/08 10:42
+
+  - name: endRelative
+    description: Set the relative end of the time window.
+    type: duration
+    example_value: -1h
+
+  - name: startAbsolute
+    description: Set the absolute start of the time window.
+    type: time
+    example_value: 2018/03/08 10:42
+
+  - name: startRelative
+    description: Set the relative start of the time window.
+    type: duration
+    example_value: -1h

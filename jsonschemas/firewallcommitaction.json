@@ -1,0 +1,77 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallCommitAction",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallcommitactions",
+  "$modelRestName": "firewallcommitaction",
+  "additionalProperties": true,
+  "properties": {
+    "actionStatus": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Success",
+            "Failure"
+          ]
+        }
+      ]
+    },
+    "actionStatusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "affectedFirewalls": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewallstatus.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "objectID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "objectType": {
+      "$defaultValue": "FirewallRuleset",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "FirewallRuleset",
+            "FirewallTemplate",
+            "FirewallSecurityProfile",
+            "AWSLogDefinition"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "objectID"
+  ],
+  "title": "FirewallCommitAction",
+  "type": "object"
+}

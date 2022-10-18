@@ -1,0 +1,46 @@
+{
+  "$extends": [],
+  "$modelName": "AvailabilityZoneSubnetInterface",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "availabilityzonesubnetinterfaces",
+  "$modelRestName": "availabilityzonesubnetinterface",
+  "additionalProperties": true,
+  "properties": {
+    "availabilityZone": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "sourceNetworkInterfaces": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "subnetCIDR": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "AvailabilityZoneSubnetInterface",
+  "type": "object"
+}

@@ -1,0 +1,235 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallrule": {
+        "description": "Represents a firewall rule.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "TLSDecryption": {
+            "default": "None",
+            "description": "TLS Decryption.",
+            "enum": [
+              "None",
+              "Outbound",
+              "Inbound"
+            ]
+          },
+          "TLSDecryptionCertificateID": {
+            "description": "The Certificate ID used for TLS Decryption.",
+            "type": "string"
+          },
+          "URLCategories": {
+            "$ref": "./firewallurlcategorycriteria#/components/schemas/firewallurlcategorycriteria"
+          },
+          "action": {
+            "default": "Deny",
+            "description": "The action the firewall should take.",
+            "enum": [
+              "Deny",
+              "Allow",
+              "ResetServer",
+              "ResetBoth"
+            ]
+          },
+          "applications": {
+            "$ref": "./firewallapplicationcriteria#/components/schemas/firewallapplicationcriteria"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "destination": {
+            "$ref": "./firewalltargetcriteria#/components/schemas/firewalltargetcriteria"
+          },
+          "logging": {
+            "description": "Log this rule when hit.",
+            "type": "boolean"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "parentID": {
+            "description": "The FirewallTemplate ID, FirewallRuleset ID, or FirewallCommittedRuleset ID\nto which the rule belongs.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "parentType": {
+            "description": "The type of parentID to which the rule belongs.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "priority": {
+            "description": "Values 1-100 for a Templates and 101+ for a Ruleset.",
+            "example": 1,
+            "type": "integer"
+          },
+          "protoports": {
+            "$ref": "./firewallprotoportscriteria#/components/schemas/firewallprotoportscriteria"
+          },
+          "source": {
+            "$ref": "./firewalltargetcriteria#/components/schemas/firewalltargetcriteria"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "priority"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallrule",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallrules": {
+      "get": {
+        "description": "Retrieves the list of firewallrules.",
+        "operationId": "get-all-firewallrules",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewallrule"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    },
+    "/firewallrules/{id}": {
+      "delete": {
+        "description": "Deletes the firewallrule with the given ID.",
+        "operationId": "delete-firewallrule-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallrule"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the firewallrule with the given ID.",
+        "operationId": "get-firewallrule-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallrule"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Updates the firewallrule with the given ID.",
+        "operationId": "update-firewallrule-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewallrule"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallrule"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

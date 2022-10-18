@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "mirrorrule": {
+        "description": "Represents an AWS mirroring filter rule.",
+        "properties": {
+          "action": {
+            "default": "Accept",
+            "description": "The action to take on the filtered traffic.",
+            "enum": [
+              "Accept",
+              "Reject"
+            ]
+          },
+          "description": {
+            "description": "Description of the mirror rule.",
+            "type": "string"
+          },
+          "destinationCIDR": {
+            "default": "0.0.0.0/0",
+            "description": "Destination CIDR block to assign to the mirror rule.",
+            "type": "string"
+          },
+          "destinationPortRange": {
+            "description": "Destination port range.",
+            "type": "string"
+          },
+          "direction": {
+            "default": "Ingress",
+            "description": "The direction of the traffic to be mirrored.",
+            "enum": [
+              "Ingress",
+              "Egress"
+            ]
+          },
+          "number": {
+            "description": "Number of a traffic mirror rule. Must be unique in each direction.",
+            "example": 100,
+            "type": "integer"
+          },
+          "protocol": {
+            "description": "Protocol number to assign to the mirror rule.",
+            "type": "integer"
+          },
+          "sourceCIDR": {
+            "default": "0.0.0.0/0",
+            "description": "Source CIDR block to assign to the mirror rule.",
+            "type": "string"
+          },
+          "sourcePortRange": {
+            "description": "Source port range.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "mirrorrule",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awslogdefinition": {
+        "description": "Represents a Log Definition.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "decryptionEnabled": {
+            "description": "The Decryption log is enabled.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "Description of the object.",
+            "type": "string"
+          },
+          "logDestination": {
+            "description": "Destination for log output.",
+            "enum": [
+              "Moose",
+              "Cortex",
+              "S3External",
+              "Cloudwatch",
+              "KinesisFirehose"
+            ],
+            "example": "Moose"
+          },
+          "logDestinationName": {
+            "description": "Name of log destination.",
+            "example": "name",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "tags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "threatEnabled": {
+            "description": "The Threat log is enabled.",
+            "type": "boolean"
+          },
+          "trafficEnabled": {
+            "description": "The Traffic log is enabled.",
+            "type": "boolean"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "logDestination",
+          "logDestinationName",
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awslogdefinition",
+    "version": "1.0"
+  },
+  "paths": {
+    "/awslogdefinitions": {
+      "get": {
+        "description": "Retrieves the list of awslogdefinitions.",
+        "operationId": "get-all-awslogdefinitions",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/awslogdefinition"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "post": {
+        "description": "Creates a new awslogdefinition.",
+        "operationId": "create-a-new-awslogdefinition",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/awslogdefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awslogdefinition"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    },
+    "/awslogdefinitions/{id}": {
+      "delete": {
+        "description": "Deletes the logdefinition with the given ID.",
+        "operationId": "delete-awslogdefinition-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awslogdefinition"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the logdefinition with the given ID.",
+        "operationId": "get-awslogdefinition-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awslogdefinition"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Updates the logdefinition with the given ID.",
+        "operationId": "update-awslogdefinition-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/awslogdefinition"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awslogdefinition"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

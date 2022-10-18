@@ -1,0 +1,12 @@
+{
+  "$extends": [],
+  "$modelName": "Root",
+  "$modelPackage": "root",
+  "$modelResourceName": "root",
+  "$modelRestName": "root",
+  "additionalProperties": true,
+  "properties": {},
+  "required": [],
+  "title": "Root",
+  "type": "object"
+}

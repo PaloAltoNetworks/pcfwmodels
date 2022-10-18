@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewalllicensingcredits": {
+        "description": "Represents firewall licensing credits.",
+        "properties": {
+          "EnhancedSupportCredits": {
+            "description": "Represents enhanced support credits.",
+            "type": "integer"
+          },
+          "FWUsageCredits": {
+            "description": "Represents firewall usage credits.",
+            "type": "integer"
+          },
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "PrismaCloudCredits": {
+            "description": "Represents prisma cloud management credits.",
+            "type": "integer"
+          },
+          "TPUsageCredits": {
+            "description": "Represents threat prevention usage credits.",
+            "type": "integer"
+          },
+          "TrafficSecuredCredits": {
+            "description": "Represents traffic secured usage credits.",
+            "type": "integer"
+          },
+          "URLFUsageCredits": {
+            "description": "Represents url filtering usage credits.",
+            "type": "integer"
+          },
+          "cloudAccountID": {
+            "description": "Represents the user cloud account ID.",
+            "example": "cloudxyz",
+            "type": "string"
+          },
+          "firewallResource": {
+            "description": "Represents firewall resource.",
+            "example": "firewall1",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "tenantID": {
+            "description": "Represents the cloud ngfw tenant ID.",
+            "example": "tenantxyz",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "The timestamp of this record.",
+            "example": "2018-06-14T23:10:46.420397985Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cloudAccountID",
+          "firewallResource",
+          "tenantID",
+          "timestamp"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewalllicensingcredits",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewalllicensingcredits": {
+      "get": {
+        "description": "Retrieves the list of firewall licensing credits.",
+        "operationId": "get-all-firewalllicensingcredits",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewalllicensingcredits"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/licensing",
+          "licensingsrv"
+        ]
+      },
+      "post": {
+        "description": "Creates a new firewalllicensingcredits.",
+        "operationId": "create-a-new-firewalllicensingcredits",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewalllicensingcredits"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewalllicensingcredits"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/licensing",
+          "licensingsrv"
+        ]
+      }
+    },
+    "/firewalllicensingcredits/{id}": {
+      "get": {
+        "description": "Retrieves the firewalllicensingcredits with the given ID.",
+        "operationId": "get-firewalllicensingcredits-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewalllicensingcredits"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/licensing",
+          "licensingsrv"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/licensing'",
+      "name": "core/licensing"
+    },
+    {
+      "description": "This tag is for package 'licensingsrv'",
+      "name": "licensingsrv"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "vpcusedsubnet": {
+        "description": "Represents association of a VPC ID to corresponding availability zones and used\nsubnet CIDR blocks in the VPC.",
+        "properties": {
+          "VPCID": {
+            "description": "An AWS VPC ID.",
+            "type": "string"
+          },
+          "availabilityZones": {
+            "description": "The list of all availability zones associated with the VPC.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "subnetCIDRs": {
+            "description": "The list of all currently used subnet CIDR blocks in this VPC.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "vpcusedsubnet",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

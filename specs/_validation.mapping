@@ -1,0 +1,59 @@
+$availabilityzone:
+  elemental:
+    name: ValidateAvailabilityZone
+
+$cidr:
+  elemental:
+    name: ValidateCIDR
+
+$cidrs:
+  elemental:
+    name: ValidateCIDRList
+
+$fqdn:
+  elemental:
+    name: ValidateFQDN
+
+$fqdns:
+  elemental:
+    name: ValidateFQDNList
+
+$optionalcidrs:
+  elemental:
+    name: ValidateOptionalCIDRList
+
+$optionalfqdns:
+  elemental:
+    name: ValidateOptionalFQDNList
+
+$optionalprotoports:
+  elemental:
+    name: ValidateOptionalProtoPorts
+
+$optionalurls:
+  elemental:
+    name: ValidateOptionalURLs
+
+$portrange:
+  elemental:
+    name: ValidatePortRange
+
+$protoport:
+  elemental:
+    name: ValidateProtoPort
+
+$tagsWithoutReservedPrefixes:
+  elemental:
+    name: ValidateTagsWithoutReservedPrefixes
+
+$url:
+  elemental:
+    name: ValidateURL
+
+$urls:
+  elemental:
+    name: ValidateURLs
+
+$whystring:
+  elemental:
+    name: ValidateWhyString

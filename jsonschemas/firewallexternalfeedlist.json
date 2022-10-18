@@ -1,0 +1,40 @@
+{
+  "$extends": [
+    "@namespaced"
+  ],
+  "$modelName": "FirewallExternalFeedList",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallexternalfeedlists",
+  "$modelRestName": "firewallexternalfeedlist",
+  "additionalProperties": true,
+  "properties": {
+    "feeds": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewallexternalfeed.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallExternalFeedList",
+  "type": "object"
+}

@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "trendqueryitem": {
+        "description": "Represents an item in a trendquery result.",
+        "properties": {
+          "count": {
+            "description": "The value of the subject at the given timestamp.",
+            "type": "integer"
+          },
+          "minutes": {
+            "description": "Number of minutes represented by the trend.",
+            "type": "integer"
+          },
+          "timestamp": {
+            "description": "The timestamp of the trend.",
+            "example": "2018-06-14T23:10:46.420397985Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timestamp"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "trendqueryitem",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logserv'",
+      "name": "logserv"
+    }
+  ]
+}

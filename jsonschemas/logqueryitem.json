@@ -1,0 +1,37 @@
+{
+  "$extends": [],
+  "$modelName": "LogQueryItem",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "logqueryitems",
+  "$modelRestName": "logqueryitem",
+  "additionalProperties": true,
+  "properties": {
+    "fields": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "timestamp": {
+      "$required": true,
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "timestamp"
+  ],
+  "title": "LogQueryItem",
+  "type": "object"
+}

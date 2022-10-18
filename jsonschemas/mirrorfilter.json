@@ -1,0 +1,39 @@
+{
+  "$extends": [],
+  "$modelName": "MirrorFilter",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "mirrorfilters",
+  "$modelRestName": "mirrorfilter",
+  "additionalProperties": true,
+  "properties": {
+    "networkServices": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "rules": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "mirrorrule.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "MirrorFilter",
+  "type": "object"
+}

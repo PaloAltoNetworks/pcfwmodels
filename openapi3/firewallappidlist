@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallappidlist": {
+        "description": "This a readonly list that returns all of the NGFW AppIDs that the user can\nselect.",
+        "properties": {
+          "appIDs": {
+            "description": "A list of NGFW AppIDs.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallappidlist",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallappidlist": {
+      "get": {
+        "description": "Retrieves a firewallappidlist.",
+        "operationId": "get-all-firewallappidlist",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewallappidlist"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

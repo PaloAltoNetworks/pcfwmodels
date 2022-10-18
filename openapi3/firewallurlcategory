@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallurlcategory": {
+        "description": "Represents a URL category.",
+        "properties": {
+          "action": {
+            "default": "Alert",
+            "description": "The action the firewall should take.",
+            "enum": [
+              "Alert",
+              "Allow",
+              "Block"
+            ]
+          },
+          "name": {
+            "description": "The name of the URL Catgory.",
+            "example": "abused-drugs",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallurlcategory",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

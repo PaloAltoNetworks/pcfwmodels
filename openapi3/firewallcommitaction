@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallcommitaction": {
+        "description": "Represents committing FilewallRulesets, FilewallTemplates,\nFilewallSecurityProfiles, \nand AWSLogDefinitions to a firewall.",
+        "properties": {
+          "actionStatus": {
+            "description": "The status of action.",
+            "enum": [
+              "Success",
+              "Failure"
+            ],
+            "example": "Success",
+            "readOnly": true
+          },
+          "actionStatusReason": {
+            "description": "The action status description.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "affectedFirewalls": {
+            "description": "The firewalls effected by the commit action.",
+            "items": {
+              "$ref": "./firewallstatus#/components/schemas/firewallstatus"
+            },
+            "type": "array"
+          },
+          "objectID": {
+            "description": "The ID of the object being committed.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          },
+          "objectType": {
+            "default": "FirewallRuleset",
+            "description": "The type of object being committed.",
+            "enum": [
+              "FirewallRuleset",
+              "FirewallTemplate",
+              "FirewallSecurityProfile",
+              "AWSLogDefinition"
+            ]
+          }
+        },
+        "required": [
+          "objectID"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallcommitaction",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallcommitactions": {
+      "post": {
+        "description": "Creates a new firewallcommitaction.",
+        "operationId": "create-a-new-firewallcommitaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewallcommitaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallcommitaction"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

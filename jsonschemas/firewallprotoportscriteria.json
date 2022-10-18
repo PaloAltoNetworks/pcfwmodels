@@ -1,0 +1,36 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallProtoPortsCriteria",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallprotoportscriterias",
+  "$modelRestName": "firewallprotoportscriteria",
+  "additionalProperties": true,
+  "properties": {
+    "applicationDefaults": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "protoportList": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallProtoPortsCriteria",
+  "type": "object"
+}

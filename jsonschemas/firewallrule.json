@@ -1,0 +1,198 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@namespaced",
+    "@zoned",
+    "@timeable"
+  ],
+  "$modelName": "FirewallRule",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallrules",
+  "$modelRestName": "firewallrule",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "TLSDecryption": {
+      "$defaultValue": "None",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "None",
+            "Outbound",
+            "Inbound"
+          ]
+        }
+      ]
+    },
+    "TLSDecryptionCertificateID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "URLCategories": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "firewallurlcategorycriteria.json"
+        }
+      ]
+    },
+    "action": {
+      "$defaultValue": "Deny",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Deny",
+            "Allow",
+            "ResetServer",
+            "ResetBoth"
+          ]
+        }
+      ]
+    },
+    "applications": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "firewallapplicationcriteria.json"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "destination": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "firewalltargetcriteria.json"
+        }
+      ]
+    },
+    "logging": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "parentID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "parentType": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "priority": {
+      "$required": true,
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        }
+      ]
+    },
+    "protoports": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "firewallprotoportscriteria.json"
+        }
+      ]
+    },
+    "source": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "firewalltargetcriteria.json"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "priority"
+  ],
+  "title": "FirewallRule",
+  "type": "object"
+}

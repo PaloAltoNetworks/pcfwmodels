@@ -1,0 +1,23 @@
+{
+  "$extends": [],
+  "$modelName": "AWSTAPModeSettings",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awstapmodesettings",
+  "$modelRestName": "awstapmodesettings",
+  "additionalProperties": true,
+  "properties": {
+    "logDefinitionID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "logDefinitionID"
+  ],
+  "title": "AWSTAPModeSettings",
+  "type": "object"
+}

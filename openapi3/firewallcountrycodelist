@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallcountrycodelist": {
+        "description": "A list of NGFW Country codes.",
+        "properties": {
+          "countrycodes": {
+            "description": "A list of NGFW Country codes.",
+            "items": {
+              "$ref": "./firewallcountrycode#/components/schemas/firewallcountrycode"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallcountrycodelist",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallcountrycodelist": {
+      "get": {
+        "description": "Retrieves a firewallcountrycodelist.",
+        "operationId": "get-all-firewallcountrycodelist",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewallcountrycodelist"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

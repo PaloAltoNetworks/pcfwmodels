@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallexternalfeed": {
+        "description": "Represents a NGFW external feed.",
+        "properties": {
+          "feedtype": {
+            "default": "IPList",
+            "description": "The type of external feed.",
+            "enum": [
+              "IPList",
+              "URLList"
+            ]
+          },
+          "name": {
+            "description": "External feed name.",
+            "example": "name",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallexternalfeed",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

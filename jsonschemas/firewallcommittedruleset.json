@@ -1,0 +1,102 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@namespaced",
+    "@zoned",
+    "@timeable"
+  ],
+  "$modelName": "FirewallCommittedRuleset",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallcommittedrulesets",
+  "$modelRestName": "firewallcommittedruleset",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "committedTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "objectID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "objectType": {
+      "$defaultValue": "FirewallRuleset",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "FirewallRuleset",
+            "FirewallTemplate"
+          ]
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallCommittedRuleset",
+  "type": "object"
+}

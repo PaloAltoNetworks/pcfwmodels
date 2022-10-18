@@ -1,0 +1,156 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced",
+    "@tags",
+    "@zoned",
+    "@timeable"
+  ],
+  "$modelName": "AWSLogDefinition",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awslogdefinitions",
+  "$modelRestName": "awslogdefinition",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "decryptionEnabled": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "logDestination": {
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "Moose",
+            "Cortex",
+            "S3External",
+            "Cloudwatch",
+            "KinesisFirehose"
+          ]
+        }
+      ]
+    },
+    "logDestinationName": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "threatEnabled": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "trafficEnabled": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "logDestination",
+    "logDestinationName",
+    "name"
+  ],
+  "title": "AWSLogDefinition",
+  "type": "object"
+}

@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "availabilityzonesubnet": {
+        "description": "Represents association of an availability zone and an avaialble subnet in that\nzone.",
+        "properties": {
+          "availabilityZone": {
+            "description": "The availability zone.",
+            "type": "string"
+          },
+          "subnetCIDR": {
+            "description": "The AWS subnet CIDR block in this availability zone.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "availabilityzonesubnet",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

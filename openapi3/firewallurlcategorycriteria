@@ -1,0 +1,71 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallurlcategorycriteria": {
+        "description": "Represents rule URL category criteria.\nThis is not an external object but a child object used by the Rule object.",
+        "properties": {
+          "URLCategories": {
+            "description": "NGFW URL categories.  See FirewallURLCategoryList for the list.",
+            "example": [
+              "adult",
+              "high-risk",
+              "hacking"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "customExternalFeedIDs": {
+            "description": "List FirewallCustomExternalFeed IDs that are of type URLList.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "customURLCategoryIDs": {
+            "description": "List of FirewallCustomURLCategory IDs.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "externalFeedIDs": {
+            "description": "List of URL intelligence feeds.",
+            "example": [
+              "PaloAltoNetworks-AuthenticationPortalExcluedList"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallurlcategorycriteria",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

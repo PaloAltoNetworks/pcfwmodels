@@ -1,0 +1,254 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallcustomexternalfeed": {
+        "description": "Represents an external intelligence feed referenced by TargetCriteria.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "certificateProfile": {
+            "description": "TODO figure out what this is.",
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the object.",
+            "type": "string"
+          },
+          "feedtype": {
+            "default": "IPList",
+            "description": "The type of external feed.",
+            "enum": [
+              "IPList",
+              "URLList"
+            ]
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "sourceURL": {
+            "description": "The URL of the external feed.",
+            "example": "https://saasedl.paloaltonetworks.com/feeds/m365/china/any/all/ipv4",
+            "type": "string"
+          },
+          "tags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "updateDailyTime": {
+            "description": "Specifies the time of day when the updateFrequency is Daily.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updateFrequency": {
+            "default": "Daily",
+            "description": "How often is the external feed updated.",
+            "enum": [
+              "Daily",
+              "Hourly"
+            ]
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "sourceURL"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallcustomexternalfeed",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallcustomexternalfeeds": {
+      "get": {
+        "description": "Retrieves the list of firewallcustomexternalfeeds.",
+        "operationId": "get-all-firewallcustomexternalfeeds",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewallcustomexternalfeed"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "post": {
+        "description": "Creates a new firewallcustomexternalfeed.",
+        "operationId": "create-a-new-firewallcustomexternalfeed",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewallcustomexternalfeed"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallcustomexternalfeed"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    },
+    "/firewallcustomexternalfeeds/{id}": {
+      "delete": {
+        "description": "Deletes the externalfeed with the given ID.",
+        "operationId": "delete-firewallcustomexternalfeed-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallcustomexternalfeed"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the externalfeed with the given ID.",
+        "operationId": "get-firewallcustomexternalfeed-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallcustomexternalfeed"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Updates the externalfeed with the given ID.",
+        "operationId": "update-firewallcustomexternalfeed-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewallcustomexternalfeed"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallcustomexternalfeed"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

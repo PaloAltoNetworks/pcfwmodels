@@ -1,0 +1,44 @@
+{
+  "$extends": [],
+  "$modelName": "TrendQueryItem",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "trendqueryitems",
+  "$modelRestName": "trendqueryitem",
+  "additionalProperties": true,
+  "properties": {
+    "count": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "minutes": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "timestamp": {
+      "$required": true,
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "timestamp"
+  ],
+  "title": "TrendQueryItem",
+  "type": "object"
+}

@@ -1,0 +1,137 @@
+{
+  "$extends": [
+    "@namespaced",
+    "@identifiable-stored",
+    "@zoned"
+  ],
+  "$modelName": "FirewallLicensingCredits",
+  "$modelPackage": "licensingsrv",
+  "$modelResourceName": "firewalllicensingcredits",
+  "$modelRestName": "firewalllicensingcredits",
+  "additionalProperties": true,
+  "properties": {
+    "EnhancedSupportCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "FWUsageCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "PrismaCloudCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "TPUsageCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "TrafficSecuredCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "URLFUsageCredits": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "cloudAccountID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "firewallResource": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "tenantID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "timestamp": {
+      "$required": true,
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "cloudAccountID",
+    "firewallResource",
+    "tenantID",
+    "timestamp"
+  ],
+  "title": "FirewallLicensingCredits",
+  "type": "object"
+}

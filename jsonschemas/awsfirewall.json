@@ -1,0 +1,207 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced",
+    "@tags",
+    "@zoned",
+    "@timeable"
+  ],
+  "$modelName": "AWSFirewall",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awsfirewalls",
+  "$modelRestName": "awsfirewall",
+  "additionalProperties": true,
+  "properties": {
+    "AWSNGFWModeSettings": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "awsngfwmodesettings.json"
+        }
+      ]
+    },
+    "AWSTAPModeSettings": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "awstapmodesettings.json"
+        }
+      ]
+    },
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "attachments": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "awsattachment.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "lastCommitTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "licenseType": {
+      "$defaultValue": "TAP",
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "TAP",
+            "Basic",
+            "Advanced"
+          ]
+        }
+      ]
+    },
+    "mode": {
+      "$defaultValue": "TAP",
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "TAP",
+            "NGFW"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "$defaultValue": "Creating",
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Ready",
+            "Failed"
+          ]
+        }
+      ]
+    },
+    "statusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "AWSFirewall",
+  "type": "object"
+}

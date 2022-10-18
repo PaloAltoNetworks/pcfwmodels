@@ -1,0 +1,65 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awsendpoint": {
+        "description": "Represents the NGFW endpoint where the NGFW attaches.\nThis object is a sub-object of NGFWAttachment.",
+        "properties": {
+          "endpointID": {
+            "description": "The AWS endpoint created by the NGFW.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "status": {
+            "default": "Creating",
+            "description": "The status of the of endpoint.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Accepted",
+              "Failed"
+            ],
+            "readOnly": true
+          },
+          "statusReason": {
+            "description": "The status description of endpoint.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "subnetID": {
+            "description": "The AWS subnet ID.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          }
+        },
+        "required": [
+          "subnetID"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awsendpoint",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

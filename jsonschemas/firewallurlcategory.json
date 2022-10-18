@@ -1,0 +1,38 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallURLCategory",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallurlcategories",
+  "$modelRestName": "firewallurlcategory",
+  "additionalProperties": true,
+  "properties": {
+    "action": {
+      "$defaultValue": "Alert",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Alert",
+            "Allow",
+            "Block"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "FirewallURLCategory",
+  "type": "object"
+}

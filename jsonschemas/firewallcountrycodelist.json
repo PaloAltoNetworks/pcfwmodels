@@ -1,0 +1,40 @@
+{
+  "$extends": [
+    "@namespaced"
+  ],
+  "$modelName": "FirewallCountryCodelist",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallcountrycodelist",
+  "$modelRestName": "firewallcountrycodelist",
+  "additionalProperties": true,
+  "properties": {
+    "countrycodes": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewallcountrycode.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallCountryCodelist",
+  "type": "object"
+}

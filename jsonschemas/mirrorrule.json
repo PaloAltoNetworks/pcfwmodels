@@ -1,0 +1,114 @@
+{
+  "$extends": [],
+  "$modelName": "MirrorRule",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "mirrorrules",
+  "$modelRestName": "mirrorrule",
+  "additionalProperties": true,
+  "properties": {
+    "action": {
+      "$defaultValue": "Accept",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Accept",
+            "Reject"
+          ]
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "destinationCIDR": {
+      "$defaultValue": "0.0.0.0/0",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "destinationPortRange": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "direction": {
+      "$defaultValue": "Ingress",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Ingress",
+            "Egress"
+          ]
+        }
+      ]
+    },
+    "number": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "protocol": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maximum": 255,
+          "type": "integer"
+        }
+      ]
+    },
+    "sourceCIDR": {
+      "$defaultValue": "0.0.0.0/0",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "sourcePortRange": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "number"
+  ],
+  "title": "MirrorRule",
+  "type": "object"
+}

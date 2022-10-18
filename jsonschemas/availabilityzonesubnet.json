@@ -1,0 +1,33 @@
+{
+  "$extends": [],
+  "$modelName": "AvailabilityZoneSubnet",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "availabilityzonesubnets",
+  "$modelRestName": "availabilityzonesubnet",
+  "additionalProperties": true,
+  "properties": {
+    "availabilityZone": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "subnetCIDR": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "AvailabilityZoneSubnet",
+  "type": "object"
+}

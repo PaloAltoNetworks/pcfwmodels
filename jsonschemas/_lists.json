@@ -1,0 +1,312 @@
+{
+  "properties": {
+    "availabilityzonesubnetinterfaces": {
+      "items": {
+        "$ref": "availabilityzonesubnetinterface.json"
+      },
+      "type": "array"
+    },
+    "availabilityzonesubnets": {
+      "items": {
+        "$ref": "availabilityzonesubnet.json"
+      },
+      "type": "array"
+    },
+    "awsattachments": {
+      "items": {
+        "$ref": "awsattachment.json"
+      },
+      "type": "array"
+    },
+    "awsendpoints": {
+      "items": {
+        "$ref": "awsendpoint.json"
+      },
+      "type": "array"
+    },
+    "awsfirewalls": {
+      "items": {
+        "$ref": "awsfirewall.json"
+      },
+      "type": "array"
+    },
+    "awslogdefinitions": {
+      "items": {
+        "$ref": "awslogdefinition.json"
+      },
+      "type": "array"
+    },
+    "awsngfwmodesettings": {
+      "items": {
+        "$ref": "awsngfwmodesettings.json"
+      },
+      "type": "array"
+    },
+    "awstapmodesettings": {
+      "items": {
+        "$ref": "awstapmodesettings.json"
+      },
+      "type": "array"
+    },
+    "deploymentadvisorsubnethelpers": {
+      "items": {
+        "$ref": "deploymentadvisorsubnethelper.json"
+      },
+      "type": "array"
+    },
+    "deploymentadvisorterraforms": {
+      "items": {
+        "$ref": "deploymentadvisorterraform.json"
+      },
+      "type": "array"
+    },
+    "firewallappidlist": {
+      "items": {
+        "$ref": "firewallappidlist.json"
+      },
+      "type": "array"
+    },
+    "firewallapplicationcriterias": {
+      "items": {
+        "$ref": "firewallapplicationcriteria.json"
+      },
+      "type": "array"
+    },
+    "firewallapplicationgroups": {
+      "items": {
+        "$ref": "firewallapplicationgroup.json"
+      },
+      "type": "array"
+    },
+    "firewallautoincludeprofiles": {
+      "items": {
+        "$ref": "firewallautoincludeprofile.json"
+      },
+      "type": "array"
+    },
+    "firewallcertificates": {
+      "items": {
+        "$ref": "firewallcertificate.json"
+      },
+      "type": "array"
+    },
+    "firewallcidrlists": {
+      "items": {
+        "$ref": "firewallcidrlist.json"
+      },
+      "type": "array"
+    },
+    "firewallcommitactions": {
+      "items": {
+        "$ref": "firewallcommitaction.json"
+      },
+      "type": "array"
+    },
+    "firewallcommittedrulesets": {
+      "items": {
+        "$ref": "firewallcommittedruleset.json"
+      },
+      "type": "array"
+    },
+    "firewallcountrycodelist": {
+      "items": {
+        "$ref": "firewallcountrycodelist.json"
+      },
+      "type": "array"
+    },
+    "firewallcountrycodes": {
+      "items": {
+        "$ref": "firewallcountrycode.json"
+      },
+      "type": "array"
+    },
+    "firewallcustomexternalfeeds": {
+      "items": {
+        "$ref": "firewallcustomexternalfeed.json"
+      },
+      "type": "array"
+    },
+    "firewallcustomurlcategories": {
+      "items": {
+        "$ref": "firewallcustomurlcategory.json"
+      },
+      "type": "array"
+    },
+    "firewallexternalfeedlists": {
+      "items": {
+        "$ref": "firewallexternalfeedlist.json"
+      },
+      "type": "array"
+    },
+    "firewallexternalfeeds": {
+      "items": {
+        "$ref": "firewallexternalfeed.json"
+      },
+      "type": "array"
+    },
+    "firewallfqdnlists": {
+      "items": {
+        "$ref": "firewallfqdnlist.json"
+      },
+      "type": "array"
+    },
+    "firewallgroups": {
+      "items": {
+        "$ref": "firewallgroup.json"
+      },
+      "type": "array"
+    },
+    "firewalllicensingcredits": {
+      "items": {
+        "$ref": "firewalllicensingcredits.json"
+      },
+      "type": "array"
+    },
+    "firewallprotoportscriterias": {
+      "items": {
+        "$ref": "firewallprotoportscriteria.json"
+      },
+      "type": "array"
+    },
+    "firewallrollbackactions": {
+      "items": {
+        "$ref": "firewallrollbackaction.json"
+      },
+      "type": "array"
+    },
+    "firewallrules": {
+      "items": {
+        "$ref": "firewallrule.json"
+      },
+      "type": "array"
+    },
+    "firewallrulesets": {
+      "items": {
+        "$ref": "firewallruleset.json"
+      },
+      "type": "array"
+    },
+    "firewallsecurityprofiles": {
+      "items": {
+        "$ref": "firewallsecurityprofile.json"
+      },
+      "type": "array"
+    },
+    "firewallstatuses": {
+      "items": {
+        "$ref": "firewallstatus.json"
+      },
+      "type": "array"
+    },
+    "firewalltargetcriterias": {
+      "items": {
+        "$ref": "firewalltargetcriteria.json"
+      },
+      "type": "array"
+    },
+    "firewalltemplates": {
+      "items": {
+        "$ref": "firewalltemplate.json"
+      },
+      "type": "array"
+    },
+    "firewallurlcategories": {
+      "items": {
+        "$ref": "firewallurlcategory.json"
+      },
+      "type": "array"
+    },
+    "firewallurlcategorycriterias": {
+      "items": {
+        "$ref": "firewallurlcategorycriteria.json"
+      },
+      "type": "array"
+    },
+    "firewallurlcategorylists": {
+      "items": {
+        "$ref": "firewallurlcategorylist.json"
+      },
+      "type": "array"
+    },
+    "logqueries": {
+      "items": {
+        "$ref": "logquery.json"
+      },
+      "type": "array"
+    },
+    "logqueryitems": {
+      "items": {
+        "$ref": "logqueryitem.json"
+      },
+      "type": "array"
+    },
+    "mirrorfilters": {
+      "items": {
+        "$ref": "mirrorfilter.json"
+      },
+      "type": "array"
+    },
+    "mirrorrules": {
+      "items": {
+        "$ref": "mirrorrule.json"
+      },
+      "type": "array"
+    },
+    "root": {
+      "items": {
+        "$ref": "root.json"
+      },
+      "type": "array"
+    },
+    "topqueries": {
+      "items": {
+        "$ref": "topquery.json"
+      },
+      "type": "array"
+    },
+    "topqueryitems": {
+      "items": {
+        "$ref": "topqueryitem.json"
+      },
+      "type": "array"
+    },
+    "totalqueries": {
+      "items": {
+        "$ref": "totalquery.json"
+      },
+      "type": "array"
+    },
+    "trendqueries": {
+      "items": {
+        "$ref": "trendquery.json"
+      },
+      "type": "array"
+    },
+    "trendqueryitems": {
+      "items": {
+        "$ref": "trendqueryitem.json"
+      },
+      "type": "array"
+    },
+    "vpcavailablesubnets": {
+      "items": {
+        "$ref": "vpcavailablesubnet.json"
+      },
+      "type": "array"
+    },
+    "vpcusedsubnets": {
+      "items": {
+        "$ref": "vpcusedsubnet.json"
+      },
+      "type": "array"
+    },
+    "vpcvailabilityzonesubnets": {
+      "items": {
+        "$ref": "vpcavailabilityzonesubnet.json"
+      },
+      "type": "array"
+    }
+  },
+  "title": "api resource lists",
+  "type": "object"
+}

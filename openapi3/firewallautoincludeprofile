@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallautoincludeprofile": {
+        "description": "Represents match criteria for selecting which AWSInstance objects belong to a\nGroup.",
+        "properties": {
+          "VPC": {
+            "description": "An AWS VPC ID.",
+            "type": "string"
+          },
+          "tags": {
+            "description": "A tag list.",
+            "example": [
+              "name=value",
+              "app=prod"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallautoincludeprofile",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

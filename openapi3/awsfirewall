@@ -1,0 +1,278 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awsfirewall": {
+        "description": "Represents an AWS firewall instance.",
+        "properties": {
+          "AWSNGFWModeSettings": {
+            "$ref": "./awsngfwmodesettings#/components/schemas/awsngfwmodesettings"
+          },
+          "AWSTAPModeSettings": {
+            "$ref": "./awstapmodesettings#/components/schemas/awstapmodesettings"
+          },
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "attachments": {
+            "description": "The firewall attachments.",
+            "items": {
+              "$ref": "./awsattachment#/components/schemas/awsattachment"
+            },
+            "type": "array"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the object.",
+            "type": "string"
+          },
+          "lastCommitTime": {
+            "description": "The date when the fireall was last committed.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "licenseType": {
+            "default": "TAP",
+            "description": "The license type of the firewall.",
+            "enum": [
+              "TAP",
+              "Basic",
+              "Advanced"
+            ],
+            "readOnly": true
+          },
+          "mode": {
+            "default": "TAP",
+            "description": "The mode of the of firewall.",
+            "enum": [
+              "TAP",
+              "NGFW"
+            ],
+            "readOnly": true
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "status": {
+            "default": "Creating",
+            "description": "The status of the of firewall.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Deleting",
+              "Ready",
+              "Failed"
+            ],
+            "readOnly": true
+          },
+          "statusReason": {
+            "description": "The status description of the firewall.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "tags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awsfirewall",
+    "version": "1.0"
+  },
+  "paths": {
+    "/awsfirewalls": {
+      "get": {
+        "description": "Retrieves the list of awsfirewalls.",
+        "operationId": "get-all-awsfirewalls",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/awsfirewall"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "post": {
+        "description": "Creates a new awsfirewall.",
+        "operationId": "create-a-new-awsfirewall",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/awsfirewall"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awsfirewall"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    },
+    "/awsfirewalls/{id}": {
+      "delete": {
+        "description": "Deletes the awsfirewall with the given ID.",
+        "operationId": "delete-awsfirewall-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awsfirewall"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the awsfirewall with the given ID.",
+        "operationId": "get-awsfirewall-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awsfirewall"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Updates the awsfirewall with the given ID.",
+        "operationId": "update-awsfirewall-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/awsfirewall"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/awsfirewall"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallURLCategoryCriteria",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallurlcategorycriterias",
+  "$modelRestName": "firewallurlcategorycriteria",
+  "additionalProperties": true,
+  "properties": {
+    "URLCategories": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "customExternalFeedIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "customURLCategoryIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "externalFeedIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallURLCategoryCriteria",
+  "type": "object"
+}

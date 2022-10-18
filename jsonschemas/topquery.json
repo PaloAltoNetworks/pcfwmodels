@@ -1,0 +1,49 @@
+{
+  "$extends": [],
+  "$modelName": "TopQuery",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "topqueries",
+  "$modelRestName": "topquery",
+  "additionalProperties": true,
+  "properties": {
+    "topResult": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "topqueryitem.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "topType": {
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "SourceIP",
+            "DestinationIP",
+            "SourceCountry",
+            "DestinationCountry",
+            "Application",
+            "Attacker",
+            "AttackVictim",
+            "Attack",
+            "AttackType",
+            "AttackedApplication",
+            "URLCategory"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "topType"
+  ],
+  "title": "TopQuery",
+  "type": "object"
+}

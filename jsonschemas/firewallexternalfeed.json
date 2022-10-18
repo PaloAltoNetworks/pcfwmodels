@@ -1,0 +1,38 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallExternalFeed",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallexternalfeeds",
+  "$modelRestName": "firewallexternalfeed",
+  "additionalProperties": true,
+  "properties": {
+    "feedtype": {
+      "$defaultValue": "IPList",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "IPList",
+            "URLList"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "$readOnly": true,
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "FirewallExternalFeed",
+  "type": "object"
+}

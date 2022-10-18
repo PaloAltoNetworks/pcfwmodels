@@ -1,0 +1,147 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced"
+  ],
+  "$modelName": "DeploymentAdvisorTerraform",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "deploymentadvisorterraforms",
+  "$modelRestName": "deploymentadvisorterraform",
+  "additionalProperties": true,
+  "properties": {
+    "AMIIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWMode": {
+      "$defaultValue": "TAP",
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "TAP",
+            "NGFW"
+          ]
+        }
+      ]
+    },
+    "VPCAvailabilityZoneSubnets": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "vpcavailabilityzonesubnet.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "dynamicPolicyUpdateEnabled": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "filter": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "mirrorfilter.json"
+        }
+      ]
+    },
+    "instanceIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "instanceTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "NGFWMode",
+    "name"
+  ],
+  "title": "DeploymentAdvisorTerraform",
+  "type": "object"
+}

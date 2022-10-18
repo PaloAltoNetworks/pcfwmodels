@@ -1,0 +1,61 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallRollbackAction",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallrollbackactions",
+  "$modelRestName": "firewallrollbackaction",
+  "additionalProperties": true,
+  "properties": {
+    "actionStatus": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Success",
+            "Failure"
+          ]
+        }
+      ]
+    },
+    "actionStatusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "affectedFirewalls": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewallstatus.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "committedFirewallRulesetID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "committedFirewallRulesetID"
+  ],
+  "title": "FirewallRollbackAction",
+  "type": "object"
+}

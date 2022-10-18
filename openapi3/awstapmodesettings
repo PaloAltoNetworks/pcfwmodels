@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awstapmodesettings": {
+        "description": "Represents settings specific to TAP mode.\nThis object is a sub-object of AWSFirewall.",
+        "properties": {
+          "logDefinitionID": {
+            "description": "An awslogdefinition ID.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logDefinitionID"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awstapmodesettings",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallApplicationCriteria",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallapplicationcriterias",
+  "$modelRestName": "firewallapplicationcriteria",
+  "additionalProperties": true,
+  "properties": {
+    "appIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "applicationGroupIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallApplicationCriteria",
+  "type": "object"
+}

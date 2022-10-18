@@ -1,0 +1,36 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallAutoIncludeProfile",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallautoincludeprofiles",
+  "$modelRestName": "firewallautoincludeprofile",
+  "additionalProperties": true,
+  "properties": {
+    "VPC": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallAutoIncludeProfile",
+  "type": "object"
+}

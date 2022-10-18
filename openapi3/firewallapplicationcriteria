@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallapplicationcriteria": {
+        "description": "Represents rule criteria for specifying AppIds.\nThis is not an external object but a child object used by the Rule object.",
+        "properties": {
+          "appIDs": {
+            "description": "List of NGFW App IDs.  See AppIDList.",
+            "example": [
+              "ftp",
+              "http-proxy",
+              "ssh"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "applicationGroupIDs": {
+            "description": "A list of FirewallApplicationGroup IDs.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallapplicationcriteria",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

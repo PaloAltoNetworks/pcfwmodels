@@ -1,0 +1,35 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallCountryCode",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallcountrycodes",
+  "$modelRestName": "firewallcountrycode",
+  "additionalProperties": true,
+  "properties": {
+    "description": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallCountryCode",
+  "type": "object"
+}

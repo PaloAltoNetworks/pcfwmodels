@@ -1,0 +1,43 @@
+{
+  "$extends": [],
+  "$modelName": "TrendQuery",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "trendqueries",
+  "$modelRestName": "trendquery",
+  "additionalProperties": true,
+  "properties": {
+    "trendResult": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "trendqueryitem.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "trendType": {
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "Traffic",
+            "IngressBytes",
+            "EgressBytes",
+            "ThreatsDetected",
+            "ThreatsBlocked"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "trendType"
+  ],
+  "title": "TrendQuery",
+  "type": "object"
+}

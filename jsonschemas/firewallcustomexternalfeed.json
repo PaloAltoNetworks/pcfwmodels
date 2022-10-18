@@ -1,0 +1,160 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced",
+    "@tags",
+    "@zoned",
+    "@timeable"
+  ],
+  "$modelName": "FirewallCustomExternalFeed",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallcustomexternalfeeds",
+  "$modelRestName": "firewallcustomexternalfeed",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "certificateProfile": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "feedtype": {
+      "$defaultValue": "IPList",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "IPList",
+            "URLList"
+          ]
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "sourceURL": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "tags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "updateDailyTime": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "updateFrequency": {
+      "$defaultValue": "Daily",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Daily",
+            "Hourly"
+          ]
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "sourceURL"
+  ],
+  "title": "FirewallCustomExternalFeed",
+  "type": "object"
+}

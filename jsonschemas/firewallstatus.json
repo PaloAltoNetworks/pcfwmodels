@@ -1,0 +1,64 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallStatus",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallstatuses",
+  "$modelRestName": "firewallstatus",
+  "additionalProperties": true,
+  "properties": {
+    "firewallID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "firewallType": {
+      "$defaultValue": "AWS",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "AWS"
+          ]
+        }
+      ]
+    },
+    "status": {
+      "$defaultValue": "Creating",
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Creating",
+            "Updating",
+            "Ready",
+            "Failed"
+          ]
+        }
+      ]
+    },
+    "statusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallStatus",
+  "type": "object"
+}

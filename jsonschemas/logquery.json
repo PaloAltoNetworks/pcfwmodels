@@ -1,0 +1,52 @@
+{
+  "$extends": [],
+  "$modelName": "LogQuery",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "logqueries",
+  "$modelRestName": "logquery",
+  "additionalProperties": true,
+  "properties": {
+    "countHint": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "logResult": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "logqueryitem.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "logType": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Traffic",
+            "Threat",
+            "URLFiltering",
+            "Decryption"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "LogQuery",
+  "type": "object"
+}

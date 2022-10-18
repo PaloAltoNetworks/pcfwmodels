@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "topqueryitem": {
+        "description": "Represents an item in a topquery result.",
+        "properties": {
+          "count": {
+            "description": "The count of the field.",
+            "type": "integer"
+          },
+          "value": {
+            "description": "The value of the field.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "topqueryitem",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logserv'",
+      "name": "logserv"
+    }
+  ]
+}

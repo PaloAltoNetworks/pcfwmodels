@@ -1,0 +1,50 @@
+{
+  "$extends": [],
+  "$modelName": "TotalQuery",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "totalqueries",
+  "$modelRestName": "totalquery",
+  "additionalProperties": true,
+  "properties": {
+    "estimationToken": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "total": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "totalType": {
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "Traffic",
+            "IngressBytes",
+            "EgressBytes",
+            "ThreatsDetected",
+            "ThreatsBlocked"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "totalType"
+  ],
+  "title": "TotalQuery",
+  "type": "object"
+}

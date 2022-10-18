@@ -1,0 +1,40 @@
+{
+  "$extends": [
+    "@namespaced"
+  ],
+  "$modelName": "FirewallAppIDList",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallappidlist",
+  "$modelRestName": "firewallappidlist",
+  "additionalProperties": true,
+  "properties": {
+    "appIDs": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallAppIDList",
+  "type": "object"
+}

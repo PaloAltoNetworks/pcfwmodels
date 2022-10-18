@@ -1,0 +1,33 @@
+{
+  "$extends": [],
+  "$modelName": "TopQueryItem",
+  "$modelPackage": "logserv",
+  "$modelResourceName": "topqueryitems",
+  "$modelRestName": "topqueryitem",
+  "additionalProperties": true,
+  "properties": {
+    "count": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "TopQueryItem",
+  "type": "object"
+}

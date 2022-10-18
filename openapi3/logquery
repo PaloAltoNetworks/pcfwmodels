@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "logquery": {
+        "description": "Answer general queries on firewall logs.",
+        "properties": {
+          "countHint": {
+            "description": "Optional hint about the result set size, provided by the caller.",
+            "type": "integer"
+          },
+          "logResult": {
+            "description": "The result of the log query.",
+            "items": {
+              "$ref": "./logqueryitem#/components/schemas/logqueryitem"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "logType": {
+            "description": "The type of firewall log to query.",
+            "enum": [
+              "Traffic",
+              "Threat",
+              "URLFiltering",
+              "Decryption"
+            ]
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "logquery",
+    "version": "1.0"
+  },
+  "paths": {
+    "/logqueries": {
+      "post": {
+        "description": "Creates a new log query.",
+        "operationId": "create-a-new-logquery",
+        "parameters": [
+          {
+            "description": "Set the absolute end of the time window.",
+            "example": "2018/04/08 10:42",
+            "in": "query",
+            "name": "endAbsolute",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the relative end of the time window.",
+            "example": "-1h",
+            "in": "query",
+            "name": "endRelative",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the absolute start of the time window.",
+            "example": "2018/03/08 10:42",
+            "in": "query",
+            "name": "startAbsolute",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the relative start of the time window.",
+            "example": "-1h",
+            "in": "query",
+            "name": "startRelative",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/logquery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logquery"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/log",
+          "logserv"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logserv'",
+      "name": "logserv"
+    }
+  ]
+}

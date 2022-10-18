@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallstatus": {
+        "description": "Represents the status of a firewall.",
+        "properties": {
+          "firewallID": {
+            "description": "The firewall ID.",
+            "type": "string"
+          },
+          "firewallType": {
+            "default": "AWS",
+            "description": "The type of firewall.",
+            "enum": [
+              "AWS"
+            ]
+          },
+          "status": {
+            "default": "Creating",
+            "description": "The status of the of firewall.",
+            "enum": [
+              "Creating",
+              "Updating",
+              "Ready",
+              "Failed"
+            ],
+            "readOnly": true
+          },
+          "statusReason": {
+            "description": "The status description of the firewall.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallstatus",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

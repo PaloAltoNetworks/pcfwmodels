@@ -1,0 +1,40 @@
+{
+  "$extends": [
+    "@namespaced"
+  ],
+  "$modelName": "FirewallURLCategoryList",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "firewallurlcategorylists",
+  "$modelRestName": "firewallurlcategorylist",
+  "additionalProperties": true,
+  "properties": {
+    "categories": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewallurlcategory.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallURLCategoryList",
+  "type": "object"
+}

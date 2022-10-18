@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "availabilityzonesubnetinterface": {
+        "description": "Represents an association of a subnet in an availability zone where a firewall\nendpoint needs to be placed, and network interfaces in that availability zone\nfrom where traffic needs to be mirrored.",
+        "properties": {
+          "availabilityZone": {
+            "description": "The availability zone in the VPC.",
+            "type": "string"
+          },
+          "sourceNetworkInterfaces": {
+            "description": "Source network interfaces in this availability zone from where traffic is to be\nmirrored.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "subnetCIDR": {
+            "description": "The AWS subnet CIDR block in this availability zone.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "availabilityzonesubnetinterface",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

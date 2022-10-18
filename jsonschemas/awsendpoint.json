@@ -1,0 +1,63 @@
+{
+  "$extends": [],
+  "$modelName": "AWSEndpoint",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awsendpoints",
+  "$modelRestName": "awsendpoint",
+  "additionalProperties": true,
+  "properties": {
+    "endpointID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "$defaultValue": "Creating",
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Accepted",
+            "Failed"
+          ]
+        }
+      ]
+    },
+    "statusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "subnetID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "subnetID"
+  ],
+  "title": "AWSEndpoint",
+  "type": "object"
+}

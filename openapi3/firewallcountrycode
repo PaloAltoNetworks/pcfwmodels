@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallcountrycode": {
+        "description": "A Country code.",
+        "properties": {
+          "description": {
+            "description": "The Country description.",
+            "example": "Canada",
+            "readOnly": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The country code name.",
+            "example": "CA",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallcountrycode",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

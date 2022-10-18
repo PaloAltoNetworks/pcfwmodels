@@ -1,0 +1,85 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallexternalfeedlist": {
+        "description": "This a readonly list that returns all of the NGFW external feeds.",
+        "properties": {
+          "feeds": {
+            "description": "A list of ExternalFeed objects.",
+            "items": {
+              "$ref": "./firewallexternalfeed#/components/schemas/firewallexternalfeed"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallexternalfeedlist",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallexternalfeedlists": {
+      "get": {
+        "description": "Retrieves a firewallexternalfeedlist.",
+        "operationId": "get-all-firewallexternalfeedlists",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/firewallexternalfeedlist"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

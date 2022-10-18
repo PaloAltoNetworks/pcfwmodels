@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallprotoportscriteria": {
+        "description": "Represents rule criteria for specifying protocols and ports.\nThis is not an external object but a child object used by the Rule object.",
+        "properties": {
+          "applicationDefaults": {
+            "description": "Use NGFW defined application protocols and ports.",
+            "type": "boolean"
+          },
+          "protoportList": {
+            "description": "A protocol:port list.",
+            "example": [
+              "TCP:80,443,8080",
+              "UDP:53,67,68"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallprotoportscriteria",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awsattachment": {
+        "description": "Represents an AWS VPC ID and subnets where the NGFW attaches.\nThis object is a sub-object of AWSFirewall.",
+        "properties": {
+          "VPC": {
+            "description": "AWS VPC ID.",
+            "example": "vpc-23af3b89cd23",
+            "type": "string"
+          },
+          "endpoints": {
+            "description": "A list of awsendpoint objects.",
+            "example": "awsendpoint list",
+            "items": {
+              "$ref": "./awsendpoint#/components/schemas/awsendpoint"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "VPC",
+          "endpoints"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awsattachment",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

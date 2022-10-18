@@ -1,0 +1,46 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "vpcavailabilityzonesubnet": {
+        "description": "Represents association of a VPC ID to corresponding subnets, AZs and interfaces.",
+        "properties": {
+          "VPCID": {
+            "description": "An AWS VPC ID.",
+            "type": "string"
+          },
+          "subnetInterfaces": {
+            "description": "The list of all firewall subnets (one in each AZ) and associated network\ninterfaces in that AZ.",
+            "items": {
+              "$ref": "./availabilityzonesubnetinterface#/components/schemas/availabilityzonesubnetinterface"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "vpcavailabilityzonesubnet",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

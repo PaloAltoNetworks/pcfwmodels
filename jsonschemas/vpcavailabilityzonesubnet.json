@@ -1,0 +1,36 @@
+{
+  "$extends": [],
+  "$modelName": "VPCAvailabilityZoneSubnet",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "vpcvailabilityzonesubnets",
+  "$modelRestName": "vpcavailabilityzonesubnet",
+  "additionalProperties": true,
+  "properties": {
+    "VPCID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "subnetInterfaces": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "availabilityzonesubnetinterface.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "VPCAvailabilityZoneSubnet",
+  "type": "object"
+}

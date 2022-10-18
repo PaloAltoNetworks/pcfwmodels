@@ -1,0 +1,49 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "awsngfwmodesettings": {
+        "description": "Represents settings specific to NGFW mode.\nThis object is a sub-object of AWSFirewall.",
+        "properties": {
+          "firewallGroupID": {
+            "description": "The firewallgroup ID.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          },
+          "firewallRulesetID": {
+            "description": "The firewallruleset ID.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          }
+        },
+        "required": [
+          "firewallGroupID",
+          "firewallRulesetID"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "awsngfwmodesettings",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "deploymentadvisorsubnethelper": {
+        "description": "Represents a Cloud NGFW Deployment Advisor service that returns available subnet\nfor every specified availability zones in every specified VPC.",
+        "properties": {
+          "VPCAvailableSubnets": {
+            "description": "Returns the list of AWS VPC IDs and information about available subnets for\nevery availability zones in a VPC.",
+            "items": {
+              "$ref": "./vpcavailablesubnet#/components/schemas/vpcavailablesubnet"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "VPCUsedSubnets": {
+            "description": "List of AWS VPC IDs with information about associated availability zones and\nused subnets to check for available subnets.",
+            "items": {
+              "$ref": "./vpcusedsubnet#/components/schemas/vpcusedsubnet"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "deploymentadvisorsubnethelper",
+    "version": "1.0"
+  },
+  "paths": {
+    "/deploymentadvisorsubnethelpers": {
+      "post": {
+        "description": "Creates a list of free subnets per availability zone.",
+        "operationId": "create-a-new-deploymentadvisorsubnethelper",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deploymentadvisorsubnethelper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deploymentadvisorsubnethelper"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

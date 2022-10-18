@@ -1,0 +1,159 @@
+{
+  "properties": {
+    "availabilityzonesubnet": {
+      "$ref": "availabilityzonesubnet.json"
+    },
+    "availabilityzonesubnetinterface": {
+      "$ref": "availabilityzonesubnetinterface.json"
+    },
+    "awsattachment": {
+      "$ref": "awsattachment.json"
+    },
+    "awsendpoint": {
+      "$ref": "awsendpoint.json"
+    },
+    "awsfirewall": {
+      "$ref": "awsfirewall.json"
+    },
+    "awslogdefinition": {
+      "$ref": "awslogdefinition.json"
+    },
+    "awsngfwmodesettings": {
+      "$ref": "awsngfwmodesettings.json"
+    },
+    "awstapmodesettings": {
+      "$ref": "awstapmodesettings.json"
+    },
+    "deploymentadvisorsubnethelper": {
+      "$ref": "deploymentadvisorsubnethelper.json"
+    },
+    "deploymentadvisorterraform": {
+      "$ref": "deploymentadvisorterraform.json"
+    },
+    "firewallappidlist": {
+      "$ref": "firewallappidlist.json"
+    },
+    "firewallapplicationcriteria": {
+      "$ref": "firewallapplicationcriteria.json"
+    },
+    "firewallapplicationgroup": {
+      "$ref": "firewallapplicationgroup.json"
+    },
+    "firewallautoincludeprofile": {
+      "$ref": "firewallautoincludeprofile.json"
+    },
+    "firewallcertificate": {
+      "$ref": "firewallcertificate.json"
+    },
+    "firewallcidrlist": {
+      "$ref": "firewallcidrlist.json"
+    },
+    "firewallcommitaction": {
+      "$ref": "firewallcommitaction.json"
+    },
+    "firewallcommittedruleset": {
+      "$ref": "firewallcommittedruleset.json"
+    },
+    "firewallcountrycode": {
+      "$ref": "firewallcountrycode.json"
+    },
+    "firewallcountrycodelist": {
+      "$ref": "firewallcountrycodelist.json"
+    },
+    "firewallcustomexternalfeed": {
+      "$ref": "firewallcustomexternalfeed.json"
+    },
+    "firewallcustomurlcategory": {
+      "$ref": "firewallcustomurlcategory.json"
+    },
+    "firewallexternalfeed": {
+      "$ref": "firewallexternalfeed.json"
+    },
+    "firewallexternalfeedlist": {
+      "$ref": "firewallexternalfeedlist.json"
+    },
+    "firewallfqdnlist": {
+      "$ref": "firewallfqdnlist.json"
+    },
+    "firewallgroup": {
+      "$ref": "firewallgroup.json"
+    },
+    "firewalllicensingcredits": {
+      "$ref": "firewalllicensingcredits.json"
+    },
+    "firewallprotoportscriteria": {
+      "$ref": "firewallprotoportscriteria.json"
+    },
+    "firewallrollbackaction": {
+      "$ref": "firewallrollbackaction.json"
+    },
+    "firewallrule": {
+      "$ref": "firewallrule.json"
+    },
+    "firewallruleset": {
+      "$ref": "firewallruleset.json"
+    },
+    "firewallsecurityprofile": {
+      "$ref": "firewallsecurityprofile.json"
+    },
+    "firewallstatus": {
+      "$ref": "firewallstatus.json"
+    },
+    "firewalltargetcriteria": {
+      "$ref": "firewalltargetcriteria.json"
+    },
+    "firewalltemplate": {
+      "$ref": "firewalltemplate.json"
+    },
+    "firewallurlcategory": {
+      "$ref": "firewallurlcategory.json"
+    },
+    "firewallurlcategorycriteria": {
+      "$ref": "firewallurlcategorycriteria.json"
+    },
+    "firewallurlcategorylist": {
+      "$ref": "firewallurlcategorylist.json"
+    },
+    "logquery": {
+      "$ref": "logquery.json"
+    },
+    "logqueryitem": {
+      "$ref": "logqueryitem.json"
+    },
+    "mirrorfilter": {
+      "$ref": "mirrorfilter.json"
+    },
+    "mirrorrule": {
+      "$ref": "mirrorrule.json"
+    },
+    "root": {
+      "$ref": "root.json"
+    },
+    "topquery": {
+      "$ref": "topquery.json"
+    },
+    "topqueryitem": {
+      "$ref": "topqueryitem.json"
+    },
+    "totalquery": {
+      "$ref": "totalquery.json"
+    },
+    "trendquery": {
+      "$ref": "trendquery.json"
+    },
+    "trendqueryitem": {
+      "$ref": "trendqueryitem.json"
+    },
+    "vpcavailabilityzonesubnet": {
+      "$ref": "vpcavailabilityzonesubnet.json"
+    },
+    "vpcavailablesubnet": {
+      "$ref": "vpcavailablesubnet.json"
+    },
+    "vpcusedsubnet": {
+      "$ref": "vpcusedsubnet.json"
+    }
+  },
+  "title": "api resources",
+  "type": "object"
+}

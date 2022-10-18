@@ -1,0 +1,40 @@
+{
+  "$extends": [],
+  "$modelName": "DeploymentAdvisorSubnetHelper",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "deploymentadvisorsubnethelpers",
+  "$modelRestName": "deploymentadvisorsubnethelper",
+  "additionalProperties": true,
+  "properties": {
+    "VPCAvailableSubnets": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "vpcavailablesubnet.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "VPCUsedSubnets": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "vpcusedsubnet.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "DeploymentAdvisorSubnetHelper",
+  "type": "object"
+}

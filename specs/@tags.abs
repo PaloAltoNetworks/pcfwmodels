@@ -1,0 +1,13 @@
+# Attributes
+attributes:
+  v1:
+  - name: tags
+    description: List of tags attached to an entity.
+    type: list
+    exposed: true
+    subtype: string
+    stored: true
+    getter: true
+    setter: true
+    validations:
+    - $tagsWithoutReservedPrefixes

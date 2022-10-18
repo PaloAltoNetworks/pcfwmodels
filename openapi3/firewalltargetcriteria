@@ -1,0 +1,105 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewalltargetcriteria": {
+        "description": "Represents Source or Destination rule matching criteria.\nThis is not an external object but a child object used by the Rule object.",
+        "properties": {
+          "CIDRs": {
+            "description": "List of CIDRs.",
+            "example": [
+              "“10.1.0.0/16“",
+              "“10.2.0.0/16“"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "FQDNs": {
+            "description": "List of FQDNs.",
+            "example": [
+              "“www.google.com“",
+              "“redlock.atlassian.net“"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "countryCodes": {
+            "description": "List of country codes.",
+            "example": [
+              "CA",
+              "“US“"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "customExternalFeedIDs": {
+            "description": "List of FirewallCustomeExternalFeed IDs that are of type IPList.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "externalFeedIDs": {
+            "description": "List of FirewallExternalFeed IDs that are of type IPList.",
+            "example": [
+              "PaloAltoNetworks-BulletproofIPAddresses",
+              "PaloAltoNetworks-HighRiskIPAddresses",
+              "PaloAltoNetworks-KnownMaliciousIPAddresses"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "firewallCIDRListIDs": {
+            "description": "List of FirewallCIDRList IDs.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "firewallFQDNListIDs": {
+            "description": "List of FQDNList IDs.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "negate": {
+            "description": "Negates this match criteria.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewalltargetcriteria",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

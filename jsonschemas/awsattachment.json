@@ -1,0 +1,35 @@
+{
+  "$extends": [],
+  "$modelName": "AWSAttachment",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awsattachments",
+  "$modelRestName": "awsattachment",
+  "additionalProperties": true,
+  "properties": {
+    "VPC": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "endpoints": {
+      "$required": true,
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "awsendpoint.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [
+    "VPC",
+    "endpoints"
+  ],
+  "title": "AWSAttachment",
+  "type": "object"
+}

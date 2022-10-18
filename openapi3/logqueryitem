@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "logqueryitem": {
+        "description": "Represents a log line in a logquery result.",
+        "properties": {
+          "fields": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The fields and values for the log line.",
+            "type": "object"
+          },
+          "timestamp": {
+            "description": "The timestamp of the log line.",
+            "example": "2018-06-14T23:10:46.420397985Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "timestamp"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "logqueryitem",
+    "version": "1.0"
+  },
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logserv'",
+      "name": "logserv"
+    }
+  ]
+}

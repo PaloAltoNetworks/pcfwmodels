@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "firewallrollbackaction": {
+        "description": "Represents rolling back a committed Rulesets.",
+        "properties": {
+          "actionStatus": {
+            "description": "The status of action.",
+            "enum": [
+              "Success",
+              "Failure"
+            ],
+            "example": "Success",
+            "readOnly": true
+          },
+          "actionStatusReason": {
+            "description": "The action status description.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "affectedFirewalls": {
+            "description": "The firewalls affected by the rollback action.",
+            "items": {
+              "$ref": "./firewallstatus#/components/schemas/firewallstatus"
+            },
+            "type": "array"
+          },
+          "committedFirewallRulesetID": {
+            "description": "The ID of the committedfirewallruleset that we are rolling back to.",
+            "example": "xxxxxxxxx",
+            "type": "string"
+          }
+        },
+        "required": [
+          "committedFirewallRulesetID"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewallrollbackaction",
+    "version": "1.0"
+  },
+  "paths": {
+    "/firewallrollbackactions": {
+      "post": {
+        "description": "Creates a new firewallrollbackaction.",
+        "operationId": "create-a-new-firewallrollbackaction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewallrollbackaction"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewallrollbackaction"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/ngfw",
+          "ngfw"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/ngfw'",
+      "name": "core/ngfw"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

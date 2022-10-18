@@ -1,0 +1,32 @@
+{
+  "$extends": [],
+  "$modelName": "AWSNGFWModeSettings",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "awsngfwmodesettings",
+  "$modelRestName": "awsngfwmodesettings",
+  "additionalProperties": true,
+  "properties": {
+    "firewallGroupID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "firewallRulesetID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "firewallGroupID",
+    "firewallRulesetID"
+  ],
+  "title": "AWSNGFWModeSettings",
+  "type": "object"
+}
