@@ -761,7 +761,8 @@ This object is a sub-object of AWSFirewall.
 ```json
 {
   "VPC": "vpc-23af3b89cd23",
-  "endpoints": "awsendpoint list"
+  "endpoints": "awsendpoint list",
+  "region": "us-east-1"
 }
 ```
 
@@ -778,6 +779,12 @@ AWS VPC ID.
 Type: [`[]awsendpoint`](#awsendpoint)
 
 A list of awsendpoint objects.
+
+##### `region` [`required`]
+
+Type: `string`
+
+The AWS region of this VPC.
 
 ### AWSEndpoint
 
@@ -854,6 +861,10 @@ Creates a new awsfirewall.
 ##### `DELETE /awsfirewalls/:id`
 
 Deletes the awsfirewall with the given ID.
+
+Parameters:
+
+- `purge` (`boolean`): Parameter to delete the awsfireall record without cleaning up the NGFW resources.
 
 ##### `GET /awsfirewalls/:id`
 

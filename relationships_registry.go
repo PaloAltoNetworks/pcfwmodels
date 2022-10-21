@@ -22,7 +22,14 @@ func init() {
 			"root": {},
 		},
 		Delete: map[string]*elemental.RelationshipInfo{
-			"root": {},
+			"root": {
+				Parameters: []elemental.ParameterDefinition{
+					{
+						Name: "purge",
+						Type: "boolean",
+					},
+				},
+			},
 		},
 		Retrieve: map[string]*elemental.RelationshipInfo{
 			"root": {},

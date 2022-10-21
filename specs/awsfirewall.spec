@@ -12,6 +12,12 @@ model:
     description: Updates the awsfirewall with the given ID.
   delete:
     description: Deletes the awsfirewall with the given ID.
+    parameters:
+      entries:
+      - name: purge
+        description: Parameter to delete the awsfireall record without cleaning up the NGFW resources.
+        type: boolean
+        default_value: false
   extends:
   - '@identifiable-stored'
   - '@named'
@@ -95,6 +101,11 @@ attributes:
     - TAP
     - NGFW
     default_value: TAP
+
+  - name: retryCount
+    description: The number of times a Create/Update/Delete has been retried.
+    type: integer
+    stored: true
 
   - name: status
     description: The status of the of firewall.

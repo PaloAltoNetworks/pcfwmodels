@@ -24,11 +24,20 @@
           "type": "array"
         }
       ]
+    },
+    "region": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
     }
   },
   "required": [
     "VPC",
-    "endpoints"
+    "endpoints",
+    "region"
   ],
   "title": "AWSAttachment",
   "type": "object"

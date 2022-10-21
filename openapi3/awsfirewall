@@ -187,6 +187,17 @@
       "delete": {
         "description": "Deletes the awsfirewall with the given ID.",
         "operationId": "delete-awsfirewall-by-ID",
+        "parameters": [
+          {
+            "description": "Parameter to delete the awsfireall record without cleaning up the NGFW resources.",
+            "example": false,
+            "in": "query",
+            "name": "purge",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
