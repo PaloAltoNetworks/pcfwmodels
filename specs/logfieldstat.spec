@@ -32,6 +32,8 @@ indexes:
 - - namespace
   - timestamp
 - - namespace
+  - firewallName
+- - namespace
   - fieldType
 
 # Attributes
@@ -53,6 +55,14 @@ attributes:
     - SourceIP
     - DestinationIP
     example_value: SourceIP
+
+  - name: firewallName
+    description: The NGFW name.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
 
   - name: minutes
     description: Number of minutes in the time range of the statistic.

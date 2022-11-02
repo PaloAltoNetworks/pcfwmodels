@@ -32,6 +32,8 @@ indexes:
 - - namespace
   - timestamp
 - - namespace
+  - firewallName
+- - namespace
   - rangeType
 - - namespace
   - topType
@@ -39,6 +41,14 @@ indexes:
 # Attributes
 attributes:
   v1:
+  - name: firewallName
+    description: The NGFW name.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
+
   - name: minutes
     description: Number of minutes represented by snapshot.
     type: integer
