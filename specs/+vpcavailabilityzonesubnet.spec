@@ -17,6 +17,8 @@ attributes:
     type: string
     exposed: true
     stored: true
+    validations:
+    - $vpcid
 
   - name: subnetInterfaces
     description: |-

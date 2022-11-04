@@ -18,6 +18,8 @@ attributes:
     type: string
     exposed: true
     stored: true
+    validations:
+    - $vpcid
 
   - name: availabilityZones
     description: The list of all availability zones associated with the VPC.

@@ -17,8 +17,8 @@ attributes:
     exposed: true
     subtype: string
     stored: true
-    example_value:
-    - amazon-dns
+    validations:
+    - $awsNetworkServicesFilter
 
   - name: rules
     description: A list of mirror filter rules.

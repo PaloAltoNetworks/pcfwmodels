@@ -1,6 +1,8 @@
 package api
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestValidateWhyString(t *testing.T) {
 	type args struct {
@@ -587,94 +589,49 @@ func TestValidateOptionalProtoPorts(t *testing.T) {
 	}
 }
 
-func TestValidatePortRange(t *testing.T) {
+func TestValidatePort(t *testing.T) {
 	type args struct {
 		attribute string
-		portrange string
+		port      int
 	}
 	tests := []struct {
 		name    string
 		args    args
 		wantErr bool
 	}{
-		// valid
+		// valid min value
 		{
-			"valid portrange",
+			"valid port min",
 			args{
-				"portrange",
-				"80-443",
+				"port",
+				0,
 			},
 			false,
 		},
-		// valid
+		// valid max value
 		{
-			"valid portrange start equal to end",
+			"valid port max",
 			args{
-				"portrange",
-				"80-80",
+				"port",
+				65535,
 			},
 			false,
 		},
-		// invalid empty
+		// invalid less than min
 		{
-			"empty portrange",
+			"smaller than min value",
 			args{
-				"portrange",
-				"",
+				"port",
+				-1,
 			},
 			true,
 		},
-		// invalid
+		// invalid more than max
 		{
-			"only start port",
+			"greater than max value",
 			args{
-				"portrange",
-				"100-",
-			},
-			true,
-		},
-		// invalid
-		{
-			"only end port",
-			args{
-				"portrange",
-				"-100",
-			},
-			true,
-		},
-		// invalid
-		{
-			"start greater than end",
-			args{
-				"portrange",
-				"100-1",
-			},
-			true,
-		},
-		// invalid
-		{
-			"invalid port",
-			args{
-				"portrange",
-				"foo-bar",
-			},
-			true,
-		},
-		// invalid
-		{
-			"negative value",
-			args{
-				"portrange",
-				"-5-1",
-			},
-			true,
-		},
-		// invalid
-		{
-			"max port value",
-			args{
-				"portrange",
-				"0-65536",
+				"port",
+				65536,
 			},
 			true,
 		},
@@ -682,8 +639,8 @@ func TestValidatePortRange(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := ValidatePortRange(tt.args.attribute, tt.args.portrange); (err != nil) != tt.wantErr {
-				t.Errorf("ValidatePortRange() test = %s error = %v, wantErr %v", tt.name, err, tt.wantErr)
+			if err := ValidatePort(tt.args.attribute, tt.args.port); (err != nil) != tt.wantErr {
+				t.Errorf("ValidatePort() test = %s error = %v, wantErr %v", tt.name, err, tt.wantErr)
 			}
 		})
 	}
@@ -720,6 +677,222 @@ func TestValidateAvailabilityZone(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := ValidateAvailabilityZone(tt.args.attribute, tt.args.availabilityzone); (err != nil) != tt.wantErr {
 				t.Errorf("ValidateAvailabilityZone() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateAwsNetworkServices(t *testing.T) {
+	type args struct {
+		attribute       string
+		networkServices []string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty list valid",
+			args: args{
+				"networkServices",
+				[]string{},
+			},
+			wantErr: false,
+		},
+		{
+			name: "valid list",
+			args: args{
+				"networkServices",
+				[]string{"amazon-dns"},
+			},
+			wantErr: false,
+		},
+		{
+			name: "invalid due to invalid item in list",
+			args: args{
+				"networkServices",
+				[]string{"amazon-nat"},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid due to mixing invalid item with valid item in list",
+			args: args{
+				"networkServices",
+				[]string{"amazon-nat", "amazon-dns"},
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateAwsNetworkServices(tt.args.attribute, tt.args.networkServices); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateAwsNetworkServices() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateVPCID(t *testing.T) {
+	type args struct {
+		attribute string
+		vpcid     string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty string",
+			args: args{
+				"vpcid",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid string that does not have 'vpc-'",
+			args: args{
+				"vpcid",
+				"vpc12345",
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid string that has 'vpc-' but not in beginning",
+			args: args{
+				"vpcid",
+				"vpc1vpc-12345",
+			},
+			wantErr: true,
+		},
+		{
+			name: "valid string that starts with 'vpc-'",
+			args: args{
+				"vpcid",
+				"vpc-12345",
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateVPCID(tt.args.attribute, tt.args.vpcid); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateVPCID() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateEnis(t *testing.T) {
+	type args struct {
+		attribute string
+		enis      []string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty list is invalid",
+			args: args{
+				"enis",
+				[]string{},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid due to invalid item in list",
+			args: args{
+				"enis",
+				[]string{"myeni"},
+			},
+			wantErr: true,
+		},
+		{
+			name: "invalid due to mixing invalid item with valid items in list",
+			args: args{
+				"networkServices",
+				[]string{"myeni", "eni-1", "eni-2"},
+			},
+			wantErr: true,
+		},
+		{
+			name: "valid list that has all entries starting with 'eni-'",
+			args: args{
+				"enis",
+				[]string{"eni-1", "eni-2", "eni-3"},
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateEnis(tt.args.attribute, tt.args.enis); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateEnis() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateVpcInfo(t *testing.T) {
+	type args struct {
+		attribute                  string
+		VPCAvailabilityZoneSubnets []*VPCAvailabilityZoneSubnet
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty list is invalid",
+			args: args{
+				"VPCAvailabilityZoneSubnet",
+				[]*VPCAvailabilityZoneSubnet{},
+			},
+			wantErr: true,
+		},
+		{
+			name: "empty embedded list is invalid",
+			args: args{
+				"VPCAvailabilityZoneSubnet",
+				[]*VPCAvailabilityZoneSubnet{
+					{
+						VPCID:            "vpc1",
+						SubnetInterfaces: []*AvailabilityZoneSubnetInterface{},
+					},
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "valid list",
+			args: args{
+				"VPCAvailabilityZoneSubnet",
+				[]*VPCAvailabilityZoneSubnet{
+					{
+						VPCID: "vpc1",
+						SubnetInterfaces: []*AvailabilityZoneSubnetInterface{
+							{
+								AvailabilityZone:        "us-west-1a",
+								SourceNetworkInterfaces: []string{},
+								SubnetCIDR:              "10.0.2.0/24",
+							},
+						},
+					},
+				},
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateVpcInfo(tt.args.attribute, tt.args.VPCAvailabilityZoneSubnets); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateVpcInfo() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

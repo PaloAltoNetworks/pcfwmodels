@@ -96,10 +96,6 @@ func (o DeploymentAdvisorTerraformsList) Version() int {
 
 // DeploymentAdvisorTerraform represents the model of a deploymentadvisorterraform
 type DeploymentAdvisorTerraform struct {
-	// The list of all AMI IDs where dynamic updates are to be performed on associated
-	// instances.
-	AMIIDs []string `json:"AMIIDs" msgpack:"AMIIDs" bson:"amiids" mapstructure:"AMIIDs,omitempty"`
-
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -109,6 +105,10 @@ type DeploymentAdvisorTerraform struct {
 	// List of AWS VPC IDs and information about associated firewall subnets in their
 	// respective availability zones.
 	VPCAvailabilityZoneSubnets []*VPCAvailabilityZoneSubnet `json:"VPCAvailabilityZoneSubnets" msgpack:"VPCAvailabilityZoneSubnets" bson:"vpcavailabilityzonesubnets" mapstructure:"VPCAvailabilityZoneSubnets,omitempty"`
+
+	// The list of all autoscaling group names where dynamic updates are to be
+	// performed on associated instances.
+	AutoScalingGroupNames []string `json:"autoScalingGroupNames" msgpack:"autoScalingGroupNames" bson:"autoscalinggroupnames" mapstructure:"autoScalingGroupNames,omitempty"`
 
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
@@ -122,9 +122,6 @@ type DeploymentAdvisorTerraform struct {
 
 	// The list of all instance IDs where dynamic updates are to be performed.
 	InstanceIDs []string `json:"instanceIDs" msgpack:"instanceIDs" bson:"instanceids" mapstructure:"instanceIDs,omitempty"`
-
-	// The list of all instance tags where dynamic updates are to be performed.
-	InstanceTags []string `json:"instanceTags" msgpack:"instanceTags" bson:"instancetags" mapstructure:"instanceTags,omitempty"`
 
 	// Name of the entity.
 	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
@@ -140,12 +137,11 @@ func NewDeploymentAdvisorTerraform() *DeploymentAdvisorTerraform {
 
 	return &DeploymentAdvisorTerraform{
 		ModelVersion:               1,
-		AMIIDs:                     []string{},
 		NGFWMode:                   DeploymentAdvisorTerraformNGFWModeTAP,
 		VPCAvailabilityZoneSubnets: []*VPCAvailabilityZoneSubnet{},
+		AutoScalingGroupNames:      []string{},
 		Filter:                     NewMirrorFilter(),
 		InstanceIDs:                []string{},
-		InstanceTags:               []string{},
 	}
 }
 
@@ -177,17 +173,16 @@ func (o *DeploymentAdvisorTerraform) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesDeploymentAdvisorTerraform{}
 
-	s.AMIIDs = o.AMIIDs
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
 	s.NGFWMode = o.NGFWMode
 	s.VPCAvailabilityZoneSubnets = o.VPCAvailabilityZoneSubnets
+	s.AutoScalingGroupNames = o.AutoScalingGroupNames
 	s.Description = o.Description
 	s.DynamicPolicyUpdateEnabled = o.DynamicPolicyUpdateEnabled
 	s.Filter = o.Filter
 	s.InstanceIDs = o.InstanceIDs
-	s.InstanceTags = o.InstanceTags
 	s.Name = o.Name
 	s.Namespace = o.Namespace
 
@@ -207,15 +202,14 @@ func (o *DeploymentAdvisorTerraform) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	o.AMIIDs = s.AMIIDs
 	o.ID = s.ID.Hex()
 	o.NGFWMode = s.NGFWMode
 	o.VPCAvailabilityZoneSubnets = s.VPCAvailabilityZoneSubnets
+	o.AutoScalingGroupNames = s.AutoScalingGroupNames
 	o.Description = s.Description
 	o.DynamicPolicyUpdateEnabled = s.DynamicPolicyUpdateEnabled
 	o.Filter = s.Filter
 	o.InstanceIDs = s.InstanceIDs
-	o.InstanceTags = s.InstanceTags
 	o.Name = s.Name
 	o.Namespace = s.Namespace
 
@@ -296,15 +290,14 @@ func (o *DeploymentAdvisorTerraform) ToSparse(fields ...string) elemental.Sparse
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseDeploymentAdvisorTerraform{
-			AMIIDs:                     &o.AMIIDs,
 			ID:                         &o.ID,
 			NGFWMode:                   &o.NGFWMode,
 			VPCAvailabilityZoneSubnets: &o.VPCAvailabilityZoneSubnets,
+			AutoScalingGroupNames:      &o.AutoScalingGroupNames,
 			Description:                &o.Description,
 			DynamicPolicyUpdateEnabled: &o.DynamicPolicyUpdateEnabled,
 			Filter:                     o.Filter,
 			InstanceIDs:                &o.InstanceIDs,
-			InstanceTags:               &o.InstanceTags,
 			Name:                       &o.Name,
 			Namespace:                  &o.Namespace,
 		}
@@ -313,14 +306,14 @@ func (o *DeploymentAdvisorTerraform) ToSparse(fields ...string) elemental.Sparse
 	sp := &SparseDeploymentAdvisorTerraform{}
 	for _, f := range fields {
 		switch f {
-		case "AMIIDs":
-			sp.AMIIDs = &(o.AMIIDs)
 		case "ID":
 			sp.ID = &(o.ID)
 		case "NGFWMode":
 			sp.NGFWMode = &(o.NGFWMode)
 		case "VPCAvailabilityZoneSubnets":
 			sp.VPCAvailabilityZoneSubnets = &(o.VPCAvailabilityZoneSubnets)
+		case "autoScalingGroupNames":
+			sp.AutoScalingGroupNames = &(o.AutoScalingGroupNames)
 		case "description":
 			sp.Description = &(o.Description)
 		case "dynamicPolicyUpdateEnabled":
@@ -329,8 +322,6 @@ func (o *DeploymentAdvisorTerraform) ToSparse(fields ...string) elemental.Sparse
 			sp.Filter = o.Filter
 		case "instanceIDs":
 			sp.InstanceIDs = &(o.InstanceIDs)
-		case "instanceTags":
-			sp.InstanceTags = &(o.InstanceTags)
 		case "name":
 			sp.Name = &(o.Name)
 		case "namespace":
@@ -348,9 +339,6 @@ func (o *DeploymentAdvisorTerraform) Patch(sparse elemental.SparseIdentifiable) 
 	}
 
 	so := sparse.(*SparseDeploymentAdvisorTerraform)
-	if so.AMIIDs != nil {
-		o.AMIIDs = *so.AMIIDs
-	}
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
@@ -359,6 +347,9 @@ func (o *DeploymentAdvisorTerraform) Patch(sparse elemental.SparseIdentifiable) 
 	}
 	if so.VPCAvailabilityZoneSubnets != nil {
 		o.VPCAvailabilityZoneSubnets = *so.VPCAvailabilityZoneSubnets
+	}
+	if so.AutoScalingGroupNames != nil {
+		o.AutoScalingGroupNames = *so.AutoScalingGroupNames
 	}
 	if so.Description != nil {
 		o.Description = *so.Description
@@ -371,9 +362,6 @@ func (o *DeploymentAdvisorTerraform) Patch(sparse elemental.SparseIdentifiable) 
 	}
 	if so.InstanceIDs != nil {
 		o.InstanceIDs = *so.InstanceIDs
-	}
-	if so.InstanceTags != nil {
-		o.InstanceTags = *so.InstanceTags
 	}
 	if so.Name != nil {
 		o.Name = *so.Name
@@ -431,6 +419,10 @@ func (o *DeploymentAdvisorTerraform) Validate() error {
 		}
 	}
 
+	if err := ValidateVpcInfo("VPCAvailabilityZoneSubnets", o.VPCAvailabilityZoneSubnets); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateMaximumLength("description", o.Description, 1024, false); err != nil {
 		errors = errors.Append(err)
 	}
@@ -484,14 +476,14 @@ func (*DeploymentAdvisorTerraform) AttributeSpecifications() map[string]elementa
 func (o *DeploymentAdvisorTerraform) ValueForAttribute(name string) interface{} {
 
 	switch name {
-	case "AMIIDs":
-		return o.AMIIDs
 	case "ID":
 		return o.ID
 	case "NGFWMode":
 		return o.NGFWMode
 	case "VPCAvailabilityZoneSubnets":
 		return o.VPCAvailabilityZoneSubnets
+	case "autoScalingGroupNames":
+		return o.AutoScalingGroupNames
 	case "description":
 		return o.Description
 	case "dynamicPolicyUpdateEnabled":
@@ -500,8 +492,6 @@ func (o *DeploymentAdvisorTerraform) ValueForAttribute(name string) interface{} 
 		return o.Filter
 	case "instanceIDs":
 		return o.InstanceIDs
-	case "instanceTags":
-		return o.InstanceTags
 	case "name":
 		return o.Name
 	case "namespace":
@@ -513,18 +503,6 @@ func (o *DeploymentAdvisorTerraform) ValueForAttribute(name string) interface{} 
 
 // DeploymentAdvisorTerraformAttributesMap represents the map of attribute for DeploymentAdvisorTerraform.
 var DeploymentAdvisorTerraformAttributesMap = map[string]elemental.AttributeSpecification{
-	"AMIIDs": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "amiids",
-		ConvertedName:  "AMIIDs",
-		Description: `The list of all AMI IDs where dynamic updates are to be performed on associated
-instances.`,
-		Exposed: true,
-		Name:    "AMIIDs",
-		Stored:  true,
-		SubType: "string",
-		Type:    "list",
-	},
 	"ID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -563,6 +541,18 @@ respective availability zones.`,
 		Stored:  true,
 		SubType: "vpcavailabilityzonesubnet",
 		Type:    "refList",
+	},
+	"AutoScalingGroupNames": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "autoscalinggroupnames",
+		ConvertedName:  "AutoScalingGroupNames",
+		Description: `The list of all autoscaling group names where dynamic updates are to be
+performed on associated instances.`,
+		Exposed: true,
+		Name:    "autoScalingGroupNames",
+		Stored:  true,
+		SubType: "string",
+		Type:    "list",
 	},
 	"Description": {
 		AllowedChoices: []string{},
@@ -611,17 +601,6 @@ mirroring policies on new instances.`,
 		SubType:        "string",
 		Type:           "list",
 	},
-	"InstanceTags": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "instancetags",
-		ConvertedName:  "InstanceTags",
-		Description:    `The list of all instance tags where dynamic updates are to be performed.`,
-		Exposed:        true,
-		Name:           "instanceTags",
-		Stored:         true,
-		SubType:        "string",
-		Type:           "list",
-	},
 	"Name": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "name",
@@ -658,18 +637,6 @@ mirroring policies on new instances.`,
 
 // DeploymentAdvisorTerraformLowerCaseAttributesMap represents the map of attribute for DeploymentAdvisorTerraform.
 var DeploymentAdvisorTerraformLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"amiids": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "amiids",
-		ConvertedName:  "AMIIDs",
-		Description: `The list of all AMI IDs where dynamic updates are to be performed on associated
-instances.`,
-		Exposed: true,
-		Name:    "AMIIDs",
-		Stored:  true,
-		SubType: "string",
-		Type:    "list",
-	},
 	"id": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -708,6 +675,18 @@ respective availability zones.`,
 		Stored:  true,
 		SubType: "vpcavailabilityzonesubnet",
 		Type:    "refList",
+	},
+	"autoscalinggroupnames": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "autoscalinggroupnames",
+		ConvertedName:  "AutoScalingGroupNames",
+		Description: `The list of all autoscaling group names where dynamic updates are to be
+performed on associated instances.`,
+		Exposed: true,
+		Name:    "autoScalingGroupNames",
+		Stored:  true,
+		SubType: "string",
+		Type:    "list",
 	},
 	"description": {
 		AllowedChoices: []string{},
@@ -752,17 +731,6 @@ mirroring policies on new instances.`,
 		Description:    `The list of all instance IDs where dynamic updates are to be performed.`,
 		Exposed:        true,
 		Name:           "instanceIDs",
-		Stored:         true,
-		SubType:        "string",
-		Type:           "list",
-	},
-	"instancetags": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "instancetags",
-		ConvertedName:  "InstanceTags",
-		Description:    `The list of all instance tags where dynamic updates are to be performed.`,
-		Exposed:        true,
-		Name:           "instanceTags",
 		Stored:         true,
 		SubType:        "string",
 		Type:           "list",
@@ -866,10 +834,6 @@ func (o SparseDeploymentAdvisorTerraformsList) Version() int {
 
 // SparseDeploymentAdvisorTerraform represents the sparse version of a deploymentadvisorterraform.
 type SparseDeploymentAdvisorTerraform struct {
-	// The list of all AMI IDs where dynamic updates are to be performed on associated
-	// instances.
-	AMIIDs *[]string `json:"AMIIDs,omitempty" msgpack:"AMIIDs,omitempty" bson:"amiids,omitempty" mapstructure:"AMIIDs,omitempty"`
-
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -879,6 +843,10 @@ type SparseDeploymentAdvisorTerraform struct {
 	// List of AWS VPC IDs and information about associated firewall subnets in their
 	// respective availability zones.
 	VPCAvailabilityZoneSubnets *[]*VPCAvailabilityZoneSubnet `json:"VPCAvailabilityZoneSubnets,omitempty" msgpack:"VPCAvailabilityZoneSubnets,omitempty" bson:"vpcavailabilityzonesubnets,omitempty" mapstructure:"VPCAvailabilityZoneSubnets,omitempty"`
+
+	// The list of all autoscaling group names where dynamic updates are to be
+	// performed on associated instances.
+	AutoScalingGroupNames *[]string `json:"autoScalingGroupNames,omitempty" msgpack:"autoScalingGroupNames,omitempty" bson:"autoscalinggroupnames,omitempty" mapstructure:"autoScalingGroupNames,omitempty"`
 
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
@@ -892,9 +860,6 @@ type SparseDeploymentAdvisorTerraform struct {
 
 	// The list of all instance IDs where dynamic updates are to be performed.
 	InstanceIDs *[]string `json:"instanceIDs,omitempty" msgpack:"instanceIDs,omitempty" bson:"instanceids,omitempty" mapstructure:"instanceIDs,omitempty"`
-
-	// The list of all instance tags where dynamic updates are to be performed.
-	InstanceTags *[]string `json:"instanceTags,omitempty" msgpack:"instanceTags,omitempty" bson:"instancetags,omitempty" mapstructure:"instanceTags,omitempty"`
 
 	// Name of the entity.
 	Name *string `json:"name,omitempty" msgpack:"name,omitempty" bson:"name,omitempty" mapstructure:"name,omitempty"`
@@ -945,9 +910,6 @@ func (o *SparseDeploymentAdvisorTerraform) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesSparseDeploymentAdvisorTerraform{}
 
-	if o.AMIIDs != nil {
-		s.AMIIDs = o.AMIIDs
-	}
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
@@ -956,6 +918,9 @@ func (o *SparseDeploymentAdvisorTerraform) GetBSON() (interface{}, error) {
 	}
 	if o.VPCAvailabilityZoneSubnets != nil {
 		s.VPCAvailabilityZoneSubnets = o.VPCAvailabilityZoneSubnets
+	}
+	if o.AutoScalingGroupNames != nil {
+		s.AutoScalingGroupNames = o.AutoScalingGroupNames
 	}
 	if o.Description != nil {
 		s.Description = o.Description
@@ -968,9 +933,6 @@ func (o *SparseDeploymentAdvisorTerraform) GetBSON() (interface{}, error) {
 	}
 	if o.InstanceIDs != nil {
 		s.InstanceIDs = o.InstanceIDs
-	}
-	if o.InstanceTags != nil {
-		s.InstanceTags = o.InstanceTags
 	}
 	if o.Name != nil {
 		s.Name = o.Name
@@ -995,9 +957,6 @@ func (o *SparseDeploymentAdvisorTerraform) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	if s.AMIIDs != nil {
-		o.AMIIDs = s.AMIIDs
-	}
 	id := s.ID.Hex()
 	o.ID = &id
 	if s.NGFWMode != nil {
@@ -1005,6 +964,9 @@ func (o *SparseDeploymentAdvisorTerraform) SetBSON(raw bson.Raw) error {
 	}
 	if s.VPCAvailabilityZoneSubnets != nil {
 		o.VPCAvailabilityZoneSubnets = s.VPCAvailabilityZoneSubnets
+	}
+	if s.AutoScalingGroupNames != nil {
+		o.AutoScalingGroupNames = s.AutoScalingGroupNames
 	}
 	if s.Description != nil {
 		o.Description = s.Description
@@ -1017,9 +979,6 @@ func (o *SparseDeploymentAdvisorTerraform) SetBSON(raw bson.Raw) error {
 	}
 	if s.InstanceIDs != nil {
 		o.InstanceIDs = s.InstanceIDs
-	}
-	if s.InstanceTags != nil {
-		o.InstanceTags = s.InstanceTags
 	}
 	if s.Name != nil {
 		o.Name = s.Name
@@ -1041,9 +1000,6 @@ func (o *SparseDeploymentAdvisorTerraform) Version() int {
 func (o *SparseDeploymentAdvisorTerraform) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewDeploymentAdvisorTerraform()
-	if o.AMIIDs != nil {
-		out.AMIIDs = *o.AMIIDs
-	}
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
@@ -1052,6 +1008,9 @@ func (o *SparseDeploymentAdvisorTerraform) ToPlain() elemental.PlainIdentifiable
 	}
 	if o.VPCAvailabilityZoneSubnets != nil {
 		out.VPCAvailabilityZoneSubnets = *o.VPCAvailabilityZoneSubnets
+	}
+	if o.AutoScalingGroupNames != nil {
+		out.AutoScalingGroupNames = *o.AutoScalingGroupNames
 	}
 	if o.Description != nil {
 		out.Description = *o.Description
@@ -1064,9 +1023,6 @@ func (o *SparseDeploymentAdvisorTerraform) ToPlain() elemental.PlainIdentifiable
 	}
 	if o.InstanceIDs != nil {
 		out.InstanceIDs = *o.InstanceIDs
-	}
-	if o.InstanceTags != nil {
-		out.InstanceTags = *o.InstanceTags
 	}
 	if o.Name != nil {
 		out.Name = *o.Name
@@ -1151,28 +1107,26 @@ func (o *SparseDeploymentAdvisorTerraform) DeepCopyInto(out *SparseDeploymentAdv
 }
 
 type mongoAttributesDeploymentAdvisorTerraform struct {
-	AMIIDs                     []string                                `bson:"amiids"`
 	ID                         bson.ObjectId                           `bson:"_id,omitempty"`
 	NGFWMode                   DeploymentAdvisorTerraformNGFWModeValue `bson:"ngfwmode"`
 	VPCAvailabilityZoneSubnets []*VPCAvailabilityZoneSubnet            `bson:"vpcavailabilityzonesubnets"`
+	AutoScalingGroupNames      []string                                `bson:"autoscalinggroupnames"`
 	Description                string                                  `bson:"description"`
 	DynamicPolicyUpdateEnabled bool                                    `bson:"dynamicpolicyupdateenabled"`
 	Filter                     *MirrorFilter                           `bson:"filter"`
 	InstanceIDs                []string                                `bson:"instanceids"`
-	InstanceTags               []string                                `bson:"instancetags"`
 	Name                       string                                  `bson:"name"`
 	Namespace                  string                                  `bson:"namespace"`
 }
 type mongoAttributesSparseDeploymentAdvisorTerraform struct {
-	AMIIDs                     *[]string                                `bson:"amiids,omitempty"`
 	ID                         bson.ObjectId                            `bson:"_id,omitempty"`
 	NGFWMode                   *DeploymentAdvisorTerraformNGFWModeValue `bson:"ngfwmode,omitempty"`
 	VPCAvailabilityZoneSubnets *[]*VPCAvailabilityZoneSubnet            `bson:"vpcavailabilityzonesubnets,omitempty"`
+	AutoScalingGroupNames      *[]string                                `bson:"autoscalinggroupnames,omitempty"`
 	Description                *string                                  `bson:"description,omitempty"`
 	DynamicPolicyUpdateEnabled *bool                                    `bson:"dynamicpolicyupdateenabled,omitempty"`
 	Filter                     *MirrorFilter                            `bson:"filter,omitempty"`
 	InstanceIDs                *[]string                                `bson:"instanceids,omitempty"`
-	InstanceTags               *[]string                                `bson:"instancetags,omitempty"`
 	Name                       *string                                  `bson:"name,omitempty"`
 	Namespace                  *string                                  `bson:"namespace,omitempty"`
 }

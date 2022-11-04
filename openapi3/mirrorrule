@@ -6,12 +6,12 @@
         "description": "Represents an AWS mirroring filter rule.",
         "properties": {
           "action": {
-            "default": "Accept",
             "description": "The action to take on the filtered traffic.",
             "enum": [
               "Accept",
               "Reject"
-            ]
+            ],
+            "example": "Accept"
           },
           "description": {
             "description": "Description of the mirror rule.",
@@ -22,17 +22,23 @@
             "description": "Destination CIDR block to assign to the mirror rule.",
             "type": "string"
           },
-          "destinationPortRange": {
-            "description": "Destination port range.",
-            "type": "string"
+          "destinationFromPort": {
+            "default": 0,
+            "description": "Destination port range start.",
+            "type": "integer"
+          },
+          "destinationToPort": {
+            "default": 65535,
+            "description": "Destination port range end.",
+            "type": "integer"
           },
           "direction": {
-            "default": "Ingress",
             "description": "The direction of the traffic to be mirrored.",
             "enum": [
               "Ingress",
               "Egress"
-            ]
+            ],
+            "example": "Ingress"
           },
           "number": {
             "description": "Number of a traffic mirror rule. Must be unique in each direction.",
@@ -48,12 +54,20 @@
             "description": "Source CIDR block to assign to the mirror rule.",
             "type": "string"
           },
-          "sourcePortRange": {
-            "description": "Source port range.",
-            "type": "string"
+          "sourceFromPort": {
+            "default": 0,
+            "description": "Source port range start.",
+            "type": "integer"
+          },
+          "sourceToPort": {
+            "default": 65535,
+            "description": "Source port range end.",
+            "type": "integer"
           }
         },
         "required": [
+          "action",
+          "direction",
           "number"
         ],
         "type": "object"

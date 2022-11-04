@@ -15,7 +15,8 @@ model:
     parameters:
       entries:
       - name: purge
-        description: Parameter to delete the awsfireall record without cleaning up the NGFW resources.
+        description: Parameter to delete the awsfireall record without cleaning up
+          the NGFW resources.
         type: boolean
         default_value: false
   extends:

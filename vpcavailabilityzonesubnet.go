@@ -103,6 +103,10 @@ func (o *VPCAvailabilityZoneSubnet) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
+	if err := ValidateVPCID("VPCID", o.VPCID); err != nil {
+		errors = errors.Append(err)
+	}
+
 	for _, sub := range o.SubnetInterfaces {
 		if sub == nil {
 			continue

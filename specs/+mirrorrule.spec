@@ -16,10 +16,11 @@ attributes:
     type: enum
     exposed: true
     stored: true
+    required: true
     allowed_choices:
     - Accept
     - Reject
-    default_value: Accept
+    example_value: Accept
 
   - name: description
     description: Description of the mirror rule.
@@ -36,23 +37,34 @@ attributes:
     validations:
     - $cidr
 
-  - name: destinationPortRange
-    description: Destination port range.
-    type: string
+  - name: destinationFromPort
+    description: Destination port range start.
+    type: integer
     exposed: true
     stored: true
+    default_value: 0
     validations:
-    - $portrange
+    - $port
+
+  - name: destinationToPort
+    description: Destination port range end.
+    type: integer
+    exposed: true
+    stored: true
+    default_value: 65535
+    validations:
+    - $port
 
   - name: direction
     description: The direction of the traffic to be mirrored.
     type: enum
     exposed: true
     stored: true
+    required: true
     allowed_choices:
     - Ingress
     - Egress
-    default_value: Ingress
+    example_value: Ingress
 
   - name: number
     description: Number of a traffic mirror rule. Must be unique in each direction.
@@ -78,10 +90,20 @@ attributes:
     validations:
     - $cidr
 
-  - name: sourcePortRange
-    description: Source port range.
-    type: string
+  - name: sourceFromPort
+    description: Source port range start.
+    type: integer
     exposed: true
     stored: true
+    default_value: 0
     validations:
-    - $portrange
+    - $port
+
+  - name: sourceToPort
+    description: Source port range end.
+    type: integer
+    exposed: true
+    stored: true
+    default_value: 65535
+    validations:
+    - $port

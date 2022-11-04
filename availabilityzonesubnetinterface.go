@@ -112,6 +112,10 @@ func (o *AvailabilityZoneSubnetInterface) Validate() error {
 		errors = errors.Append(err)
 	}
 
+	if err := ValidateEnis("sourceNetworkInterfaces", o.SourceNetworkInterfaces); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := ValidateCIDR("subnetCIDR", o.SubnetCIDR); err != nil {
 		errors = errors.Append(err)
 	}

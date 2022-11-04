@@ -7,9 +7,6 @@
         "properties": {
           "networkServices": {
             "description": "AWS network services to be mirrored.",
-            "example": [
-              "amazon-dns"
-            ],
             "items": {
               "type": "string"
             },

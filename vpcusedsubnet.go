@@ -108,6 +108,10 @@ func (o *VpcUsedSubnet) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
+	if err := ValidateVPCID("VPCID", o.VPCID); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := ValidateCIDRList("subnetCIDRs", o.SubnetCIDRs); err != nil {
 		errors = errors.Append(err)
 	}

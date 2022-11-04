@@ -15,15 +15,6 @@ model:
 # Attributes
 attributes:
   v1:
-  - name: AMIIDs
-    description: |-
-      The list of all AMI IDs where dynamic updates are to be performed on associated
-      instances.
-    type: list
-    exposed: true
-    subtype: string
-    stored: true
-
   - name: NGFWMode
     description: The mode of the Cloud NGFW instance.
     type: enum
@@ -43,8 +34,19 @@ attributes:
     exposed: true
     subtype: vpcavailabilityzonesubnet
     stored: true
+    validations:
+    - $vpcinfo
     extensions:
       refMode: pointer
+
+  - name: autoScalingGroupNames
+    description: |-
+      The list of all autoscaling group names where dynamic updates are to be
+      performed on associated instances.
+    type: list
+    exposed: true
+    subtype: string
+    stored: true
 
   - name: dynamicPolicyUpdateEnabled
     description: |-
@@ -65,13 +67,6 @@ attributes:
 
   - name: instanceIDs
     description: The list of all instance IDs where dynamic updates are to be performed.
-    type: list
-    exposed: true
-    subtype: string
-    stored: true
-
-  - name: instanceTags
-    description: The list of all instance tags where dynamic updates are to be performed.
     type: list
     exposed: true
     subtype: string

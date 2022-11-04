@@ -2,6 +2,10 @@ $availabilityzone:
   elemental:
     name: ValidateAvailabilityZone
 
+$awsNetworkServicesFilter:
+  elemental:
+    name: ValidateAwsNetworkServices
+
 $cidr:
   elemental:
     name: ValidateCIDR
@@ -9,6 +13,10 @@ $cidr:
 $cidrs:
   elemental:
     name: ValidateCIDRList
+
+$enis:
+  elemental:
+    name: ValidateEnis
 
 $fqdn:
   elemental:
@@ -34,9 +42,9 @@ $optionalurls:
   elemental:
     name: ValidateOptionalURLs
 
-$portrange:
+$port:
   elemental:
-    name: ValidatePortRange
+    name: ValidatePort
 
 $protoport:
   elemental:
@@ -53,6 +61,14 @@ $url:
 $urls:
   elemental:
     name: ValidateURLs
+
+$vpcid:
+  elemental:
+    name: ValidateVPCID
+
+$vpcinfo:
+  elemental:
+    name: ValidateVpcInfo
 
 $whystring:
   elemental:

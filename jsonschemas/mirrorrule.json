@@ -7,11 +7,8 @@
   "additionalProperties": true,
   "properties": {
     "action": {
-      "$defaultValue": "Accept",
+      "$required": true,
       "anyOf": [
-        {
-          "type": "null"
-        },
         {
           "enum": [
             "Accept",
@@ -41,22 +38,31 @@
         }
       ]
     },
-    "destinationPortRange": {
+    "destinationFromPort": {
+      "$defaultValue": 0,
       "anyOf": [
         {
           "type": "null"
         },
         {
-          "type": "string"
+          "type": "integer"
+        }
+      ]
+    },
+    "destinationToPort": {
+      "$defaultValue": 65535,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
         }
       ]
     },
     "direction": {
-      "$defaultValue": "Ingress",
+      "$required": true,
       "anyOf": [
-        {
-          "type": "null"
-        },
         {
           "enum": [
             "Ingress",
@@ -95,18 +101,32 @@
         }
       ]
     },
-    "sourcePortRange": {
+    "sourceFromPort": {
+      "$defaultValue": 0,
       "anyOf": [
         {
           "type": "null"
         },
         {
-          "type": "string"
+          "type": "integer"
+        }
+      ]
+    },
+    "sourceToPort": {
+      "$defaultValue": 65535,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer"
         }
       ]
     }
   },
   "required": [
+    "action",
+    "direction",
     "number"
   ],
   "title": "MirrorRule",

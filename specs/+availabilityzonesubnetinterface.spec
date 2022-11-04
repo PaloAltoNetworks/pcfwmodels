@@ -30,6 +30,8 @@ attributes:
     exposed: true
     subtype: string
     stored: true
+    validations:
+    - $enis
 
   - name: subnetCIDR
     description: The AWS subnet CIDR block in this availability zone.

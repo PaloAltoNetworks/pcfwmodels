@@ -11,19 +11,6 @@
   "$modelRestName": "deploymentadvisorterraform",
   "additionalProperties": true,
   "properties": {
-    "AMIIDs": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      ]
-    },
     "ID": {
       "$readOnly": true,
       "anyOf": [
@@ -55,6 +42,19 @@
         {
           "items": {
             "$ref": "vpcavailabilityzonesubnet.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "autoScalingGroupNames": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
           },
           "type": "array"
         }
@@ -92,19 +92,6 @@
       ]
     },
     "instanceIDs": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      ]
-    },
-    "instanceTags": {
       "anyOf": [
         {
           "type": "null"

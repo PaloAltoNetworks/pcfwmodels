@@ -5,13 +5,6 @@
       "deploymentadvisorterraform": {
         "description": "Represents a Cloud NGFW Deployment Advisor core service.",
         "properties": {
-          "AMIIDs": {
-            "description": "The list of all AMI IDs where dynamic updates are to be performed on associated\ninstances.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
@@ -32,6 +25,13 @@
             },
             "type": "array"
           },
+          "autoScalingGroupNames": {
+            "description": "The list of all autoscaling group names where dynamic updates are to be\nperformed on associated instances.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "description": {
             "description": "Description of the object.",
             "type": "string"
@@ -45,13 +45,6 @@
           },
           "instanceIDs": {
             "description": "The list of all instance IDs where dynamic updates are to be performed.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "instanceTags": {
-            "description": "The list of all instance tags where dynamic updates are to be performed.",
             "items": {
               "type": "string"
             },

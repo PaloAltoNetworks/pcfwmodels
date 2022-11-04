@@ -44,8 +44,11 @@ type MirrorRule struct {
 	// Destination CIDR block to assign to the mirror rule.
 	DestinationCIDR string `json:"destinationCIDR" msgpack:"destinationCIDR" bson:"destinationcidr" mapstructure:"destinationCIDR,omitempty"`
 
-	// Destination port range.
-	DestinationPortRange string `json:"destinationPortRange" msgpack:"destinationPortRange" bson:"destinationportrange" mapstructure:"destinationPortRange,omitempty"`
+	// Destination port range start.
+	DestinationFromPort int `json:"destinationFromPort" msgpack:"destinationFromPort" bson:"destinationfromport" mapstructure:"destinationFromPort,omitempty"`
+
+	// Destination port range end.
+	DestinationToPort int `json:"destinationToPort" msgpack:"destinationToPort" bson:"destinationtoport" mapstructure:"destinationToPort,omitempty"`
 
 	// The direction of the traffic to be mirrored.
 	Direction MirrorRuleDirectionValue `json:"direction" msgpack:"direction" bson:"direction" mapstructure:"direction,omitempty"`
@@ -59,8 +62,11 @@ type MirrorRule struct {
 	// Source CIDR block to assign to the mirror rule.
 	SourceCIDR string `json:"sourceCIDR" msgpack:"sourceCIDR" bson:"sourcecidr" mapstructure:"sourceCIDR,omitempty"`
 
-	// Source port range.
-	SourcePortRange string `json:"sourcePortRange" msgpack:"sourcePortRange" bson:"sourceportrange" mapstructure:"sourcePortRange,omitempty"`
+	// Source port range start.
+	SourceFromPort int `json:"sourceFromPort" msgpack:"sourceFromPort" bson:"sourcefromport" mapstructure:"sourceFromPort,omitempty"`
+
+	// Source port range end.
+	SourceToPort int `json:"sourceToPort" msgpack:"sourceToPort" bson:"sourcetoport" mapstructure:"sourceToPort,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -69,11 +75,13 @@ type MirrorRule struct {
 func NewMirrorRule() *MirrorRule {
 
 	return &MirrorRule{
-		ModelVersion:    1,
-		Action:          MirrorRuleActionAccept,
-		DestinationCIDR: "0.0.0.0/0",
-		Direction:       MirrorRuleDirectionIngress,
-		SourceCIDR:      "0.0.0.0/0",
+		ModelVersion:        1,
+		DestinationCIDR:     "0.0.0.0/0",
+		DestinationFromPort: 0,
+		DestinationToPort:   65535,
+		SourceCIDR:          "0.0.0.0/0",
+		SourceFromPort:      0,
+		SourceToPort:        65535,
 	}
 }
 
@@ -90,12 +98,14 @@ func (o *MirrorRule) GetBSON() (interface{}, error) {
 	s.Action = o.Action
 	s.Description = o.Description
 	s.DestinationCIDR = o.DestinationCIDR
-	s.DestinationPortRange = o.DestinationPortRange
+	s.DestinationFromPort = o.DestinationFromPort
+	s.DestinationToPort = o.DestinationToPort
 	s.Direction = o.Direction
 	s.Number = o.Number
 	s.Protocol = o.Protocol
 	s.SourceCIDR = o.SourceCIDR
-	s.SourcePortRange = o.SourcePortRange
+	s.SourceFromPort = o.SourceFromPort
+	s.SourceToPort = o.SourceToPort
 
 	return s, nil
 }
@@ -116,12 +126,14 @@ func (o *MirrorRule) SetBSON(raw bson.Raw) error {
 	o.Action = s.Action
 	o.Description = s.Description
 	o.DestinationCIDR = s.DestinationCIDR
-	o.DestinationPortRange = s.DestinationPortRange
+	o.DestinationFromPort = s.DestinationFromPort
+	o.DestinationToPort = s.DestinationToPort
 	o.Direction = s.Direction
 	o.Number = s.Number
 	o.Protocol = s.Protocol
 	o.SourceCIDR = s.SourceCIDR
-	o.SourcePortRange = s.SourcePortRange
+	o.SourceFromPort = s.SourceFromPort
+	o.SourceToPort = s.SourceToPort
 
 	return nil
 }
@@ -162,6 +174,10 @@ func (o *MirrorRule) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
+	if err := elemental.ValidateRequiredString("action", string(o.Action)); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateStringInList("action", string(o.Action), []string{"Accept", "Reject"}, false); err != nil {
 		errors = errors.Append(err)
 	}
@@ -170,8 +186,16 @@ func (o *MirrorRule) Validate() error {
 		errors = errors.Append(err)
 	}
 
-	if err := ValidatePortRange("destinationPortRange", o.DestinationPortRange); err != nil {
+	if err := ValidatePort("destinationFromPort", o.DestinationFromPort); err != nil {
 		errors = errors.Append(err)
+	}
+
+	if err := ValidatePort("destinationToPort", o.DestinationToPort); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("direction", string(o.Direction)); err != nil {
+		requiredErrors = requiredErrors.Append(err)
 	}
 
 	if err := elemental.ValidateStringInList("direction", string(o.Direction), []string{"Ingress", "Egress"}, false); err != nil {
@@ -190,7 +214,11 @@ func (o *MirrorRule) Validate() error {
 		errors = errors.Append(err)
 	}
 
-	if err := ValidatePortRange("sourcePortRange", o.SourcePortRange); err != nil {
+	if err := ValidatePort("sourceFromPort", o.SourceFromPort); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidatePort("sourceToPort", o.SourceToPort); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -234,8 +262,10 @@ func (o *MirrorRule) ValueForAttribute(name string) interface{} {
 		return o.Description
 	case "destinationCIDR":
 		return o.DestinationCIDR
-	case "destinationPortRange":
-		return o.DestinationPortRange
+	case "destinationFromPort":
+		return o.DestinationFromPort
+	case "destinationToPort":
+		return o.DestinationToPort
 	case "direction":
 		return o.Direction
 	case "number":
@@ -244,8 +274,10 @@ func (o *MirrorRule) ValueForAttribute(name string) interface{} {
 		return o.Protocol
 	case "sourceCIDR":
 		return o.SourceCIDR
-	case "sourcePortRange":
-		return o.SourcePortRange
+	case "sourceFromPort":
+		return o.SourceFromPort
+	case "sourceToPort":
+		return o.SourceToPort
 	}
 
 	return nil
@@ -257,10 +289,10 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{"Accept", "Reject"},
 		BSONFieldName:  "action",
 		ConvertedName:  "Action",
-		DefaultValue:   MirrorRuleActionAccept,
 		Description:    `The action to take on the filtered traffic.`,
 		Exposed:        true,
 		Name:           "action",
+		Required:       true,
 		Stored:         true,
 		Type:           "enum",
 	},
@@ -285,24 +317,35 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
-	"DestinationPortRange": {
+	"DestinationFromPort": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "destinationportrange",
-		ConvertedName:  "DestinationPortRange",
-		Description:    `Destination port range.`,
+		BSONFieldName:  "destinationfromport",
+		ConvertedName:  "DestinationFromPort",
+		Description:    `Destination port range start.`,
 		Exposed:        true,
-		Name:           "destinationPortRange",
+		Name:           "destinationFromPort",
 		Stored:         true,
-		Type:           "string",
+		Type:           "integer",
+	},
+	"DestinationToPort": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "destinationtoport",
+		ConvertedName:  "DestinationToPort",
+		DefaultValue:   65535,
+		Description:    `Destination port range end.`,
+		Exposed:        true,
+		Name:           "destinationToPort",
+		Stored:         true,
+		Type:           "integer",
 	},
 	"Direction": {
 		AllowedChoices: []string{"Ingress", "Egress"},
 		BSONFieldName:  "direction",
 		ConvertedName:  "Direction",
-		DefaultValue:   MirrorRuleDirectionIngress,
 		Description:    `The direction of the traffic to be mirrored.`,
 		Exposed:        true,
 		Name:           "direction",
+		Required:       true,
 		Stored:         true,
 		Type:           "enum",
 	},
@@ -339,15 +382,26 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
-	"SourcePortRange": {
+	"SourceFromPort": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "sourceportrange",
-		ConvertedName:  "SourcePortRange",
-		Description:    `Source port range.`,
+		BSONFieldName:  "sourcefromport",
+		ConvertedName:  "SourceFromPort",
+		Description:    `Source port range start.`,
 		Exposed:        true,
-		Name:           "sourcePortRange",
+		Name:           "sourceFromPort",
 		Stored:         true,
-		Type:           "string",
+		Type:           "integer",
+	},
+	"SourceToPort": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "sourcetoport",
+		ConvertedName:  "SourceToPort",
+		DefaultValue:   65535,
+		Description:    `Source port range end.`,
+		Exposed:        true,
+		Name:           "sourceToPort",
+		Stored:         true,
+		Type:           "integer",
 	},
 }
 
@@ -357,10 +411,10 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{"Accept", "Reject"},
 		BSONFieldName:  "action",
 		ConvertedName:  "Action",
-		DefaultValue:   MirrorRuleActionAccept,
 		Description:    `The action to take on the filtered traffic.`,
 		Exposed:        true,
 		Name:           "action",
+		Required:       true,
 		Stored:         true,
 		Type:           "enum",
 	},
@@ -385,24 +439,35 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Stored:         true,
 		Type:           "string",
 	},
-	"destinationportrange": {
+	"destinationfromport": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "destinationportrange",
-		ConvertedName:  "DestinationPortRange",
-		Description:    `Destination port range.`,
+		BSONFieldName:  "destinationfromport",
+		ConvertedName:  "DestinationFromPort",
+		Description:    `Destination port range start.`,
 		Exposed:        true,
-		Name:           "destinationPortRange",
+		Name:           "destinationFromPort",
 		Stored:         true,
-		Type:           "string",
+		Type:           "integer",
+	},
+	"destinationtoport": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "destinationtoport",
+		ConvertedName:  "DestinationToPort",
+		DefaultValue:   65535,
+		Description:    `Destination port range end.`,
+		Exposed:        true,
+		Name:           "destinationToPort",
+		Stored:         true,
+		Type:           "integer",
 	},
 	"direction": {
 		AllowedChoices: []string{"Ingress", "Egress"},
 		BSONFieldName:  "direction",
 		ConvertedName:  "Direction",
-		DefaultValue:   MirrorRuleDirectionIngress,
 		Description:    `The direction of the traffic to be mirrored.`,
 		Exposed:        true,
 		Name:           "direction",
+		Required:       true,
 		Stored:         true,
 		Type:           "enum",
 	},
@@ -439,26 +504,39 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Stored:         true,
 		Type:           "string",
 	},
-	"sourceportrange": {
+	"sourcefromport": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "sourceportrange",
-		ConvertedName:  "SourcePortRange",
-		Description:    `Source port range.`,
+		BSONFieldName:  "sourcefromport",
+		ConvertedName:  "SourceFromPort",
+		Description:    `Source port range start.`,
 		Exposed:        true,
-		Name:           "sourcePortRange",
+		Name:           "sourceFromPort",
 		Stored:         true,
-		Type:           "string",
+		Type:           "integer",
+	},
+	"sourcetoport": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "sourcetoport",
+		ConvertedName:  "SourceToPort",
+		DefaultValue:   65535,
+		Description:    `Source port range end.`,
+		Exposed:        true,
+		Name:           "sourceToPort",
+		Stored:         true,
+		Type:           "integer",
 	},
 }
 
 type mongoAttributesMirrorRule struct {
-	Action               MirrorRuleActionValue    `bson:"action"`
-	Description          string                   `bson:"description"`
-	DestinationCIDR      string                   `bson:"destinationcidr"`
-	DestinationPortRange string                   `bson:"destinationportrange"`
-	Direction            MirrorRuleDirectionValue `bson:"direction"`
-	Number               int                      `bson:"number"`
-	Protocol             int                      `bson:"protocol"`
-	SourceCIDR           string                   `bson:"sourcecidr"`
-	SourcePortRange      string                   `bson:"sourceportrange"`
+	Action              MirrorRuleActionValue    `bson:"action"`
+	Description         string                   `bson:"description"`
+	DestinationCIDR     string                   `bson:"destinationcidr"`
+	DestinationFromPort int                      `bson:"destinationfromport"`
+	DestinationToPort   int                      `bson:"destinationtoport"`
+	Direction           MirrorRuleDirectionValue `bson:"direction"`
+	Number              int                      `bson:"number"`
+	Protocol            int                      `bson:"protocol"`
+	SourceCIDR          string                   `bson:"sourcecidr"`
+	SourceFromPort      int                      `bson:"sourcefromport"`
+	SourceToPort        int                      `bson:"sourcetoport"`
 }

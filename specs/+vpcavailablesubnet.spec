@@ -17,6 +17,8 @@ attributes:
     description: An AWS VPC ID.
     type: string
     exposed: true
+    validations:
+    - $vpcid
 
   - name: availabilityZoneSubnets
     description: |-

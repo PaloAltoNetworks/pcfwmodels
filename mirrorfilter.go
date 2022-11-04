@@ -103,6 +103,10 @@ func (o *MirrorFilter) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
+	if err := ValidateAwsNetworkServices("networkServices", o.NetworkServices); err != nil {
+		errors = errors.Append(err)
+	}
+
 	for _, sub := range o.Rules {
 		if sub == nil {
 			continue

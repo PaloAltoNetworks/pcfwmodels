@@ -5,6 +5,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"reflect"
 	"regexp"
 	"strconv"
 	"strings"
@@ -226,38 +227,80 @@ func ValidateOptionalProtoPorts(attribute string, protoports []string) error {
 	return nil
 }
 
-// ValidatePortRange validates a port range.
-func ValidatePortRange(attribute string, portrange string) error {
-
-	ports := strings.Split(portrange, "-")
-	if len(ports) != 2 {
-		return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid portrange", attribute))
+// ValidatePort validates a port number.
+func ValidatePort(attribute string, port int) error {
+	if port < 0 || port > 65535 {
+		return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Invalid port value %d.  Must be between 0:65535", attribute, port))
 	}
-
-	for _, port := range ports {
-		if val, err := strconv.Atoi(port); err != nil {
-			return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Invalid port value %s", attribute, port))
-		} else if val < 0 || val > 65535 {
-			return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Invalid port value %s.  Must be between 0:65535", attribute, port))
-		}
-	}
-
-	start, _ := strconv.Atoi(ports[0])
-	end, _ := strconv.Atoi(ports[1])
-	if start > end {
-		return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid portrange.  Start of range greater than end.", attribute))
-	}
-
 	return nil
 }
 
 // ValidateAvailabilityZone validates the availability zone string.
 // It can not be empty.
 func ValidateAvailabilityZone(attribute string, availabilityzone string) error {
+
 	if availabilityzone == "" {
 		return makeErr(attribute, "availabilityzone cannot be empty")
 	}
 	// Validations against list of valid availability zones is going to fail
 	// whenever a new zone is added, so avoid it for now.
+	return nil
+}
+
+// ValidateAwsNetworkServices validates the networkServices list of strings that are
+// used in mirror filter to filter aws services.
+func ValidateAwsNetworkServices(attribute string, networkServices []string) error {
+
+	// Empty list of network services is valid
+	if len(networkServices) == 0 {
+		return nil
+	}
+	// If not empty, then compare against the supported services.
+	// Currently only "amazon-dns" is supported.
+	supportedServices := []string{"amazon-dns"}
+	if !reflect.DeepEqual(networkServices, supportedServices) {
+		return makeErr(attribute, "Only amazon-dns is supported as network services in mirror filter")
+	}
+	return nil
+}
+
+// ValidateVPCID validates the VPC ID string.
+// It should always start with "vpc-" prefix
+func ValidateVPCID(attribute string, vpcid string) error {
+
+	if !strings.HasPrefix(vpcid, "vpc-") {
+		return makeErr(attribute, fmt.Sprintf("vpcid %s does not start as 'vpc-'", vpcid))
+	}
+	return nil
+}
+
+// ValidateEnis validates the list containing eni strings.
+// List can not be empty and each entry must start with "eni-" prefix
+func ValidateEnis(attribute string, enis []string) error {
+
+	if len(enis) == 0 {
+		return makeErr(attribute, "eni list cannot be empty")
+	}
+	for _, eni := range enis {
+		if !strings.HasPrefix(eni, "eni-") {
+			return makeErr(attribute, fmt.Sprintf("eni %s does not start as 'eni-'", eni))
+		}
+	}
+	return nil
+}
+
+// ValidateVpcInfo validates all the vpc information in VPCAvailabilityZoneSubnet list
+func ValidateVpcInfo(attribute string, VPCAvailabilityZoneSubnets []*VPCAvailabilityZoneSubnet) error {
+
+	// Empty list is invalid
+	if len(VPCAvailabilityZoneSubnets) == 0 {
+		return makeErr(attribute, "VPCAvailabilityZoneSubnet list cannot be empty")
+	}
+	// Walk through each entry and validate it
+	for _, vpc := range VPCAvailabilityZoneSubnets {
+		if len(vpc.SubnetInterfaces) == 0 {
+			return makeErr(attribute, fmt.Sprintf("AvailabilityZoneSubnetInterface list for VPC %s cannot be empty", vpc.VPCID))
+		}
+	}
 	return nil
 }
