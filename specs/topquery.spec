@@ -10,6 +10,14 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: firewallName
+    description: The NGFW name.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
+
   - name: topResult
     description: The result of the top query. The top items in the category.
     type: refList

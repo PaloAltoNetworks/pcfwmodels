@@ -6,6 +6,14 @@
   "$modelRestName": "topquery",
   "additionalProperties": true,
   "properties": {
+    "firewallName": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "topResult": {
       "$readOnly": true,
       "anyOf": [
@@ -42,6 +50,7 @@
     }
   },
   "required": [
+    "firewallName",
     "topType"
   ],
   "title": "TopQuery",

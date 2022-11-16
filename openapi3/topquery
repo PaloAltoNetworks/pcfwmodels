@@ -5,6 +5,11 @@
       "topquery": {
         "description": "Answer general queries on firewall logs.",
         "properties": {
+          "firewallName": {
+            "description": "The NGFW name.",
+            "example": "firewall1",
+            "type": "string"
+          },
           "topResult": {
             "description": "The result of the top query. The top items in the category.",
             "items": {
@@ -32,6 +37,7 @@
           }
         },
         "required": [
+          "firewallName",
           "topType"
         ],
         "type": "object"
