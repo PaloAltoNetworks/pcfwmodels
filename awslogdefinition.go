@@ -12,24 +12,21 @@ import (
 	"go.aporeto.io/elemental"
 )
 
-// AWSLogDefinitionLogDestinationValue represents the possible values for attribute "logDestination".
-type AWSLogDefinitionLogDestinationValue string
+// AWSLogDefinitionLogDestinationTypeValue represents the possible values for attribute "logDestinationType".
+type AWSLogDefinitionLogDestinationTypeValue string
 
 const (
-	// AWSLogDefinitionLogDestinationCloudwatch represents the value Cloudwatch.
-	AWSLogDefinitionLogDestinationCloudwatch AWSLogDefinitionLogDestinationValue = "Cloudwatch"
+	// AWSLogDefinitionLogDestinationTypeCloudwatch represents the value Cloudwatch.
+	AWSLogDefinitionLogDestinationTypeCloudwatch AWSLogDefinitionLogDestinationTypeValue = "Cloudwatch"
 
-	// AWSLogDefinitionLogDestinationCortex represents the value Cortex.
-	AWSLogDefinitionLogDestinationCortex AWSLogDefinitionLogDestinationValue = "Cortex"
+	// AWSLogDefinitionLogDestinationTypeKinesisFirehose represents the value KinesisFirehose.
+	AWSLogDefinitionLogDestinationTypeKinesisFirehose AWSLogDefinitionLogDestinationTypeValue = "KinesisFirehose"
 
-	// AWSLogDefinitionLogDestinationKinesisFirehose represents the value KinesisFirehose.
-	AWSLogDefinitionLogDestinationKinesisFirehose AWSLogDefinitionLogDestinationValue = "KinesisFirehose"
+	// AWSLogDefinitionLogDestinationTypeMoose represents the value Moose.
+	AWSLogDefinitionLogDestinationTypeMoose AWSLogDefinitionLogDestinationTypeValue = "Moose"
 
-	// AWSLogDefinitionLogDestinationMoose represents the value Moose.
-	AWSLogDefinitionLogDestinationMoose AWSLogDefinitionLogDestinationValue = "Moose"
-
-	// AWSLogDefinitionLogDestinationS3External represents the value S3External.
-	AWSLogDefinitionLogDestinationS3External AWSLogDefinitionLogDestinationValue = "S3External"
+	// AWSLogDefinitionLogDestinationTypeS3 represents the value S3.
+	AWSLogDefinitionLogDestinationTypeS3 AWSLogDefinitionLogDestinationTypeValue = "S3"
 )
 
 // AWSLogDefinitionIdentity represents the Identity of the object.
@@ -118,11 +115,14 @@ type AWSLogDefinition struct {
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
 
-	// Destination for log output.
-	LogDestination AWSLogDefinitionLogDestinationValue `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
+	// The ARN to access the log destination.
+	LogARN string `json:"logARN" msgpack:"logARN" bson:"logarn" mapstructure:"logARN,omitempty"`
 
-	// Name of log destination.
-	LogDestinationName string `json:"logDestinationName" msgpack:"logDestinationName" bson:"logdestinationname" mapstructure:"logDestinationName,omitempty"`
+	// Destination for log output.
+	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
+
+	// Destination type for log output.
+	LogDestinationType AWSLogDefinitionLogDestinationTypeValue `json:"logDestinationType" msgpack:"logDestinationType" bson:"logdestinationtype" mapstructure:"logDestinationType,omitempty"`
 
 	// Name of the entity.
 	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
@@ -195,8 +195,9 @@ func (o *AWSLogDefinition) GetBSON() (interface{}, error) {
 	s.CreateTime = o.CreateTime
 	s.DecryptionEnabled = o.DecryptionEnabled
 	s.Description = o.Description
+	s.LogARN = o.LogARN
 	s.LogDestination = o.LogDestination
-	s.LogDestinationName = o.LogDestinationName
+	s.LogDestinationType = o.LogDestinationType
 	s.Name = o.Name
 	s.Namespace = o.Namespace
 	s.Tags = o.Tags
@@ -226,8 +227,9 @@ func (o *AWSLogDefinition) SetBSON(raw bson.Raw) error {
 	o.CreateTime = s.CreateTime
 	o.DecryptionEnabled = s.DecryptionEnabled
 	o.Description = s.Description
+	o.LogARN = s.LogARN
 	o.LogDestination = s.LogDestination
-	o.LogDestinationName = s.LogDestinationName
+	o.LogDestinationType = s.LogDestinationType
 	o.Name = s.Name
 	o.Namespace = s.Namespace
 	o.Tags = s.Tags
@@ -354,8 +356,9 @@ func (o *AWSLogDefinition) ToSparse(fields ...string) elemental.SparseIdentifiab
 			CreateTime:         &o.CreateTime,
 			DecryptionEnabled:  &o.DecryptionEnabled,
 			Description:        &o.Description,
+			LogARN:             &o.LogARN,
 			LogDestination:     &o.LogDestination,
-			LogDestinationName: &o.LogDestinationName,
+			LogDestinationType: &o.LogDestinationType,
 			Name:               &o.Name,
 			Namespace:          &o.Namespace,
 			Tags:               &o.Tags,
@@ -378,10 +381,12 @@ func (o *AWSLogDefinition) ToSparse(fields ...string) elemental.SparseIdentifiab
 			sp.DecryptionEnabled = &(o.DecryptionEnabled)
 		case "description":
 			sp.Description = &(o.Description)
+		case "logARN":
+			sp.LogARN = &(o.LogARN)
 		case "logDestination":
 			sp.LogDestination = &(o.LogDestination)
-		case "logDestinationName":
-			sp.LogDestinationName = &(o.LogDestinationName)
+		case "logDestinationType":
+			sp.LogDestinationType = &(o.LogDestinationType)
 		case "name":
 			sp.Name = &(o.Name)
 		case "namespace":
@@ -423,11 +428,14 @@ func (o *AWSLogDefinition) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Description != nil {
 		o.Description = *so.Description
 	}
+	if so.LogARN != nil {
+		o.LogARN = *so.LogARN
+	}
 	if so.LogDestination != nil {
 		o.LogDestination = *so.LogDestination
 	}
-	if so.LogDestinationName != nil {
-		o.LogDestinationName = *so.LogDestinationName
+	if so.LogDestinationType != nil {
+		o.LogDestinationType = *so.LogDestinationType
 	}
 	if so.Name != nil {
 		o.Name = *so.Name
@@ -489,16 +497,16 @@ func (o *AWSLogDefinition) Validate() error {
 		errors = errors.Append(err)
 	}
 
-	if err := elemental.ValidateRequiredString("logDestination", string(o.LogDestination)); err != nil {
+	if err := elemental.ValidateRequiredString("logDestination", o.LogDestination); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateStringInList("logDestination", string(o.LogDestination), []string{"Moose", "Cortex", "S3External", "Cloudwatch", "KinesisFirehose"}, false); err != nil {
+	if err := elemental.ValidateRequiredString("logDestinationType", string(o.LogDestinationType)); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateStringInList("logDestinationType", string(o.LogDestinationType), []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"}, false); err != nil {
 		errors = errors.Append(err)
-	}
-
-	if err := elemental.ValidateRequiredString("logDestinationName", o.LogDestinationName); err != nil {
-		requiredErrors = requiredErrors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
@@ -555,10 +563,12 @@ func (o *AWSLogDefinition) ValueForAttribute(name string) interface{} {
 		return o.DecryptionEnabled
 	case "description":
 		return o.Description
+	case "logARN":
+		return o.LogARN
 	case "logDestination":
 		return o.LogDestination
-	case "logDestinationName":
-		return o.LogDestinationName
+	case "logDestinationType":
+		return o.LogDestinationType
 	case "name":
 		return o.Name
 	case "namespace":
@@ -636,8 +646,18 @@ var AWSLogDefinitionAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+	"LogARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logarn",
+		ConvertedName:  "LogARN",
+		Description:    `The ARN to access the log destination.`,
+		Exposed:        true,
+		Name:           "logARN",
+		Stored:         true,
+		Type:           "string",
+	},
 	"LogDestination": {
-		AllowedChoices: []string{"Moose", "Cortex", "S3External", "Cloudwatch", "KinesisFirehose"},
+		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
 		ConvertedName:  "LogDestination",
 		Description:    `Destination for log output.`,
@@ -645,18 +665,18 @@ var AWSLogDefinitionAttributesMap = map[string]elemental.AttributeSpecification{
 		Name:           "logDestination",
 		Required:       true,
 		Stored:         true,
-		Type:           "enum",
+		Type:           "string",
 	},
-	"LogDestinationName": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "logdestinationname",
-		ConvertedName:  "LogDestinationName",
-		Description:    `Name of log destination.`,
+	"LogDestinationType": {
+		AllowedChoices: []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"},
+		BSONFieldName:  "logdestinationtype",
+		ConvertedName:  "LogDestinationType",
+		Description:    `Destination type for log output.`,
 		Exposed:        true,
-		Name:           "logDestinationName",
+		Name:           "logDestinationType",
 		Required:       true,
 		Stored:         true,
-		Type:           "string",
+		Type:           "enum",
 	},
 	"Name": {
 		AllowedChoices: []string{},
@@ -796,8 +816,18 @@ var AWSLogDefinitionLowerCaseAttributesMap = map[string]elemental.AttributeSpeci
 		Stored:         true,
 		Type:           "string",
 	},
+	"logarn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logarn",
+		ConvertedName:  "LogARN",
+		Description:    `The ARN to access the log destination.`,
+		Exposed:        true,
+		Name:           "logARN",
+		Stored:         true,
+		Type:           "string",
+	},
 	"logdestination": {
-		AllowedChoices: []string{"Moose", "Cortex", "S3External", "Cloudwatch", "KinesisFirehose"},
+		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
 		ConvertedName:  "LogDestination",
 		Description:    `Destination for log output.`,
@@ -805,18 +835,18 @@ var AWSLogDefinitionLowerCaseAttributesMap = map[string]elemental.AttributeSpeci
 		Name:           "logDestination",
 		Required:       true,
 		Stored:         true,
-		Type:           "enum",
+		Type:           "string",
 	},
-	"logdestinationname": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "logdestinationname",
-		ConvertedName:  "LogDestinationName",
-		Description:    `Name of log destination.`,
+	"logdestinationtype": {
+		AllowedChoices: []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"},
+		BSONFieldName:  "logdestinationtype",
+		ConvertedName:  "LogDestinationType",
+		Description:    `Destination type for log output.`,
 		Exposed:        true,
-		Name:           "logDestinationName",
+		Name:           "logDestinationType",
 		Required:       true,
 		Stored:         true,
-		Type:           "string",
+		Type:           "enum",
 	},
 	"name": {
 		AllowedChoices: []string{},
@@ -977,11 +1007,14 @@ type SparseAWSLogDefinition struct {
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
 
-	// Destination for log output.
-	LogDestination *AWSLogDefinitionLogDestinationValue `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
+	// The ARN to access the log destination.
+	LogARN *string `json:"logARN,omitempty" msgpack:"logARN,omitempty" bson:"logarn,omitempty" mapstructure:"logARN,omitempty"`
 
-	// Name of log destination.
-	LogDestinationName *string `json:"logDestinationName,omitempty" msgpack:"logDestinationName,omitempty" bson:"logdestinationname,omitempty" mapstructure:"logDestinationName,omitempty"`
+	// Destination for log output.
+	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
+
+	// Destination type for log output.
+	LogDestinationType *AWSLogDefinitionLogDestinationTypeValue `json:"logDestinationType,omitempty" msgpack:"logDestinationType,omitempty" bson:"logdestinationtype,omitempty" mapstructure:"logDestinationType,omitempty"`
 
 	// Name of the entity.
 	Name *string `json:"name,omitempty" msgpack:"name,omitempty" bson:"name,omitempty" mapstructure:"name,omitempty"`
@@ -1063,11 +1096,14 @@ func (o *SparseAWSLogDefinition) GetBSON() (interface{}, error) {
 	if o.Description != nil {
 		s.Description = o.Description
 	}
+	if o.LogARN != nil {
+		s.LogARN = o.LogARN
+	}
 	if o.LogDestination != nil {
 		s.LogDestination = o.LogDestination
 	}
-	if o.LogDestinationName != nil {
-		s.LogDestinationName = o.LogDestinationName
+	if o.LogDestinationType != nil {
+		s.LogDestinationType = o.LogDestinationType
 	}
 	if o.Name != nil {
 		s.Name = o.Name
@@ -1121,11 +1157,14 @@ func (o *SparseAWSLogDefinition) SetBSON(raw bson.Raw) error {
 	if s.Description != nil {
 		o.Description = s.Description
 	}
+	if s.LogARN != nil {
+		o.LogARN = s.LogARN
+	}
 	if s.LogDestination != nil {
 		o.LogDestination = s.LogDestination
 	}
-	if s.LogDestinationName != nil {
-		o.LogDestinationName = s.LogDestinationName
+	if s.LogDestinationType != nil {
+		o.LogDestinationType = s.LogDestinationType
 	}
 	if s.Name != nil {
 		o.Name = s.Name
@@ -1177,11 +1216,14 @@ func (o *SparseAWSLogDefinition) ToPlain() elemental.PlainIdentifiable {
 	if o.Description != nil {
 		out.Description = *o.Description
 	}
+	if o.LogARN != nil {
+		out.LogARN = *o.LogARN
+	}
 	if o.LogDestination != nil {
 		out.LogDestination = *o.LogDestination
 	}
-	if o.LogDestinationName != nil {
-		out.LogDestinationName = *o.LogDestinationName
+	if o.LogDestinationType != nil {
+		out.LogDestinationType = *o.LogDestinationType
 	}
 	if o.Name != nil {
 		out.Name = *o.Name
@@ -1332,34 +1374,36 @@ func (o *SparseAWSLogDefinition) DeepCopyInto(out *SparseAWSLogDefinition) {
 }
 
 type mongoAttributesAWSLogDefinition struct {
-	ID                 bson.ObjectId                       `bson:"_id,omitempty"`
-	CreateTime         time.Time                           `bson:"createtime"`
-	DecryptionEnabled  bool                                `bson:"decryptionenabled"`
-	Description        string                              `bson:"description"`
-	LogDestination     AWSLogDefinitionLogDestinationValue `bson:"logdestination"`
-	LogDestinationName string                              `bson:"logdestinationname"`
-	Name               string                              `bson:"name"`
-	Namespace          string                              `bson:"namespace"`
-	Tags               []string                            `bson:"tags"`
-	ThreatEnabled      bool                                `bson:"threatenabled"`
-	TrafficEnabled     bool                                `bson:"trafficenabled"`
-	UpdateTime         time.Time                           `bson:"updatetime"`
-	ZHash              int                                 `bson:"zhash"`
-	Zone               int                                 `bson:"zone"`
+	ID                 bson.ObjectId                           `bson:"_id,omitempty"`
+	CreateTime         time.Time                               `bson:"createtime"`
+	DecryptionEnabled  bool                                    `bson:"decryptionenabled"`
+	Description        string                                  `bson:"description"`
+	LogARN             string                                  `bson:"logarn"`
+	LogDestination     string                                  `bson:"logdestination"`
+	LogDestinationType AWSLogDefinitionLogDestinationTypeValue `bson:"logdestinationtype"`
+	Name               string                                  `bson:"name"`
+	Namespace          string                                  `bson:"namespace"`
+	Tags               []string                                `bson:"tags"`
+	ThreatEnabled      bool                                    `bson:"threatenabled"`
+	TrafficEnabled     bool                                    `bson:"trafficenabled"`
+	UpdateTime         time.Time                               `bson:"updatetime"`
+	ZHash              int                                     `bson:"zhash"`
+	Zone               int                                     `bson:"zone"`
 }
 type mongoAttributesSparseAWSLogDefinition struct {
-	ID                 bson.ObjectId                        `bson:"_id,omitempty"`
-	CreateTime         *time.Time                           `bson:"createtime,omitempty"`
-	DecryptionEnabled  *bool                                `bson:"decryptionenabled,omitempty"`
-	Description        *string                              `bson:"description,omitempty"`
-	LogDestination     *AWSLogDefinitionLogDestinationValue `bson:"logdestination,omitempty"`
-	LogDestinationName *string                              `bson:"logdestinationname,omitempty"`
-	Name               *string                              `bson:"name,omitempty"`
-	Namespace          *string                              `bson:"namespace,omitempty"`
-	Tags               *[]string                            `bson:"tags,omitempty"`
-	ThreatEnabled      *bool                                `bson:"threatenabled,omitempty"`
-	TrafficEnabled     *bool                                `bson:"trafficenabled,omitempty"`
-	UpdateTime         *time.Time                           `bson:"updatetime,omitempty"`
-	ZHash              *int                                 `bson:"zhash,omitempty"`
-	Zone               *int                                 `bson:"zone,omitempty"`
+	ID                 bson.ObjectId                            `bson:"_id,omitempty"`
+	CreateTime         *time.Time                               `bson:"createtime,omitempty"`
+	DecryptionEnabled  *bool                                    `bson:"decryptionenabled,omitempty"`
+	Description        *string                                  `bson:"description,omitempty"`
+	LogARN             *string                                  `bson:"logarn,omitempty"`
+	LogDestination     *string                                  `bson:"logdestination,omitempty"`
+	LogDestinationType *AWSLogDefinitionLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
+	Name               *string                                  `bson:"name,omitempty"`
+	Namespace          *string                                  `bson:"namespace,omitempty"`
+	Tags               *[]string                                `bson:"tags,omitempty"`
+	ThreatEnabled      *bool                                    `bson:"threatenabled,omitempty"`
+	TrafficEnabled     *bool                                    `bson:"trafficenabled,omitempty"`
+	UpdateTime         *time.Time                               `bson:"updatetime,omitempty"`
+	ZHash              *int                                     `bson:"zhash,omitempty"`
+	Zone               *int                                     `bson:"zone,omitempty"`
 }

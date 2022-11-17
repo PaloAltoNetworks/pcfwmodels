@@ -17,17 +17,11 @@
               "$ref": "./awsendpoint#/components/schemas/awsendpoint"
             },
             "type": "array"
-          },
-          "region": {
-            "description": "The AWS region of this VPC.",
-            "example": "us-east-1",
-            "type": "string"
           }
         },
         "required": [
           "VPC",
-          "endpoints",
-          "region"
+          "endpoints"
         ],
         "type": "object"
       }

@@ -68,6 +68,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "region": {
+            "description": "The AWS region of this Firewall.",
+            "example": "us-east-1",
+            "type": "string"
+          },
           "status": {
             "default": "Creating",
             "description": "The status of the of firewall.",
@@ -76,7 +81,8 @@
               "Updating",
               "Deleting",
               "Ready",
-              "Failed"
+              "Failed",
+              "LogConfigFailed"
             ],
             "readOnly": true
           },
@@ -100,7 +106,8 @@
           }
         },
         "required": [
-          "name"
+          "name",
+          "region"
         ],
         "type": "object"
       }

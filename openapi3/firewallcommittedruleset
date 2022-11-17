@@ -3,7 +3,7 @@
   "components": {
     "schemas": {
       "firewallcommittedruleset": {
-        "description": "Represents a list of commited filewall rules.",
+        "description": "Represents a list of committed filewall rules.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -35,7 +35,7 @@
           },
           "objectType": {
             "default": "FirewallRuleset",
-            "description": "The type of object commited.",
+            "description": "The type of object committed.",
             "enum": [
               "FirewallRuleset",
               "FirewallTemplate"

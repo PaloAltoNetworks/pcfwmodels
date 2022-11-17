@@ -110,7 +110,7 @@ type FirewallCommittedRuleset struct {
 	// The ID of the ruleset or template that was committed.
 	ObjectID time.Time `json:"objectID" msgpack:"objectID" bson:"objectid" mapstructure:"objectID,omitempty"`
 
-	// The type of object commited.
+	// The type of object committed.
 	ObjectType FirewallCommittedRulesetObjectTypeValue `json:"objectType" msgpack:"objectType" bson:"objecttype" mapstructure:"objectType,omitempty"`
 
 	// Last update date of the object.
@@ -225,7 +225,7 @@ func (o *FirewallCommittedRuleset) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCommittedRuleset) Doc() string {
 
-	return `Represents a list of commited filewall rules.`
+	return `Represents a list of committed filewall rules.`
 }
 
 func (o *FirewallCommittedRuleset) String() string {
@@ -517,7 +517,7 @@ var FirewallCommittedRulesetAttributesMap = map[string]elemental.AttributeSpecif
 		BSONFieldName:  "objecttype",
 		ConvertedName:  "ObjectType",
 		DefaultValue:   FirewallCommittedRulesetObjectTypeFirewallRuleset,
-		Description:    `The type of object commited.`,
+		Description:    `The type of object committed.`,
 		Exposed:        true,
 		Name:           "objectType",
 		Stored:         true,
@@ -615,7 +615,7 @@ var FirewallCommittedRulesetLowerCaseAttributesMap = map[string]elemental.Attrib
 		BSONFieldName:  "objecttype",
 		ConvertedName:  "ObjectType",
 		DefaultValue:   FirewallCommittedRulesetObjectTypeFirewallRuleset,
-		Description:    `The type of object commited.`,
+		Description:    `The type of object committed.`,
 		Exposed:        true,
 		Name:           "objectType",
 		Stored:         true,
@@ -716,7 +716,7 @@ type SparseFirewallCommittedRuleset struct {
 	// The ID of the ruleset or template that was committed.
 	ObjectID *time.Time `json:"objectID,omitempty" msgpack:"objectID,omitempty" bson:"objectid,omitempty" mapstructure:"objectID,omitempty"`
 
-	// The type of object commited.
+	// The type of object committed.
 	ObjectType *FirewallCommittedRulesetObjectTypeValue `json:"objectType,omitempty" msgpack:"objectType,omitempty" bson:"objecttype,omitempty" mapstructure:"objectType,omitempty"`
 
 	// Last update date of the object.

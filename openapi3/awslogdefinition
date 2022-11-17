@@ -24,21 +24,25 @@
             "description": "Description of the object.",
             "type": "string"
           },
+          "logARN": {
+            "description": "The ARN to access the log destination.",
+            "example": "arn:aws:iam::833962752675:role/SomeRole",
+            "type": "string"
+          },
           "logDestination": {
             "description": "Destination for log output.",
+            "example": "name",
+            "type": "string"
+          },
+          "logDestinationType": {
+            "description": "Destination type for log output.",
             "enum": [
               "Moose",
-              "Cortex",
-              "S3External",
+              "S3",
               "Cloudwatch",
               "KinesisFirehose"
             ],
             "example": "Moose"
-          },
-          "logDestinationName": {
-            "description": "Name of log destination.",
-            "example": "name",
-            "type": "string"
           },
           "name": {
             "description": "Name of the entity.",
@@ -74,7 +78,7 @@
         },
         "required": [
           "logDestination",
-          "logDestinationName",
+          "logDestinationType",
           "name"
         ],
         "type": "object"

@@ -58,25 +58,34 @@
         }
       ]
     },
+    "logARN": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "logDestination": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logDestinationType": {
       "$required": true,
       "anyOf": [
         {
           "enum": [
             "Moose",
-            "Cortex",
-            "S3External",
+            "S3",
             "Cloudwatch",
             "KinesisFirehose"
           ]
-        }
-      ]
-    },
-    "logDestinationName": {
-      "$required": true,
-      "anyOf": [
-        {
-          "type": "string"
         }
       ]
     },
@@ -148,7 +157,7 @@
   },
   "required": [
     "logDestination",
-    "logDestinationName",
+    "logDestinationType",
     "name"
   ],
   "title": "AWSLogDefinition",

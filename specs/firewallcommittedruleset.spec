@@ -5,7 +5,7 @@ model:
   entity_name: FirewallCommittedRuleset
   package: ngfw
   group: core/ngfw
-  description: Represents a list of commited filewall rules.
+  description: Represents a list of committed filewall rules.
   get:
     description: Retrieves the firewallcommittedruleset with the given ID.
   update:
@@ -36,7 +36,7 @@ attributes:
     read_only: true
 
   - name: objectType
-    description: The type of object commited.
+    description: The type of object committed.
     type: enum
     exposed: true
     stored: true

@@ -19,9 +19,6 @@ type AWSAttachment struct {
 	// A list of awsendpoint objects.
 	Endpoints []*AWSEndpoint `json:"endpoints" msgpack:"endpoints" bson:"endpoints" mapstructure:"endpoints,omitempty"`
 
-	// The AWS region of this VPC.
-	Region string `json:"region" msgpack:"region" bson:"region" mapstructure:"region,omitempty"`
-
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
@@ -46,7 +43,6 @@ func (o *AWSAttachment) GetBSON() (interface{}, error) {
 
 	s.VPC = o.VPC
 	s.Endpoints = o.Endpoints
-	s.Region = o.Region
 
 	return s, nil
 }
@@ -66,7 +62,6 @@ func (o *AWSAttachment) SetBSON(raw bson.Raw) error {
 
 	o.VPC = s.VPC
 	o.Endpoints = s.Endpoints
-	o.Region = s.Region
 
 	return nil
 }
@@ -121,10 +116,6 @@ func (o *AWSAttachment) Validate() error {
 		}
 	}
 
-	if err := elemental.ValidateRequiredString("region", o.Region); err != nil {
-		requiredErrors = requiredErrors.Append(err)
-	}
-
 	if len(requiredErrors) > 0 {
 		return requiredErrors
 	}
@@ -163,8 +154,6 @@ func (o *AWSAttachment) ValueForAttribute(name string) interface{} {
 		return o.VPC
 	case "endpoints":
 		return o.Endpoints
-	case "region":
-		return o.Region
 	}
 
 	return nil
@@ -195,17 +184,6 @@ var AWSAttachmentAttributesMap = map[string]elemental.AttributeSpecification{
 		SubType:        "awsendpoint",
 		Type:           "refList",
 	},
-	"Region": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "region",
-		ConvertedName:  "Region",
-		Description:    `The AWS region of this VPC.`,
-		Exposed:        true,
-		Name:           "region",
-		Required:       true,
-		Stored:         true,
-		Type:           "string",
-	},
 }
 
 // AWSAttachmentLowerCaseAttributesMap represents the map of attribute for AWSAttachment.
@@ -233,21 +211,9 @@ var AWSAttachmentLowerCaseAttributesMap = map[string]elemental.AttributeSpecific
 		SubType:        "awsendpoint",
 		Type:           "refList",
 	},
-	"region": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "region",
-		ConvertedName:  "Region",
-		Description:    `The AWS region of this VPC.`,
-		Exposed:        true,
-		Name:           "region",
-		Required:       true,
-		Stored:         true,
-		Type:           "string",
-	},
 }
 
 type mongoAttributesAWSAttachment struct {
 	VPC       string         `bson:"vpc"`
 	Endpoints []*AWSEndpoint `bson:"endpoints"`
-	Region    string         `bson:"region"`
 }

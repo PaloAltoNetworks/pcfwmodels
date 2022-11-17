@@ -144,6 +144,15 @@
         }
       ]
     },
+    "region": {
+      "$creationOnly": true,
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "status": {
       "$defaultValue": "Creating",
       "$readOnly": true,
@@ -157,7 +166,8 @@
             "Updating",
             "Deleting",
             "Ready",
-            "Failed"
+            "Failed",
+            "LogConfigFailed"
           ]
         }
       ]
@@ -200,7 +210,8 @@
     }
   },
   "required": [
-    "name"
+    "name",
+    "region"
   ],
   "title": "AWSFirewall",
   "type": "object"

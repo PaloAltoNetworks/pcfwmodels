@@ -30,27 +30,33 @@ attributes:
     exposed: true
     stored: true
 
+  - name: logARN
+    description: The ARN to access the log destination.
+    type: string
+    exposed: true
+    stored: true
+    example_value: arn:aws:iam::833962752675:role/SomeRole
+
   - name: logDestination
     description: Destination for log output.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: name
+
+  - name: logDestinationType
+    description: Destination type for log output.
     type: enum
     exposed: true
     stored: true
     required: true
     allowed_choices:
     - Moose
-    - Cortex
-    - S3External
+    - S3
     - Cloudwatch
     - KinesisFirehose
     example_value: Moose
-
-  - name: logDestinationName
-    description: Name of log destination.
-    type: string
-    exposed: true
-    stored: true
-    required: true
-    example_value: name
 
   - name: threatEnabled
     description: The Threat log is enabled.
