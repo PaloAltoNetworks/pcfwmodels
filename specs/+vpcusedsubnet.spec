@@ -13,6 +13,14 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: CIDRBlock
+    description: The CIDR block of the VPC.
+    type: string
+    exposed: true
+    stored: true
+    validations:
+    - $cidr
+
   - name: VPCID
     description: An AWS VPC ID.
     type: string

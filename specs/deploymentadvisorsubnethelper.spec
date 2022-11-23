@@ -32,5 +32,7 @@ attributes:
     exposed: true
     subtype: vpcusedsubnet
     stored: true
+    validations:
+    - $vpcsubnetinfo
     extensions:
       refMode: pointer

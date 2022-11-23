@@ -6,6 +6,16 @@
   "$modelRestName": "vpcusedsubnet",
   "additionalProperties": true,
   "properties": {
+    "CIDRBlock": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "VPCID": {
       "anyOf": [
         {

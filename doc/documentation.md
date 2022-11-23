@@ -366,6 +366,12 @@ subnet CIDR blocks in the VPC.
 
 #### Attributes
 
+##### `CIDRBlock`
+
+Type: `string`
+
+The CIDR block of the VPC.
+
 ##### `VPCID`
 
 Type: `string`

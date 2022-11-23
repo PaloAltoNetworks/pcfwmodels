@@ -897,3 +897,57 @@ func TestValidateVpcInfo(t *testing.T) {
 		})
 	}
 }
+
+func TestValidateVpcSubnetInfo(t *testing.T) {
+	type args struct {
+		attribute      string
+		VpcUsedSubnets []*VpcUsedSubnet
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty VpcUsedSubnets is invalid",
+			args: args{
+				"VpcUsedSubnets",
+				[]*VpcUsedSubnet{},
+			},
+			wantErr: true,
+		},
+		{
+			name: "empty AvailabilityZones is invalid",
+			args: args{
+				"VpcUsedSubnets",
+				[]*VpcUsedSubnet{
+					{
+						VPCID:             "vpc1",
+						AvailabilityZones: []string{},
+					},
+				},
+			},
+			wantErr: true,
+		},
+		{
+			name: "valid list",
+			args: args{
+				"VpcUsedSubnets",
+				[]*VpcUsedSubnet{
+					{
+						VPCID:             "vpc1",
+						AvailabilityZones: []string{"us-west-1a"},
+					},
+				},
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateVpcSubnetInfo(tt.args.attribute, tt.args.VpcUsedSubnets); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateVpcSubnetInfo() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}

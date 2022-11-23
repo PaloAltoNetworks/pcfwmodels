@@ -5,6 +5,10 @@
       "vpcusedsubnet": {
         "description": "Represents association of a VPC ID to corresponding availability zones and used\nsubnet CIDR blocks in the VPC.",
         "properties": {
+          "CIDRBlock": {
+            "description": "The CIDR block of the VPC.",
+            "type": "string"
+          },
           "VPCID": {
             "description": "An AWS VPC ID.",
             "type": "string"

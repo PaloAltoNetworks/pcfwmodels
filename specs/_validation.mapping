@@ -70,6 +70,10 @@ $vpcinfo:
   elemental:
     name: ValidateVpcInfo
 
+$vpcsubnetinfo:
+  elemental:
+    name: ValidateVpcSubnetInfo
+
 $whystring:
   elemental:
     name: ValidateWhyString

@@ -274,6 +274,10 @@ func (o *DeploymentAdvisorSubnetHelper) Validate() error {
 		}
 	}
 
+	if err := ValidateVpcSubnetInfo("VPCUsedSubnets", o.VPCUsedSubnets); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if len(requiredErrors) > 0 {
 		return requiredErrors
 	}
