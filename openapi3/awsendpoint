@@ -15,7 +15,6 @@
             "description": "The status of the of endpoint.",
             "enum": [
               "Creating",
-              "Updating",
               "Deleting",
               "Accepted",
               "Failed"

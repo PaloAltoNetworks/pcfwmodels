@@ -20,6 +20,11 @@ attributes:
     stored: true
     read_only: true
 
+  - name: previousStatus
+    description: The previous endpoint Status.
+    type: string
+    stored: true
+
   - name: status
     description: The status of the of endpoint.
     type: enum
@@ -28,7 +33,6 @@ attributes:
     read_only: true
     allowed_choices:
     - Creating
-    - Updating
     - Deleting
     - Accepted
     - Failed
