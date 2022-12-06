@@ -210,6 +210,7 @@ Represents an AWS mirroring filter rule.
   "destinationToPort": 65535,
   "direction": "Ingress",
   "number": 100,
+  "protocol": -1,
   "sourceCIDR": "0.0.0.0/0",
   "sourceFromPort": 0,
   "sourceToPort": 65535
@@ -283,6 +284,12 @@ Number of a traffic mirror rule. Must be unique in each direction.
 Type: `integer`
 
 Protocol number to assign to the mirror rule.
+
+Default value:
+
+```json
+-1
+```
 
 ##### `sourceCIDR`
 

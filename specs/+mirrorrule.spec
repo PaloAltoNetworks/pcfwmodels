@@ -79,6 +79,7 @@ attributes:
     type: integer
     exposed: true
     stored: true
+    default_value: -1
     max_value: 255
 
   - name: sourceCIDR

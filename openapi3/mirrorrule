@@ -46,6 +46,7 @@
             "type": "integer"
           },
           "protocol": {
+            "default": -1,
             "description": "Protocol number to assign to the mirror rule.",
             "type": "integer"
           },

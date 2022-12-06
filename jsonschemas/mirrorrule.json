@@ -80,6 +80,7 @@
       ]
     },
     "protocol": {
+      "$defaultValue": -1,
       "anyOf": [
         {
           "type": "null"
