@@ -16,6 +16,14 @@
         }
       ]
     },
+    "firewallName": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "logResult": {
       "$readOnly": true,
       "anyOf": [
@@ -46,7 +54,9 @@
       ]
     }
   },
-  "required": [],
+  "required": [
+    "firewallName"
+  ],
   "title": "LogQuery",
   "type": "object"
 }

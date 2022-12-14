@@ -103,6 +103,9 @@ type LogQuery struct {
 	// Optional hint about the result set size, provided by the caller.
 	CountHint int `json:"countHint" msgpack:"countHint" bson:"-" mapstructure:"countHint,omitempty"`
 
+	// The NGFW name.
+	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"firewallname" mapstructure:"firewallName,omitempty"`
+
 	// The result of the log query.
 	LogResult []*LogQueryItem `json:"logResult" msgpack:"logResult" bson:"-" mapstructure:"logResult,omitempty"`
 
@@ -148,6 +151,8 @@ func (o *LogQuery) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesLogQuery{}
 
+	s.FirewallName = o.FirewallName
+
 	return s, nil
 }
 
@@ -163,6 +168,8 @@ func (o *LogQuery) SetBSON(raw bson.Raw) error {
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
+
+	o.FirewallName = s.FirewallName
 
 	return nil
 }
@@ -203,9 +210,10 @@ func (o *LogQuery) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseLogQuery{
-			CountHint: &o.CountHint,
-			LogResult: &o.LogResult,
-			LogType:   &o.LogType,
+			CountHint:    &o.CountHint,
+			FirewallName: &o.FirewallName,
+			LogResult:    &o.LogResult,
+			LogType:      &o.LogType,
 		}
 	}
 
@@ -214,6 +222,8 @@ func (o *LogQuery) ToSparse(fields ...string) elemental.SparseIdentifiable {
 		switch f {
 		case "countHint":
 			sp.CountHint = &(o.CountHint)
+		case "firewallName":
+			sp.FirewallName = &(o.FirewallName)
 		case "logResult":
 			sp.LogResult = &(o.LogResult)
 		case "logType":
@@ -233,6 +243,9 @@ func (o *LogQuery) Patch(sparse elemental.SparseIdentifiable) {
 	so := sparse.(*SparseLogQuery)
 	if so.CountHint != nil {
 		o.CountHint = *so.CountHint
+	}
+	if so.FirewallName != nil {
+		o.FirewallName = *so.FirewallName
 	}
 	if so.LogResult != nil {
 		o.LogResult = *so.LogResult
@@ -271,6 +284,10 @@ func (o *LogQuery) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
+
+	if err := elemental.ValidateRequiredString("firewallName", o.FirewallName); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
 
 	for _, sub := range o.LogResult {
 		if sub == nil {
@@ -322,6 +339,8 @@ func (o *LogQuery) ValueForAttribute(name string) interface{} {
 	switch name {
 	case "countHint":
 		return o.CountHint
+	case "firewallName":
+		return o.FirewallName
 	case "logResult":
 		return o.LogResult
 	case "logType":
@@ -340,6 +359,17 @@ var LogQueryAttributesMap = map[string]elemental.AttributeSpecification{
 		Exposed:        true,
 		Name:           "countHint",
 		Type:           "integer",
+	},
+	"FirewallName": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallname",
+		ConvertedName:  "FirewallName",
+		Description:    `The NGFW name.`,
+		Exposed:        true,
+		Name:           "firewallName",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"LogResult": {
 		AllowedChoices: []string{},
@@ -371,6 +401,17 @@ var LogQueryLowerCaseAttributesMap = map[string]elemental.AttributeSpecification
 		Exposed:        true,
 		Name:           "countHint",
 		Type:           "integer",
+	},
+	"firewallname": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallname",
+		ConvertedName:  "FirewallName",
+		Description:    `The NGFW name.`,
+		Exposed:        true,
+		Name:           "firewallName",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"logresult": {
 		AllowedChoices: []string{},
@@ -459,6 +500,9 @@ type SparseLogQuery struct {
 	// Optional hint about the result set size, provided by the caller.
 	CountHint *int `json:"countHint,omitempty" msgpack:"countHint,omitempty" bson:"-" mapstructure:"countHint,omitempty"`
 
+	// The NGFW name.
+	FirewallName *string `json:"firewallName,omitempty" msgpack:"firewallName,omitempty" bson:"firewallname,omitempty" mapstructure:"firewallName,omitempty"`
+
 	// The result of the log query.
 	LogResult *[]*LogQueryItem `json:"logResult,omitempty" msgpack:"logResult,omitempty" bson:"-" mapstructure:"logResult,omitempty"`
 
@@ -500,6 +544,10 @@ func (o *SparseLogQuery) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesSparseLogQuery{}
 
+	if o.FirewallName != nil {
+		s.FirewallName = o.FirewallName
+	}
+
 	return s, nil
 }
 
@@ -514,6 +562,10 @@ func (o *SparseLogQuery) SetBSON(raw bson.Raw) error {
 	s := &mongoAttributesSparseLogQuery{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
+	}
+
+	if s.FirewallName != nil {
+		o.FirewallName = s.FirewallName
 	}
 
 	return nil
@@ -531,6 +583,9 @@ func (o *SparseLogQuery) ToPlain() elemental.PlainIdentifiable {
 	out := NewLogQuery()
 	if o.CountHint != nil {
 		out.CountHint = *o.CountHint
+	}
+	if o.FirewallName != nil {
+		out.FirewallName = *o.FirewallName
 	}
 	if o.LogResult != nil {
 		out.LogResult = *o.LogResult
@@ -567,6 +622,8 @@ func (o *SparseLogQuery) DeepCopyInto(out *SparseLogQuery) {
 }
 
 type mongoAttributesLogQuery struct {
+	FirewallName string `bson:"firewallname"`
 }
 type mongoAttributesSparseLogQuery struct {
+	FirewallName *string `bson:"firewallname,omitempty"`
 }

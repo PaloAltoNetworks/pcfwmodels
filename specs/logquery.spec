@@ -15,6 +15,14 @@ attributes:
     type: integer
     exposed: true
 
+  - name: firewallName
+    description: The NGFW name.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
+
   - name: logResult
     description: The result of the log query.
     type: refList

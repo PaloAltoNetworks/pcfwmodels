@@ -9,6 +9,11 @@
             "description": "Optional hint about the result set size, provided by the caller.",
             "type": "integer"
           },
+          "firewallName": {
+            "description": "The NGFW name.",
+            "example": "firewall1",
+            "type": "string"
+          },
           "logResult": {
             "description": "The result of the log query.",
             "items": {
@@ -27,6 +32,9 @@
             ]
           }
         },
+        "required": [
+          "firewallName"
+        ],
         "type": "object"
       }
     }
