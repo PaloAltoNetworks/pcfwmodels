@@ -87,9 +87,8 @@ attributes:
     stored: true
     required: true
     allowed_choices:
-    - Traffic
     - IngressBytes
     - EgressBytes
     - ThreatsDetected
     - ThreatsBlocked
-    example_value: Traffic
+    example_value: IngressBytes

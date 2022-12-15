@@ -5,6 +5,11 @@
       "trendquery": {
         "description": "Answer trend queries on firewall logs.",
         "properties": {
+          "firewallName": {
+            "description": "The NGFW name.",
+            "example": "firewall1",
+            "type": "string"
+          },
           "trendResult": {
             "description": "The result of the trend query.",
             "items": {
@@ -26,6 +31,7 @@
           }
         },
         "required": [
+          "firewallName",
           "trendType"
         ],
         "type": "object"

@@ -10,6 +10,14 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: firewallName
+    description: The NGFW name.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
+
   - name: trendResult
     description: The result of the trend query.
     type: refList
