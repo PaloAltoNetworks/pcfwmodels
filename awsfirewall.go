@@ -149,14 +149,23 @@ type AWSFirewall struct {
 	// The name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack string `json:"-" msgpack:"-" bson:"ngfwrulestack" mapstructure:"-,omitempty"`
 
-	// The firewall attachments.
-	Attachments []*AWSAttachment `json:"attachments" msgpack:"attachments" bson:"attachments" mapstructure:"attachments,omitempty"`
+	// An AWS VPC ID.
+	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"vpcid" mapstructure:"VPCID,omitempty"`
+
+	// A list of availability zones.
+	AvailabilityZones []string `json:"availabilityZones" msgpack:"availabilityZones" bson:"availabilityzones" mapstructure:"availabilityZones,omitempty"`
 
 	// Creation date of the object.
 	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
 
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
+
+	// The endpoint service name needed to create an AWS endpoint.
+	EndpointServiceName string `json:"endpointServiceName" msgpack:"endpointServiceName" bson:"endpointservicename" mapstructure:"endpointServiceName,omitempty"`
+
+	// The firewall endpoints.
+	Endpoints []*AWSEndpoint `json:"endpoints" msgpack:"endpoints" bson:"endpoints" mapstructure:"endpoints,omitempty"`
 
 	// The date when the fireall was last committed.
 	LastCommitTime time.Time `json:"lastCommitTime" msgpack:"lastCommitTime" bson:"lastcommittime" mapstructure:"lastCommitTime,omitempty"`
@@ -205,12 +214,13 @@ type AWSFirewall struct {
 func NewAWSFirewall() *AWSFirewall {
 
 	return &AWSFirewall{
-		ModelVersion: 1,
-		Attachments:  []*AWSAttachment{},
-		LicenseType:  AWSFirewallLicenseTypeTAP,
-		Mode:         AWSFirewallModeTAP,
-		Status:       AWSFirewallStatusCreating,
-		Tags:         []string{},
+		ModelVersion:      1,
+		AvailabilityZones: []string{},
+		Endpoints:         []*AWSEndpoint{},
+		LicenseType:       AWSFirewallLicenseTypeTAP,
+		Mode:              AWSFirewallModeTAP,
+		Status:            AWSFirewallStatusCreating,
+		Tags:              []string{},
 	}
 }
 
@@ -249,9 +259,12 @@ func (o *AWSFirewall) GetBSON() (interface{}, error) {
 	}
 	s.NGFWFirewall = o.NGFWFirewall
 	s.NGFWRuleStack = o.NGFWRuleStack
-	s.Attachments = o.Attachments
+	s.VPCID = o.VPCID
+	s.AvailabilityZones = o.AvailabilityZones
 	s.CreateTime = o.CreateTime
 	s.Description = o.Description
+	s.EndpointServiceName = o.EndpointServiceName
+	s.Endpoints = o.Endpoints
 	s.LastCommitTime = o.LastCommitTime
 	s.LicenseType = o.LicenseType
 	s.Mode = o.Mode
@@ -287,9 +300,12 @@ func (o *AWSFirewall) SetBSON(raw bson.Raw) error {
 	o.ID = s.ID.Hex()
 	o.NGFWFirewall = s.NGFWFirewall
 	o.NGFWRuleStack = s.NGFWRuleStack
-	o.Attachments = s.Attachments
+	o.VPCID = s.VPCID
+	o.AvailabilityZones = s.AvailabilityZones
 	o.CreateTime = s.CreateTime
 	o.Description = s.Description
+	o.EndpointServiceName = s.EndpointServiceName
+	o.Endpoints = s.Endpoints
 	o.LastCommitTime = s.LastCommitTime
 	o.LicenseType = s.LicenseType
 	o.Mode = s.Mode
@@ -422,9 +438,12 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			ID:                  &o.ID,
 			NGFWFirewall:        &o.NGFWFirewall,
 			NGFWRuleStack:       &o.NGFWRuleStack,
-			Attachments:         &o.Attachments,
+			VPCID:               &o.VPCID,
+			AvailabilityZones:   &o.AvailabilityZones,
 			CreateTime:          &o.CreateTime,
 			Description:         &o.Description,
+			EndpointServiceName: &o.EndpointServiceName,
+			Endpoints:           &o.Endpoints,
 			LastCommitTime:      &o.LastCommitTime,
 			LicenseType:         &o.LicenseType,
 			Mode:                &o.Mode,
@@ -454,12 +473,18 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.NGFWFirewall = &(o.NGFWFirewall)
 		case "NGFWRuleStack":
 			sp.NGFWRuleStack = &(o.NGFWRuleStack)
-		case "attachments":
-			sp.Attachments = &(o.Attachments)
+		case "VPCID":
+			sp.VPCID = &(o.VPCID)
+		case "availabilityZones":
+			sp.AvailabilityZones = &(o.AvailabilityZones)
 		case "createTime":
 			sp.CreateTime = &(o.CreateTime)
 		case "description":
 			sp.Description = &(o.Description)
+		case "endpointServiceName":
+			sp.EndpointServiceName = &(o.EndpointServiceName)
+		case "endpoints":
+			sp.Endpoints = &(o.Endpoints)
 		case "lastCommitTime":
 			sp.LastCommitTime = &(o.LastCommitTime)
 		case "licenseType":
@@ -514,14 +539,23 @@ func (o *AWSFirewall) Patch(sparse elemental.SparseIdentifiable) {
 	if so.NGFWRuleStack != nil {
 		o.NGFWRuleStack = *so.NGFWRuleStack
 	}
-	if so.Attachments != nil {
-		o.Attachments = *so.Attachments
+	if so.VPCID != nil {
+		o.VPCID = *so.VPCID
+	}
+	if so.AvailabilityZones != nil {
+		o.AvailabilityZones = *so.AvailabilityZones
 	}
 	if so.CreateTime != nil {
 		o.CreateTime = *so.CreateTime
 	}
 	if so.Description != nil {
 		o.Description = *so.Description
+	}
+	if so.EndpointServiceName != nil {
+		o.EndpointServiceName = *so.EndpointServiceName
+	}
+	if so.Endpoints != nil {
+		o.Endpoints = *so.Endpoints
 	}
 	if so.LastCommitTime != nil {
 		o.LastCommitTime = *so.LastCommitTime
@@ -608,7 +642,23 @@ func (o *AWSFirewall) Validate() error {
 		}
 	}
 
-	for _, sub := range o.Attachments {
+	if err := elemental.ValidateRequiredString("VPCID", o.VPCID); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateVPCID("VPCID", o.VPCID); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredExternal("availabilityZones", o.AvailabilityZones); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateMaximumLength("description", o.Description, 1024, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	for _, sub := range o.Endpoints {
 		if sub == nil {
 			continue
 		}
@@ -616,10 +666,6 @@ func (o *AWSFirewall) Validate() error {
 		if err := sub.Validate(); err != nil {
 			errors = errors.Append(err)
 		}
-	}
-
-	if err := elemental.ValidateMaximumLength("description", o.Description, 1024, false); err != nil {
-		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateStringInList("licenseType", string(o.LicenseType), []string{"TAP", "Basic", "Advanced"}, true); err != nil {
@@ -694,12 +740,18 @@ func (o *AWSFirewall) ValueForAttribute(name string) interface{} {
 		return o.NGFWFirewall
 	case "NGFWRuleStack":
 		return o.NGFWRuleStack
-	case "attachments":
-		return o.Attachments
+	case "VPCID":
+		return o.VPCID
+	case "availabilityZones":
+		return o.AvailabilityZones
 	case "createTime":
 		return o.CreateTime
 	case "description":
 		return o.Description
+	case "endpointServiceName":
+		return o.EndpointServiceName
+	case "endpoints":
+		return o.Endpoints
 	case "lastCommitTime":
 		return o.LastCommitTime
 	case "licenseType":
@@ -771,16 +823,28 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Type:           "string",
 	},
 
-	"Attachments": {
+	"VPCID": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "attachments",
-		ConvertedName:  "Attachments",
-		Description:    `The firewall attachments.`,
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `An AWS VPC ID.`,
 		Exposed:        true,
-		Name:           "attachments",
+		Name:           "VPCID",
+		Required:       true,
 		Stored:         true,
-		SubType:        "awsattachment",
-		Type:           "refList",
+		Type:           "string",
+	},
+	"AvailabilityZones": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "availabilityzones",
+		ConvertedName:  "AvailabilityZones",
+		Description:    `A list of availability zones.`,
+		Exposed:        true,
+		Name:           "availabilityZones",
+		Required:       true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
 	},
 	"CreateTime": {
 		AllowedChoices: []string{},
@@ -810,6 +874,29 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Setter:         true,
 		Stored:         true,
 		Type:           "string",
+	},
+	"EndpointServiceName": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpointservicename",
+		ConvertedName:  "EndpointServiceName",
+		Description:    `The endpoint service name needed to create an AWS endpoint.`,
+		Exposed:        true,
+		Name:           "endpointServiceName",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"Endpoints": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpoints",
+		ConvertedName:  "Endpoints",
+		Description:    `The firewall endpoints.`,
+		Exposed:        true,
+		Name:           "endpoints",
+		ReadOnly:       true,
+		Stored:         true,
+		SubType:        "awsendpoint",
+		Type:           "refList",
 	},
 	"LastCommitTime": {
 		AllowedChoices: []string{},
@@ -986,16 +1073,28 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Type:           "string",
 	},
 
-	"attachments": {
+	"vpcid": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "attachments",
-		ConvertedName:  "Attachments",
-		Description:    `The firewall attachments.`,
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `An AWS VPC ID.`,
 		Exposed:        true,
-		Name:           "attachments",
+		Name:           "VPCID",
+		Required:       true,
 		Stored:         true,
-		SubType:        "awsattachment",
-		Type:           "refList",
+		Type:           "string",
+	},
+	"availabilityzones": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "availabilityzones",
+		ConvertedName:  "AvailabilityZones",
+		Description:    `A list of availability zones.`,
+		Exposed:        true,
+		Name:           "availabilityZones",
+		Required:       true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
 	},
 	"createtime": {
 		AllowedChoices: []string{},
@@ -1025,6 +1124,29 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Setter:         true,
 		Stored:         true,
 		Type:           "string",
+	},
+	"endpointservicename": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpointservicename",
+		ConvertedName:  "EndpointServiceName",
+		Description:    `The endpoint service name needed to create an AWS endpoint.`,
+		Exposed:        true,
+		Name:           "endpointServiceName",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"endpoints": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpoints",
+		ConvertedName:  "Endpoints",
+		Description:    `The firewall endpoints.`,
+		Exposed:        true,
+		Name:           "endpoints",
+		ReadOnly:       true,
+		Stored:         true,
+		SubType:        "awsendpoint",
+		Type:           "refList",
 	},
 	"lastcommittime": {
 		AllowedChoices: []string{},
@@ -1241,14 +1363,23 @@ type SparseAWSFirewall struct {
 	// The name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack *string `json:"-" msgpack:"-" bson:"ngfwrulestack,omitempty" mapstructure:"-,omitempty"`
 
-	// The firewall attachments.
-	Attachments *[]*AWSAttachment `json:"attachments,omitempty" msgpack:"attachments,omitempty" bson:"attachments,omitempty" mapstructure:"attachments,omitempty"`
+	// An AWS VPC ID.
+	VPCID *string `json:"VPCID,omitempty" msgpack:"VPCID,omitempty" bson:"vpcid,omitempty" mapstructure:"VPCID,omitempty"`
+
+	// A list of availability zones.
+	AvailabilityZones *[]string `json:"availabilityZones,omitempty" msgpack:"availabilityZones,omitempty" bson:"availabilityzones,omitempty" mapstructure:"availabilityZones,omitempty"`
 
 	// Creation date of the object.
 	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
 
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
+
+	// The endpoint service name needed to create an AWS endpoint.
+	EndpointServiceName *string `json:"endpointServiceName,omitempty" msgpack:"endpointServiceName,omitempty" bson:"endpointservicename,omitempty" mapstructure:"endpointServiceName,omitempty"`
+
+	// The firewall endpoints.
+	Endpoints *[]*AWSEndpoint `json:"endpoints,omitempty" msgpack:"endpoints,omitempty" bson:"endpoints,omitempty" mapstructure:"endpoints,omitempty"`
 
 	// The date when the fireall was last committed.
 	LastCommitTime *time.Time `json:"lastCommitTime,omitempty" msgpack:"lastCommitTime,omitempty" bson:"lastcommittime,omitempty" mapstructure:"lastCommitTime,omitempty"`
@@ -1348,14 +1479,23 @@ func (o *SparseAWSFirewall) GetBSON() (interface{}, error) {
 	if o.NGFWRuleStack != nil {
 		s.NGFWRuleStack = o.NGFWRuleStack
 	}
-	if o.Attachments != nil {
-		s.Attachments = o.Attachments
+	if o.VPCID != nil {
+		s.VPCID = o.VPCID
+	}
+	if o.AvailabilityZones != nil {
+		s.AvailabilityZones = o.AvailabilityZones
 	}
 	if o.CreateTime != nil {
 		s.CreateTime = o.CreateTime
 	}
 	if o.Description != nil {
 		s.Description = o.Description
+	}
+	if o.EndpointServiceName != nil {
+		s.EndpointServiceName = o.EndpointServiceName
+	}
+	if o.Endpoints != nil {
+		s.Endpoints = o.Endpoints
 	}
 	if o.LastCommitTime != nil {
 		s.LastCommitTime = o.LastCommitTime
@@ -1427,14 +1567,23 @@ func (o *SparseAWSFirewall) SetBSON(raw bson.Raw) error {
 	if s.NGFWRuleStack != nil {
 		o.NGFWRuleStack = s.NGFWRuleStack
 	}
-	if s.Attachments != nil {
-		o.Attachments = s.Attachments
+	if s.VPCID != nil {
+		o.VPCID = s.VPCID
+	}
+	if s.AvailabilityZones != nil {
+		o.AvailabilityZones = s.AvailabilityZones
 	}
 	if s.CreateTime != nil {
 		o.CreateTime = s.CreateTime
 	}
 	if s.Description != nil {
 		o.Description = s.Description
+	}
+	if s.EndpointServiceName != nil {
+		o.EndpointServiceName = s.EndpointServiceName
+	}
+	if s.Endpoints != nil {
+		o.Endpoints = s.Endpoints
 	}
 	if s.LastCommitTime != nil {
 		o.LastCommitTime = s.LastCommitTime
@@ -1504,14 +1653,23 @@ func (o *SparseAWSFirewall) ToPlain() elemental.PlainIdentifiable {
 	if o.NGFWRuleStack != nil {
 		out.NGFWRuleStack = *o.NGFWRuleStack
 	}
-	if o.Attachments != nil {
-		out.Attachments = *o.Attachments
+	if o.VPCID != nil {
+		out.VPCID = *o.VPCID
+	}
+	if o.AvailabilityZones != nil {
+		out.AvailabilityZones = *o.AvailabilityZones
 	}
 	if o.CreateTime != nil {
 		out.CreateTime = *o.CreateTime
 	}
 	if o.Description != nil {
 		out.Description = *o.Description
+	}
+	if o.EndpointServiceName != nil {
+		out.EndpointServiceName = *o.EndpointServiceName
+	}
+	if o.Endpoints != nil {
+		out.Endpoints = *o.Endpoints
 	}
 	if o.LastCommitTime != nil {
 		out.LastCommitTime = *o.LastCommitTime
@@ -1682,9 +1840,12 @@ type mongoAttributesAWSFirewall struct {
 	ID                  bson.ObjectId               `bson:"_id,omitempty"`
 	NGFWFirewall        string                      `bson:"ngfwfirewall"`
 	NGFWRuleStack       string                      `bson:"ngfwrulestack"`
-	Attachments         []*AWSAttachment            `bson:"attachments"`
+	VPCID               string                      `bson:"vpcid"`
+	AvailabilityZones   []string                    `bson:"availabilityzones"`
 	CreateTime          time.Time                   `bson:"createtime"`
 	Description         string                      `bson:"description"`
+	EndpointServiceName string                      `bson:"endpointservicename"`
+	Endpoints           []*AWSEndpoint              `bson:"endpoints"`
 	LastCommitTime      time.Time                   `bson:"lastcommittime"`
 	LicenseType         AWSFirewallLicenseTypeValue `bson:"licensetype"`
 	Mode                AWSFirewallModeValue        `bson:"mode"`
@@ -1705,9 +1866,12 @@ type mongoAttributesSparseAWSFirewall struct {
 	ID                  bson.ObjectId                `bson:"_id,omitempty"`
 	NGFWFirewall        *string                      `bson:"ngfwfirewall,omitempty"`
 	NGFWRuleStack       *string                      `bson:"ngfwrulestack,omitempty"`
-	Attachments         *[]*AWSAttachment            `bson:"attachments,omitempty"`
+	VPCID               *string                      `bson:"vpcid,omitempty"`
+	AvailabilityZones   *[]string                    `bson:"availabilityzones,omitempty"`
 	CreateTime          *time.Time                   `bson:"createtime,omitempty"`
 	Description         *string                      `bson:"description,omitempty"`
+	EndpointServiceName *string                      `bson:"endpointservicename,omitempty"`
+	Endpoints           *[]*AWSEndpoint              `bson:"endpoints,omitempty"`
 	LastCommitTime      *time.Time                   `bson:"lastcommittime,omitempty"`
 	LicenseType         *AWSFirewallLicenseTypeValue `bson:"licensetype,omitempty"`
 	Mode                *AWSFirewallModeValue        `bson:"mode,omitempty"`

@@ -18,29 +18,26 @@ const (
 	// AWSEndpointStatusAccepted represents the value Accepted.
 	AWSEndpointStatusAccepted AWSEndpointStatusValue = "Accepted"
 
-	// AWSEndpointStatusCreating represents the value Creating.
-	AWSEndpointStatusCreating AWSEndpointStatusValue = "Creating"
+	// AWSEndpointStatusPending represents the value Pending.
+	AWSEndpointStatusPending AWSEndpointStatusValue = "Pending"
 
-	// AWSEndpointStatusDeleting represents the value Deleting.
-	AWSEndpointStatusDeleting AWSEndpointStatusValue = "Deleting"
-
-	// AWSEndpointStatusFailed represents the value Failed.
-	AWSEndpointStatusFailed AWSEndpointStatusValue = "Failed"
+	// AWSEndpointStatusRejected represents the value Rejected.
+	AWSEndpointStatusRejected AWSEndpointStatusValue = "Rejected"
 )
 
 // AWSEndpoint represents the model of a awsendpoint
 type AWSEndpoint struct {
+	// The AWS VPC ID.
+	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"vpcid" mapstructure:"VPCID,omitempty"`
+
 	// The AWS endpoint created by the NGFW.
 	EndpointID string `json:"endpointID" msgpack:"endpointID" bson:"endpointid" mapstructure:"endpointID,omitempty"`
 
-	// The previous endpoint Status.
-	PreviousStatus string `json:"-" msgpack:"-" bson:"previousstatus" mapstructure:"-,omitempty"`
+	// The rejected reason.
+	RejectedReason string `json:"rejectedReason" msgpack:"rejectedReason" bson:"rejectedreason" mapstructure:"rejectedReason,omitempty"`
 
 	// The status of the of endpoint.
 	Status AWSEndpointStatusValue `json:"status" msgpack:"status" bson:"status" mapstructure:"status,omitempty"`
-
-	// The status description of endpoint.
-	StatusReason string `json:"statusReason" msgpack:"statusReason" bson:"statusreason" mapstructure:"statusReason,omitempty"`
 
 	// The AWS subnet ID.
 	SubnetID string `json:"subnetID" msgpack:"subnetID" bson:"subnetid" mapstructure:"subnetID,omitempty"`
@@ -53,7 +50,7 @@ func NewAWSEndpoint() *AWSEndpoint {
 
 	return &AWSEndpoint{
 		ModelVersion: 1,
-		Status:       AWSEndpointStatusCreating,
+		Status:       AWSEndpointStatusPending,
 	}
 }
 
@@ -67,10 +64,10 @@ func (o *AWSEndpoint) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesAWSEndpoint{}
 
+	s.VPCID = o.VPCID
 	s.EndpointID = o.EndpointID
-	s.PreviousStatus = o.PreviousStatus
+	s.RejectedReason = o.RejectedReason
 	s.Status = o.Status
-	s.StatusReason = o.StatusReason
 	s.SubnetID = o.SubnetID
 
 	return s, nil
@@ -89,10 +86,10 @@ func (o *AWSEndpoint) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
+	o.VPCID = s.VPCID
 	o.EndpointID = s.EndpointID
-	o.PreviousStatus = s.PreviousStatus
+	o.RejectedReason = s.RejectedReason
 	o.Status = s.Status
-	o.StatusReason = s.StatusReason
 	o.SubnetID = s.SubnetID
 
 	return nil
@@ -134,12 +131,8 @@ func (o *AWSEndpoint) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Creating", "Deleting", "Accepted", "Failed"}, true); err != nil {
+	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Accepted", "Pending", "Rejected"}, true); err != nil {
 		errors = errors.Append(err)
-	}
-
-	if err := elemental.ValidateRequiredString("subnetID", o.SubnetID); err != nil {
-		requiredErrors = requiredErrors.Append(err)
 	}
 
 	if len(requiredErrors) > 0 {
@@ -176,14 +169,14 @@ func (*AWSEndpoint) AttributeSpecifications() map[string]elemental.AttributeSpec
 func (o *AWSEndpoint) ValueForAttribute(name string) interface{} {
 
 	switch name {
+	case "VPCID":
+		return o.VPCID
 	case "endpointID":
 		return o.EndpointID
-	case "previousStatus":
-		return o.PreviousStatus
+	case "rejectedReason":
+		return o.RejectedReason
 	case "status":
 		return o.Status
-	case "statusReason":
-		return o.StatusReason
 	case "subnetID":
 		return o.SubnetID
 	}
@@ -193,6 +186,17 @@ func (o *AWSEndpoint) ValueForAttribute(name string) interface{} {
 
 // AWSEndpointAttributesMap represents the map of attribute for AWSEndpoint.
 var AWSEndpointAttributesMap = map[string]elemental.AttributeSpecification{
+	"VPCID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `The AWS VPC ID.`,
+		Exposed:        true,
+		Name:           "VPCID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"EndpointID": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "endpointid",
@@ -204,30 +208,29 @@ var AWSEndpointAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
-
+	"RejectedReason": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "rejectedreason",
+		ConvertedName:  "RejectedReason",
+		Description:    `The rejected reason.`,
+		Exposed:        true,
+		Name:           "rejectedReason",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"Status": {
-		AllowedChoices: []string{"Creating", "Deleting", "Accepted", "Failed"},
+		AllowedChoices: []string{"Accepted", "Pending", "Rejected"},
 		Autogenerated:  true,
 		BSONFieldName:  "status",
 		ConvertedName:  "Status",
-		DefaultValue:   AWSEndpointStatusCreating,
+		DefaultValue:   AWSEndpointStatusPending,
 		Description:    `The status of the of endpoint.`,
 		Exposed:        true,
 		Name:           "status",
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "enum",
-	},
-	"StatusReason": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "statusreason",
-		ConvertedName:  "StatusReason",
-		Description:    `The status description of endpoint.`,
-		Exposed:        true,
-		Name:           "statusReason",
-		ReadOnly:       true,
-		Stored:         true,
-		Type:           "string",
 	},
 	"SubnetID": {
 		AllowedChoices: []string{},
@@ -236,7 +239,7 @@ var AWSEndpointAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `The AWS subnet ID.`,
 		Exposed:        true,
 		Name:           "subnetID",
-		Required:       true,
+		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -244,6 +247,17 @@ var AWSEndpointAttributesMap = map[string]elemental.AttributeSpecification{
 
 // AWSEndpointLowerCaseAttributesMap represents the map of attribute for AWSEndpoint.
 var AWSEndpointLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+	"vpcid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `The AWS VPC ID.`,
+		Exposed:        true,
+		Name:           "VPCID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"endpointid": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "endpointid",
@@ -255,30 +269,29 @@ var AWSEndpointLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
-
+	"rejectedreason": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "rejectedreason",
+		ConvertedName:  "RejectedReason",
+		Description:    `The rejected reason.`,
+		Exposed:        true,
+		Name:           "rejectedReason",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"status": {
-		AllowedChoices: []string{"Creating", "Deleting", "Accepted", "Failed"},
+		AllowedChoices: []string{"Accepted", "Pending", "Rejected"},
 		Autogenerated:  true,
 		BSONFieldName:  "status",
 		ConvertedName:  "Status",
-		DefaultValue:   AWSEndpointStatusCreating,
+		DefaultValue:   AWSEndpointStatusPending,
 		Description:    `The status of the of endpoint.`,
 		Exposed:        true,
 		Name:           "status",
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "enum",
-	},
-	"statusreason": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "statusreason",
-		ConvertedName:  "StatusReason",
-		Description:    `The status description of endpoint.`,
-		Exposed:        true,
-		Name:           "statusReason",
-		ReadOnly:       true,
-		Stored:         true,
-		Type:           "string",
 	},
 	"subnetid": {
 		AllowedChoices: []string{},
@@ -287,16 +300,16 @@ var AWSEndpointLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description:    `The AWS subnet ID.`,
 		Exposed:        true,
 		Name:           "subnetID",
-		Required:       true,
+		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
 	},
 }
 
 type mongoAttributesAWSEndpoint struct {
+	VPCID          string                 `bson:"vpcid"`
 	EndpointID     string                 `bson:"endpointid"`
-	PreviousStatus string                 `bson:"previousstatus"`
+	RejectedReason string                 `bson:"rejectedreason"`
 	Status         AWSEndpointStatusValue `bson:"status"`
-	StatusReason   string                 `bson:"statusreason"`
 	SubnetID       string                 `bson:"subnetid"`
 }

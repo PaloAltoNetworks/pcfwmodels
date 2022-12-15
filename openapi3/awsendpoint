@@ -5,36 +5,39 @@
       "awsendpoint": {
         "description": "Represents the NGFW endpoint where the NGFW attaches.\nThis object is a sub-object of NGFWAttachment.",
         "properties": {
+          "VPCID": {
+            "description": "The AWS VPC ID.",
+            "example": "xxxxxxxxx",
+            "readOnly": true,
+            "type": "string"
+          },
           "endpointID": {
             "description": "The AWS endpoint created by the NGFW.",
             "readOnly": true,
             "type": "string"
           },
-          "status": {
-            "default": "Creating",
-            "description": "The status of the of endpoint.",
-            "enum": [
-              "Creating",
-              "Deleting",
-              "Accepted",
-              "Failed"
-            ],
-            "readOnly": true
-          },
-          "statusReason": {
-            "description": "The status description of endpoint.",
+          "rejectedReason": {
+            "description": "The rejected reason.",
             "readOnly": true,
             "type": "string"
+          },
+          "status": {
+            "default": "Pending",
+            "description": "The status of the of endpoint.",
+            "enum": [
+              "Accepted",
+              "Pending",
+              "Rejected"
+            ],
+            "readOnly": true
           },
           "subnetID": {
             "description": "The AWS subnet ID.",
             "example": "xxxxxxxxx",
+            "readOnly": true,
             "type": "string"
           }
         },
-        "required": [
-          "subnetID"
-        ],
         "type": "object"
       }
     }

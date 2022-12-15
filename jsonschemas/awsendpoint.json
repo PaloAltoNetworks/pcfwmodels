@@ -6,6 +6,17 @@
   "$modelRestName": "awsendpoint",
   "additionalProperties": true,
   "properties": {
+    "VPCID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "endpointID": {
       "$readOnly": true,
       "anyOf": [
@@ -17,8 +28,19 @@
         }
       ]
     },
+    "rejectedReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "status": {
-      "$defaultValue": "Creating",
+      "$defaultValue": "Pending",
       "$readOnly": true,
       "anyOf": [
         {
@@ -26,15 +48,14 @@
         },
         {
           "enum": [
-            "Creating",
-            "Deleting",
             "Accepted",
-            "Failed"
+            "Pending",
+            "Rejected"
           ]
         }
       ]
     },
-    "statusReason": {
+    "subnetID": {
       "$readOnly": true,
       "anyOf": [
         {
@@ -44,19 +65,9 @@
           "type": "string"
         }
       ]
-    },
-    "subnetID": {
-      "$required": true,
-      "anyOf": [
-        {
-          "type": "string"
-        }
-      ]
     }
   },
-  "required": [
-    "subnetID"
-  ],
+  "required": [],
   "title": "AWSEndpoint",
   "type": "object"
 }

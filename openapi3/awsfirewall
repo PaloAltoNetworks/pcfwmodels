@@ -16,10 +16,16 @@
             "readOnly": true,
             "type": "string"
           },
-          "attachments": {
-            "description": "The firewall attachments.",
+          "VPCID": {
+            "description": "An AWS VPC ID.",
+            "example": "vpc-23af3b89cd23",
+            "type": "string"
+          },
+          "availabilityZones": {
+            "description": "A list of availability zones.",
+            "example": "us-east-1a",
             "items": {
-              "$ref": "./awsattachment#/components/schemas/awsattachment"
+              "type": "string"
             },
             "type": "array"
           },
@@ -32,6 +38,19 @@
           "description": {
             "description": "Description of the object.",
             "type": "string"
+          },
+          "endpointServiceName": {
+            "description": "The endpoint service name needed to create an AWS endpoint.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "endpoints": {
+            "description": "The firewall endpoints.",
+            "items": {
+              "$ref": "./awsendpoint#/components/schemas/awsendpoint"
+            },
+            "readOnly": true,
+            "type": "array"
           },
           "lastCommitTime": {
             "description": "The date when the fireall was last committed.",
@@ -106,6 +125,8 @@
           }
         },
         "required": [
+          "VPCID",
+          "availabilityZones",
           "name",
           "region"
         ],
