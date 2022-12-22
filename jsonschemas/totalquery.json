@@ -6,11 +6,9 @@
   "$modelRestName": "totalquery",
   "additionalProperties": true,
   "properties": {
-    "estimationToken": {
+    "firewallName": {
+      "$required": true,
       "anyOf": [
-        {
-          "type": "null"
-        },
         {
           "type": "string"
         }
@@ -40,9 +38,21 @@
           ]
         }
       ]
+    },
+    "useCacheOnly": {
+      "$defaultValue": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
     }
   },
   "required": [
+    "firewallName",
     "totalType"
   ],
   "title": "TotalQuery",

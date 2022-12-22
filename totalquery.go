@@ -103,16 +103,18 @@ func (o TotalQueriesList) Version() int {
 
 // TotalQuery represents the model of a totalquery
 type TotalQuery struct {
-	// If set by the callee, then the result is estimated. The caller should call again
-	// to get accurate results. If set by the caller, then the callee should return
-	// accurate results.
-	EstimationToken string `json:"estimationToken" msgpack:"estimationToken" bson:"-" mapstructure:"estimationToken,omitempty"`
+	// The NGFW name.
+	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"firewallname" mapstructure:"firewallName,omitempty"`
 
 	// The count of the specified type.
 	Total int `json:"total" msgpack:"total" bson:"-" mapstructure:"total,omitempty"`
 
 	// The type of field to get stats for.
 	TotalType TotalQueryTotalTypeValue `json:"totalType" msgpack:"totalType" bson:"-" mapstructure:"totalType,omitempty"`
+
+	// Fastest response time, and cheapest. Only use cached snapshot data, and estimate
+	// fractional hours at the ends of the time range.
+	UseCacheOnly bool `json:"useCacheOnly" msgpack:"useCacheOnly" bson:"-" mapstructure:"useCacheOnly,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -122,6 +124,7 @@ func NewTotalQuery() *TotalQuery {
 
 	return &TotalQuery{
 		ModelVersion: 1,
+		UseCacheOnly: true,
 	}
 }
 
@@ -152,6 +155,8 @@ func (o *TotalQuery) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesTotalQuery{}
 
+	s.FirewallName = o.FirewallName
+
 	return s, nil
 }
 
@@ -167,6 +172,8 @@ func (o *TotalQuery) SetBSON(raw bson.Raw) error {
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
+
+	o.FirewallName = s.FirewallName
 
 	return nil
 }
@@ -207,21 +214,24 @@ func (o *TotalQuery) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseTotalQuery{
-			EstimationToken: &o.EstimationToken,
-			Total:           &o.Total,
-			TotalType:       &o.TotalType,
+			FirewallName: &o.FirewallName,
+			Total:        &o.Total,
+			TotalType:    &o.TotalType,
+			UseCacheOnly: &o.UseCacheOnly,
 		}
 	}
 
 	sp := &SparseTotalQuery{}
 	for _, f := range fields {
 		switch f {
-		case "estimationToken":
-			sp.EstimationToken = &(o.EstimationToken)
+		case "firewallName":
+			sp.FirewallName = &(o.FirewallName)
 		case "total":
 			sp.Total = &(o.Total)
 		case "totalType":
 			sp.TotalType = &(o.TotalType)
+		case "useCacheOnly":
+			sp.UseCacheOnly = &(o.UseCacheOnly)
 		}
 	}
 
@@ -235,14 +245,17 @@ func (o *TotalQuery) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparseTotalQuery)
-	if so.EstimationToken != nil {
-		o.EstimationToken = *so.EstimationToken
+	if so.FirewallName != nil {
+		o.FirewallName = *so.FirewallName
 	}
 	if so.Total != nil {
 		o.Total = *so.Total
 	}
 	if so.TotalType != nil {
 		o.TotalType = *so.TotalType
+	}
+	if so.UseCacheOnly != nil {
+		o.UseCacheOnly = *so.UseCacheOnly
 	}
 }
 
@@ -275,6 +288,10 @@ func (o *TotalQuery) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
+
+	if err := elemental.ValidateRequiredString("firewallName", o.FirewallName); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
 
 	if err := elemental.ValidateRequiredString("totalType", string(o.TotalType)); err != nil {
 		requiredErrors = requiredErrors.Append(err)
@@ -318,12 +335,14 @@ func (*TotalQuery) AttributeSpecifications() map[string]elemental.AttributeSpeci
 func (o *TotalQuery) ValueForAttribute(name string) interface{} {
 
 	switch name {
-	case "estimationToken":
-		return o.EstimationToken
+	case "firewallName":
+		return o.FirewallName
 	case "total":
 		return o.Total
 	case "totalType":
 		return o.TotalType
+	case "useCacheOnly":
+		return o.UseCacheOnly
 	}
 
 	return nil
@@ -331,15 +350,16 @@ func (o *TotalQuery) ValueForAttribute(name string) interface{} {
 
 // TotalQueryAttributesMap represents the map of attribute for TotalQuery.
 var TotalQueryAttributesMap = map[string]elemental.AttributeSpecification{
-	"EstimationToken": {
+	"FirewallName": {
 		AllowedChoices: []string{},
-		ConvertedName:  "EstimationToken",
-		Description: `If set by the callee, then the result is estimated. The caller should call again
-to get accurate results. If set by the caller, then the callee should return
-accurate results.`,
-		Exposed: true,
-		Name:    "estimationToken",
-		Type:    "string",
+		BSONFieldName:  "firewallname",
+		ConvertedName:  "FirewallName",
+		Description:    `The NGFW name.`,
+		Exposed:        true,
+		Name:           "firewallName",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"Total": {
 		AllowedChoices: []string{},
@@ -360,19 +380,30 @@ accurate results.`,
 		Required:       true,
 		Type:           "enum",
 	},
+	"UseCacheOnly": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UseCacheOnly",
+		DefaultValue:   true,
+		Description: `Fastest response time, and cheapest. Only use cached snapshot data, and estimate
+fractional hours at the ends of the time range.`,
+		Exposed: true,
+		Name:    "useCacheOnly",
+		Type:    "boolean",
+	},
 }
 
 // TotalQueryLowerCaseAttributesMap represents the map of attribute for TotalQuery.
 var TotalQueryLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"estimationtoken": {
+	"firewallname": {
 		AllowedChoices: []string{},
-		ConvertedName:  "EstimationToken",
-		Description: `If set by the callee, then the result is estimated. The caller should call again
-to get accurate results. If set by the caller, then the callee should return
-accurate results.`,
-		Exposed: true,
-		Name:    "estimationToken",
-		Type:    "string",
+		BSONFieldName:  "firewallname",
+		ConvertedName:  "FirewallName",
+		Description:    `The NGFW name.`,
+		Exposed:        true,
+		Name:           "firewallName",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"total": {
 		AllowedChoices: []string{},
@@ -392,6 +423,16 @@ accurate results.`,
 		Name:           "totalType",
 		Required:       true,
 		Type:           "enum",
+	},
+	"usecacheonly": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UseCacheOnly",
+		DefaultValue:   true,
+		Description: `Fastest response time, and cheapest. Only use cached snapshot data, and estimate
+fractional hours at the ends of the time range.`,
+		Exposed: true,
+		Name:    "useCacheOnly",
+		Type:    "boolean",
 	},
 }
 
@@ -458,16 +499,18 @@ func (o SparseTotalQueriesList) Version() int {
 
 // SparseTotalQuery represents the sparse version of a totalquery.
 type SparseTotalQuery struct {
-	// If set by the callee, then the result is estimated. The caller should call again
-	// to get accurate results. If set by the caller, then the callee should return
-	// accurate results.
-	EstimationToken *string `json:"estimationToken,omitempty" msgpack:"estimationToken,omitempty" bson:"-" mapstructure:"estimationToken,omitempty"`
+	// The NGFW name.
+	FirewallName *string `json:"firewallName,omitempty" msgpack:"firewallName,omitempty" bson:"firewallname,omitempty" mapstructure:"firewallName,omitempty"`
 
 	// The count of the specified type.
 	Total *int `json:"total,omitempty" msgpack:"total,omitempty" bson:"-" mapstructure:"total,omitempty"`
 
 	// The type of field to get stats for.
 	TotalType *TotalQueryTotalTypeValue `json:"totalType,omitempty" msgpack:"totalType,omitempty" bson:"-" mapstructure:"totalType,omitempty"`
+
+	// Fastest response time, and cheapest. Only use cached snapshot data, and estimate
+	// fractional hours at the ends of the time range.
+	UseCacheOnly *bool `json:"useCacheOnly,omitempty" msgpack:"useCacheOnly,omitempty" bson:"-" mapstructure:"useCacheOnly,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -504,6 +547,10 @@ func (o *SparseTotalQuery) GetBSON() (interface{}, error) {
 
 	s := &mongoAttributesSparseTotalQuery{}
 
+	if o.FirewallName != nil {
+		s.FirewallName = o.FirewallName
+	}
+
 	return s, nil
 }
 
@@ -520,6 +567,10 @@ func (o *SparseTotalQuery) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
+	if s.FirewallName != nil {
+		o.FirewallName = s.FirewallName
+	}
+
 	return nil
 }
 
@@ -533,14 +584,17 @@ func (o *SparseTotalQuery) Version() int {
 func (o *SparseTotalQuery) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewTotalQuery()
-	if o.EstimationToken != nil {
-		out.EstimationToken = *o.EstimationToken
+	if o.FirewallName != nil {
+		out.FirewallName = *o.FirewallName
 	}
 	if o.Total != nil {
 		out.Total = *o.Total
 	}
 	if o.TotalType != nil {
 		out.TotalType = *o.TotalType
+	}
+	if o.UseCacheOnly != nil {
+		out.UseCacheOnly = *o.UseCacheOnly
 	}
 
 	return out
@@ -571,6 +625,8 @@ func (o *SparseTotalQuery) DeepCopyInto(out *SparseTotalQuery) {
 }
 
 type mongoAttributesTotalQuery struct {
+	FirewallName string `bson:"firewallname"`
 }
 type mongoAttributesSparseTotalQuery struct {
+	FirewallName *string `bson:"firewallname,omitempty"`
 }

@@ -10,13 +10,13 @@ model:
 # Attributes
 attributes:
   v1:
-  - name: estimationToken
-    description: |-
-      If set by the callee, then the result is estimated. The caller should call again
-      to get accurate results. If set by the caller, then the callee should return
-      accurate results.
+  - name: firewallName
+    description: The NGFW name.
     type: string
     exposed: true
+    stored: true
+    required: true
+    example_value: firewall1
 
   - name: total
     description: The count of the specified type.
@@ -37,3 +37,11 @@ attributes:
     - ThreatsDetected
     - ThreatsBlocked
     example_value: Traffic
+
+  - name: useCacheOnly
+    description: |-
+      Fastest response time, and cheapest. Only use cached snapshot data, and estimate
+      fractional hours at the ends of the time range.
+    type: boolean
+    exposed: true
+    default_value: true

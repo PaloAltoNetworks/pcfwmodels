@@ -5,8 +5,9 @@
       "totalquery": {
         "description": "Provide counts of various statistics on firewall logs.",
         "properties": {
-          "estimationToken": {
-            "description": "If set by the callee, then the result is estimated. The caller should call again\nto get accurate results. If set by the caller, then the callee should return\naccurate results.",
+          "firewallName": {
+            "description": "The NGFW name.",
+            "example": "firewall1",
             "type": "string"
           },
           "total": {
@@ -24,9 +25,15 @@
               "ThreatsBlocked"
             ],
             "example": "Traffic"
+          },
+          "useCacheOnly": {
+            "default": true,
+            "description": "Fastest response time, and cheapest. Only use cached snapshot data, and estimate\nfractional hours at the ends of the time range.",
+            "type": "boolean"
           }
         },
         "required": [
+          "firewallName",
           "totalType"
         ],
         "type": "object"
