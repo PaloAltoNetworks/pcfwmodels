@@ -126,6 +126,12 @@
     "mirrorrule": {
       "$ref": "mirrorrule.json"
     },
+    "pcfwaccount": {
+      "$ref": "pcfwaccount.json"
+    },
+    "pcfwtenant": {
+      "$ref": "pcfwtenant.json"
+    },
     "root": {
       "$ref": "root.json"
     },

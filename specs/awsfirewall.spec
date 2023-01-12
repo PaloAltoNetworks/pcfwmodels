@@ -63,6 +63,32 @@ attributes:
     stored: true
     read_only: true
 
+  - name: VPCID
+    description: An AWS VPC ID.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: vpc-23af3b89cd23
+    validations:
+    - $vpcid
+
+  - name: availabilityZones
+    description: A list of availability zones.
+    type: list
+    exposed: true
+    subtype: string
+    stored: true
+    required: true
+    example_value: us-east-1a
+
+  - name: endpointServiceName
+    description: The endpoint service name needed to create an AWS endpoint.
+    type: string
+    exposed: true
+    stored: true
+    read_only: true
+
   - name: endpoints
     description: The firewall endpoints.
     type: refList
@@ -136,32 +162,6 @@ attributes:
 
   - name: statusReason
     description: The status description of the firewall.
-    type: string
-    exposed: true
-    stored: true
-    read_only: true
-
-  - name: VPCID
-    description: An AWS VPC ID.
-    type: string
-    required: true
-    exposed: true
-    stored: true
-    example_value: vpc-23af3b89cd23
-    validations:
-    - $vpcid
-
-  - name: availabilityZones
-    description: A list of availability zones.
-    required: true
-    type: list
-    exposed: true
-    subtype: string
-    example_value: us-east-1a
-    stored: true
-
-  - name: endpointServiceName
-    description: The endpoint service name needed to create an AWS endpoint.
     type: string
     exposed: true
     stored: true

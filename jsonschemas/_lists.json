@@ -252,6 +252,18 @@
       },
       "type": "array"
     },
+    "pcfwaccounts": {
+      "items": {
+        "$ref": "pcfwaccount.json"
+      },
+      "type": "array"
+    },
+    "pcfwtenants": {
+      "items": {
+        "$ref": "pcfwtenant.json"
+      },
+      "type": "array"
+    },
     "root": {
       "items": {
         "$ref": "root.json"

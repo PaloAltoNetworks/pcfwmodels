@@ -1,0 +1,53 @@
+{
+  "$extends": [
+    "@namespaced",
+    "@identifiable-stored",
+    "@zoned"
+  ],
+  "$modelName": "PCFWTenant",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "pcfwtenants",
+  "$modelRestName": "pcfwtenant",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Success",
+            "Failed"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "PCFWTenant",
+  "type": "object"
+}

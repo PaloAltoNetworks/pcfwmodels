@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "pcfwaccount": {
+        "description": "Represents Prisma Cloud Firewall Account.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "status": {
+            "description": "status of account.",
+            "enum": [
+              "Success",
+              "Failed"
+            ],
+            "readOnly": true
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "pcfwaccount",
+    "version": "1.0"
+  },
+  "paths": {
+    "/pcfwaccounts": {
+      "get": {
+        "description": "Retrieves the status of cloud account on Prisma firewall service.",
+        "operationId": "get-all-pcfwaccounts",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/pcfwaccount"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "post": {
+        "description": "Onboards Cloud Account on the Prisma Prisma Cloud service.",
+        "operationId": "create-a-new-pcfwaccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwaccount"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccount"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      }
+    },
+    "/pcfwaccounts/{id}": {
+      "delete": {
+        "description": "offboard the account.",
+        "operationId": "delete-pcfwaccount-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccount"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieve the status of the account.",
+        "operationId": "get-pcfwaccount-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccount"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'onboarding'",
+      "name": "onboarding"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

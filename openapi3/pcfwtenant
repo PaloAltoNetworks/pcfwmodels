@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.3",
+  "components": {
+    "schemas": {
+      "pcfwtenant": {
+        "description": "Represents Prisma Cloud Firewall Tenant.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "status": {
+            "description": "status of tenant.",
+            "enum": [
+              "Success",
+              "Failed"
+            ],
+            "readOnly": true
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "pcfwtenant",
+    "version": "1.0"
+  },
+  "paths": {
+    "/pcfwtenants": {
+      "get": {
+        "description": "Retrieves the status of Prisma Cloud Tenant.",
+        "operationId": "get-all-pcfwtenants",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/pcfwtenant"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "post": {
+        "description": "Onboards Prisma Cloud tenant on PC Firewall.",
+        "operationId": "create-a-new-pcfwtenant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwtenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwtenant"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      }
+    },
+    "/pcfwtenants/{id}": {
+      "delete": {
+        "description": "Delete the tenant with the given PrismaID.",
+        "operationId": "delete-pcfwtenant-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwtenant"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "get": {
+        "description": "Retrieve the tenant with the given PrismaID.",
+        "operationId": "get-pcfwtenant-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwtenant"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'onboarding'",
+      "name": "onboarding"
+    },
+    {
+      "description": "This tag is for package 'ngfw'",
+      "name": "ngfw"
+    }
+  ]
+}

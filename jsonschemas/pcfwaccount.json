@@ -1,0 +1,53 @@
+{
+  "$extends": [
+    "@namespaced",
+    "@identifiable-stored",
+    "@zoned"
+  ],
+  "$modelName": "PCFWAccount",
+  "$modelPackage": "ngfw",
+  "$modelResourceName": "pcfwaccounts",
+  "$modelRestName": "pcfwaccount",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Success",
+            "Failed"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "PCFWAccount",
+  "type": "object"
+}

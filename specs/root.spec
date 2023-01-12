@@ -184,6 +184,22 @@ relations:
     - $timewindow
     - $queryable
 
+- rest_name: pcfwaccount
+  get:
+    description: Retrieves the status of cloud account on Prisma firewall service.
+    global_parameters:
+    - $queryable
+  create:
+    description: Onboards Cloud Account on the Prisma Prisma Cloud service.
+
+- rest_name: pcfwtenant
+  get:
+    description: Retrieves the status of Prisma Cloud Tenant.
+    global_parameters:
+    - $queryable
+  create:
+    description: Onboards Prisma Cloud tenant on PC Firewall.
+
 - rest_name: testmodel
   get:
     description: Retrieves the list of testmodels.

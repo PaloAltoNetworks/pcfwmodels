@@ -42,7 +42,9 @@ var (
 
 		"logquery": LogQueryIdentity,
 
-		"root": RootIdentity,
+		"pcfwaccount": PCFWAccountIdentity,
+		"pcfwtenant":  PCFWTenantIdentity,
+		"root":        RootIdentity,
 
 		"topquery": TopQueryIdentity,
 
@@ -86,7 +88,9 @@ var (
 
 		"logqueries": LogQueryIdentity,
 
-		"root": RootIdentity,
+		"pcfwaccounts": PCFWAccountIdentity,
+		"pcfwtenants":  PCFWTenantIdentity,
+		"root":         RootIdentity,
 
 		"topqueries": TopQueryIdentity,
 
@@ -202,7 +206,15 @@ var (
 		"firewallurlcategorylist": {
 			{"namespace"},
 		},
-		"logquery":   nil,
+		"logquery": nil,
+		"pcfwaccount": {
+			{":shard", ":unique", "zone", "zHash"},
+			{"namespace"},
+		},
+		"pcfwtenant": {
+			{":shard", ":unique", "zone", "zHash"},
+			{"namespace"},
+		},
 		"root":       nil,
 		"topquery":   nil,
 		"totalquery": nil,
@@ -295,6 +307,10 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewFirewallURLCategoryList()
 	case LogQueryIdentity:
 		return NewLogQuery()
+	case PCFWAccountIdentity:
+		return NewPCFWAccount()
+	case PCFWTenantIdentity:
+		return NewPCFWTenant()
 	case RootIdentity:
 		return NewRoot()
 	case TopQueryIdentity:
@@ -360,6 +376,10 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseFirewallURLCategoryList()
 	case LogQueryIdentity:
 		return NewSparseLogQuery()
+	case PCFWAccountIdentity:
+		return NewSparsePCFWAccount()
+	case PCFWTenantIdentity:
+		return NewSparsePCFWTenant()
 	case TopQueryIdentity:
 		return NewSparseTopQuery()
 	case TotalQueryIdentity:
@@ -433,6 +453,10 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &FirewallURLCategoryListsList{}
 	case LogQueryIdentity:
 		return &LogQueriesList{}
+	case PCFWAccountIdentity:
+		return &PCFWAccountsList{}
+	case PCFWTenantIdentity:
+		return &PCFWTenantsList{}
 	case TopQueryIdentity:
 		return &TopQueriesList{}
 	case TotalQueryIdentity:
@@ -496,6 +520,10 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseFirewallURLCategoryListsList{}
 	case LogQueryIdentity:
 		return &SparseLogQueriesList{}
+	case PCFWAccountIdentity:
+		return &SparsePCFWAccountsList{}
+	case PCFWTenantIdentity:
+		return &SparsePCFWTenantsList{}
 	case TopQueryIdentity:
 		return &SparseTopQueriesList{}
 	case TotalQueryIdentity:
@@ -554,6 +582,8 @@ func AllIdentities() []elemental.Identity {
 		FirewallTemplateIdentity,
 		FirewallURLCategoryListIdentity,
 		LogQueryIdentity,
+		PCFWAccountIdentity,
+		PCFWTenantIdentity,
 		RootIdentity,
 		TopQueryIdentity,
 		TotalQueryIdentity,
@@ -612,6 +642,10 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case FirewallURLCategoryListIdentity:
 		return []string{}
 	case LogQueryIdentity:
+		return []string{}
+	case PCFWAccountIdentity:
+		return []string{}
+	case PCFWTenantIdentity:
 		return []string{}
 	case RootIdentity:
 		return []string{}
