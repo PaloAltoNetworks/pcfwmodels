@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "pcfwaccount": {
@@ -39,6 +38,7 @@
     "title": "pcfwaccount",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/pcfwaccounts": {
       "get": {

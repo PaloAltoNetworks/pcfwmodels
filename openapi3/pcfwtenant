@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "pcfwtenant": {
@@ -39,6 +38,7 @@
     "title": "pcfwtenant",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/pcfwtenants": {
       "get": {

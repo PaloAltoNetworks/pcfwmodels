@@ -158,7 +158,7 @@ func (o *FirewallCommitAction) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallCommitAction) GetBSON() (interface{}, error) {
+func (o *FirewallCommitAction) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -361,7 +361,7 @@ func (*FirewallCommitAction) AttributeSpecifications() map[string]elemental.Attr
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallCommitAction) ValueForAttribute(name string) interface{} {
+func (o *FirewallCommitAction) ValueForAttribute(name string) any {
 
 	switch name {
 	case "actionStatus":
@@ -586,7 +586,7 @@ func (o *SparseFirewallCommitAction) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallCommitAction) GetBSON() (interface{}, error) {
+func (o *SparseFirewallCommitAction) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

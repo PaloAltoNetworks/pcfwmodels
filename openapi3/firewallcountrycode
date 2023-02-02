@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "firewallcountrycode": {
@@ -33,6 +32,7 @@
     "title": "firewallcountrycode",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {},
   "tags": [
     {

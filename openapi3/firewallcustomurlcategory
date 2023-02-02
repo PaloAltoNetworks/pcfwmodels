@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "firewallcustomurlcategory": {
@@ -84,6 +83,7 @@
     "title": "firewallcustomurlcategory",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/firewallcustomurlcategories": {
       "get": {

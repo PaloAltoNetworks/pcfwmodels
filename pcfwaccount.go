@@ -141,7 +141,7 @@ func (o *PCFWAccount) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *PCFWAccount) GetBSON() (interface{}, error) {
+func (o *PCFWAccount) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -346,7 +346,7 @@ func (*PCFWAccount) AttributeSpecifications() map[string]elemental.AttributeSpec
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *PCFWAccount) ValueForAttribute(name string) interface{} {
+func (o *PCFWAccount) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -572,7 +572,7 @@ func (o *SparsePCFWAccount) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparsePCFWAccount) GetBSON() (interface{}, error) {
+func (o *SparsePCFWAccount) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

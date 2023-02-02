@@ -181,7 +181,7 @@ func (o *AWSLogDefinition) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *AWSLogDefinition) GetBSON() (interface{}, error) {
+func (o *AWSLogDefinition) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -552,7 +552,7 @@ func (*AWSLogDefinition) AttributeSpecifications() map[string]elemental.Attribut
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *AWSLogDefinition) ValueForAttribute(name string) interface{} {
+func (o *AWSLogDefinition) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -1076,7 +1076,7 @@ func (o *SparseAWSLogDefinition) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseAWSLogDefinition) GetBSON() (interface{}, error) {
+func (o *SparseAWSLogDefinition) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

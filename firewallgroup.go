@@ -159,7 +159,7 @@ func (o *FirewallGroup) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallGroup) GetBSON() (interface{}, error) {
+func (o *FirewallGroup) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -509,7 +509,7 @@ func (*FirewallGroup) AttributeSpecifications() map[string]elemental.AttributeSp
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallGroup) ValueForAttribute(name string) interface{} {
+func (o *FirewallGroup) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -981,7 +981,7 @@ func (o *SparseFirewallGroup) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallGroup) GetBSON() (interface{}, error) {
+func (o *SparseFirewallGroup) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

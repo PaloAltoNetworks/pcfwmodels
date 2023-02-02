@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "topquery": {
@@ -55,6 +54,7 @@
     "title": "topquery",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/topqueries": {
       "post": {

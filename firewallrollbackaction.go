@@ -137,7 +137,7 @@ func (o *FirewallRollbackAction) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallRollbackAction) GetBSON() (interface{}, error) {
+func (o *FirewallRollbackAction) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -328,7 +328,7 @@ func (*FirewallRollbackAction) AttributeSpecifications() map[string]elemental.At
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallRollbackAction) ValueForAttribute(name string) interface{} {
+func (o *FirewallRollbackAction) ValueForAttribute(name string) any {
 
 	switch name {
 	case "actionStatus":
@@ -530,7 +530,7 @@ func (o *SparseFirewallRollbackAction) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallRollbackAction) GetBSON() (interface{}, error) {
+func (o *SparseFirewallRollbackAction) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

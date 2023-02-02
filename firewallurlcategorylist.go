@@ -120,7 +120,7 @@ func (o *FirewallURLCategoryList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallURLCategoryList) GetBSON() (interface{}, error) {
+func (o *FirewallURLCategoryList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -303,7 +303,7 @@ func (*FirewallURLCategoryList) AttributeSpecifications() map[string]elemental.A
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallURLCategoryList) ValueForAttribute(name string) interface{} {
+func (o *FirewallURLCategoryList) ValueForAttribute(name string) any {
 
 	switch name {
 	case "categories":
@@ -471,7 +471,7 @@ func (o *SparseFirewallURLCategoryList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallURLCategoryList) GetBSON() (interface{}, error) {
+func (o *SparseFirewallURLCategoryList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

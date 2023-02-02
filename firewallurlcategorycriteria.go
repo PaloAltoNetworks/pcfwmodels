@@ -42,7 +42,7 @@ func NewFirewallURLCategoryCriteria() *FirewallURLCategoryCriteria {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallURLCategoryCriteria) GetBSON() (interface{}, error) {
+func (o *FirewallURLCategoryCriteria) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -146,7 +146,7 @@ func (*FirewallURLCategoryCriteria) AttributeSpecifications() map[string]element
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallURLCategoryCriteria) ValueForAttribute(name string) interface{} {
+func (o *FirewallURLCategoryCriteria) ValueForAttribute(name string) any {
 
 	switch name {
 	case "URLCategories":

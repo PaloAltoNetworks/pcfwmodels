@@ -57,7 +57,7 @@ func NewFirewallTargetCriteria() *FirewallTargetCriteria {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallTargetCriteria) GetBSON() (interface{}, error) {
+func (o *FirewallTargetCriteria) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -177,7 +177,7 @@ func (*FirewallTargetCriteria) AttributeSpecifications() map[string]elemental.At
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallTargetCriteria) ValueForAttribute(name string) interface{} {
+func (o *FirewallTargetCriteria) ValueForAttribute(name string) any {
 
 	switch name {
 	case "CIDRs":

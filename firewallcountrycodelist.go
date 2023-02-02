@@ -120,7 +120,7 @@ func (o *FirewallCountryCodelist) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallCountryCodelist) GetBSON() (interface{}, error) {
+func (o *FirewallCountryCodelist) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -305,7 +305,7 @@ func (*FirewallCountryCodelist) AttributeSpecifications() map[string]elemental.A
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallCountryCodelist) ValueForAttribute(name string) interface{} {
+func (o *FirewallCountryCodelist) ValueForAttribute(name string) any {
 
 	switch name {
 	case "countrycodes":
@@ -477,7 +477,7 @@ func (o *SparseFirewallCountryCodelist) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallCountryCodelist) GetBSON() (interface{}, error) {
+func (o *SparseFirewallCountryCodelist) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

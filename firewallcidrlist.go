@@ -150,7 +150,7 @@ func (o *FirewallCIDRlist) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallCIDRlist) GetBSON() (interface{}, error) {
+func (o *FirewallCIDRlist) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -477,7 +477,7 @@ func (*FirewallCIDRlist) AttributeSpecifications() map[string]elemental.Attribut
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallCIDRlist) ValueForAttribute(name string) interface{} {
+func (o *FirewallCIDRlist) ValueForAttribute(name string) any {
 
 	switch name {
 	case "CIDRs":
@@ -876,7 +876,7 @@ func (o *SparseFirewallCIDRlist) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallCIDRlist) GetBSON() (interface{}, error) {
+func (o *SparseFirewallCIDRlist) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

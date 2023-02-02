@@ -158,7 +158,7 @@ func (o *FirewallLicensingCredits) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallLicensingCredits) GetBSON() (interface{}, error) {
+func (o *FirewallLicensingCredits) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -447,7 +447,7 @@ func (*FirewallLicensingCredits) AttributeSpecifications() map[string]elemental.
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallLicensingCredits) ValueForAttribute(name string) interface{} {
+func (o *FirewallLicensingCredits) ValueForAttribute(name string) any {
 
 	switch name {
 	case "EnhancedSupportCredits":
@@ -902,7 +902,7 @@ func (o *SparseFirewallLicensingCredits) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallLicensingCredits) GetBSON() (interface{}, error) {
+func (o *SparseFirewallLicensingCredits) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

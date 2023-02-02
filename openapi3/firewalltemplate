@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "firewalltemplate": {
@@ -79,6 +78,7 @@
     "title": "firewalltemplate",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/firewalltemplates": {
       "get": {

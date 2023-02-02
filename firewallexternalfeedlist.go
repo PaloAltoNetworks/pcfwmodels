@@ -120,7 +120,7 @@ func (o *FirewallExternalFeedList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallExternalFeedList) GetBSON() (interface{}, error) {
+func (o *FirewallExternalFeedList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -305,7 +305,7 @@ func (*FirewallExternalFeedList) AttributeSpecifications() map[string]elemental.
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallExternalFeedList) ValueForAttribute(name string) interface{} {
+func (o *FirewallExternalFeedList) ValueForAttribute(name string) any {
 
 	switch name {
 	case "feeds":
@@ -477,7 +477,7 @@ func (o *SparseFirewallExternalFeedList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallExternalFeedList) GetBSON() (interface{}, error) {
+func (o *SparseFirewallExternalFeedList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

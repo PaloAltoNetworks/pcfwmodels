@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "vpcavailablesubnet": {
@@ -32,6 +31,7 @@
     "title": "vpcavailablesubnet",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {},
   "tags": [
     {

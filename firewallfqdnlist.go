@@ -150,7 +150,7 @@ func (o *FirewallFQDNList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallFQDNList) GetBSON() (interface{}, error) {
+func (o *FirewallFQDNList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -475,7 +475,7 @@ func (*FirewallFQDNList) AttributeSpecifications() map[string]elemental.Attribut
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallFQDNList) ValueForAttribute(name string) interface{} {
+func (o *FirewallFQDNList) ValueForAttribute(name string) any {
 
 	switch name {
 	case "FQDNs":
@@ -870,7 +870,7 @@ func (o *SparseFirewallFQDNList) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallFQDNList) GetBSON() (interface{}, error) {
+func (o *SparseFirewallFQDNList) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

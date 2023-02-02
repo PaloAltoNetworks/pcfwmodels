@@ -123,7 +123,7 @@ func (o *DeploymentAdvisorSubnetHelper) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *DeploymentAdvisorSubnetHelper) GetBSON() (interface{}, error) {
+func (o *DeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -309,7 +309,7 @@ func (*DeploymentAdvisorSubnetHelper) AttributeSpecifications() map[string]eleme
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *DeploymentAdvisorSubnetHelper) ValueForAttribute(name string) interface{} {
+func (o *DeploymentAdvisorSubnetHelper) ValueForAttribute(name string) any {
 
 	switch name {
 	case "VPCAvailableSubnets":
@@ -475,7 +475,7 @@ func (o *SparseDeploymentAdvisorSubnetHelper) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseDeploymentAdvisorSubnetHelper) GetBSON() (interface{}, error) {
+func (o *SparseDeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

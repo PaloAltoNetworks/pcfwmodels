@@ -155,7 +155,7 @@ func (o *FirewallCommittedRuleset) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallCommittedRuleset) GetBSON() (interface{}, error) {
+func (o *FirewallCommittedRuleset) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -416,7 +416,7 @@ func (*FirewallCommittedRuleset) AttributeSpecifications() map[string]elemental.
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallCommittedRuleset) ValueForAttribute(name string) interface{} {
+func (o *FirewallCommittedRuleset) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -764,7 +764,7 @@ func (o *SparseFirewallCommittedRuleset) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallCommittedRuleset) GetBSON() (interface{}, error) {
+func (o *SparseFirewallCommittedRuleset) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

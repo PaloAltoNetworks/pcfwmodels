@@ -152,7 +152,7 @@ func (o *FirewallRuleset) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallRuleset) GetBSON() (interface{}, error) {
+func (o *FirewallRuleset) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -480,7 +480,7 @@ func (*FirewallRuleset) AttributeSpecifications() map[string]elemental.Attribute
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallRuleset) ValueForAttribute(name string) interface{} {
+func (o *FirewallRuleset) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -904,7 +904,7 @@ func (o *SparseFirewallRuleset) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallRuleset) GetBSON() (interface{}, error) {
+func (o *SparseFirewallRuleset) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

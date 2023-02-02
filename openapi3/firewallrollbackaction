@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "firewallrollbackaction": {
@@ -50,6 +49,7 @@
     "title": "firewallrollbackaction",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/firewallrollbackactions": {
       "post": {

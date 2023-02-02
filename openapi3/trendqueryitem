@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "trendqueryitem": {
@@ -38,6 +37,7 @@
     "title": "trendqueryitem",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {},
   "tags": [
     {

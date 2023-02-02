@@ -33,7 +33,7 @@ func NewAWSAttachment() *AWSAttachment {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *AWSAttachment) GetBSON() (interface{}, error) {
+func (o *AWSAttachment) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -147,7 +147,7 @@ func (*AWSAttachment) AttributeSpecifications() map[string]elemental.AttributeSp
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *AWSAttachment) ValueForAttribute(name string) interface{} {
+func (o *AWSAttachment) ValueForAttribute(name string) any {
 
 	switch name {
 	case "VPC":

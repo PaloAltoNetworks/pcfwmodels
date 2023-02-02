@@ -173,7 +173,7 @@ func (o *FirewallSecurityProfile) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallSecurityProfile) GetBSON() (interface{}, error) {
+func (o *FirewallSecurityProfile) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -557,7 +557,7 @@ func (*FirewallSecurityProfile) AttributeSpecifications() map[string]elemental.A
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallSecurityProfile) ValueForAttribute(name string) interface{} {
+func (o *FirewallSecurityProfile) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -1156,7 +1156,7 @@ func (o *SparseFirewallSecurityProfile) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseFirewallSecurityProfile) GetBSON() (interface{}, error) {
+func (o *SparseFirewallSecurityProfile) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

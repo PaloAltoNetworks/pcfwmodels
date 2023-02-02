@@ -1,5 +1,4 @@
 {
-  "openapi": "3.0.3",
   "components": {
     "schemas": {
       "firewallcertificate": {
@@ -70,6 +69,7 @@
     "title": "firewallcertificate",
     "version": "1.0"
   },
+  "openapi": "3.0.3",
   "paths": {
     "/firewallcertificates": {
       "get": {

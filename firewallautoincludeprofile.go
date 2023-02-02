@@ -33,7 +33,7 @@ func NewFirewallAutoIncludeProfile() *FirewallAutoIncludeProfile {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *FirewallAutoIncludeProfile) GetBSON() (interface{}, error) {
+func (o *FirewallAutoIncludeProfile) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -137,7 +137,7 @@ func (*FirewallAutoIncludeProfile) AttributeSpecifications() map[string]elementa
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *FirewallAutoIncludeProfile) ValueForAttribute(name string) interface{} {
+func (o *FirewallAutoIncludeProfile) ValueForAttribute(name string) any {
 
 	switch name {
 	case "VPC":

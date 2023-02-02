@@ -244,7 +244,7 @@ func (o *AWSFirewall) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *AWSFirewall) GetBSON() (interface{}, error) {
+func (o *AWSFirewall) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -727,7 +727,7 @@ func (*AWSFirewall) AttributeSpecifications() map[string]elemental.AttributeSpec
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *AWSFirewall) ValueForAttribute(name string) interface{} {
+func (o *AWSFirewall) ValueForAttribute(name string) any {
 
 	switch name {
 	case "AWSNGFWModeSettings":
@@ -1456,7 +1456,7 @@ func (o *SparseAWSFirewall) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseAWSFirewall) GetBSON() (interface{}, error) {
+func (o *SparseAWSFirewall) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

@@ -143,7 +143,7 @@ func (o *LogQuery) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *LogQuery) GetBSON() (interface{}, error) {
+func (o *LogQuery) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -334,7 +334,7 @@ func (*LogQuery) AttributeSpecifications() map[string]elemental.AttributeSpecifi
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *LogQuery) ValueForAttribute(name string) interface{} {
+func (o *LogQuery) ValueForAttribute(name string) any {
 
 	switch name {
 	case "countHint":
@@ -536,7 +536,7 @@ func (o *SparseLogQuery) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseLogQuery) GetBSON() (interface{}, error) {
+func (o *SparseLogQuery) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil

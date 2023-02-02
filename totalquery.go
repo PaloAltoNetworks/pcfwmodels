@@ -147,7 +147,7 @@ func (o *TotalQuery) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *TotalQuery) GetBSON() (interface{}, error) {
+func (o *TotalQuery) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
@@ -332,7 +332,7 @@ func (*TotalQuery) AttributeSpecifications() map[string]elemental.AttributeSpeci
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *TotalQuery) ValueForAttribute(name string) interface{} {
+func (o *TotalQuery) ValueForAttribute(name string) any {
 
 	switch name {
 	case "firewallName":
@@ -539,7 +539,7 @@ func (o *SparseTotalQuery) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseTotalQuery) GetBSON() (interface{}, error) {
+func (o *SparseTotalQuery) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
