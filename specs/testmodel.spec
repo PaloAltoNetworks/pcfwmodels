@@ -16,8 +16,11 @@ model:
     global_parameters:
     - $queryable
   extends:
-  - '@namespaced'
+  - '@identifiable-stored'
   - '@named'
+  - '@namespaced'
+  - '@timeable'
+  - '@zoned'
 
 # Indexes
 indexes:
