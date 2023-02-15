@@ -3,7 +3,7 @@ model:
   rest_name: topsnapshot
   resource_name: topsnapshots
   entity_name: TopSnapshot
-  package: logserv
+  package: logging
   group: core/log
   description: Snapshot of top items for a log field.
   private: true

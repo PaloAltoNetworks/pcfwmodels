@@ -3,7 +3,7 @@ model:
   rest_name: topquery
   resource_name: topqueries
   entity_name: TopQuery
-  package: logserv
+  package: logging
   group: core/log
   description: Answer general queries on firewall logs.
 

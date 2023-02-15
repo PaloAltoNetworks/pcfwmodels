@@ -35,7 +35,7 @@ const (
 var TrendQueryIdentity = elemental.Identity{
 	Name:     "trendquery",
 	Category: "trendqueries",
-	Package:  "logserv",
+	Package:  "logging",
 	Private:  false,
 }
 

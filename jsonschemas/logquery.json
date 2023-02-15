@@ -1,7 +1,7 @@
 {
   "$extends": [],
   "$modelName": "LogQuery",
-  "$modelPackage": "logserv",
+  "$modelPackage": "logging",
   "$modelResourceName": "logqueries",
   "$modelRestName": "logquery",
   "additionalProperties": true,

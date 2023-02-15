@@ -3,7 +3,7 @@ model:
   rest_name: trendsnapshot
   resource_name: trendsnapshots
   entity_name: TrendSnapshot
-  package: logserv
+  package: logging
   group: core/log
   description: Snapshot of a trend item for a log field.
   private: true

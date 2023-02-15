@@ -3,7 +3,7 @@ model:
   rest_name: logqueryitem
   resource_name: logqueryitems
   entity_name: LogQueryItem
-  package: logserv
+  package: logging
   group: core/log
   description: Represents a log line in a logquery result.
   detached: true

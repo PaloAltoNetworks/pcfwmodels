@@ -3,7 +3,7 @@ model:
   rest_name: logquery
   resource_name: logqueries
   entity_name: LogQuery
-  package: logserv
+  package: logging
   group: core/log
   description: Answer general queries on firewall logs.
 

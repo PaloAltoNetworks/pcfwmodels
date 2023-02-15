@@ -32,7 +32,7 @@ const (
 var LogQueryIdentity = elemental.Identity{
 	Name:     "logquery",
 	Category: "logqueries",
-	Package:  "logserv",
+	Package:  "logging",
 	Private:  false,
 }
 

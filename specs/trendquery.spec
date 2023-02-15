@@ -3,7 +3,7 @@ model:
   rest_name: trendquery
   resource_name: trendqueries
   entity_name: TrendQuery
-  package: logserv
+  package: logging
   group: core/log
   description: Answer trend queries on firewall logs.
 

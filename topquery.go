@@ -53,7 +53,7 @@ const (
 var TopQueryIdentity = elemental.Identity{
 	Name:     "topquery",
 	Category: "topqueries",
-	Package:  "logserv",
+	Package:  "logging",
 	Private:  false,
 }
 

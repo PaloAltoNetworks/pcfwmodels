@@ -1,7 +1,7 @@
 {
   "$extends": [],
   "$modelName": "TopQueryItem",
-  "$modelPackage": "logserv",
+  "$modelPackage": "logging",
   "$modelResourceName": "topqueryitems",
   "$modelRestName": "topqueryitem",
   "additionalProperties": true,

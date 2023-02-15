@@ -3,7 +3,7 @@ model:
   rest_name: trendqueryitem
   resource_name: trendqueryitems
   entity_name: TrendQueryItem
-  package: logserv
+  package: logging
   group: core/log
   description: Represents an item in a trendquery result.
   detached: true

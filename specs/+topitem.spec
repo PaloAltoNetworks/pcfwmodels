@@ -3,7 +3,7 @@ model:
   rest_name: topitem
   resource_name: topitems
   entity_name: TopItem
-  package: logserv
+  package: logging
   group: core/log
   description: A field value and its count.
   private: true

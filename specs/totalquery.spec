@@ -3,7 +3,7 @@ model:
   rest_name: totalquery
   resource_name: totalqueries
   entity_name: TotalQuery
-  package: logserv
+  package: logging
   group: core/log
   description: Provide counts of various statistics on firewall logs.
 

@@ -3,7 +3,7 @@ model:
   rest_name: logfieldstat
   resource_name: logfieldstats
   entity_name: LogFieldStat
-  package: logserv
+  package: logging
   group: core/log
   description: Statistics about a NGFW log field.
   private: true

@@ -1,7 +1,7 @@
 {
   "$extends": [],
   "$modelName": "TrendQueryItem",
-  "$modelPackage": "logserv",
+  "$modelPackage": "logging",
   "$modelResourceName": "trendqueryitems",
   "$modelRestName": "trendqueryitem",
   "additionalProperties": true,

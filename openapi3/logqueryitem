@@ -44,8 +44,8 @@
       "name": "core/log"
     },
     {
-      "description": "This tag is for package 'logserv'",
-      "name": "logserv"
+      "description": "This tag is for package 'logging'",
+      "name": "logging"
     }
   ]
 }

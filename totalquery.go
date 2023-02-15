@@ -35,7 +35,7 @@ const (
 var TotalQueryIdentity = elemental.Identity{
 	Name:     "totalquery",
 	Category: "totalqueries",
-	Package:  "logserv",
+	Package:  "logging",
 	Private:  false,
 }
 
