@@ -22,8 +22,8 @@ attributes:
     description: status of account.
     type: enum
     exposed: true
-    read_only: true
     stored: true
+    read_only: true
     allowed_choices:
     - Success
     - Failed

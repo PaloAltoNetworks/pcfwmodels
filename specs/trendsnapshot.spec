@@ -91,4 +91,5 @@ attributes:
     - EgressBytes
     - ThreatsDetected
     - ThreatsBlocked
+    - Traffic
     example_value: IngressBytes
