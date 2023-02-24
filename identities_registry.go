@@ -11,9 +11,8 @@ var (
 		"awsfirewall":      AWSFirewallIdentity,
 		"awslogdefinition": AWSLogDefinitionIdentity,
 
-		"deploymentadvisorsubnethelper": DeploymentAdvisorSubnetHelperIdentity,
-		"deploymentadvisorterraform":    DeploymentAdvisorTerraformIdentity,
-		"firewallappidlist":             FirewallAppIDListIdentity,
+		"deploymentadvisorterraform": DeploymentAdvisorTerraformIdentity,
+		"firewallappidlist":          FirewallAppIDListIdentity,
 
 		"firewallapplicationgroup": FirewallApplicationGroupIdentity,
 
@@ -42,9 +41,13 @@ var (
 
 		"logquery": LogQueryIdentity,
 
-		"pcfwaccount": PCFWAccountIdentity,
-		"pcfwtenant":  PCFWTenantIdentity,
-		"root":        RootIdentity,
+		"pcfwaccount":                  PCFWAccountIdentity,
+		"pcfwaccountmirrorsource":      PCFWAccountMirrorSourceIdentity,
+		"pcfwaccountmirrorsourcestate": PCFWAccountMirrorSourceStateIdentity,
+		"pcfwaccountmirrorterraform":   PCFWAccountMirrorTerraformIdentity,
+		"pcfwsubnethelper":             PCFWSubnetHelperIdentity,
+		"pcfwtenant":                   PCFWTenantIdentity,
+		"root":                         RootIdentity,
 
 		"topquery": TopQueryIdentity,
 
@@ -57,9 +60,8 @@ var (
 		"awsfirewalls":      AWSFirewallIdentity,
 		"awslogdefinitions": AWSLogDefinitionIdentity,
 
-		"deploymentadvisorsubnethelpers": DeploymentAdvisorSubnetHelperIdentity,
-		"deploymentadvisorterraforms":    DeploymentAdvisorTerraformIdentity,
-		"firewallappidlist":              FirewallAppIDListIdentity,
+		"deploymentadvisorterraforms": DeploymentAdvisorTerraformIdentity,
+		"firewallappidlist":           FirewallAppIDListIdentity,
 
 		"firewallapplicationgroups": FirewallApplicationGroupIdentity,
 
@@ -88,9 +90,13 @@ var (
 
 		"logqueries": LogQueryIdentity,
 
-		"pcfwaccounts": PCFWAccountIdentity,
-		"pcfwtenants":  PCFWTenantIdentity,
-		"root":         RootIdentity,
+		"pcfwaccounts":                  PCFWAccountIdentity,
+		"pcfwaccountmirrorsources":      PCFWAccountMirrorSourceIdentity,
+		"pcfwaccountmirrorsourcestates": PCFWAccountMirrorSourceStateIdentity,
+		"pcfwaccountmirrorterraform":    PCFWAccountMirrorTerraformIdentity,
+		"pcfwsubnethelpers":             PCFWSubnetHelperIdentity,
+		"pcfwtenants":                   PCFWTenantIdentity,
+		"root":                          RootIdentity,
 
 		"topqueries": TopQueryIdentity,
 
@@ -113,7 +119,6 @@ var (
 			{"namespace"},
 			{"namespace", "name"},
 		},
-		"deploymentadvisorsubnethelper": nil,
 		"deploymentadvisorterraform": {
 			{"name"},
 			{"namespace"},
@@ -211,6 +216,24 @@ var (
 			{":shard", ":unique", "zone", "zHash"},
 			{"namespace"},
 		},
+		"pcfwaccountmirrorsource": {
+			{":shard", ":unique", "zone", "zHash"},
+			{"name"},
+			{"namespace"},
+			{"namespace", "name"},
+		},
+		"pcfwaccountmirrorsourcestate": {
+			{":shard", ":unique", "zone", "zHash"},
+			{"name"},
+			{"namespace"},
+			{"namespace", "name"},
+		},
+		"pcfwaccountmirrorterraform": {
+			{"name"},
+			{"namespace"},
+			{"namespace", "name"},
+		},
+		"pcfwsubnethelper": nil,
 		"pcfwtenant": {
 			{":shard", ":unique", "zone", "zHash"},
 			{"namespace"},
@@ -263,8 +286,6 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewAWSFirewall()
 	case AWSLogDefinitionIdentity:
 		return NewAWSLogDefinition()
-	case DeploymentAdvisorSubnetHelperIdentity:
-		return NewDeploymentAdvisorSubnetHelper()
 	case DeploymentAdvisorTerraformIdentity:
 		return NewDeploymentAdvisorTerraform()
 	case FirewallAppIDListIdentity:
@@ -309,6 +330,14 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewLogQuery()
 	case PCFWAccountIdentity:
 		return NewPCFWAccount()
+	case PCFWAccountMirrorSourceIdentity:
+		return NewPCFWAccountMirrorSource()
+	case PCFWAccountMirrorSourceStateIdentity:
+		return NewPCFWAccountMirrorSourceState()
+	case PCFWAccountMirrorTerraformIdentity:
+		return NewPCFWAccountMirrorTerraform()
+	case PCFWSubnetHelperIdentity:
+		return NewPCFWSubnetHelper()
 	case PCFWTenantIdentity:
 		return NewPCFWTenant()
 	case RootIdentity:
@@ -332,8 +361,6 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseAWSFirewall()
 	case AWSLogDefinitionIdentity:
 		return NewSparseAWSLogDefinition()
-	case DeploymentAdvisorSubnetHelperIdentity:
-		return NewSparseDeploymentAdvisorSubnetHelper()
 	case DeploymentAdvisorTerraformIdentity:
 		return NewSparseDeploymentAdvisorTerraform()
 	case FirewallAppIDListIdentity:
@@ -378,6 +405,14 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseLogQuery()
 	case PCFWAccountIdentity:
 		return NewSparsePCFWAccount()
+	case PCFWAccountMirrorSourceIdentity:
+		return NewSparsePCFWAccountMirrorSource()
+	case PCFWAccountMirrorSourceStateIdentity:
+		return NewSparsePCFWAccountMirrorSourceState()
+	case PCFWAccountMirrorTerraformIdentity:
+		return NewSparsePCFWAccountMirrorTerraform()
+	case PCFWSubnetHelperIdentity:
+		return NewSparsePCFWSubnetHelper()
 	case PCFWTenantIdentity:
 		return NewSparsePCFWTenant()
 	case TopQueryIdentity:
@@ -409,8 +444,6 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &AWSFirewallsList{}
 	case AWSLogDefinitionIdentity:
 		return &AWSLogDefinitionsList{}
-	case DeploymentAdvisorSubnetHelperIdentity:
-		return &DeploymentAdvisorSubnetHelpersList{}
 	case DeploymentAdvisorTerraformIdentity:
 		return &DeploymentAdvisorTerraformsList{}
 	case FirewallAppIDListIdentity:
@@ -455,6 +488,14 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &LogQueriesList{}
 	case PCFWAccountIdentity:
 		return &PCFWAccountsList{}
+	case PCFWAccountMirrorSourceIdentity:
+		return &PCFWAccountMirrorSourcesList{}
+	case PCFWAccountMirrorSourceStateIdentity:
+		return &PCFWAccountMirrorSourceStatesList{}
+	case PCFWAccountMirrorTerraformIdentity:
+		return &PCFWAccountMirrorTerraformsList{}
+	case PCFWSubnetHelperIdentity:
+		return &PCFWSubnetHelpersList{}
 	case PCFWTenantIdentity:
 		return &PCFWTenantsList{}
 	case TopQueryIdentity:
@@ -476,8 +517,6 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseAWSFirewallsList{}
 	case AWSLogDefinitionIdentity:
 		return &SparseAWSLogDefinitionsList{}
-	case DeploymentAdvisorSubnetHelperIdentity:
-		return &SparseDeploymentAdvisorSubnetHelpersList{}
 	case DeploymentAdvisorTerraformIdentity:
 		return &SparseDeploymentAdvisorTerraformsList{}
 	case FirewallAppIDListIdentity:
@@ -522,6 +561,14 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseLogQueriesList{}
 	case PCFWAccountIdentity:
 		return &SparsePCFWAccountsList{}
+	case PCFWAccountMirrorSourceIdentity:
+		return &SparsePCFWAccountMirrorSourcesList{}
+	case PCFWAccountMirrorSourceStateIdentity:
+		return &SparsePCFWAccountMirrorSourceStatesList{}
+	case PCFWAccountMirrorTerraformIdentity:
+		return &SparsePCFWAccountMirrorTerraformsList{}
+	case PCFWSubnetHelperIdentity:
+		return &SparsePCFWSubnetHelpersList{}
 	case PCFWTenantIdentity:
 		return &SparsePCFWTenantsList{}
 	case TopQueryIdentity:
@@ -560,7 +607,6 @@ func AllIdentities() []elemental.Identity {
 	return []elemental.Identity{
 		AWSFirewallIdentity,
 		AWSLogDefinitionIdentity,
-		DeploymentAdvisorSubnetHelperIdentity,
 		DeploymentAdvisorTerraformIdentity,
 		FirewallAppIDListIdentity,
 		FirewallApplicationGroupIdentity,
@@ -583,6 +629,10 @@ func AllIdentities() []elemental.Identity {
 		FirewallURLCategoryListIdentity,
 		LogQueryIdentity,
 		PCFWAccountIdentity,
+		PCFWAccountMirrorSourceIdentity,
+		PCFWAccountMirrorSourceStateIdentity,
+		PCFWAccountMirrorTerraformIdentity,
+		PCFWSubnetHelperIdentity,
 		PCFWTenantIdentity,
 		RootIdentity,
 		TopQueryIdentity,
@@ -598,8 +648,6 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case AWSFirewallIdentity:
 		return []string{}
 	case AWSLogDefinitionIdentity:
-		return []string{}
-	case DeploymentAdvisorSubnetHelperIdentity:
 		return []string{}
 	case DeploymentAdvisorTerraformIdentity:
 		return []string{}
@@ -644,6 +692,14 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case LogQueryIdentity:
 		return []string{}
 	case PCFWAccountIdentity:
+		return []string{}
+	case PCFWAccountMirrorSourceIdentity:
+		return []string{}
+	case PCFWAccountMirrorSourceStateIdentity:
+		return []string{}
+	case PCFWAccountMirrorTerraformIdentity:
+		return []string{}
+	case PCFWSubnetHelperIdentity:
 		return []string{}
 	case PCFWTenantIdentity:
 		return []string{}

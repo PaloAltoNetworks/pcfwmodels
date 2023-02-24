@@ -48,12 +48,6 @@
       },
       "type": "array"
     },
-    "deploymentadvisorsubnethelpers": {
-      "items": {
-        "$ref": "deploymentadvisorsubnethelper.json"
-      },
-      "type": "array"
-    },
     "deploymentadvisorterraforms": {
       "items": {
         "$ref": "deploymentadvisorterraform.json"
@@ -252,9 +246,33 @@
       },
       "type": "array"
     },
+    "pcfwaccountmirrorsources": {
+      "items": {
+        "$ref": "pcfwaccountmirrorsource.json"
+      },
+      "type": "array"
+    },
+    "pcfwaccountmirrorsourcestates": {
+      "items": {
+        "$ref": "pcfwaccountmirrorsourcestate.json"
+      },
+      "type": "array"
+    },
+    "pcfwaccountmirrorterraform": {
+      "items": {
+        "$ref": "pcfwaccountmirrorterraform.json"
+      },
+      "type": "array"
+    },
     "pcfwaccounts": {
       "items": {
         "$ref": "pcfwaccount.json"
+      },
+      "type": "array"
+    },
+    "pcfwsubnethelpers": {
+      "items": {
+        "$ref": "pcfwsubnethelper.json"
       },
       "type": "array"
     },

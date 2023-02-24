@@ -1,0 +1,133 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced",
+    "@zoned"
+  ],
+  "$modelName": "PCFWAccountMirrorSource",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "pcfwaccountmirrorsources",
+  "$modelRestName": "pcfwaccountmirrorsource",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "VPCIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "autoScalingGroupNames": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "dynamicPolicyUpdateEnabled": {
+      "$defaultValue": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "endpointAbsent": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "filter": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "mirrorfilter.json"
+        }
+      ]
+    },
+    "instanceIDs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "PCFWAccountMirrorSource",
+  "type": "object"
+}

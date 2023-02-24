@@ -1,13 +1,13 @@
 # Model
 model:
-  rest_name: deploymentadvisorsubnethelper
-  resource_name: deploymentadvisorsubnethelpers
-  entity_name: DeploymentAdvisorSubnetHelper
+  rest_name: pcfwsubnethelper
+  resource_name: pcfwsubnethelpers
+  entity_name: PCFWSubnetHelper
   package: deploymentadvisor
   group: core/deploymentadvisor
   description: |-
-    Represents a Cloud NGFW Deployment Advisor service that returns available subnet
-    for every specified availability zones in every specified VPC.
+    Represents a PCFW service endpoint that returns available subnet for every
+    specified availability zones in every specified VPC.
 
 # Attributes
 attributes:

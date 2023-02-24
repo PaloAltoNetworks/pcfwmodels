@@ -1,0 +1,62 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced"
+  ],
+  "$modelName": "PCFWAccountMirrorTerraform",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "pcfwaccountmirrorterraform",
+  "$modelRestName": "pcfwaccountmirrorterraform",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "PCFWAccountMirrorTerraform",
+  "type": "object"
+}

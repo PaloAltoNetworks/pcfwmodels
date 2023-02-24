@@ -24,9 +24,6 @@
     "awstapmodesettings": {
       "$ref": "awstapmodesettings.json"
     },
-    "deploymentadvisorsubnethelper": {
-      "$ref": "deploymentadvisorsubnethelper.json"
-    },
     "deploymentadvisorterraform": {
       "$ref": "deploymentadvisorterraform.json"
     },
@@ -128,6 +125,18 @@
     },
     "pcfwaccount": {
       "$ref": "pcfwaccount.json"
+    },
+    "pcfwaccountmirrorsource": {
+      "$ref": "pcfwaccountmirrorsource.json"
+    },
+    "pcfwaccountmirrorsourcestate": {
+      "$ref": "pcfwaccountmirrorsourcestate.json"
+    },
+    "pcfwaccountmirrorterraform": {
+      "$ref": "pcfwaccountmirrorterraform.json"
+    },
+    "pcfwsubnethelper": {
+      "$ref": "pcfwsubnethelper.json"
     },
     "pcfwtenant": {
       "$ref": "pcfwtenant.json"

@@ -1,25 +1,32 @@
 {
   "components": {
     "schemas": {
-      "deploymentadvisorsubnethelper": {
-        "description": "Represents a Cloud NGFW Deployment Advisor service that returns available subnet\nfor every specified availability zones in every specified VPC.",
+      "pcfwaccountmirrorterraform": {
+        "description": "Represents PCFW account terraform generator.",
         "properties": {
-          "VPCAvailableSubnets": {
-            "description": "Returns the list of AWS VPC IDs and information about available subnets for\nevery availability zones in a VPC.",
-            "items": {
-              "$ref": "./vpcavailablesubnet#/components/schemas/vpcavailablesubnet"
-            },
+          "ID": {
+            "description": "Identifier of the object.",
             "readOnly": true,
-            "type": "array"
+            "type": "string"
           },
-          "VPCUsedSubnets": {
-            "description": "List of AWS VPC IDs with information about associated availability zones and\nused subnets to check for available subnets.",
-            "items": {
-              "$ref": "./vpcusedsubnet#/components/schemas/vpcusedsubnet"
-            },
-            "type": "array"
+          "description": {
+            "description": "Description of the object.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       }
     }
@@ -32,15 +39,15 @@
       "name": "TODO"
     },
     "termsOfService": "https://localhost/TODO",
-    "title": "deploymentadvisorsubnethelper",
+    "title": "pcfwaccountmirrorterraform",
     "version": "1.0"
   },
   "openapi": "3.0.3",
   "paths": {
-    "/deploymentadvisorsubnethelpers": {
+    "/pcfwaccountmirrorterraform": {
       "post": {
-        "description": "Creates a list of free subnets per availability zone.",
-        "operationId": "create-a-new-deploymentadvisorsubnethelper",
+        "description": "Creates a new mirroring terraform plan associated with a firewall for a cloud\naccount.",
+        "operationId": "create-a-new-pcfwaccountmirrorterraform",
         "parameters": [
           {
             "description": "Filtering query. Consequent `q` parameters will form an or.",
@@ -56,7 +63,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/deploymentadvisorsubnethelper"
+                "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
               }
             }
           }
@@ -66,7 +73,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/deploymentadvisorsubnethelper"
+                  "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
                 }
               }
             },

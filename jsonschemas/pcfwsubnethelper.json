@@ -1,9 +1,9 @@
 {
   "$extends": [],
-  "$modelName": "DeploymentAdvisorSubnetHelper",
+  "$modelName": "PCFWSubnetHelper",
   "$modelPackage": "deploymentadvisor",
-  "$modelResourceName": "deploymentadvisorsubnethelpers",
-  "$modelRestName": "deploymentadvisorsubnethelper",
+  "$modelResourceName": "pcfwsubnethelpers",
+  "$modelRestName": "pcfwsubnethelper",
   "additionalProperties": true,
   "properties": {
     "VPCAvailableSubnets": {
@@ -35,6 +35,6 @@
     }
   },
   "required": [],
-  "title": "DeploymentAdvisorSubnetHelper",
+  "title": "PCFWSubnetHelper",
   "type": "object"
 }

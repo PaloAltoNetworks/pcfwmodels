@@ -1,0 +1,106 @@
+{
+  "$extends": [
+    "@identifiable-stored",
+    "@named",
+    "@described",
+    "@namespaced",
+    "@zoned"
+  ],
+  "$modelName": "PCFWAccountMirrorSourceState",
+  "$modelPackage": "deploymentadvisor",
+  "$modelResourceName": "pcfwaccountmirrorsourcestates",
+  "$modelRestName": "pcfwaccountmirrorsourcestate",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "description": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      ]
+    },
+    "instanceID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    },
+    "namespace": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "networkInterface": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "enum": [
+            "Success",
+            "Failed"
+          ]
+        }
+      ]
+    },
+    "statusReason": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "PCFWAccountMirrorSourceState",
+  "type": "object"
+}

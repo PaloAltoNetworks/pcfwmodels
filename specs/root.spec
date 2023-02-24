@@ -28,12 +28,6 @@ relations:
   create:
     description: Creates a new awslogdefinition.
 
-- rest_name: deploymentadvisorsubnethelper
-  create:
-    description: Creates a list of free subnets per availability zone.
-    global_parameters:
-    - $queryable
-
 - rest_name: deploymentadvisorterraform
   create:
     description: Creates a new terraform plan.
@@ -191,6 +185,36 @@ relations:
     - $queryable
   create:
     description: Onboards Cloud Account on the Prisma Prisma Cloud service.
+
+- rest_name: pcfwaccountmirrorsource
+  get:
+    description: Retrieves the mirror configuration of a firewall for a cloud account.
+    global_parameters:
+    - $queryable
+  create:
+    description: Retrieves the mirror configuration of a firewall for a cloud account.
+
+- rest_name: pcfwaccountmirrorsourcestate
+  get:
+    description: Retrieves the mirror source status of a firewall for a cloud account.
+    global_parameters:
+    - $queryable
+  create:
+    description: Retrieves the mirror source status of a firewall for a cloud account.
+
+- rest_name: pcfwaccountmirrorterraform
+  create:
+    description: |-
+      Creates a new mirroring terraform plan associated with a firewall for a cloud
+      account.
+    global_parameters:
+    - $queryable
+
+- rest_name: pcfwsubnethelper
+  create:
+    description: Creates a list of free subnets per availability zone.
+    global_parameters:
+    - $queryable
 
 - rest_name: pcfwtenant
   get:

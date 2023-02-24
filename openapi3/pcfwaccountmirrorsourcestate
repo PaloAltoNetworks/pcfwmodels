@@ -1,0 +1,223 @@
+{
+  "components": {
+    "schemas": {
+      "pcfwaccountmirrorsourcestate": {
+        "description": "Represents state of traffic mirror session setup associated with an instance and\nnetwork interface for a firewall associatd with a customer account.",
+        "properties": {
+          "ID": {
+            "description": "Identifier of the object.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the object.",
+            "type": "string"
+          },
+          "instanceID": {
+            "description": "The instance ID that is the source of traffic mirroring.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "namespace": {
+            "description": "Namespace tag attached to an entity.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "networkInterface": {
+            "description": "The ENI that is the source of traffic mirroring.",
+            "type": "string"
+          },
+          "status": {
+            "description": "The status of the traffic mirroring session.",
+            "enum": [
+              "Success",
+              "Failed"
+            ]
+          },
+          "statusReason": {
+            "description": "The status description of the traffic mirroring session.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "pcfwaccountmirrorsourcestate",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/pcfwaccountmirrorsourcestates": {
+      "get": {
+        "description": "Retrieves the mirror source status of a firewall for a cloud account.",
+        "operationId": "get-all-pcfwaccountmirrorsourcestates",
+        "parameters": [
+          {
+            "description": "Filtering query. Consequent `q` parameters will form an or.",
+            "example": "tags contains ['hello=world'] or mode == 'TAP'",
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      },
+      "post": {
+        "description": "Retrieves the mirror source status of a firewall for a cloud account.",
+        "operationId": "create-a-new-pcfwaccountmirrorsourcestate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      }
+    },
+    "/pcfwaccountmirrorsourcestates/{id}": {
+      "delete": {
+        "description": "Deletes the pcfwaccountmirrorsourcestate object with the given ID.",
+        "operationId": "delete-pcfwaccountmirrorsourcestate-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the pcfwaccountmirrorsourcestate object with the given ID.",
+        "operationId": "get-pcfwaccountmirrorsourcestate-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Updates the pcfwaccountmirrorsourcestate object with the given ID.",
+        "operationId": "update-pcfwaccountmirrorsourcestate-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccountmirrorsourcestate"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/deploymentadvisor",
+          "deploymentadvisor"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/deploymentadvisor'",
+      "name": "core/deploymentadvisor"
+    },
+    {
+      "description": "This tag is for package 'deploymentadvisor'",
+      "name": "deploymentadvisor"
+    }
+  ]
+}

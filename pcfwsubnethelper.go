@@ -11,43 +11,43 @@ import (
 	"go.aporeto.io/elemental"
 )
 
-// DeploymentAdvisorSubnetHelperIdentity represents the Identity of the object.
-var DeploymentAdvisorSubnetHelperIdentity = elemental.Identity{
-	Name:     "deploymentadvisorsubnethelper",
-	Category: "deploymentadvisorsubnethelpers",
+// PCFWSubnetHelperIdentity represents the Identity of the object.
+var PCFWSubnetHelperIdentity = elemental.Identity{
+	Name:     "pcfwsubnethelper",
+	Category: "pcfwsubnethelpers",
 	Package:  "deploymentadvisor",
 	Private:  false,
 }
 
-// DeploymentAdvisorSubnetHelpersList represents a list of DeploymentAdvisorSubnetHelpers
-type DeploymentAdvisorSubnetHelpersList []*DeploymentAdvisorSubnetHelper
+// PCFWSubnetHelpersList represents a list of PCFWSubnetHelpers
+type PCFWSubnetHelpersList []*PCFWSubnetHelper
 
 // Identity returns the identity of the objects in the list.
-func (o DeploymentAdvisorSubnetHelpersList) Identity() elemental.Identity {
+func (o PCFWSubnetHelpersList) Identity() elemental.Identity {
 
-	return DeploymentAdvisorSubnetHelperIdentity
+	return PCFWSubnetHelperIdentity
 }
 
-// Copy returns a pointer to a copy the DeploymentAdvisorSubnetHelpersList.
-func (o DeploymentAdvisorSubnetHelpersList) Copy() elemental.Identifiables {
+// Copy returns a pointer to a copy the PCFWSubnetHelpersList.
+func (o PCFWSubnetHelpersList) Copy() elemental.Identifiables {
 
-	copy := append(DeploymentAdvisorSubnetHelpersList{}, o...)
+	copy := append(PCFWSubnetHelpersList{}, o...)
 	return &copy
 }
 
-// Append appends the objects to the a new copy of the DeploymentAdvisorSubnetHelpersList.
-func (o DeploymentAdvisorSubnetHelpersList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
+// Append appends the objects to the a new copy of the PCFWSubnetHelpersList.
+func (o PCFWSubnetHelpersList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
 
-	out := append(DeploymentAdvisorSubnetHelpersList{}, o...)
+	out := append(PCFWSubnetHelpersList{}, o...)
 	for _, obj := range objects {
-		out = append(out, obj.(*DeploymentAdvisorSubnetHelper))
+		out = append(out, obj.(*PCFWSubnetHelper))
 	}
 
 	return out
 }
 
 // List converts the object to an elemental.IdentifiablesList.
-func (o DeploymentAdvisorSubnetHelpersList) List() elemental.IdentifiablesList {
+func (o PCFWSubnetHelpersList) List() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -58,31 +58,31 @@ func (o DeploymentAdvisorSubnetHelpersList) List() elemental.IdentifiablesList {
 }
 
 // DefaultOrder returns the default ordering fields of the content.
-func (o DeploymentAdvisorSubnetHelpersList) DefaultOrder() []string {
+func (o PCFWSubnetHelpersList) DefaultOrder() []string {
 
 	return []string{}
 }
 
-// ToSparse returns the DeploymentAdvisorSubnetHelpersList converted to SparseDeploymentAdvisorSubnetHelpersList.
+// ToSparse returns the PCFWSubnetHelpersList converted to SparsePCFWSubnetHelpersList.
 // Objects in the list will only contain the given fields. No field means entire field set.
-func (o DeploymentAdvisorSubnetHelpersList) ToSparse(fields ...string) elemental.Identifiables {
+func (o PCFWSubnetHelpersList) ToSparse(fields ...string) elemental.Identifiables {
 
-	out := make(SparseDeploymentAdvisorSubnetHelpersList, len(o))
+	out := make(SparsePCFWSubnetHelpersList, len(o))
 	for i := 0; i < len(o); i++ {
-		out[i] = o[i].ToSparse(fields...).(*SparseDeploymentAdvisorSubnetHelper)
+		out[i] = o[i].ToSparse(fields...).(*SparsePCFWSubnetHelper)
 	}
 
 	return out
 }
 
 // Version returns the version of the content.
-func (o DeploymentAdvisorSubnetHelpersList) Version() int {
+func (o PCFWSubnetHelpersList) Version() int {
 
 	return 1
 }
 
-// DeploymentAdvisorSubnetHelper represents the model of a deploymentadvisorsubnethelper
-type DeploymentAdvisorSubnetHelper struct {
+// PCFWSubnetHelper represents the model of a pcfwsubnethelper
+type PCFWSubnetHelper struct {
 	// Returns the list of AWS VPC IDs and information about available subnets for
 	// every availability zones in a VPC.
 	VPCAvailableSubnets []*VpcAvailableSubnet `json:"VPCAvailableSubnets" msgpack:"VPCAvailableSubnets" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
@@ -94,10 +94,10 @@ type DeploymentAdvisorSubnetHelper struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewDeploymentAdvisorSubnetHelper returns a new *DeploymentAdvisorSubnetHelper
-func NewDeploymentAdvisorSubnetHelper() *DeploymentAdvisorSubnetHelper {
+// NewPCFWSubnetHelper returns a new *PCFWSubnetHelper
+func NewPCFWSubnetHelper() *PCFWSubnetHelper {
 
-	return &DeploymentAdvisorSubnetHelper{
+	return &PCFWSubnetHelper{
 		ModelVersion:        1,
 		VPCAvailableSubnets: []*VpcAvailableSubnet{},
 		VPCUsedSubnets:      []*VpcUsedSubnet{},
@@ -105,31 +105,31 @@ func NewDeploymentAdvisorSubnetHelper() *DeploymentAdvisorSubnetHelper {
 }
 
 // Identity returns the Identity of the object.
-func (o *DeploymentAdvisorSubnetHelper) Identity() elemental.Identity {
+func (o *PCFWSubnetHelper) Identity() elemental.Identity {
 
-	return DeploymentAdvisorSubnetHelperIdentity
+	return PCFWSubnetHelperIdentity
 }
 
 // Identifier returns the value of the object's unique identifier.
-func (o *DeploymentAdvisorSubnetHelper) Identifier() string {
+func (o *PCFWSubnetHelper) Identifier() string {
 
 	return ""
 }
 
 // SetIdentifier sets the value of the object's unique identifier.
-func (o *DeploymentAdvisorSubnetHelper) SetIdentifier(id string) {
+func (o *PCFWSubnetHelper) SetIdentifier(id string) {
 
 }
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *DeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
+func (o *PCFWSubnetHelper) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesDeploymentAdvisorSubnetHelper{}
+	s := &mongoAttributesPCFWSubnetHelper{}
 
 	s.VPCUsedSubnets = o.VPCUsedSubnets
 
@@ -138,13 +138,13 @@ func (o *DeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *DeploymentAdvisorSubnetHelper) SetBSON(raw bson.Raw) error {
+func (o *PCFWSubnetHelper) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesDeploymentAdvisorSubnetHelper{}
+	s := &mongoAttributesPCFWSubnetHelper{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -155,48 +155,48 @@ func (o *DeploymentAdvisorSubnetHelper) SetBSON(raw bson.Raw) error {
 }
 
 // Version returns the hardcoded version of the model.
-func (o *DeploymentAdvisorSubnetHelper) Version() int {
+func (o *PCFWSubnetHelper) Version() int {
 
 	return 1
 }
 
 // BleveType implements the bleve.Classifier Interface.
-func (o *DeploymentAdvisorSubnetHelper) BleveType() string {
+func (o *PCFWSubnetHelper) BleveType() string {
 
-	return "deploymentadvisorsubnethelper"
+	return "pcfwsubnethelper"
 }
 
 // DefaultOrder returns the list of default ordering fields.
-func (o *DeploymentAdvisorSubnetHelper) DefaultOrder() []string {
+func (o *PCFWSubnetHelper) DefaultOrder() []string {
 
 	return []string{}
 }
 
 // Doc returns the documentation for the object
-func (o *DeploymentAdvisorSubnetHelper) Doc() string {
+func (o *PCFWSubnetHelper) Doc() string {
 
-	return `Represents a Cloud NGFW Deployment Advisor service that returns available subnet
-for every specified availability zones in every specified VPC.`
+	return `Represents a PCFW service endpoint that returns available subnet for every
+specified availability zones in every specified VPC.`
 }
 
-func (o *DeploymentAdvisorSubnetHelper) String() string {
+func (o *PCFWSubnetHelper) String() string {
 
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
 // ToSparse returns the sparse version of the model.
 // The returned object will only contain the given fields. No field means entire field set.
-func (o *DeploymentAdvisorSubnetHelper) ToSparse(fields ...string) elemental.SparseIdentifiable {
+func (o *PCFWSubnetHelper) ToSparse(fields ...string) elemental.SparseIdentifiable {
 
 	if len(fields) == 0 {
 		// nolint: goimports
-		return &SparseDeploymentAdvisorSubnetHelper{
+		return &SparsePCFWSubnetHelper{
 			VPCAvailableSubnets: &o.VPCAvailableSubnets,
 			VPCUsedSubnets:      &o.VPCUsedSubnets,
 		}
 	}
 
-	sp := &SparseDeploymentAdvisorSubnetHelper{}
+	sp := &SparsePCFWSubnetHelper{}
 	for _, f := range fields {
 		switch f {
 		case "VPCAvailableSubnets":
@@ -209,13 +209,13 @@ func (o *DeploymentAdvisorSubnetHelper) ToSparse(fields ...string) elemental.Spa
 	return sp
 }
 
-// Patch apply the non nil value of a *SparseDeploymentAdvisorSubnetHelper to the object.
-func (o *DeploymentAdvisorSubnetHelper) Patch(sparse elemental.SparseIdentifiable) {
+// Patch apply the non nil value of a *SparsePCFWSubnetHelper to the object.
+func (o *PCFWSubnetHelper) Patch(sparse elemental.SparseIdentifiable) {
 	if !sparse.Identity().IsEqual(o.Identity()) {
 		panic("cannot patch from a parse with different identity")
 	}
 
-	so := sparse.(*SparseDeploymentAdvisorSubnetHelper)
+	so := sparse.(*SparsePCFWSubnetHelper)
 	if so.VPCAvailableSubnets != nil {
 		o.VPCAvailableSubnets = *so.VPCAvailableSubnets
 	}
@@ -224,32 +224,32 @@ func (o *DeploymentAdvisorSubnetHelper) Patch(sparse elemental.SparseIdentifiabl
 	}
 }
 
-// DeepCopy returns a deep copy if the DeploymentAdvisorSubnetHelper.
-func (o *DeploymentAdvisorSubnetHelper) DeepCopy() *DeploymentAdvisorSubnetHelper {
+// DeepCopy returns a deep copy if the PCFWSubnetHelper.
+func (o *PCFWSubnetHelper) DeepCopy() *PCFWSubnetHelper {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &DeploymentAdvisorSubnetHelper{}
+	out := &PCFWSubnetHelper{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *DeploymentAdvisorSubnetHelper.
-func (o *DeploymentAdvisorSubnetHelper) DeepCopyInto(out *DeploymentAdvisorSubnetHelper) {
+// DeepCopyInto copies the receiver into the given *PCFWSubnetHelper.
+func (o *PCFWSubnetHelper) DeepCopyInto(out *PCFWSubnetHelper) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy DeploymentAdvisorSubnetHelper: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy PCFWSubnetHelper: %s", err))
 	}
 
-	*out = *target.(*DeploymentAdvisorSubnetHelper)
+	*out = *target.(*PCFWSubnetHelper)
 }
 
 // Validate valides the current information stored into the structure.
-func (o *DeploymentAdvisorSubnetHelper) Validate() error {
+func (o *PCFWSubnetHelper) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
@@ -290,26 +290,26 @@ func (o *DeploymentAdvisorSubnetHelper) Validate() error {
 }
 
 // SpecificationForAttribute returns the AttributeSpecification for the given attribute name key.
-func (*DeploymentAdvisorSubnetHelper) SpecificationForAttribute(name string) elemental.AttributeSpecification {
+func (*PCFWSubnetHelper) SpecificationForAttribute(name string) elemental.AttributeSpecification {
 
-	if v, ok := DeploymentAdvisorSubnetHelperAttributesMap[name]; ok {
+	if v, ok := PCFWSubnetHelperAttributesMap[name]; ok {
 		return v
 	}
 
 	// We could not find it, so let's check on the lower case indexed spec map
-	return DeploymentAdvisorSubnetHelperLowerCaseAttributesMap[name]
+	return PCFWSubnetHelperLowerCaseAttributesMap[name]
 }
 
 // AttributeSpecifications returns the full attribute specifications map.
-func (*DeploymentAdvisorSubnetHelper) AttributeSpecifications() map[string]elemental.AttributeSpecification {
+func (*PCFWSubnetHelper) AttributeSpecifications() map[string]elemental.AttributeSpecification {
 
-	return DeploymentAdvisorSubnetHelperAttributesMap
+	return PCFWSubnetHelperAttributesMap
 }
 
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *DeploymentAdvisorSubnetHelper) ValueForAttribute(name string) any {
+func (o *PCFWSubnetHelper) ValueForAttribute(name string) any {
 
 	switch name {
 	case "VPCAvailableSubnets":
@@ -321,8 +321,8 @@ func (o *DeploymentAdvisorSubnetHelper) ValueForAttribute(name string) any {
 	return nil
 }
 
-// DeploymentAdvisorSubnetHelperAttributesMap represents the map of attribute for DeploymentAdvisorSubnetHelper.
-var DeploymentAdvisorSubnetHelperAttributesMap = map[string]elemental.AttributeSpecification{
+// PCFWSubnetHelperAttributesMap represents the map of attribute for PCFWSubnetHelper.
+var PCFWSubnetHelperAttributesMap = map[string]elemental.AttributeSpecification{
 	"VPCAvailableSubnets": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -349,8 +349,8 @@ used subnets to check for available subnets.`,
 	},
 }
 
-// DeploymentAdvisorSubnetHelperLowerCaseAttributesMap represents the map of attribute for DeploymentAdvisorSubnetHelper.
-var DeploymentAdvisorSubnetHelperLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+// PCFWSubnetHelperLowerCaseAttributesMap represents the map of attribute for PCFWSubnetHelper.
+var PCFWSubnetHelperLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
 	"vpcavailablesubnets": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -377,35 +377,35 @@ used subnets to check for available subnets.`,
 	},
 }
 
-// SparseDeploymentAdvisorSubnetHelpersList represents a list of SparseDeploymentAdvisorSubnetHelpers
-type SparseDeploymentAdvisorSubnetHelpersList []*SparseDeploymentAdvisorSubnetHelper
+// SparsePCFWSubnetHelpersList represents a list of SparsePCFWSubnetHelpers
+type SparsePCFWSubnetHelpersList []*SparsePCFWSubnetHelper
 
 // Identity returns the identity of the objects in the list.
-func (o SparseDeploymentAdvisorSubnetHelpersList) Identity() elemental.Identity {
+func (o SparsePCFWSubnetHelpersList) Identity() elemental.Identity {
 
-	return DeploymentAdvisorSubnetHelperIdentity
+	return PCFWSubnetHelperIdentity
 }
 
-// Copy returns a pointer to a copy the SparseDeploymentAdvisorSubnetHelpersList.
-func (o SparseDeploymentAdvisorSubnetHelpersList) Copy() elemental.Identifiables {
+// Copy returns a pointer to a copy the SparsePCFWSubnetHelpersList.
+func (o SparsePCFWSubnetHelpersList) Copy() elemental.Identifiables {
 
-	copy := append(SparseDeploymentAdvisorSubnetHelpersList{}, o...)
+	copy := append(SparsePCFWSubnetHelpersList{}, o...)
 	return &copy
 }
 
-// Append appends the objects to the a new copy of the SparseDeploymentAdvisorSubnetHelpersList.
-func (o SparseDeploymentAdvisorSubnetHelpersList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
+// Append appends the objects to the a new copy of the SparsePCFWSubnetHelpersList.
+func (o SparsePCFWSubnetHelpersList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
 
-	out := append(SparseDeploymentAdvisorSubnetHelpersList{}, o...)
+	out := append(SparsePCFWSubnetHelpersList{}, o...)
 	for _, obj := range objects {
-		out = append(out, obj.(*SparseDeploymentAdvisorSubnetHelper))
+		out = append(out, obj.(*SparsePCFWSubnetHelper))
 	}
 
 	return out
 }
 
 // List converts the object to an elemental.IdentifiablesList.
-func (o SparseDeploymentAdvisorSubnetHelpersList) List() elemental.IdentifiablesList {
+func (o SparsePCFWSubnetHelpersList) List() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -416,13 +416,13 @@ func (o SparseDeploymentAdvisorSubnetHelpersList) List() elemental.Identifiables
 }
 
 // DefaultOrder returns the default ordering fields of the content.
-func (o SparseDeploymentAdvisorSubnetHelpersList) DefaultOrder() []string {
+func (o SparsePCFWSubnetHelpersList) DefaultOrder() []string {
 
 	return []string{}
 }
 
-// ToPlain returns the SparseDeploymentAdvisorSubnetHelpersList converted to DeploymentAdvisorSubnetHelpersList.
-func (o SparseDeploymentAdvisorSubnetHelpersList) ToPlain() elemental.IdentifiablesList {
+// ToPlain returns the SparsePCFWSubnetHelpersList converted to PCFWSubnetHelpersList.
+func (o SparsePCFWSubnetHelpersList) ToPlain() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -433,13 +433,13 @@ func (o SparseDeploymentAdvisorSubnetHelpersList) ToPlain() elemental.Identifiab
 }
 
 // Version returns the version of the content.
-func (o SparseDeploymentAdvisorSubnetHelpersList) Version() int {
+func (o SparsePCFWSubnetHelpersList) Version() int {
 
 	return 1
 }
 
-// SparseDeploymentAdvisorSubnetHelper represents the sparse version of a deploymentadvisorsubnethelper.
-type SparseDeploymentAdvisorSubnetHelper struct {
+// SparsePCFWSubnetHelper represents the sparse version of a pcfwsubnethelper.
+type SparsePCFWSubnetHelper struct {
 	// Returns the list of AWS VPC IDs and information about available subnets for
 	// every availability zones in a VPC.
 	VPCAvailableSubnets *[]*VpcAvailableSubnet `json:"VPCAvailableSubnets,omitempty" msgpack:"VPCAvailableSubnets,omitempty" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
@@ -451,37 +451,37 @@ type SparseDeploymentAdvisorSubnetHelper struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewSparseDeploymentAdvisorSubnetHelper returns a new  SparseDeploymentAdvisorSubnetHelper.
-func NewSparseDeploymentAdvisorSubnetHelper() *SparseDeploymentAdvisorSubnetHelper {
-	return &SparseDeploymentAdvisorSubnetHelper{}
+// NewSparsePCFWSubnetHelper returns a new  SparsePCFWSubnetHelper.
+func NewSparsePCFWSubnetHelper() *SparsePCFWSubnetHelper {
+	return &SparsePCFWSubnetHelper{}
 }
 
 // Identity returns the Identity of the sparse object.
-func (o *SparseDeploymentAdvisorSubnetHelper) Identity() elemental.Identity {
+func (o *SparsePCFWSubnetHelper) Identity() elemental.Identity {
 
-	return DeploymentAdvisorSubnetHelperIdentity
+	return PCFWSubnetHelperIdentity
 }
 
 // Identifier returns the value of the sparse object's unique identifier.
-func (o *SparseDeploymentAdvisorSubnetHelper) Identifier() string {
+func (o *SparsePCFWSubnetHelper) Identifier() string {
 
 	return ""
 }
 
 // SetIdentifier sets the value of the sparse object's unique identifier.
-func (o *SparseDeploymentAdvisorSubnetHelper) SetIdentifier(id string) {
+func (o *SparsePCFWSubnetHelper) SetIdentifier(id string) {
 
 }
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseDeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
+func (o *SparsePCFWSubnetHelper) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesSparseDeploymentAdvisorSubnetHelper{}
+	s := &mongoAttributesSparsePCFWSubnetHelper{}
 
 	if o.VPCUsedSubnets != nil {
 		s.VPCUsedSubnets = o.VPCUsedSubnets
@@ -492,13 +492,13 @@ func (o *SparseDeploymentAdvisorSubnetHelper) GetBSON() (any, error) {
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparseDeploymentAdvisorSubnetHelper) SetBSON(raw bson.Raw) error {
+func (o *SparsePCFWSubnetHelper) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesSparseDeploymentAdvisorSubnetHelper{}
+	s := &mongoAttributesSparsePCFWSubnetHelper{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -511,15 +511,15 @@ func (o *SparseDeploymentAdvisorSubnetHelper) SetBSON(raw bson.Raw) error {
 }
 
 // Version returns the hardcoded version of the model.
-func (o *SparseDeploymentAdvisorSubnetHelper) Version() int {
+func (o *SparsePCFWSubnetHelper) Version() int {
 
 	return 1
 }
 
 // ToPlain returns the plain version of the sparse model.
-func (o *SparseDeploymentAdvisorSubnetHelper) ToPlain() elemental.PlainIdentifiable {
+func (o *SparsePCFWSubnetHelper) ToPlain() elemental.PlainIdentifiable {
 
-	out := NewDeploymentAdvisorSubnetHelper()
+	out := NewPCFWSubnetHelper()
 	if o.VPCAvailableSubnets != nil {
 		out.VPCAvailableSubnets = *o.VPCAvailableSubnets
 	}
@@ -530,33 +530,33 @@ func (o *SparseDeploymentAdvisorSubnetHelper) ToPlain() elemental.PlainIdentifia
 	return out
 }
 
-// DeepCopy returns a deep copy if the SparseDeploymentAdvisorSubnetHelper.
-func (o *SparseDeploymentAdvisorSubnetHelper) DeepCopy() *SparseDeploymentAdvisorSubnetHelper {
+// DeepCopy returns a deep copy if the SparsePCFWSubnetHelper.
+func (o *SparsePCFWSubnetHelper) DeepCopy() *SparsePCFWSubnetHelper {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &SparseDeploymentAdvisorSubnetHelper{}
+	out := &SparsePCFWSubnetHelper{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *SparseDeploymentAdvisorSubnetHelper.
-func (o *SparseDeploymentAdvisorSubnetHelper) DeepCopyInto(out *SparseDeploymentAdvisorSubnetHelper) {
+// DeepCopyInto copies the receiver into the given *SparsePCFWSubnetHelper.
+func (o *SparsePCFWSubnetHelper) DeepCopyInto(out *SparsePCFWSubnetHelper) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy SparseDeploymentAdvisorSubnetHelper: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy SparsePCFWSubnetHelper: %s", err))
 	}
 
-	*out = *target.(*SparseDeploymentAdvisorSubnetHelper)
+	*out = *target.(*SparsePCFWSubnetHelper)
 }
 
-type mongoAttributesDeploymentAdvisorSubnetHelper struct {
+type mongoAttributesPCFWSubnetHelper struct {
 	VPCUsedSubnets []*VpcUsedSubnet `bson:"vpcusedsubnets"`
 }
-type mongoAttributesSparseDeploymentAdvisorSubnetHelper struct {
+type mongoAttributesSparsePCFWSubnetHelper struct {
 	VPCUsedSubnets *[]*VpcUsedSubnet `bson:"vpcusedsubnets,omitempty"`
 }
