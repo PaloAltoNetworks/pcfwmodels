@@ -88,9 +88,6 @@ type PCFWAccountMirrorTerraform struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
-	// Description of the object.
-	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
-
 	// Name of the entity.
 	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
 
@@ -139,7 +136,6 @@ func (o *PCFWAccountMirrorTerraform) GetBSON() (any, error) {
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
-	s.Description = o.Description
 	s.Name = o.Name
 	s.Namespace = o.Namespace
 
@@ -160,7 +156,6 @@ func (o *PCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
 	}
 
 	o.ID = s.ID.Hex()
-	o.Description = s.Description
 	o.Name = s.Name
 	o.Namespace = s.Namespace
 
@@ -198,18 +193,6 @@ func (o *PCFWAccountMirrorTerraform) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
-// GetDescription returns the Description of the receiver.
-func (o *PCFWAccountMirrorTerraform) GetDescription() string {
-
-	return o.Description
-}
-
-// SetDescription sets the property Description of the receiver using the given value.
-func (o *PCFWAccountMirrorTerraform) SetDescription(description string) {
-
-	o.Description = description
-}
-
 // GetName returns the Name of the receiver.
 func (o *PCFWAccountMirrorTerraform) GetName() string {
 
@@ -241,10 +224,9 @@ func (o *PCFWAccountMirrorTerraform) ToSparse(fields ...string) elemental.Sparse
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparsePCFWAccountMirrorTerraform{
-			ID:          &o.ID,
-			Description: &o.Description,
-			Name:        &o.Name,
-			Namespace:   &o.Namespace,
+			ID:        &o.ID,
+			Name:      &o.Name,
+			Namespace: &o.Namespace,
 		}
 	}
 
@@ -253,8 +235,6 @@ func (o *PCFWAccountMirrorTerraform) ToSparse(fields ...string) elemental.Sparse
 		switch f {
 		case "ID":
 			sp.ID = &(o.ID)
-		case "description":
-			sp.Description = &(o.Description)
 		case "name":
 			sp.Name = &(o.Name)
 		case "namespace":
@@ -274,9 +254,6 @@ func (o *PCFWAccountMirrorTerraform) Patch(sparse elemental.SparseIdentifiable) 
 	so := sparse.(*SparsePCFWAccountMirrorTerraform)
 	if so.ID != nil {
 		o.ID = *so.ID
-	}
-	if so.Description != nil {
-		o.Description = *so.Description
 	}
 	if so.Name != nil {
 		o.Name = *so.Name
@@ -315,10 +292,6 @@ func (o *PCFWAccountMirrorTerraform) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
-
-	if err := elemental.ValidateMaximumLength("description", o.Description, 1024, false); err != nil {
-		errors = errors.Append(err)
-	}
 
 	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
 		requiredErrors = requiredErrors.Append(err)
@@ -364,8 +337,6 @@ func (o *PCFWAccountMirrorTerraform) ValueForAttribute(name string) any {
 	switch name {
 	case "ID":
 		return o.ID
-	case "description":
-		return o.Description
 	case "name":
 		return o.Name
 	case "namespace":
@@ -389,20 +360,6 @@ var PCFWAccountMirrorTerraformAttributesMap = map[string]elemental.AttributeSpec
 		Name:           "ID",
 		Orderable:      true,
 		ReadOnly:       true,
-		Stored:         true,
-		Type:           "string",
-	},
-	"Description": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "description",
-		ConvertedName:  "Description",
-		Description:    `Description of the object.`,
-		Exposed:        true,
-		Getter:         true,
-		MaxLength:      1024,
-		Name:           "description",
-		Orderable:      true,
-		Setter:         true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -454,20 +411,6 @@ var PCFWAccountMirrorTerraformLowerCaseAttributesMap = map[string]elemental.Attr
 		Name:           "ID",
 		Orderable:      true,
 		ReadOnly:       true,
-		Stored:         true,
-		Type:           "string",
-	},
-	"description": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "description",
-		ConvertedName:  "Description",
-		Description:    `Description of the object.`,
-		Exposed:        true,
-		Getter:         true,
-		MaxLength:      1024,
-		Name:           "description",
-		Orderable:      true,
-		Setter:         true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -573,9 +516,6 @@ type SparsePCFWAccountMirrorTerraform struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
-	// Description of the object.
-	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
-
 	// Name of the entity.
 	Name *string `json:"name,omitempty" msgpack:"name,omitempty" bson:"name,omitempty" mapstructure:"name,omitempty"`
 
@@ -628,9 +568,6 @@ func (o *SparsePCFWAccountMirrorTerraform) GetBSON() (any, error) {
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
-	if o.Description != nil {
-		s.Description = o.Description
-	}
 	if o.Name != nil {
 		s.Name = o.Name
 	}
@@ -656,9 +593,6 @@ func (o *SparsePCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
 
 	id := s.ID.Hex()
 	o.ID = &id
-	if s.Description != nil {
-		o.Description = s.Description
-	}
 	if s.Name != nil {
 		o.Name = s.Name
 	}
@@ -682,9 +616,6 @@ func (o *SparsePCFWAccountMirrorTerraform) ToPlain() elemental.PlainIdentifiable
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
-	if o.Description != nil {
-		out.Description = *o.Description
-	}
 	if o.Name != nil {
 		out.Name = *o.Name
 	}
@@ -693,22 +624,6 @@ func (o *SparsePCFWAccountMirrorTerraform) ToPlain() elemental.PlainIdentifiable
 	}
 
 	return out
-}
-
-// GetDescription returns the Description of the receiver.
-func (o *SparsePCFWAccountMirrorTerraform) GetDescription() (out string) {
-
-	if o.Description == nil {
-		return
-	}
-
-	return *o.Description
-}
-
-// SetDescription sets the property Description of the receiver using the address of the given value.
-func (o *SparsePCFWAccountMirrorTerraform) SetDescription(description string) {
-
-	o.Description = &description
 }
 
 // GetName returns the Name of the receiver.
@@ -768,14 +683,12 @@ func (o *SparsePCFWAccountMirrorTerraform) DeepCopyInto(out *SparsePCFWAccountMi
 }
 
 type mongoAttributesPCFWAccountMirrorTerraform struct {
-	ID          bson.ObjectId `bson:"_id,omitempty"`
-	Description string        `bson:"description"`
-	Name        string        `bson:"name"`
-	Namespace   string        `bson:"namespace"`
+	ID        bson.ObjectId `bson:"_id,omitempty"`
+	Name      string        `bson:"name"`
+	Namespace string        `bson:"namespace"`
 }
 type mongoAttributesSparsePCFWAccountMirrorTerraform struct {
-	ID          bson.ObjectId `bson:"_id,omitempty"`
-	Description *string       `bson:"description,omitempty"`
-	Name        *string       `bson:"name,omitempty"`
-	Namespace   *string       `bson:"namespace,omitempty"`
+	ID        bson.ObjectId `bson:"_id,omitempty"`
+	Name      *string       `bson:"name,omitempty"`
+	Namespace *string       `bson:"namespace,omitempty"`
 }

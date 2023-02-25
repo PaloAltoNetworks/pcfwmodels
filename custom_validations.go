@@ -274,37 +274,6 @@ func ValidateVPCID(attribute string, vpcid string) error {
 	return nil
 }
 
-// ValidateEnis validates the list containing eni strings.
-// List can not be empty and each entry must start with "eni-" prefix
-func ValidateEnis(attribute string, enis []string) error {
-
-	if len(enis) == 0 {
-		return makeErr(attribute, "eni list cannot be empty")
-	}
-	for _, eni := range enis {
-		if !strings.HasPrefix(eni, "eni-") {
-			return makeErr(attribute, fmt.Sprintf("eni %s does not start as 'eni-'", eni))
-		}
-	}
-	return nil
-}
-
-// ValidateVpcInfo validates all the vpc information in VPCAvailabilityZoneSubnet list
-func ValidateVpcInfo(attribute string, VPCAvailabilityZoneSubnets []*VPCAvailabilityZoneSubnet) error {
-
-	// Empty list is invalid
-	if len(VPCAvailabilityZoneSubnets) == 0 {
-		return makeErr(attribute, "VPCAvailabilityZoneSubnet list cannot be empty")
-	}
-	// Walk through each entry and validate it
-	for _, vpc := range VPCAvailabilityZoneSubnets {
-		if len(vpc.SubnetInterfaces) == 0 {
-			return makeErr(attribute, fmt.Sprintf("AvailabilityZoneSubnetInterface list for VPC %s cannot be empty", vpc.VPCID))
-		}
-	}
-	return nil
-}
-
 // ValidateVpcSubnetInfo validates all the information in VPCUsedSubnets list
 func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) error {
 

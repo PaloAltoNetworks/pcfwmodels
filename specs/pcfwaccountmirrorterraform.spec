@@ -9,5 +9,4 @@ model:
   extends:
   - '@identifiable-stored'
   - '@named'
-  - '@described'
   - '@namespaced'

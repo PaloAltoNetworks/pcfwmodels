@@ -14,10 +14,6 @@ $cidrs:
   elemental:
     name: ValidateCIDRList
 
-$enis:
-  elemental:
-    name: ValidateEnis
-
 $fqdn:
   elemental:
     name: ValidateFQDN
@@ -65,10 +61,6 @@ $urls:
 $vpcid:
   elemental:
     name: ValidateVPCID
-
-$vpcinfo:
-  elemental:
-    name: ValidateVpcInfo
 
 $vpcsubnetinfo:
   elemental:

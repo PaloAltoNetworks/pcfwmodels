@@ -98,20 +98,6 @@ func init() {
 		},
 	}
 
-	relationshipsRegistry[DeploymentAdvisorTerraformIdentity] = &elemental.Relationship{
-		Create: map[string]*elemental.RelationshipInfo{
-			"root": {
-				Parameters: []elemental.ParameterDefinition{
-					{
-						Name:     "q",
-						Type:     "string",
-						Multiple: true,
-					},
-				},
-			},
-		},
-	}
-
 	relationshipsRegistry[FirewallAppIDListIdentity] = &elemental.Relationship{
 		RetrieveMany: map[string]*elemental.RelationshipInfo{
 			"root": {
@@ -777,6 +763,12 @@ func init() {
 		Create: map[string]*elemental.RelationshipInfo{
 			"root": {},
 		},
+		Update: map[string]*elemental.RelationshipInfo{
+			"root": {},
+		},
+		Patch: map[string]*elemental.RelationshipInfo{
+			"root": {},
+		},
 		Delete: map[string]*elemental.RelationshipInfo{
 			"root": {},
 		},
@@ -937,6 +929,34 @@ func init() {
 			},
 		},
 		Info: map[string]*elemental.RelationshipInfo{
+			"root": {
+				Parameters: []elemental.ParameterDefinition{
+					{
+						Name:     "q",
+						Type:     "string",
+						Multiple: true,
+					},
+				},
+			},
+		},
+	}
+
+	relationshipsRegistry[PCFWTenantAccountTerraformIdentity] = &elemental.Relationship{
+		Create: map[string]*elemental.RelationshipInfo{
+			"root": {
+				Parameters: []elemental.ParameterDefinition{
+					{
+						Name:     "q",
+						Type:     "string",
+						Multiple: true,
+					},
+				},
+			},
+		},
+	}
+
+	relationshipsRegistry[PCFWTenantTerraformIdentity] = &elemental.Relationship{
+		Create: map[string]*elemental.RelationshipInfo{
 			"root": {
 				Parameters: []elemental.ParameterDefinition{
 					{

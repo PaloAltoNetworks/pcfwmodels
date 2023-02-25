@@ -4,9 +4,70 @@
       "pcfwaccount": {
         "description": "Represents Prisma Cloud Firewall Account.",
         "properties": {
+          "AWSAccountID": {
+            "description": "AWS Account ID.",
+            "example": 640574671726,
+            "type": "string"
+          },
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
+            "type": "string"
+          },
+          "NGFWCFTHash": {
+            "description": "NGFW cloud formation template hash.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWExternalID": {
+            "description": "NGFW external ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWOnboardingStatus": {
+            "description": "NGFW onboarding status.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWSNSTopicARN": {
+            "description": "NGFW SNS Topic ARN.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWServiceAccountID": {
+            "description": "NGFW AWS service account ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWTenantID": {
+            "description": "NGFW tenant ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "decryptionRoleARN": {
+            "description": "AWS rulestack decryption role ARN.",
+            "example": "arn:aws:iam::640574671726:role/DecryptionRole",
+            "type": "string"
+          },
+          "endpointRoleARN": {
+            "description": "AWS endpoint role ARN.",
+            "example": "arn:aws:iam::640574671726:role/CustomerManagedEndpoint",
+            "type": "string"
+          },
+          "logDestination": {
+            "description": "The log destination for logging.",
+            "example": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
+            "type": "string"
+          },
+          "loggingRoleARN": {
+            "description": "AWS logging role ARN.",
+            "example": "arn:aws:iam::640574671726:role/LogMetricRole",
             "type": "string"
           },
           "namespace": {
@@ -14,15 +75,40 @@
             "readOnly": true,
             "type": "string"
           },
+          "primaryAccount": {
+            "description": "indicates the primary AWS account.",
+            "readOnly": true,
+            "type": "boolean"
+          },
           "status": {
             "description": "status of account.",
             "enum": [
+              "Creating",
+              "Pending",
               "Success",
-              "Failed"
+              "Failed",
+              "Deleting"
             ],
             "readOnly": true
+          },
+          "statusReason": {
+            "description": "status failure reason.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
           }
         },
+        "required": [
+          "AWSAccountID",
+          "decryptionRoleARN",
+          "endpointRoleARN",
+          "logDestination"
+        ],
         "type": "object"
       }
     }
@@ -155,7 +241,36 @@
             "type": "string"
           }
         }
-      ]
+      ],
+      "put": {
+        "description": "retries updating the role ARNs with NGFW.",
+        "operationId": "update-pcfwaccount-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwaccount"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwaccount"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      }
     }
   },
   "tags": [

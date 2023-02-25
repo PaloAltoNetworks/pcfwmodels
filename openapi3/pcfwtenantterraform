@@ -1,17 +1,12 @@
 {
   "components": {
     "schemas": {
-      "pcfwaccountmirrorterraform": {
-        "description": "Represents PCFW account terraform generator.",
+      "pcfwtenantterraform": {
+        "description": "Represents PCFW tenant's all account setup terraform generator.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Name of the entity.",
-            "example": "the name",
             "type": "string"
           },
           "namespace": {
@@ -20,9 +15,6 @@
             "type": "string"
           }
         },
-        "required": [
-          "name"
-        ],
         "type": "object"
       }
     }
@@ -35,15 +27,15 @@
       "name": "TODO"
     },
     "termsOfService": "https://localhost/TODO",
-    "title": "pcfwaccountmirrorterraform",
+    "title": "pcfwtenantterraform",
     "version": "1.0"
   },
   "openapi": "3.0.3",
   "paths": {
-    "/pcfwaccountmirrorterraform": {
+    "/pcfwtenantterraform": {
       "post": {
-        "description": "Creates a new mirroring terraform plan associated with a firewall for a cloud\naccount.",
-        "operationId": "create-a-new-pcfwaccountmirrorterraform",
+        "description": "Creates a multi account setup terraform plan for a tenant.",
+        "operationId": "create-a-new-pcfwtenantterraform",
         "parameters": [
           {
             "description": "Filtering query. Consequent `q` parameters will form an or.",
@@ -59,7 +51,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
+                "$ref": "#/components/schemas/pcfwtenantterraform"
               }
             }
           }
@@ -69,7 +61,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
+                  "$ref": "#/components/schemas/pcfwtenantterraform"
                 }
               }
             },

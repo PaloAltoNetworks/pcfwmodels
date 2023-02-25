@@ -28,12 +28,6 @@ relations:
   create:
     description: Creates a new awslogdefinition.
 
-- rest_name: deploymentadvisorterraform
-  create:
-    description: Creates a new terraform plan.
-    global_parameters:
-    - $queryable
-
 - rest_name: firewallappidlist
   get:
     description: Retrieves a firewallappidlist.
@@ -223,6 +217,18 @@ relations:
     - $queryable
   create:
     description: Onboards Prisma Cloud tenant on PC Firewall.
+
+- rest_name: pcfwtenantaccountterraform
+  create:
+    description: Creates a new account setup terraform plan for a tenant.
+    global_parameters:
+    - $queryable
+
+- rest_name: pcfwtenantterraform
+  create:
+    description: Creates a multi account setup terraform plan for a tenant.
+    global_parameters:
+    - $queryable
 
 - rest_name: testmodel
   get:

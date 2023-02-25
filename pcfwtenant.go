@@ -5,6 +5,7 @@ package api
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/globalsign/mgo/bson"
 	"github.com/mitchellh/copystructure"
@@ -15,11 +16,26 @@ import (
 type PCFWTenantStatusValue string
 
 const (
+	// PCFWTenantStatusCreating represents the value Creating.
+	PCFWTenantStatusCreating PCFWTenantStatusValue = "Creating"
+
+	// PCFWTenantStatusDeleting represents the value Deleting.
+	PCFWTenantStatusDeleting PCFWTenantStatusValue = "Deleting"
+
 	// PCFWTenantStatusFailed represents the value Failed.
 	PCFWTenantStatusFailed PCFWTenantStatusValue = "Failed"
 
+	// PCFWTenantStatusFailedCreatingPrimaryAccount represents the value FailedCreatingPrimaryAccount.
+	PCFWTenantStatusFailedCreatingPrimaryAccount PCFWTenantStatusValue = "FailedCreatingPrimaryAccount"
+
 	// PCFWTenantStatusSuccess represents the value Success.
 	PCFWTenantStatusSuccess PCFWTenantStatusValue = "Success"
+
+	// PCFWTenantStatusUnsubscribe represents the value Unsubscribe.
+	PCFWTenantStatusUnsubscribe PCFWTenantStatusValue = "Unsubscribe"
+
+	// PCFWTenantStatusUnsubscribePending represents the value UnsubscribePending.
+	PCFWTenantStatusUnsubscribePending PCFWTenantStatusValue = "UnsubscribePending"
 )
 
 // PCFWTenantIdentity represents the Identity of the object.
@@ -94,14 +110,47 @@ func (o PCFWTenantsList) Version() int {
 
 // PCFWTenant represents the model of a pcfwtenant
 type PCFWTenant struct {
+	// AWS Account ID.
+	AWSAccountID string `json:"AWSAccountID" msgpack:"AWSAccountID" bson:"awsaccountid" mapstructure:"AWSAccountID,omitempty"`
+
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
+
+	// NGFW external ID.
+	NGFWExternalID string `json:"NGFWExternalID" msgpack:"NGFWExternalID" bson:"ngfwexternalid" mapstructure:"NGFWExternalID,omitempty"`
+
+	// NGFW tenant ID.
+	NGFWTenantID string `json:"NGFWTenantID" msgpack:"NGFWTenantID" bson:"ngfwtenantid" mapstructure:"NGFWTenantID,omitempty"`
+
+	// Creation date of the object.
+	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
+
+	// AWS rulestack decryption role ARN.
+	DecryptionRoleARN string `json:"decryptionRoleARN" msgpack:"decryptionRoleARN" bson:"decryptionrolearn" mapstructure:"decryptionRoleARN,omitempty"`
+
+	// AWS endpoint role ARN.
+	EndpointRoleARN string `json:"endpointRoleARN" msgpack:"endpointRoleARN" bson:"endpointrolearn" mapstructure:"endpointRoleARN,omitempty"`
+
+	// The log destination for logging.
+	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
+
+	// AWS logging role ARN.
+	LoggingRoleARN string `json:"loggingRoleARN" msgpack:"loggingRoleARN" bson:"loggingrolearn" mapstructure:"loggingRoleARN,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
 
+	// The timestamp when offboarding pending started.
+	OffboardingTimestamp time.Time `json:"-" msgpack:"-" bson:"offboardingtimestamp" mapstructure:"-,omitempty"`
+
 	// status of tenant.
 	Status PCFWTenantStatusValue `json:"status" msgpack:"status" bson:"status" mapstructure:"status,omitempty"`
+
+	// status failure reason.
+	StatusReason string `json:"statusReason" msgpack:"statusReason" bson:"statusreason" mapstructure:"statusReason,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime time.Time `json:"updateTime" msgpack:"updateTime" bson:"updatetime" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -149,11 +198,22 @@ func (o *PCFWTenant) GetBSON() (any, error) {
 
 	s := &mongoAttributesPCFWTenant{}
 
+	s.AWSAccountID = o.AWSAccountID
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
+	s.NGFWExternalID = o.NGFWExternalID
+	s.NGFWTenantID = o.NGFWTenantID
+	s.CreateTime = o.CreateTime
+	s.DecryptionRoleARN = o.DecryptionRoleARN
+	s.EndpointRoleARN = o.EndpointRoleARN
+	s.LogDestination = o.LogDestination
+	s.LoggingRoleARN = o.LoggingRoleARN
 	s.Namespace = o.Namespace
+	s.OffboardingTimestamp = o.OffboardingTimestamp
 	s.Status = o.Status
+	s.StatusReason = o.StatusReason
+	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
 	s.Zone = o.Zone
 
@@ -173,9 +233,20 @@ func (o *PCFWTenant) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
+	o.AWSAccountID = s.AWSAccountID
 	o.ID = s.ID.Hex()
+	o.NGFWExternalID = s.NGFWExternalID
+	o.NGFWTenantID = s.NGFWTenantID
+	o.CreateTime = s.CreateTime
+	o.DecryptionRoleARN = s.DecryptionRoleARN
+	o.EndpointRoleARN = s.EndpointRoleARN
+	o.LogDestination = s.LogDestination
+	o.LoggingRoleARN = s.LoggingRoleARN
 	o.Namespace = s.Namespace
+	o.OffboardingTimestamp = s.OffboardingTimestamp
 	o.Status = s.Status
+	o.StatusReason = s.StatusReason
+	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
 	o.Zone = s.Zone
 
@@ -211,6 +282,18 @@ func (o *PCFWTenant) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *PCFWTenant) GetCreateTime() time.Time {
+
+	return o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the given value.
+func (o *PCFWTenant) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = createTime
+}
+
 // GetNamespace returns the Namespace of the receiver.
 func (o *PCFWTenant) GetNamespace() string {
 
@@ -223,6 +306,18 @@ func (o *PCFWTenant) SetNamespace(namespace string) {
 	o.Namespace = namespace
 }
 
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *PCFWTenant) GetUpdateTime() time.Time {
+
+	return o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the given value.
+func (o *PCFWTenant) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = updateTime
+}
+
 // ToSparse returns the sparse version of the model.
 // The returned object will only contain the given fields. No field means entire field set.
 func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
@@ -230,23 +325,56 @@ func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparsePCFWTenant{
-			ID:        &o.ID,
-			Namespace: &o.Namespace,
-			Status:    &o.Status,
-			ZHash:     &o.ZHash,
-			Zone:      &o.Zone,
+			AWSAccountID:         &o.AWSAccountID,
+			ID:                   &o.ID,
+			NGFWExternalID:       &o.NGFWExternalID,
+			NGFWTenantID:         &o.NGFWTenantID,
+			CreateTime:           &o.CreateTime,
+			DecryptionRoleARN:    &o.DecryptionRoleARN,
+			EndpointRoleARN:      &o.EndpointRoleARN,
+			LogDestination:       &o.LogDestination,
+			LoggingRoleARN:       &o.LoggingRoleARN,
+			Namespace:            &o.Namespace,
+			OffboardingTimestamp: &o.OffboardingTimestamp,
+			Status:               &o.Status,
+			StatusReason:         &o.StatusReason,
+			UpdateTime:           &o.UpdateTime,
+			ZHash:                &o.ZHash,
+			Zone:                 &o.Zone,
 		}
 	}
 
 	sp := &SparsePCFWTenant{}
 	for _, f := range fields {
 		switch f {
+		case "AWSAccountID":
+			sp.AWSAccountID = &(o.AWSAccountID)
 		case "ID":
 			sp.ID = &(o.ID)
+		case "NGFWExternalID":
+			sp.NGFWExternalID = &(o.NGFWExternalID)
+		case "NGFWTenantID":
+			sp.NGFWTenantID = &(o.NGFWTenantID)
+		case "createTime":
+			sp.CreateTime = &(o.CreateTime)
+		case "decryptionRoleARN":
+			sp.DecryptionRoleARN = &(o.DecryptionRoleARN)
+		case "endpointRoleARN":
+			sp.EndpointRoleARN = &(o.EndpointRoleARN)
+		case "logDestination":
+			sp.LogDestination = &(o.LogDestination)
+		case "loggingRoleARN":
+			sp.LoggingRoleARN = &(o.LoggingRoleARN)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
+		case "offboardingTimestamp":
+			sp.OffboardingTimestamp = &(o.OffboardingTimestamp)
 		case "status":
 			sp.Status = &(o.Status)
+		case "statusReason":
+			sp.StatusReason = &(o.StatusReason)
+		case "updateTime":
+			sp.UpdateTime = &(o.UpdateTime)
 		case "zHash":
 			sp.ZHash = &(o.ZHash)
 		case "zone":
@@ -264,14 +392,47 @@ func (o *PCFWTenant) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparsePCFWTenant)
+	if so.AWSAccountID != nil {
+		o.AWSAccountID = *so.AWSAccountID
+	}
 	if so.ID != nil {
 		o.ID = *so.ID
+	}
+	if so.NGFWExternalID != nil {
+		o.NGFWExternalID = *so.NGFWExternalID
+	}
+	if so.NGFWTenantID != nil {
+		o.NGFWTenantID = *so.NGFWTenantID
+	}
+	if so.CreateTime != nil {
+		o.CreateTime = *so.CreateTime
+	}
+	if so.DecryptionRoleARN != nil {
+		o.DecryptionRoleARN = *so.DecryptionRoleARN
+	}
+	if so.EndpointRoleARN != nil {
+		o.EndpointRoleARN = *so.EndpointRoleARN
+	}
+	if so.LogDestination != nil {
+		o.LogDestination = *so.LogDestination
+	}
+	if so.LoggingRoleARN != nil {
+		o.LoggingRoleARN = *so.LoggingRoleARN
 	}
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
 	}
+	if so.OffboardingTimestamp != nil {
+		o.OffboardingTimestamp = *so.OffboardingTimestamp
+	}
 	if so.Status != nil {
 		o.Status = *so.Status
+	}
+	if so.StatusReason != nil {
+		o.StatusReason = *so.StatusReason
+	}
+	if so.UpdateTime != nil {
+		o.UpdateTime = *so.UpdateTime
 	}
 	if so.ZHash != nil {
 		o.ZHash = *so.ZHash
@@ -311,7 +472,23 @@ func (o *PCFWTenant) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Success", "Failed"}, true); err != nil {
+	if err := elemental.ValidateRequiredString("AWSAccountID", o.AWSAccountID); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("endpointRoleARN", o.EndpointRoleARN); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("logDestination", o.LogDestination); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Creating", "Success", "Failed", "Unsubscribe", "UnsubscribePending", "Deleting", "FailedCreatingPrimaryAccount"}, true); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -349,12 +526,34 @@ func (*PCFWTenant) AttributeSpecifications() map[string]elemental.AttributeSpeci
 func (o *PCFWTenant) ValueForAttribute(name string) any {
 
 	switch name {
+	case "AWSAccountID":
+		return o.AWSAccountID
 	case "ID":
 		return o.ID
+	case "NGFWExternalID":
+		return o.NGFWExternalID
+	case "NGFWTenantID":
+		return o.NGFWTenantID
+	case "createTime":
+		return o.CreateTime
+	case "decryptionRoleARN":
+		return o.DecryptionRoleARN
+	case "endpointRoleARN":
+		return o.EndpointRoleARN
+	case "logDestination":
+		return o.LogDestination
+	case "loggingRoleARN":
+		return o.LoggingRoleARN
 	case "namespace":
 		return o.Namespace
+	case "offboardingTimestamp":
+		return o.OffboardingTimestamp
 	case "status":
 		return o.Status
+	case "statusReason":
+		return o.StatusReason
+	case "updateTime":
+		return o.UpdateTime
 	case "zHash":
 		return o.ZHash
 	case "zone":
@@ -366,6 +565,17 @@ func (o *PCFWTenant) ValueForAttribute(name string) any {
 
 // PCFWTenantAttributesMap represents the map of attribute for PCFWTenant.
 var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
+	"AWSAccountID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "awsaccountid",
+		ConvertedName:  "AWSAccountID",
+		Description:    `AWS Account ID.`,
+		Exposed:        true,
+		Name:           "AWSAccountID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"ID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -378,6 +588,88 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Name:           "ID",
 		Orderable:      true,
 		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"NGFWExternalID": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "ngfwexternalid",
+		ConvertedName:  "NGFWExternalID",
+		Description:    `NGFW external ID.`,
+		Exposed:        true,
+		Name:           "NGFWExternalID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"NGFWTenantID": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "ngfwtenantid",
+		ConvertedName:  "NGFWTenantID",
+		Description:    `NGFW tenant ID.`,
+		Exposed:        true,
+		Name:           "NGFWTenantID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"CreateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
+	},
+	"DecryptionRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "decryptionrolearn",
+		ConvertedName:  "DecryptionRoleARN",
+		Description:    `AWS rulestack decryption role ARN.`,
+		Exposed:        true,
+		Name:           "decryptionRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"EndpointRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpointrolearn",
+		ConvertedName:  "EndpointRoleARN",
+		Description:    `AWS endpoint role ARN.`,
+		Exposed:        true,
+		Name:           "endpointRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogDestination": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logdestination",
+		ConvertedName:  "LogDestination",
+		Description:    `The log destination for logging.`,
+		Exposed:        true,
+		Name:           "logDestination",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"LoggingRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "loggingrolearn",
+		ConvertedName:  "LoggingRoleARN",
+		Description:    `AWS logging role ARN.`,
+		Exposed:        true,
+		Name:           "loggingRoleARN",
 		Stored:         true,
 		Type:           "string",
 	},
@@ -397,8 +689,9 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+
 	"Status": {
-		AllowedChoices: []string{"Success", "Failed"},
+		AllowedChoices: []string{"Creating", "Success", "Failed", "Unsubscribe", "UnsubscribePending", "Deleting", "FailedCreatingPrimaryAccount"},
 		Autogenerated:  true,
 		BSONFieldName:  "status",
 		ConvertedName:  "Status",
@@ -409,10 +702,48 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "enum",
 	},
+	"StatusReason": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "statusreason",
+		ConvertedName:  "StatusReason",
+		Description:    `status failure reason.`,
+		Exposed:        true,
+		Name:           "statusReason",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"UpdateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
+	},
 }
 
 // PCFWTenantLowerCaseAttributesMap represents the map of attribute for PCFWTenant.
 var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+	"awsaccountid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "awsaccountid",
+		ConvertedName:  "AWSAccountID",
+		Description:    `AWS Account ID.`,
+		Exposed:        true,
+		Name:           "AWSAccountID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"id": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -425,6 +756,88 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Name:           "ID",
 		Orderable:      true,
 		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"ngfwexternalid": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "ngfwexternalid",
+		ConvertedName:  "NGFWExternalID",
+		Description:    `NGFW external ID.`,
+		Exposed:        true,
+		Name:           "NGFWExternalID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"ngfwtenantid": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "ngfwtenantid",
+		ConvertedName:  "NGFWTenantID",
+		Description:    `NGFW tenant ID.`,
+		Exposed:        true,
+		Name:           "NGFWTenantID",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"createtime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
+	},
+	"decryptionrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "decryptionrolearn",
+		ConvertedName:  "DecryptionRoleARN",
+		Description:    `AWS rulestack decryption role ARN.`,
+		Exposed:        true,
+		Name:           "decryptionRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"endpointrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "endpointrolearn",
+		ConvertedName:  "EndpointRoleARN",
+		Description:    `AWS endpoint role ARN.`,
+		Exposed:        true,
+		Name:           "endpointRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"logdestination": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logdestination",
+		ConvertedName:  "LogDestination",
+		Description:    `The log destination for logging.`,
+		Exposed:        true,
+		Name:           "logDestination",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"loggingrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "loggingrolearn",
+		ConvertedName:  "LoggingRoleARN",
+		Description:    `AWS logging role ARN.`,
+		Exposed:        true,
+		Name:           "loggingRoleARN",
 		Stored:         true,
 		Type:           "string",
 	},
@@ -444,8 +857,9 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Stored:         true,
 		Type:           "string",
 	},
+
 	"status": {
-		AllowedChoices: []string{"Success", "Failed"},
+		AllowedChoices: []string{"Creating", "Success", "Failed", "Unsubscribe", "UnsubscribePending", "Deleting", "FailedCreatingPrimaryAccount"},
 		Autogenerated:  true,
 		BSONFieldName:  "status",
 		ConvertedName:  "Status",
@@ -455,6 +869,33 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "enum",
+	},
+	"statusreason": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "statusreason",
+		ConvertedName:  "StatusReason",
+		Description:    `status failure reason.`,
+		Exposed:        true,
+		Name:           "statusReason",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"updatetime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 }
 
@@ -521,14 +962,47 @@ func (o SparsePCFWTenantsList) Version() int {
 
 // SparsePCFWTenant represents the sparse version of a pcfwtenant.
 type SparsePCFWTenant struct {
+	// AWS Account ID.
+	AWSAccountID *string `json:"AWSAccountID,omitempty" msgpack:"AWSAccountID,omitempty" bson:"awsaccountid,omitempty" mapstructure:"AWSAccountID,omitempty"`
+
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
+
+	// NGFW external ID.
+	NGFWExternalID *string `json:"NGFWExternalID,omitempty" msgpack:"NGFWExternalID,omitempty" bson:"ngfwexternalid,omitempty" mapstructure:"NGFWExternalID,omitempty"`
+
+	// NGFW tenant ID.
+	NGFWTenantID *string `json:"NGFWTenantID,omitempty" msgpack:"NGFWTenantID,omitempty" bson:"ngfwtenantid,omitempty" mapstructure:"NGFWTenantID,omitempty"`
+
+	// Creation date of the object.
+	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
+
+	// AWS rulestack decryption role ARN.
+	DecryptionRoleARN *string `json:"decryptionRoleARN,omitempty" msgpack:"decryptionRoleARN,omitempty" bson:"decryptionrolearn,omitempty" mapstructure:"decryptionRoleARN,omitempty"`
+
+	// AWS endpoint role ARN.
+	EndpointRoleARN *string `json:"endpointRoleARN,omitempty" msgpack:"endpointRoleARN,omitempty" bson:"endpointrolearn,omitempty" mapstructure:"endpointRoleARN,omitempty"`
+
+	// The log destination for logging.
+	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
+
+	// AWS logging role ARN.
+	LoggingRoleARN *string `json:"loggingRoleARN,omitempty" msgpack:"loggingRoleARN,omitempty" bson:"loggingrolearn,omitempty" mapstructure:"loggingRoleARN,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
 
+	// The timestamp when offboarding pending started.
+	OffboardingTimestamp *time.Time `json:"-" msgpack:"-" bson:"offboardingtimestamp,omitempty" mapstructure:"-,omitempty"`
+
 	// status of tenant.
 	Status *PCFWTenantStatusValue `json:"status,omitempty" msgpack:"status,omitempty" bson:"status,omitempty" mapstructure:"status,omitempty"`
+
+	// status failure reason.
+	StatusReason *string `json:"statusReason,omitempty" msgpack:"statusReason,omitempty" bson:"statusreason,omitempty" mapstructure:"statusReason,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime *time.Time `json:"updateTime,omitempty" msgpack:"updateTime,omitempty" bson:"updatetime,omitempty" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -580,14 +1054,47 @@ func (o *SparsePCFWTenant) GetBSON() (any, error) {
 
 	s := &mongoAttributesSparsePCFWTenant{}
 
+	if o.AWSAccountID != nil {
+		s.AWSAccountID = o.AWSAccountID
+	}
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
+	}
+	if o.NGFWExternalID != nil {
+		s.NGFWExternalID = o.NGFWExternalID
+	}
+	if o.NGFWTenantID != nil {
+		s.NGFWTenantID = o.NGFWTenantID
+	}
+	if o.CreateTime != nil {
+		s.CreateTime = o.CreateTime
+	}
+	if o.DecryptionRoleARN != nil {
+		s.DecryptionRoleARN = o.DecryptionRoleARN
+	}
+	if o.EndpointRoleARN != nil {
+		s.EndpointRoleARN = o.EndpointRoleARN
+	}
+	if o.LogDestination != nil {
+		s.LogDestination = o.LogDestination
+	}
+	if o.LoggingRoleARN != nil {
+		s.LoggingRoleARN = o.LoggingRoleARN
 	}
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
 	}
+	if o.OffboardingTimestamp != nil {
+		s.OffboardingTimestamp = o.OffboardingTimestamp
+	}
 	if o.Status != nil {
 		s.Status = o.Status
+	}
+	if o.StatusReason != nil {
+		s.StatusReason = o.StatusReason
+	}
+	if o.UpdateTime != nil {
+		s.UpdateTime = o.UpdateTime
 	}
 	if o.ZHash != nil {
 		s.ZHash = o.ZHash
@@ -612,13 +1119,46 @@ func (o *SparsePCFWTenant) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
+	if s.AWSAccountID != nil {
+		o.AWSAccountID = s.AWSAccountID
+	}
 	id := s.ID.Hex()
 	o.ID = &id
+	if s.NGFWExternalID != nil {
+		o.NGFWExternalID = s.NGFWExternalID
+	}
+	if s.NGFWTenantID != nil {
+		o.NGFWTenantID = s.NGFWTenantID
+	}
+	if s.CreateTime != nil {
+		o.CreateTime = s.CreateTime
+	}
+	if s.DecryptionRoleARN != nil {
+		o.DecryptionRoleARN = s.DecryptionRoleARN
+	}
+	if s.EndpointRoleARN != nil {
+		o.EndpointRoleARN = s.EndpointRoleARN
+	}
+	if s.LogDestination != nil {
+		o.LogDestination = s.LogDestination
+	}
+	if s.LoggingRoleARN != nil {
+		o.LoggingRoleARN = s.LoggingRoleARN
+	}
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
 	}
+	if s.OffboardingTimestamp != nil {
+		o.OffboardingTimestamp = s.OffboardingTimestamp
+	}
 	if s.Status != nil {
 		o.Status = s.Status
+	}
+	if s.StatusReason != nil {
+		o.StatusReason = s.StatusReason
+	}
+	if s.UpdateTime != nil {
+		o.UpdateTime = s.UpdateTime
 	}
 	if s.ZHash != nil {
 		o.ZHash = s.ZHash
@@ -640,14 +1180,47 @@ func (o *SparsePCFWTenant) Version() int {
 func (o *SparsePCFWTenant) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewPCFWTenant()
+	if o.AWSAccountID != nil {
+		out.AWSAccountID = *o.AWSAccountID
+	}
 	if o.ID != nil {
 		out.ID = *o.ID
+	}
+	if o.NGFWExternalID != nil {
+		out.NGFWExternalID = *o.NGFWExternalID
+	}
+	if o.NGFWTenantID != nil {
+		out.NGFWTenantID = *o.NGFWTenantID
+	}
+	if o.CreateTime != nil {
+		out.CreateTime = *o.CreateTime
+	}
+	if o.DecryptionRoleARN != nil {
+		out.DecryptionRoleARN = *o.DecryptionRoleARN
+	}
+	if o.EndpointRoleARN != nil {
+		out.EndpointRoleARN = *o.EndpointRoleARN
+	}
+	if o.LogDestination != nil {
+		out.LogDestination = *o.LogDestination
+	}
+	if o.LoggingRoleARN != nil {
+		out.LoggingRoleARN = *o.LoggingRoleARN
 	}
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
 	}
+	if o.OffboardingTimestamp != nil {
+		out.OffboardingTimestamp = *o.OffboardingTimestamp
+	}
 	if o.Status != nil {
 		out.Status = *o.Status
+	}
+	if o.StatusReason != nil {
+		out.StatusReason = *o.StatusReason
+	}
+	if o.UpdateTime != nil {
+		out.UpdateTime = *o.UpdateTime
 	}
 	if o.ZHash != nil {
 		out.ZHash = *o.ZHash
@@ -657,6 +1230,22 @@ func (o *SparsePCFWTenant) ToPlain() elemental.PlainIdentifiable {
 	}
 
 	return out
+}
+
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *SparsePCFWTenant) GetCreateTime() (out time.Time) {
+
+	if o.CreateTime == nil {
+		return
+	}
+
+	return *o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the address of the given value.
+func (o *SparsePCFWTenant) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = &createTime
 }
 
 // GetNamespace returns the Namespace of the receiver.
@@ -673,6 +1262,22 @@ func (o *SparsePCFWTenant) GetNamespace() (out string) {
 func (o *SparsePCFWTenant) SetNamespace(namespace string) {
 
 	o.Namespace = &namespace
+}
+
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *SparsePCFWTenant) GetUpdateTime() (out time.Time) {
+
+	if o.UpdateTime == nil {
+		return
+	}
+
+	return *o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the address of the given value.
+func (o *SparsePCFWTenant) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = &updateTime
 }
 
 // DeepCopy returns a deep copy if the SparsePCFWTenant.
@@ -700,16 +1305,38 @@ func (o *SparsePCFWTenant) DeepCopyInto(out *SparsePCFWTenant) {
 }
 
 type mongoAttributesPCFWTenant struct {
-	ID        bson.ObjectId         `bson:"_id,omitempty"`
-	Namespace string                `bson:"namespace"`
-	Status    PCFWTenantStatusValue `bson:"status"`
-	ZHash     int                   `bson:"zhash"`
-	Zone      int                   `bson:"zone"`
+	AWSAccountID         string                `bson:"awsaccountid"`
+	ID                   bson.ObjectId         `bson:"_id,omitempty"`
+	NGFWExternalID       string                `bson:"ngfwexternalid"`
+	NGFWTenantID         string                `bson:"ngfwtenantid"`
+	CreateTime           time.Time             `bson:"createtime"`
+	DecryptionRoleARN    string                `bson:"decryptionrolearn"`
+	EndpointRoleARN      string                `bson:"endpointrolearn"`
+	LogDestination       string                `bson:"logdestination"`
+	LoggingRoleARN       string                `bson:"loggingrolearn"`
+	Namespace            string                `bson:"namespace"`
+	OffboardingTimestamp time.Time             `bson:"offboardingtimestamp"`
+	Status               PCFWTenantStatusValue `bson:"status"`
+	StatusReason         string                `bson:"statusreason"`
+	UpdateTime           time.Time             `bson:"updatetime"`
+	ZHash                int                   `bson:"zhash"`
+	Zone                 int                   `bson:"zone"`
 }
 type mongoAttributesSparsePCFWTenant struct {
-	ID        bson.ObjectId          `bson:"_id,omitempty"`
-	Namespace *string                `bson:"namespace,omitempty"`
-	Status    *PCFWTenantStatusValue `bson:"status,omitempty"`
-	ZHash     *int                   `bson:"zhash,omitempty"`
-	Zone      *int                   `bson:"zone,omitempty"`
+	AWSAccountID         *string                `bson:"awsaccountid,omitempty"`
+	ID                   bson.ObjectId          `bson:"_id,omitempty"`
+	NGFWExternalID       *string                `bson:"ngfwexternalid,omitempty"`
+	NGFWTenantID         *string                `bson:"ngfwtenantid,omitempty"`
+	CreateTime           *time.Time             `bson:"createtime,omitempty"`
+	DecryptionRoleARN    *string                `bson:"decryptionrolearn,omitempty"`
+	EndpointRoleARN      *string                `bson:"endpointrolearn,omitempty"`
+	LogDestination       *string                `bson:"logdestination,omitempty"`
+	LoggingRoleARN       *string                `bson:"loggingrolearn,omitempty"`
+	Namespace            *string                `bson:"namespace,omitempty"`
+	OffboardingTimestamp *time.Time             `bson:"offboardingtimestamp,omitempty"`
+	Status               *PCFWTenantStatusValue `bson:"status,omitempty"`
+	StatusReason         *string                `bson:"statusreason,omitempty"`
+	UpdateTime           *time.Time             `bson:"updatetime,omitempty"`
+	ZHash                *int                   `bson:"zhash,omitempty"`
+	Zone                 *int                   `bson:"zone,omitempty"`
 }

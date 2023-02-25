@@ -3,9 +3,6 @@
     "availabilityzonesubnet": {
       "$ref": "availabilityzonesubnet.json"
     },
-    "availabilityzonesubnetinterface": {
-      "$ref": "availabilityzonesubnetinterface.json"
-    },
     "awsattachment": {
       "$ref": "awsattachment.json"
     },
@@ -23,9 +20,6 @@
     },
     "awstapmodesettings": {
       "$ref": "awstapmodesettings.json"
-    },
-    "deploymentadvisorterraform": {
-      "$ref": "deploymentadvisorterraform.json"
     },
     "firewallappidlist": {
       "$ref": "firewallappidlist.json"
@@ -141,6 +135,12 @@
     "pcfwtenant": {
       "$ref": "pcfwtenant.json"
     },
+    "pcfwtenantaccountterraform": {
+      "$ref": "pcfwtenantaccountterraform.json"
+    },
+    "pcfwtenantterraform": {
+      "$ref": "pcfwtenantterraform.json"
+    },
     "root": {
       "$ref": "root.json"
     },
@@ -158,9 +158,6 @@
     },
     "trendqueryitem": {
       "$ref": "trendqueryitem.json"
-    },
-    "vpcavailabilityzonesubnet": {
-      "$ref": "vpcavailabilityzonesubnet.json"
     },
     "vpcavailablesubnet": {
       "$ref": "vpcavailablesubnet.json"

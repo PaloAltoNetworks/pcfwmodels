@@ -2,6 +2,7 @@
   "$extends": [
     "@namespaced",
     "@identifiable-stored",
+    "@timeable",
     "@zoned"
   ],
   "$modelName": "PCFWTenant",
@@ -10,8 +11,84 @@
   "$modelRestName": "pcfwtenant",
   "additionalProperties": true,
   "properties": {
+    "AWSAccountID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "ID": {
       "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWExternalID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWTenantID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "decryptionRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "endpointRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logDestination": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "loggingRoleARN": {
       "anyOf": [
         {
           "type": "null"
@@ -40,14 +117,47 @@
         },
         {
           "enum": [
+            "Creating",
             "Success",
-            "Failed"
+            "Failed",
+            "Unsubscribe",
+            "UnsubscribePending",
+            "Deleting",
+            "FailedCreatingPrimaryAccount"
           ]
+        }
+      ]
+    },
+    "statusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
         }
       ]
     }
   },
-  "required": [],
+  "required": [
+    "AWSAccountID",
+    "decryptionRoleARN",
+    "endpointRoleARN",
+    "logDestination"
+  ],
   "title": "PCFWTenant",
   "type": "object"
 }

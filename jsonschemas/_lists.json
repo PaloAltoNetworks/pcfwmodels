@@ -1,11 +1,5 @@
 {
   "properties": {
-    "availabilityzonesubnetinterfaces": {
-      "items": {
-        "$ref": "availabilityzonesubnetinterface.json"
-      },
-      "type": "array"
-    },
     "availabilityzonesubnets": {
       "items": {
         "$ref": "availabilityzonesubnet.json"
@@ -45,12 +39,6 @@
     "awstapmodesettings": {
       "items": {
         "$ref": "awstapmodesettings.json"
-      },
-      "type": "array"
-    },
-    "deploymentadvisorterraforms": {
-      "items": {
-        "$ref": "deploymentadvisorterraform.json"
       },
       "type": "array"
     },
@@ -276,9 +264,21 @@
       },
       "type": "array"
     },
+    "pcfwtenantaccountterraform": {
+      "items": {
+        "$ref": "pcfwtenantaccountterraform.json"
+      },
+      "type": "array"
+    },
     "pcfwtenants": {
       "items": {
         "$ref": "pcfwtenant.json"
+      },
+      "type": "array"
+    },
+    "pcfwtenantterraform": {
+      "items": {
+        "$ref": "pcfwtenantterraform.json"
       },
       "type": "array"
     },
@@ -327,12 +327,6 @@
     "vpcusedsubnets": {
       "items": {
         "$ref": "vpcusedsubnet.json"
-      },
-      "type": "array"
-    },
-    "vpcvailabilityzonesubnets": {
-      "items": {
-        "$ref": "vpcavailabilityzonesubnet.json"
       },
       "type": "array"
     }

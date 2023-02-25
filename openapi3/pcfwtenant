@@ -4,9 +4,50 @@
       "pcfwtenant": {
         "description": "Represents Prisma Cloud Firewall Tenant.",
         "properties": {
+          "AWSAccountID": {
+            "description": "AWS Account ID.",
+            "example": 640574671726,
+            "type": "string"
+          },
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
+            "type": "string"
+          },
+          "NGFWExternalID": {
+            "description": "NGFW external ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "NGFWTenantID": {
+            "description": "NGFW tenant ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
+          "decryptionRoleARN": {
+            "description": "AWS rulestack decryption role ARN.",
+            "example": "arn:aws:iam::640574671726:role/DecryptionRole",
+            "type": "string"
+          },
+          "endpointRoleARN": {
+            "description": "AWS endpoint role ARN.",
+            "example": "arn:aws:iam::640574671726:role/CustomerManagedEndpoint",
+            "type": "string"
+          },
+          "logDestination": {
+            "description": "The log destination for logging.",
+            "example": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
+            "type": "string"
+          },
+          "loggingRoleARN": {
+            "description": "AWS logging role ARN.",
+            "example": "arn:aws:iam::640574671726:role/LogMetricRole",
             "type": "string"
           },
           "namespace": {
@@ -17,12 +58,34 @@
           "status": {
             "description": "status of tenant.",
             "enum": [
+              "Creating",
               "Success",
-              "Failed"
+              "Failed",
+              "Unsubscribe",
+              "UnsubscribePending",
+              "Deleting",
+              "FailedCreatingPrimaryAccount"
             ],
             "readOnly": true
+          },
+          "statusReason": {
+            "description": "status failure reason.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
           }
         },
+        "required": [
+          "AWSAccountID",
+          "decryptionRoleARN",
+          "endpointRoleARN",
+          "logDestination"
+        ],
         "type": "object"
       }
     }

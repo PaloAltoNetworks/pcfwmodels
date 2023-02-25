@@ -2,6 +2,7 @@
   "$extends": [
     "@namespaced",
     "@identifiable-stored",
+    "@timeable",
     "@zoned"
   ],
   "$modelName": "PCFWAccount",
@@ -10,8 +11,128 @@
   "$modelRestName": "pcfwaccount",
   "additionalProperties": true,
   "properties": {
+    "AWSAccountID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "ID": {
       "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWCFTHash": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWExternalID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWOnboardingStatus": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWSNSTopicARN": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWServiceAccountID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "NGFWTenantID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "decryptionRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "endpointRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logDestination": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "loggingRoleARN": {
       "anyOf": [
         {
           "type": "null"
@@ -32,6 +153,17 @@
         }
       ]
     },
+    "primaryAccount": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
     "status": {
       "$readOnly": true,
       "anyOf": [
@@ -40,14 +172,45 @@
         },
         {
           "enum": [
+            "Creating",
+            "Pending",
             "Success",
-            "Failed"
+            "Failed",
+            "Deleting"
           ]
+        }
+      ]
+    },
+    "statusReason": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
         }
       ]
     }
   },
-  "required": [],
+  "required": [
+    "AWSAccountID",
+    "decryptionRoleARN",
+    "endpointRoleARN",
+    "logDestination"
+  ],
   "title": "PCFWAccount",
   "type": "object"
 }
