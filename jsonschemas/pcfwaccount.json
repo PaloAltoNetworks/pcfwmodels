@@ -63,17 +63,6 @@
         }
       ]
     },
-    "NGFWSNSTopicARN": {
-      "$readOnly": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
     "NGFWServiceAccountID": {
       "$readOnly": true,
       "anyOf": [

@@ -72,6 +72,7 @@ attributes:
     type: string
     exposed: true
     stored: true
+    required: true
     example_value: arn:aws:iam::640574671726:role/LogMetricRole
 
   - name: offboardingTimestamp

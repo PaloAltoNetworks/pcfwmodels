@@ -51,14 +51,20 @@ attributes:
       noInit: true
       refMode: pointer
 
+  - name: NGFWExternalID
+    description: The internal NGFW externalID for making API calls.
+    type: string
+    stored: true
+    read_only: true
+
   - name: NGFWFirewall
-    description: The name of the NGFW fireall.
+    description: The internal name of the NGFW firewall.
     type: string
     stored: true
     read_only: true
 
   - name: NGFWRuleStack
-    description: The name of the NGFW rulestack associated with the firewall.
+    description: The internal name of the NGFW rulestack associated with the firewall.
     type: string
     stored: true
     read_only: true

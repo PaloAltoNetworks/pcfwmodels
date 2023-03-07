@@ -488,6 +488,10 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("loggingRoleARN", o.LoggingRoleARN); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Creating", "Success", "Failed", "Unsubscribe", "UnsubscribePending", "Deleting", "FailedCreatingPrimaryAccount"}, true); err != nil {
 		errors = errors.Append(err)
 	}
@@ -670,6 +674,7 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `AWS logging role ARN.`,
 		Exposed:        true,
 		Name:           "loggingRoleARN",
+		Required:       true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -838,6 +843,7 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Description:    `AWS logging role ARN.`,
 		Exposed:        true,
 		Name:           "loggingRoleARN",
+		Required:       true,
 		Stored:         true,
 		Type:           "string",
 	},

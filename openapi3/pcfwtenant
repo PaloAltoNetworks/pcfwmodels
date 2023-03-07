@@ -84,7 +84,8 @@
           "AWSAccountID",
           "decryptionRoleARN",
           "endpointRoleARN",
-          "logDestination"
+          "logDestination",
+          "loggingRoleARN"
         ],
         "type": "object"
       }

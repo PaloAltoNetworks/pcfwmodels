@@ -143,10 +143,13 @@ type AWSFirewall struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
-	// The name of the NGFW fireall.
+	// The internal NGFW externalID for making API calls.
+	NGFWExternalID string `json:"-" msgpack:"-" bson:"ngfwexternalid" mapstructure:"-,omitempty"`
+
+	// The internal name of the NGFW firewall.
 	NGFWFirewall string `json:"-" msgpack:"-" bson:"ngfwfirewall" mapstructure:"-,omitempty"`
 
-	// The name of the NGFW rulestack associated with the firewall.
+	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack string `json:"-" msgpack:"-" bson:"ngfwrulestack" mapstructure:"-,omitempty"`
 
 	// An AWS VPC ID.
@@ -257,6 +260,7 @@ func (o *AWSFirewall) GetBSON() (any, error) {
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
+	s.NGFWExternalID = o.NGFWExternalID
 	s.NGFWFirewall = o.NGFWFirewall
 	s.NGFWRuleStack = o.NGFWRuleStack
 	s.VPCID = o.VPCID
@@ -298,6 +302,7 @@ func (o *AWSFirewall) SetBSON(raw bson.Raw) error {
 	o.AWSNGFWModeSettings = s.AWSNGFWModeSettings
 	o.AWSTAPModeSettings = s.AWSTAPModeSettings
 	o.ID = s.ID.Hex()
+	o.NGFWExternalID = s.NGFWExternalID
 	o.NGFWFirewall = s.NGFWFirewall
 	o.NGFWRuleStack = s.NGFWRuleStack
 	o.VPCID = s.VPCID
@@ -436,6 +441,7 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			AWSNGFWModeSettings: o.AWSNGFWModeSettings,
 			AWSTAPModeSettings:  o.AWSTAPModeSettings,
 			ID:                  &o.ID,
+			NGFWExternalID:      &o.NGFWExternalID,
 			NGFWFirewall:        &o.NGFWFirewall,
 			NGFWRuleStack:       &o.NGFWRuleStack,
 			VPCID:               &o.VPCID,
@@ -469,6 +475,8 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.AWSTAPModeSettings = o.AWSTAPModeSettings
 		case "ID":
 			sp.ID = &(o.ID)
+		case "NGFWExternalID":
+			sp.NGFWExternalID = &(o.NGFWExternalID)
 		case "NGFWFirewall":
 			sp.NGFWFirewall = &(o.NGFWFirewall)
 		case "NGFWRuleStack":
@@ -532,6 +540,9 @@ func (o *AWSFirewall) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.ID != nil {
 		o.ID = *so.ID
+	}
+	if so.NGFWExternalID != nil {
+		o.NGFWExternalID = *so.NGFWExternalID
 	}
 	if so.NGFWFirewall != nil {
 		o.NGFWFirewall = *so.NGFWFirewall
@@ -736,6 +747,8 @@ func (o *AWSFirewall) ValueForAttribute(name string) any {
 		return o.AWSTAPModeSettings
 	case "ID":
 		return o.ID
+	case "NGFWExternalID":
+		return o.NGFWExternalID
 	case "NGFWFirewall":
 		return o.NGFWFirewall
 	case "NGFWRuleStack":
@@ -1357,10 +1370,13 @@ type SparseAWSFirewall struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
-	// The name of the NGFW fireall.
+	// The internal NGFW externalID for making API calls.
+	NGFWExternalID *string `json:"-" msgpack:"-" bson:"ngfwexternalid,omitempty" mapstructure:"-,omitempty"`
+
+	// The internal name of the NGFW firewall.
 	NGFWFirewall *string `json:"-" msgpack:"-" bson:"ngfwfirewall,omitempty" mapstructure:"-,omitempty"`
 
-	// The name of the NGFW rulestack associated with the firewall.
+	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack *string `json:"-" msgpack:"-" bson:"ngfwrulestack,omitempty" mapstructure:"-,omitempty"`
 
 	// An AWS VPC ID.
@@ -1473,6 +1489,9 @@ func (o *SparseAWSFirewall) GetBSON() (any, error) {
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
+	if o.NGFWExternalID != nil {
+		s.NGFWExternalID = o.NGFWExternalID
+	}
 	if o.NGFWFirewall != nil {
 		s.NGFWFirewall = o.NGFWFirewall
 	}
@@ -1561,6 +1580,9 @@ func (o *SparseAWSFirewall) SetBSON(raw bson.Raw) error {
 	}
 	id := s.ID.Hex()
 	o.ID = &id
+	if s.NGFWExternalID != nil {
+		o.NGFWExternalID = s.NGFWExternalID
+	}
 	if s.NGFWFirewall != nil {
 		o.NGFWFirewall = s.NGFWFirewall
 	}
@@ -1646,6 +1668,9 @@ func (o *SparseAWSFirewall) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.ID != nil {
 		out.ID = *o.ID
+	}
+	if o.NGFWExternalID != nil {
+		out.NGFWExternalID = *o.NGFWExternalID
 	}
 	if o.NGFWFirewall != nil {
 		out.NGFWFirewall = *o.NGFWFirewall
@@ -1838,6 +1863,7 @@ type mongoAttributesAWSFirewall struct {
 	AWSNGFWModeSettings *AWSNGFWModeSettings        `bson:"awsngfwmodesettings"`
 	AWSTAPModeSettings  *AWSTAPModeSettings         `bson:"awstapmodesettings"`
 	ID                  bson.ObjectId               `bson:"_id,omitempty"`
+	NGFWExternalID      string                      `bson:"ngfwexternalid"`
 	NGFWFirewall        string                      `bson:"ngfwfirewall"`
 	NGFWRuleStack       string                      `bson:"ngfwrulestack"`
 	VPCID               string                      `bson:"vpcid"`
@@ -1864,6 +1890,7 @@ type mongoAttributesSparseAWSFirewall struct {
 	AWSNGFWModeSettings *AWSNGFWModeSettings         `bson:"awsngfwmodesettings,omitempty"`
 	AWSTAPModeSettings  *AWSTAPModeSettings          `bson:"awstapmodesettings,omitempty"`
 	ID                  bson.ObjectId                `bson:"_id,omitempty"`
+	NGFWExternalID      *string                      `bson:"ngfwexternalid,omitempty"`
 	NGFWFirewall        *string                      `bson:"ngfwfirewall,omitempty"`
 	NGFWRuleStack       *string                      `bson:"ngfwrulestack,omitempty"`
 	VPCID               *string                      `bson:"vpcid,omitempty"`

@@ -29,11 +29,6 @@
             "readOnly": true,
             "type": "string"
           },
-          "NGFWSNSTopicARN": {
-            "description": "NGFW SNS Topic ARN.",
-            "readOnly": true,
-            "type": "string"
-          },
           "NGFWServiceAccountID": {
             "description": "NGFW AWS service account ID.",
             "readOnly": true,

@@ -89,10 +89,8 @@
       ]
     },
     "loggingRoleARN": {
+      "$required": true,
       "anyOf": [
-        {
-          "type": "null"
-        },
         {
           "type": "string"
         }
@@ -156,7 +154,8 @@
     "AWSAccountID",
     "decryptionRoleARN",
     "endpointRoleARN",
-    "logDestination"
+    "logDestination",
+    "loggingRoleARN"
   ],
   "title": "PCFWTenant",
   "type": "object"
