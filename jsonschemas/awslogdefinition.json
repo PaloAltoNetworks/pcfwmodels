@@ -81,7 +81,7 @@
       "anyOf": [
         {
           "enum": [
-            "Moose",
+            "Prisma",
             "S3",
             "Cloudwatch",
             "KinesisFirehose"

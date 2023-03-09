@@ -134,6 +134,9 @@ type PCFWTenant struct {
 	// The log destination for logging.
 	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
 
+	// The AWS region where logging data lives.
+	LogRegion string `json:"logRegion" msgpack:"logRegion" bson:"logregion" mapstructure:"logRegion,omitempty"`
+
 	// AWS logging role ARN.
 	LoggingRoleARN string `json:"loggingRoleARN" msgpack:"loggingRoleARN" bson:"loggingrolearn" mapstructure:"loggingRoleARN,omitempty"`
 
@@ -208,6 +211,7 @@ func (o *PCFWTenant) GetBSON() (any, error) {
 	s.DecryptionRoleARN = o.DecryptionRoleARN
 	s.EndpointRoleARN = o.EndpointRoleARN
 	s.LogDestination = o.LogDestination
+	s.LogRegion = o.LogRegion
 	s.LoggingRoleARN = o.LoggingRoleARN
 	s.Namespace = o.Namespace
 	s.OffboardingTimestamp = o.OffboardingTimestamp
@@ -241,6 +245,7 @@ func (o *PCFWTenant) SetBSON(raw bson.Raw) error {
 	o.DecryptionRoleARN = s.DecryptionRoleARN
 	o.EndpointRoleARN = s.EndpointRoleARN
 	o.LogDestination = s.LogDestination
+	o.LogRegion = s.LogRegion
 	o.LoggingRoleARN = s.LoggingRoleARN
 	o.Namespace = s.Namespace
 	o.OffboardingTimestamp = s.OffboardingTimestamp
@@ -333,6 +338,7 @@ func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			DecryptionRoleARN:    &o.DecryptionRoleARN,
 			EndpointRoleARN:      &o.EndpointRoleARN,
 			LogDestination:       &o.LogDestination,
+			LogRegion:            &o.LogRegion,
 			LoggingRoleARN:       &o.LoggingRoleARN,
 			Namespace:            &o.Namespace,
 			OffboardingTimestamp: &o.OffboardingTimestamp,
@@ -363,6 +369,8 @@ func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.EndpointRoleARN = &(o.EndpointRoleARN)
 		case "logDestination":
 			sp.LogDestination = &(o.LogDestination)
+		case "logRegion":
+			sp.LogRegion = &(o.LogRegion)
 		case "loggingRoleARN":
 			sp.LoggingRoleARN = &(o.LoggingRoleARN)
 		case "namespace":
@@ -415,6 +423,9 @@ func (o *PCFWTenant) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.LogDestination != nil {
 		o.LogDestination = *so.LogDestination
+	}
+	if so.LogRegion != nil {
+		o.LogRegion = *so.LogRegion
 	}
 	if so.LoggingRoleARN != nil {
 		o.LoggingRoleARN = *so.LoggingRoleARN
@@ -488,6 +499,10 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("loggingRoleARN", o.LoggingRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -546,6 +561,8 @@ func (o *PCFWTenant) ValueForAttribute(name string) any {
 		return o.EndpointRoleARN
 	case "logDestination":
 		return o.LogDestination
+	case "logRegion":
+		return o.LogRegion
 	case "loggingRoleARN":
 		return o.LoggingRoleARN
 	case "namespace":
@@ -663,6 +680,17 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `The log destination for logging.`,
 		Exposed:        true,
 		Name:           "logDestination",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogRegion": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logregion",
+		ConvertedName:  "LogRegion",
+		Description:    `The AWS region where logging data lives.`,
+		Exposed:        true,
+		Name:           "logRegion",
 		Required:       true,
 		Stored:         true,
 		Type:           "string",
@@ -836,6 +864,17 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Stored:         true,
 		Type:           "string",
 	},
+	"logregion": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logregion",
+		ConvertedName:  "LogRegion",
+		Description:    `The AWS region where logging data lives.`,
+		Exposed:        true,
+		Name:           "logRegion",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"loggingrolearn": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "loggingrolearn",
@@ -992,6 +1031,9 @@ type SparsePCFWTenant struct {
 	// The log destination for logging.
 	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
 
+	// The AWS region where logging data lives.
+	LogRegion *string `json:"logRegion,omitempty" msgpack:"logRegion,omitempty" bson:"logregion,omitempty" mapstructure:"logRegion,omitempty"`
+
 	// AWS logging role ARN.
 	LoggingRoleARN *string `json:"loggingRoleARN,omitempty" msgpack:"loggingRoleARN,omitempty" bson:"loggingrolearn,omitempty" mapstructure:"loggingRoleARN,omitempty"`
 
@@ -1084,6 +1126,9 @@ func (o *SparsePCFWTenant) GetBSON() (any, error) {
 	if o.LogDestination != nil {
 		s.LogDestination = o.LogDestination
 	}
+	if o.LogRegion != nil {
+		s.LogRegion = o.LogRegion
+	}
 	if o.LoggingRoleARN != nil {
 		s.LoggingRoleARN = o.LoggingRoleARN
 	}
@@ -1148,6 +1193,9 @@ func (o *SparsePCFWTenant) SetBSON(raw bson.Raw) error {
 	if s.LogDestination != nil {
 		o.LogDestination = s.LogDestination
 	}
+	if s.LogRegion != nil {
+		o.LogRegion = s.LogRegion
+	}
 	if s.LoggingRoleARN != nil {
 		o.LoggingRoleARN = s.LoggingRoleARN
 	}
@@ -1209,6 +1257,9 @@ func (o *SparsePCFWTenant) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.LogDestination != nil {
 		out.LogDestination = *o.LogDestination
+	}
+	if o.LogRegion != nil {
+		out.LogRegion = *o.LogRegion
 	}
 	if o.LoggingRoleARN != nil {
 		out.LoggingRoleARN = *o.LoggingRoleARN
@@ -1319,6 +1370,7 @@ type mongoAttributesPCFWTenant struct {
 	DecryptionRoleARN    string                `bson:"decryptionrolearn"`
 	EndpointRoleARN      string                `bson:"endpointrolearn"`
 	LogDestination       string                `bson:"logdestination"`
+	LogRegion            string                `bson:"logregion"`
 	LoggingRoleARN       string                `bson:"loggingrolearn"`
 	Namespace            string                `bson:"namespace"`
 	OffboardingTimestamp time.Time             `bson:"offboardingtimestamp"`
@@ -1337,6 +1389,7 @@ type mongoAttributesSparsePCFWTenant struct {
 	DecryptionRoleARN    *string                `bson:"decryptionrolearn,omitempty"`
 	EndpointRoleARN      *string                `bson:"endpointrolearn,omitempty"`
 	LogDestination       *string                `bson:"logdestination,omitempty"`
+	LogRegion            *string                `bson:"logregion,omitempty"`
 	LoggingRoleARN       *string                `bson:"loggingrolearn,omitempty"`
 	Namespace            *string                `bson:"namespace,omitempty"`
 	OffboardingTimestamp *time.Time             `bson:"offboardingtimestamp,omitempty"`

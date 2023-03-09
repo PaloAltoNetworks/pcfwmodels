@@ -144,6 +144,12 @@
       },
       "type": "array"
     },
+    "firewalllogs": {
+      "items": {
+        "$ref": "firewalllog.json"
+      },
+      "type": "array"
+    },
     "firewallprotoportscriterias": {
       "items": {
         "$ref": "firewallprotoportscriteria.json"

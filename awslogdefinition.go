@@ -22,8 +22,8 @@ const (
 	// AWSLogDefinitionLogDestinationTypeKinesisFirehose represents the value KinesisFirehose.
 	AWSLogDefinitionLogDestinationTypeKinesisFirehose AWSLogDefinitionLogDestinationTypeValue = "KinesisFirehose"
 
-	// AWSLogDefinitionLogDestinationTypeMoose represents the value Moose.
-	AWSLogDefinitionLogDestinationTypeMoose AWSLogDefinitionLogDestinationTypeValue = "Moose"
+	// AWSLogDefinitionLogDestinationTypePrisma represents the value Prisma.
+	AWSLogDefinitionLogDestinationTypePrisma AWSLogDefinitionLogDestinationTypeValue = "Prisma"
 
 	// AWSLogDefinitionLogDestinationTypeS3 represents the value S3.
 	AWSLogDefinitionLogDestinationTypeS3 AWSLogDefinitionLogDestinationTypeValue = "S3"
@@ -505,7 +505,7 @@ func (o *AWSLogDefinition) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateStringInList("logDestinationType", string(o.LogDestinationType), []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"}, false); err != nil {
+	if err := elemental.ValidateStringInList("logDestinationType", string(o.LogDestinationType), []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"}, false); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -668,7 +668,7 @@ var AWSLogDefinitionAttributesMap = map[string]elemental.AttributeSpecification{
 		Type:           "string",
 	},
 	"LogDestinationType": {
-		AllowedChoices: []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"},
+		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
 		BSONFieldName:  "logdestinationtype",
 		ConvertedName:  "LogDestinationType",
 		Description:    `Destination type for log output.`,
@@ -838,7 +838,7 @@ var AWSLogDefinitionLowerCaseAttributesMap = map[string]elemental.AttributeSpeci
 		Type:           "string",
 	},
 	"logdestinationtype": {
-		AllowedChoices: []string{"Moose", "S3", "Cloudwatch", "KinesisFirehose"},
+		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
 		BSONFieldName:  "logdestinationtype",
 		ConvertedName:  "LogDestinationType",
 		Description:    `Destination type for log output.`,

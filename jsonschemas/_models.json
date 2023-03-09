@@ -72,6 +72,9 @@
     "firewalllicensingcredits": {
       "$ref": "firewalllicensingcredits.json"
     },
+    "firewalllog": {
+      "$ref": "firewalllog.json"
+    },
     "firewallprotoportscriteria": {
       "$ref": "firewallprotoportscriteria.json"
     },

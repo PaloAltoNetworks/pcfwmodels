@@ -16,7 +16,7 @@
           "logResult": {
             "description": "The result of the log query.",
             "items": {
-              "$ref": "./logqueryitem#/components/schemas/logqueryitem"
+              "$ref": "./firewalllog#/components/schemas/firewalllog"
             },
             "readOnly": true,
             "type": "array"
@@ -26,8 +26,7 @@
             "enum": [
               "Traffic",
               "Threat",
-              "URLFiltering",
-              "Decryption"
+              "URLFiltering"
             ]
           }
         },

@@ -121,6 +121,14 @@
         }
       ]
     },
+    "logRegion": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "loggingRoleARN": {
       "anyOf": [
         {
@@ -198,7 +206,8 @@
     "AWSAccountID",
     "decryptionRoleARN",
     "endpointRoleARN",
-    "logDestination"
+    "logDestination",
+    "logRegion"
   ],
   "title": "PCFWAccount",
   "type": "object"

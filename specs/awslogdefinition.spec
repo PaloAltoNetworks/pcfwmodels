@@ -52,11 +52,11 @@ attributes:
     stored: true
     required: true
     allowed_choices:
-    - Moose
+    - Prisma
     - S3
     - Cloudwatch
     - KinesisFirehose
-    example_value: Moose
+    example_value: Prisma
 
   - name: threatEnabled
     description: The Threat log is enabled.

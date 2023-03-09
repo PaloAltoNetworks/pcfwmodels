@@ -67,6 +67,14 @@ attributes:
     required: true
     example_value: s3://640574671726-us-east-1-api-auth-bucket/Logging
 
+  - name: logRegion
+    description: The AWS region where logging data lives.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: us-east-1
+
   - name: loggingRoleARN
     description: AWS logging role ARN.
     type: string

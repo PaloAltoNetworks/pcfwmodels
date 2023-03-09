@@ -32,7 +32,7 @@
         },
         {
           "items": {
-            "$ref": "logqueryitem.json"
+            "$ref": "firewalllog.json"
           },
           "type": "array"
         }
@@ -47,8 +47,7 @@
           "enum": [
             "Traffic",
             "Threat",
-            "URLFiltering",
-            "Decryption"
+            "URLFiltering"
           ]
         }
       ]

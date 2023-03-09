@@ -88,6 +88,14 @@
         }
       ]
     },
+    "logRegion": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "loggingRoleARN": {
       "$required": true,
       "anyOf": [
@@ -155,6 +163,7 @@
     "decryptionRoleARN",
     "endpointRoleARN",
     "logDestination",
+    "logRegion",
     "loggingRoleARN"
   ],
   "title": "PCFWTenant",

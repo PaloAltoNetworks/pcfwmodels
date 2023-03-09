@@ -36,12 +36,12 @@
           "logDestinationType": {
             "description": "Destination type for log output.",
             "enum": [
-              "Moose",
+              "Prisma",
               "S3",
               "Cloudwatch",
               "KinesisFirehose"
             ],
-            "example": "Moose"
+            "example": "Prisma"
           },
           "name": {
             "description": "Name of the entity.",

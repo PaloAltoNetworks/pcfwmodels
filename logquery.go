@@ -15,9 +15,6 @@ import (
 type LogQueryLogTypeValue string
 
 const (
-	// LogQueryLogTypeDecryption represents the value Decryption.
-	LogQueryLogTypeDecryption LogQueryLogTypeValue = "Decryption"
-
 	// LogQueryLogTypeThreat represents the value Threat.
 	LogQueryLogTypeThreat LogQueryLogTypeValue = "Threat"
 
@@ -107,7 +104,7 @@ type LogQuery struct {
 	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"firewallname" mapstructure:"firewallName,omitempty"`
 
 	// The result of the log query.
-	LogResult []*LogQueryItem `json:"logResult" msgpack:"logResult" bson:"-" mapstructure:"logResult,omitempty"`
+	LogResult []*FirewallLog `json:"logResult" msgpack:"logResult" bson:"-" mapstructure:"logResult,omitempty"`
 
 	// The type of firewall log to query.
 	LogType LogQueryLogTypeValue `json:"logType" msgpack:"logType" bson:"-" mapstructure:"logType,omitempty"`
@@ -120,7 +117,7 @@ func NewLogQuery() *LogQuery {
 
 	return &LogQuery{
 		ModelVersion: 1,
-		LogResult:    []*LogQueryItem{},
+		LogResult:    []*FirewallLog{},
 	}
 }
 
@@ -299,7 +296,7 @@ func (o *LogQuery) Validate() error {
 		}
 	}
 
-	if err := elemental.ValidateStringInList("logType", string(o.LogType), []string{"Traffic", "Threat", "URLFiltering", "Decryption"}, false); err != nil {
+	if err := elemental.ValidateStringInList("logType", string(o.LogType), []string{"Traffic", "Threat", "URLFiltering"}, false); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -379,11 +376,11 @@ var LogQueryAttributesMap = map[string]elemental.AttributeSpecification{
 		Exposed:        true,
 		Name:           "logResult",
 		ReadOnly:       true,
-		SubType:        "logqueryitem",
+		SubType:        "firewalllog",
 		Type:           "refList",
 	},
 	"LogType": {
-		AllowedChoices: []string{"Traffic", "Threat", "URLFiltering", "Decryption"},
+		AllowedChoices: []string{"Traffic", "Threat", "URLFiltering"},
 		ConvertedName:  "LogType",
 		Description:    `The type of firewall log to query.`,
 		Exposed:        true,
@@ -421,11 +418,11 @@ var LogQueryLowerCaseAttributesMap = map[string]elemental.AttributeSpecification
 		Exposed:        true,
 		Name:           "logResult",
 		ReadOnly:       true,
-		SubType:        "logqueryitem",
+		SubType:        "firewalllog",
 		Type:           "refList",
 	},
 	"logtype": {
-		AllowedChoices: []string{"Traffic", "Threat", "URLFiltering", "Decryption"},
+		AllowedChoices: []string{"Traffic", "Threat", "URLFiltering"},
 		ConvertedName:  "LogType",
 		Description:    `The type of firewall log to query.`,
 		Exposed:        true,
@@ -504,7 +501,7 @@ type SparseLogQuery struct {
 	FirewallName *string `json:"firewallName,omitempty" msgpack:"firewallName,omitempty" bson:"firewallname,omitempty" mapstructure:"firewallName,omitempty"`
 
 	// The result of the log query.
-	LogResult *[]*LogQueryItem `json:"logResult,omitempty" msgpack:"logResult,omitempty" bson:"-" mapstructure:"logResult,omitempty"`
+	LogResult *[]*FirewallLog `json:"logResult,omitempty" msgpack:"logResult,omitempty" bson:"-" mapstructure:"logResult,omitempty"`
 
 	// The type of firewall log to query.
 	LogType *LogQueryLogTypeValue `json:"logType,omitempty" msgpack:"logType,omitempty" bson:"-" mapstructure:"logType,omitempty"`

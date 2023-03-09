@@ -45,6 +45,11 @@
             "example": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
             "type": "string"
           },
+          "logRegion": {
+            "description": "The AWS region where logging data lives.",
+            "example": "us-east-1",
+            "type": "string"
+          },
           "loggingRoleARN": {
             "description": "AWS logging role ARN.",
             "example": "arn:aws:iam::640574671726:role/LogMetricRole",
@@ -85,6 +90,7 @@
           "decryptionRoleARN",
           "endpointRoleARN",
           "logDestination",
+          "logRegion",
           "loggingRoleARN"
         ],
         "type": "object"
