@@ -15,10 +15,13 @@
             "readOnly": true,
             "type": "string"
           },
-          "VPCID": {
-            "description": "An AWS VPC ID.",
-            "example": "vpc-23af3b89cd23",
-            "type": "string"
+          "VPCIDs": {
+            "description": "The list of VPC IDs.",
+            "example": "vpc-23af3b89cd23, vpc-23af3b89cd24",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "availabilityZones": {
             "description": "A list of availability zones.",
@@ -124,7 +127,7 @@
           }
         },
         "required": [
-          "VPCID",
+          "VPCIDs",
           "availabilityZones",
           "name",
           "region"

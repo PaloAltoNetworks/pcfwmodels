@@ -152,8 +152,8 @@ type AWSFirewall struct {
 	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack string `json:"-" msgpack:"-" bson:"ngfwrulestack" mapstructure:"-,omitempty"`
 
-	// An AWS VPC ID.
-	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"vpcid" mapstructure:"VPCID,omitempty"`
+	// The list of VPC IDs.
+	VPCIDs []string `json:"VPCIDs" msgpack:"VPCIDs" bson:"vpcids" mapstructure:"VPCIDs,omitempty"`
 
 	// A list of availability zones.
 	AvailabilityZones []string `json:"availabilityZones" msgpack:"availabilityZones" bson:"availabilityzones" mapstructure:"availabilityZones,omitempty"`
@@ -218,6 +218,7 @@ func NewAWSFirewall() *AWSFirewall {
 
 	return &AWSFirewall{
 		ModelVersion:      1,
+		VPCIDs:            []string{},
 		AvailabilityZones: []string{},
 		Endpoints:         []*AWSEndpoint{},
 		LicenseType:       AWSFirewallLicenseTypeTAP,
@@ -263,7 +264,7 @@ func (o *AWSFirewall) GetBSON() (any, error) {
 	s.NGFWExternalID = o.NGFWExternalID
 	s.NGFWFirewall = o.NGFWFirewall
 	s.NGFWRuleStack = o.NGFWRuleStack
-	s.VPCID = o.VPCID
+	s.VPCIDs = o.VPCIDs
 	s.AvailabilityZones = o.AvailabilityZones
 	s.CreateTime = o.CreateTime
 	s.Description = o.Description
@@ -305,7 +306,7 @@ func (o *AWSFirewall) SetBSON(raw bson.Raw) error {
 	o.NGFWExternalID = s.NGFWExternalID
 	o.NGFWFirewall = s.NGFWFirewall
 	o.NGFWRuleStack = s.NGFWRuleStack
-	o.VPCID = s.VPCID
+	o.VPCIDs = s.VPCIDs
 	o.AvailabilityZones = s.AvailabilityZones
 	o.CreateTime = s.CreateTime
 	o.Description = s.Description
@@ -444,7 +445,7 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			NGFWExternalID:      &o.NGFWExternalID,
 			NGFWFirewall:        &o.NGFWFirewall,
 			NGFWRuleStack:       &o.NGFWRuleStack,
-			VPCID:               &o.VPCID,
+			VPCIDs:              &o.VPCIDs,
 			AvailabilityZones:   &o.AvailabilityZones,
 			CreateTime:          &o.CreateTime,
 			Description:         &o.Description,
@@ -481,8 +482,8 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.NGFWFirewall = &(o.NGFWFirewall)
 		case "NGFWRuleStack":
 			sp.NGFWRuleStack = &(o.NGFWRuleStack)
-		case "VPCID":
-			sp.VPCID = &(o.VPCID)
+		case "VPCIDs":
+			sp.VPCIDs = &(o.VPCIDs)
 		case "availabilityZones":
 			sp.AvailabilityZones = &(o.AvailabilityZones)
 		case "createTime":
@@ -550,8 +551,8 @@ func (o *AWSFirewall) Patch(sparse elemental.SparseIdentifiable) {
 	if so.NGFWRuleStack != nil {
 		o.NGFWRuleStack = *so.NGFWRuleStack
 	}
-	if so.VPCID != nil {
-		o.VPCID = *so.VPCID
+	if so.VPCIDs != nil {
+		o.VPCIDs = *so.VPCIDs
 	}
 	if so.AvailabilityZones != nil {
 		o.AvailabilityZones = *so.AvailabilityZones
@@ -653,11 +654,11 @@ func (o *AWSFirewall) Validate() error {
 		}
 	}
 
-	if err := elemental.ValidateRequiredString("VPCID", o.VPCID); err != nil {
+	if err := elemental.ValidateRequiredExternal("VPCIDs", o.VPCIDs); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := ValidateVPCID("VPCID", o.VPCID); err != nil {
+	if err := ValidateVPCIDs("VPCIDs", o.VPCIDs); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -753,8 +754,8 @@ func (o *AWSFirewall) ValueForAttribute(name string) any {
 		return o.NGFWFirewall
 	case "NGFWRuleStack":
 		return o.NGFWRuleStack
-	case "VPCID":
-		return o.VPCID
+	case "VPCIDs":
+		return o.VPCIDs
 	case "availabilityZones":
 		return o.AvailabilityZones
 	case "createTime":
@@ -836,16 +837,17 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Type:           "string",
 	},
 
-	"VPCID": {
+	"VPCIDs": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "vpcid",
-		ConvertedName:  "VPCID",
-		Description:    `An AWS VPC ID.`,
+		BSONFieldName:  "vpcids",
+		ConvertedName:  "VPCIDs",
+		Description:    `The list of VPC IDs.`,
 		Exposed:        true,
-		Name:           "VPCID",
+		Name:           "VPCIDs",
 		Required:       true,
 		Stored:         true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"AvailabilityZones": {
 		AllowedChoices: []string{},
@@ -1086,16 +1088,17 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Type:           "string",
 	},
 
-	"vpcid": {
+	"vpcids": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "vpcid",
-		ConvertedName:  "VPCID",
-		Description:    `An AWS VPC ID.`,
+		BSONFieldName:  "vpcids",
+		ConvertedName:  "VPCIDs",
+		Description:    `The list of VPC IDs.`,
 		Exposed:        true,
-		Name:           "VPCID",
+		Name:           "VPCIDs",
 		Required:       true,
 		Stored:         true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"availabilityzones": {
 		AllowedChoices: []string{},
@@ -1379,8 +1382,8 @@ type SparseAWSFirewall struct {
 	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack *string `json:"-" msgpack:"-" bson:"ngfwrulestack,omitempty" mapstructure:"-,omitempty"`
 
-	// An AWS VPC ID.
-	VPCID *string `json:"VPCID,omitempty" msgpack:"VPCID,omitempty" bson:"vpcid,omitempty" mapstructure:"VPCID,omitempty"`
+	// The list of VPC IDs.
+	VPCIDs *[]string `json:"VPCIDs,omitempty" msgpack:"VPCIDs,omitempty" bson:"vpcids,omitempty" mapstructure:"VPCIDs,omitempty"`
 
 	// A list of availability zones.
 	AvailabilityZones *[]string `json:"availabilityZones,omitempty" msgpack:"availabilityZones,omitempty" bson:"availabilityzones,omitempty" mapstructure:"availabilityZones,omitempty"`
@@ -1498,8 +1501,8 @@ func (o *SparseAWSFirewall) GetBSON() (any, error) {
 	if o.NGFWRuleStack != nil {
 		s.NGFWRuleStack = o.NGFWRuleStack
 	}
-	if o.VPCID != nil {
-		s.VPCID = o.VPCID
+	if o.VPCIDs != nil {
+		s.VPCIDs = o.VPCIDs
 	}
 	if o.AvailabilityZones != nil {
 		s.AvailabilityZones = o.AvailabilityZones
@@ -1589,8 +1592,8 @@ func (o *SparseAWSFirewall) SetBSON(raw bson.Raw) error {
 	if s.NGFWRuleStack != nil {
 		o.NGFWRuleStack = s.NGFWRuleStack
 	}
-	if s.VPCID != nil {
-		o.VPCID = s.VPCID
+	if s.VPCIDs != nil {
+		o.VPCIDs = s.VPCIDs
 	}
 	if s.AvailabilityZones != nil {
 		o.AvailabilityZones = s.AvailabilityZones
@@ -1678,8 +1681,8 @@ func (o *SparseAWSFirewall) ToPlain() elemental.PlainIdentifiable {
 	if o.NGFWRuleStack != nil {
 		out.NGFWRuleStack = *o.NGFWRuleStack
 	}
-	if o.VPCID != nil {
-		out.VPCID = *o.VPCID
+	if o.VPCIDs != nil {
+		out.VPCIDs = *o.VPCIDs
 	}
 	if o.AvailabilityZones != nil {
 		out.AvailabilityZones = *o.AvailabilityZones
@@ -1866,7 +1869,7 @@ type mongoAttributesAWSFirewall struct {
 	NGFWExternalID      string                      `bson:"ngfwexternalid"`
 	NGFWFirewall        string                      `bson:"ngfwfirewall"`
 	NGFWRuleStack       string                      `bson:"ngfwrulestack"`
-	VPCID               string                      `bson:"vpcid"`
+	VPCIDs              []string                    `bson:"vpcids"`
 	AvailabilityZones   []string                    `bson:"availabilityzones"`
 	CreateTime          time.Time                   `bson:"createtime"`
 	Description         string                      `bson:"description"`
@@ -1893,7 +1896,7 @@ type mongoAttributesSparseAWSFirewall struct {
 	NGFWExternalID      *string                      `bson:"ngfwexternalid,omitempty"`
 	NGFWFirewall        *string                      `bson:"ngfwfirewall,omitempty"`
 	NGFWRuleStack       *string                      `bson:"ngfwrulestack,omitempty"`
-	VPCID               *string                      `bson:"vpcid,omitempty"`
+	VPCIDs              *[]string                    `bson:"vpcids,omitempty"`
 	AvailabilityZones   *[]string                    `bson:"availabilityzones,omitempty"`
 	CreateTime          *time.Time                   `bson:"createtime,omitempty"`
 	Description         *string                      `bson:"description,omitempty"`

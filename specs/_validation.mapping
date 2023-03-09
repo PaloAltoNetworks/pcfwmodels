@@ -62,6 +62,10 @@ $vpcid:
   elemental:
     name: ValidateVPCID
 
+$vpcids:
+  elemental:
+    name: ValidateVPCIDs
+
 $vpcsubnetinfo:
   elemental:
     name: ValidateVpcSubnetInfo

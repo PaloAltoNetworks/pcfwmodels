@@ -1055,7 +1055,7 @@ Represents an AWS firewall instance.
 
 ```json
 {
-  "VPCID": "vpc-23af3b89cd23",
+  "VPCIDs": "vpc-23af3b89cd23, vpc-23af3b89cd24",
   "availabilityZones": "us-east-1a",
   "mode": "TAP",
   "name": "the name",
@@ -1113,11 +1113,11 @@ Type: `string`
 
 Identifier of the object.
 
-##### `VPCID` [`required`]
+##### `VPCIDs` [`required`]
 
-Type: `string`
+Type: `[]string`
 
-An AWS VPC ID.
+The list of VPC IDs.
 
 ##### `availabilityZones` [`required`]
 

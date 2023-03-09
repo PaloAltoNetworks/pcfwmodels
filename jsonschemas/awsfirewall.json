@@ -45,11 +45,14 @@
         }
       ]
     },
-    "VPCID": {
+    "VPCIDs": {
       "$required": true,
       "anyOf": [
         {
-          "type": "string"
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ]
     },
@@ -241,7 +244,7 @@
     }
   },
   "required": [
-    "VPCID",
+    "VPCIDs",
     "availabilityZones",
     "name",
     "region"

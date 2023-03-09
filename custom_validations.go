@@ -274,6 +274,17 @@ func ValidateVPCID(attribute string, vpcid string) error {
 	return nil
 }
 
+// ValidateVPCIDs validates a list of VPC IDs.
+func ValidateVPCIDs(attribute string, vpcids []string) error {
+
+	for _, vpcid := range vpcids {
+		if err := ValidateVPCID(attribute, vpcid); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 // ValidateVpcSubnetInfo validates all the information in VPCUsedSubnets list
 func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) error {
 

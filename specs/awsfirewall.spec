@@ -69,15 +69,16 @@ attributes:
     stored: true
     read_only: true
 
-  - name: VPCID
-    description: An AWS VPC ID.
-    type: string
+  - name: VPCIDs
+    description: The list of VPC IDs.
+    type: list
     exposed: true
+    subtype: string
     stored: true
     required: true
-    example_value: vpc-23af3b89cd23
+    example_value: vpc-23af3b89cd23, vpc-23af3b89cd24
     validations:
-    - $vpcid
+    - $vpcids
 
   - name: availabilityZones
     description: A list of availability zones.
