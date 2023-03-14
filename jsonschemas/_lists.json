@@ -30,18 +30,6 @@
       },
       "type": "array"
     },
-    "awsngfwmodesettings": {
-      "items": {
-        "$ref": "awsngfwmodesettings.json"
-      },
-      "type": "array"
-    },
-    "awstapmodesettings": {
-      "items": {
-        "$ref": "awstapmodesettings.json"
-      },
-      "type": "array"
-    },
     "firewallappidlist": {
       "items": {
         "$ref": "firewallappidlist.json"

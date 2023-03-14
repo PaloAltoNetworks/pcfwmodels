@@ -45,6 +45,16 @@
             "example": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
             "type": "string"
           },
+          "logDestinationType": {
+            "default": "Prisma",
+            "description": "Destination type for log output.",
+            "enum": [
+              "Prisma",
+              "S3",
+              "Cloudwatch",
+              "KinesisFirehose"
+            ]
+          },
           "logRegion": {
             "description": "The AWS region where logging data lives.",
             "example": "us-east-1",
@@ -90,6 +100,7 @@
           "decryptionRoleARN",
           "endpointRoleARN",
           "logDestination",
+          "logDestinationType",
           "logRegion",
           "loggingRoleARN"
         ],

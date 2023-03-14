@@ -8,9 +8,8 @@ import "go.aporeto.io/elemental"
 var (
 	identityNamesMap = map[string]elemental.Identity{
 
-		"awsfirewall":      AWSFirewallIdentity,
-		"awslogdefinition": AWSLogDefinitionIdentity,
-
+		"awsfirewall":       AWSFirewallIdentity,
+		"awslogdefinition":  AWSLogDefinitionIdentity,
 		"firewallappidlist": FirewallAppIDListIdentity,
 
 		"firewallapplicationgroup": FirewallApplicationGroupIdentity,
@@ -60,7 +59,6 @@ var (
 
 		"awsfirewalls":      AWSFirewallIdentity,
 		"awslogdefinitions": AWSLogDefinitionIdentity,
-
 		"firewallappidlist": FirewallAppIDListIdentity,
 
 		"firewallapplicationgroups": FirewallApplicationGroupIdentity,

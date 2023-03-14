@@ -67,6 +67,19 @@ attributes:
     required: true
     example_value: s3://640574671726-us-east-1-api-auth-bucket/Logging
 
+  - name: logDestinationType
+    description: Destination type for log output.
+    type: enum
+    exposed: true
+    stored: true
+    required: true
+    allowed_choices:
+    - Prisma
+    - S3
+    - Cloudwatch
+    - KinesisFirehose
+    default_value: Prisma
+
   - name: logRegion
     description: The AWS region where logging data lives.
     type: string

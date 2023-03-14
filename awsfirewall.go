@@ -134,12 +134,6 @@ func (o AWSFirewallsList) Version() int {
 
 // AWSFirewall represents the model of a awsfirewall
 type AWSFirewall struct {
-	// Settings specific to NGFW mode.
-	AWSNGFWModeSettings *AWSNGFWModeSettings `json:"AWSNGFWModeSettings" msgpack:"AWSNGFWModeSettings" bson:"awsngfwmodesettings" mapstructure:"AWSNGFWModeSettings,omitempty"`
-
-	// Settings specific to TAP mode.
-	AWSTAPModeSettings *AWSTAPModeSettings `json:"AWSTAPModeSettings" msgpack:"AWSTAPModeSettings" bson:"awstapmodesettings" mapstructure:"AWSTAPModeSettings,omitempty"`
-
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -175,6 +169,9 @@ type AWSFirewall struct {
 
 	// The license type of the firewall.
 	LicenseType AWSFirewallLicenseTypeValue `json:"licenseType" msgpack:"licenseType" bson:"licensetype" mapstructure:"licenseType,omitempty"`
+
+	// An awslogdefinition ID.
+	LogDefinitionID string `json:"logDefinitionID" msgpack:"logDefinitionID" bson:"logdefinitionid" mapstructure:"logDefinitionID,omitempty"`
 
 	// The mode of the of firewall.
 	Mode AWSFirewallModeValue `json:"mode" msgpack:"mode" bson:"mode" mapstructure:"mode,omitempty"`
@@ -256,8 +253,6 @@ func (o *AWSFirewall) GetBSON() (any, error) {
 
 	s := &mongoAttributesAWSFirewall{}
 
-	s.AWSNGFWModeSettings = o.AWSNGFWModeSettings
-	s.AWSTAPModeSettings = o.AWSTAPModeSettings
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
@@ -272,6 +267,7 @@ func (o *AWSFirewall) GetBSON() (any, error) {
 	s.Endpoints = o.Endpoints
 	s.LastCommitTime = o.LastCommitTime
 	s.LicenseType = o.LicenseType
+	s.LogDefinitionID = o.LogDefinitionID
 	s.Mode = o.Mode
 	s.Name = o.Name
 	s.Namespace = o.Namespace
@@ -300,8 +296,6 @@ func (o *AWSFirewall) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	o.AWSNGFWModeSettings = s.AWSNGFWModeSettings
-	o.AWSTAPModeSettings = s.AWSTAPModeSettings
 	o.ID = s.ID.Hex()
 	o.NGFWExternalID = s.NGFWExternalID
 	o.NGFWFirewall = s.NGFWFirewall
@@ -314,6 +308,7 @@ func (o *AWSFirewall) SetBSON(raw bson.Raw) error {
 	o.Endpoints = s.Endpoints
 	o.LastCommitTime = s.LastCommitTime
 	o.LicenseType = s.LicenseType
+	o.LogDefinitionID = s.LogDefinitionID
 	o.Mode = s.Mode
 	o.Name = s.Name
 	o.Namespace = s.Namespace
@@ -439,8 +434,6 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseAWSFirewall{
-			AWSNGFWModeSettings: o.AWSNGFWModeSettings,
-			AWSTAPModeSettings:  o.AWSTAPModeSettings,
 			ID:                  &o.ID,
 			NGFWExternalID:      &o.NGFWExternalID,
 			NGFWFirewall:        &o.NGFWFirewall,
@@ -453,6 +446,7 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			Endpoints:           &o.Endpoints,
 			LastCommitTime:      &o.LastCommitTime,
 			LicenseType:         &o.LicenseType,
+			LogDefinitionID:     &o.LogDefinitionID,
 			Mode:                &o.Mode,
 			Name:                &o.Name,
 			Namespace:           &o.Namespace,
@@ -470,10 +464,6 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	sp := &SparseAWSFirewall{}
 	for _, f := range fields {
 		switch f {
-		case "AWSNGFWModeSettings":
-			sp.AWSNGFWModeSettings = o.AWSNGFWModeSettings
-		case "AWSTAPModeSettings":
-			sp.AWSTAPModeSettings = o.AWSTAPModeSettings
 		case "ID":
 			sp.ID = &(o.ID)
 		case "NGFWExternalID":
@@ -498,6 +488,8 @@ func (o *AWSFirewall) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.LastCommitTime = &(o.LastCommitTime)
 		case "licenseType":
 			sp.LicenseType = &(o.LicenseType)
+		case "logDefinitionID":
+			sp.LogDefinitionID = &(o.LogDefinitionID)
 		case "mode":
 			sp.Mode = &(o.Mode)
 		case "name":
@@ -533,12 +525,6 @@ func (o *AWSFirewall) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparseAWSFirewall)
-	if so.AWSNGFWModeSettings != nil {
-		o.AWSNGFWModeSettings = so.AWSNGFWModeSettings
-	}
-	if so.AWSTAPModeSettings != nil {
-		o.AWSTAPModeSettings = so.AWSTAPModeSettings
-	}
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
@@ -574,6 +560,9 @@ func (o *AWSFirewall) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.LicenseType != nil {
 		o.LicenseType = *so.LicenseType
+	}
+	if so.LogDefinitionID != nil {
+		o.LogDefinitionID = *so.LogDefinitionID
 	}
 	if so.Mode != nil {
 		o.Mode = *so.Mode
@@ -639,20 +628,6 @@ func (o *AWSFirewall) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
-
-	if o.AWSNGFWModeSettings != nil {
-		elemental.ResetDefaultForZeroValues(o.AWSNGFWModeSettings)
-		if err := o.AWSNGFWModeSettings.Validate(); err != nil {
-			errors = errors.Append(err)
-		}
-	}
-
-	if o.AWSTAPModeSettings != nil {
-		elemental.ResetDefaultForZeroValues(o.AWSTAPModeSettings)
-		if err := o.AWSTAPModeSettings.Validate(); err != nil {
-			errors = errors.Append(err)
-		}
-	}
 
 	if err := elemental.ValidateRequiredExternal("VPCIDs", o.VPCIDs); err != nil {
 		requiredErrors = requiredErrors.Append(err)
@@ -742,10 +717,6 @@ func (*AWSFirewall) AttributeSpecifications() map[string]elemental.AttributeSpec
 func (o *AWSFirewall) ValueForAttribute(name string) any {
 
 	switch name {
-	case "AWSNGFWModeSettings":
-		return o.AWSNGFWModeSettings
-	case "AWSTAPModeSettings":
-		return o.AWSTAPModeSettings
 	case "ID":
 		return o.ID
 	case "NGFWExternalID":
@@ -770,6 +741,8 @@ func (o *AWSFirewall) ValueForAttribute(name string) any {
 		return o.LastCommitTime
 	case "licenseType":
 		return o.LicenseType
+	case "logDefinitionID":
+		return o.LogDefinitionID
 	case "mode":
 		return o.Mode
 	case "name":
@@ -799,28 +772,6 @@ func (o *AWSFirewall) ValueForAttribute(name string) any {
 
 // AWSFirewallAttributesMap represents the map of attribute for AWSFirewall.
 var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
-	"AWSNGFWModeSettings": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awsngfwmodesettings",
-		ConvertedName:  "AWSNGFWModeSettings",
-		Description:    `Settings specific to NGFW mode.`,
-		Exposed:        true,
-		Name:           "AWSNGFWModeSettings",
-		Stored:         true,
-		SubType:        "awsngfwmodesettings",
-		Type:           "ref",
-	},
-	"AWSTAPModeSettings": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awstapmodesettings",
-		ConvertedName:  "AWSTAPModeSettings",
-		Description:    `Settings specific to TAP mode.`,
-		Exposed:        true,
-		Name:           "AWSTAPModeSettings",
-		Stored:         true,
-		SubType:        "awstapmodesettings",
-		Type:           "ref",
-	},
 	"ID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -937,6 +888,16 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "enum",
 	},
+	"LogDefinitionID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logdefinitionid",
+		ConvertedName:  "LogDefinitionID",
+		Description:    `An awslogdefinition ID.`,
+		Exposed:        true,
+		Name:           "logDefinitionID",
+		Stored:         true,
+		Type:           "string",
+	},
 	"Mode": {
 		AllowedChoices: []string{"TAP", "NGFW"},
 		BSONFieldName:  "mode",
@@ -1050,28 +1011,6 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 
 // AWSFirewallLowerCaseAttributesMap represents the map of attribute for AWSFirewall.
 var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"awsngfwmodesettings": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awsngfwmodesettings",
-		ConvertedName:  "AWSNGFWModeSettings",
-		Description:    `Settings specific to NGFW mode.`,
-		Exposed:        true,
-		Name:           "AWSNGFWModeSettings",
-		Stored:         true,
-		SubType:        "awsngfwmodesettings",
-		Type:           "ref",
-	},
-	"awstapmodesettings": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awstapmodesettings",
-		ConvertedName:  "AWSTAPModeSettings",
-		Description:    `Settings specific to TAP mode.`,
-		Exposed:        true,
-		Name:           "AWSTAPModeSettings",
-		Stored:         true,
-		SubType:        "awstapmodesettings",
-		Type:           "ref",
-	},
 	"id": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1187,6 +1126,16 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "enum",
+	},
+	"logdefinitionid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logdefinitionid",
+		ConvertedName:  "LogDefinitionID",
+		Description:    `An awslogdefinition ID.`,
+		Exposed:        true,
+		Name:           "logDefinitionID",
+		Stored:         true,
+		Type:           "string",
 	},
 	"mode": {
 		AllowedChoices: []string{"TAP", "NGFW"},
@@ -1364,12 +1313,6 @@ func (o SparseAWSFirewallsList) Version() int {
 
 // SparseAWSFirewall represents the sparse version of a awsfirewall.
 type SparseAWSFirewall struct {
-	// Settings specific to NGFW mode.
-	AWSNGFWModeSettings *AWSNGFWModeSettings `json:"AWSNGFWModeSettings,omitempty" msgpack:"AWSNGFWModeSettings,omitempty" bson:"awsngfwmodesettings,omitempty" mapstructure:"AWSNGFWModeSettings,omitempty"`
-
-	// Settings specific to TAP mode.
-	AWSTAPModeSettings *AWSTAPModeSettings `json:"AWSTAPModeSettings,omitempty" msgpack:"AWSTAPModeSettings,omitempty" bson:"awstapmodesettings,omitempty" mapstructure:"AWSTAPModeSettings,omitempty"`
-
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -1405,6 +1348,9 @@ type SparseAWSFirewall struct {
 
 	// The license type of the firewall.
 	LicenseType *AWSFirewallLicenseTypeValue `json:"licenseType,omitempty" msgpack:"licenseType,omitempty" bson:"licensetype,omitempty" mapstructure:"licenseType,omitempty"`
+
+	// An awslogdefinition ID.
+	LogDefinitionID *string `json:"logDefinitionID,omitempty" msgpack:"logDefinitionID,omitempty" bson:"logdefinitionid,omitempty" mapstructure:"logDefinitionID,omitempty"`
 
 	// The mode of the of firewall.
 	Mode *AWSFirewallModeValue `json:"mode,omitempty" msgpack:"mode,omitempty" bson:"mode,omitempty" mapstructure:"mode,omitempty"`
@@ -1483,12 +1429,6 @@ func (o *SparseAWSFirewall) GetBSON() (any, error) {
 
 	s := &mongoAttributesSparseAWSFirewall{}
 
-	if o.AWSNGFWModeSettings != nil {
-		s.AWSNGFWModeSettings = o.AWSNGFWModeSettings
-	}
-	if o.AWSTAPModeSettings != nil {
-		s.AWSTAPModeSettings = o.AWSTAPModeSettings
-	}
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
@@ -1524,6 +1464,9 @@ func (o *SparseAWSFirewall) GetBSON() (any, error) {
 	}
 	if o.LicenseType != nil {
 		s.LicenseType = o.LicenseType
+	}
+	if o.LogDefinitionID != nil {
+		s.LogDefinitionID = o.LogDefinitionID
 	}
 	if o.Mode != nil {
 		s.Mode = o.Mode
@@ -1575,12 +1518,6 @@ func (o *SparseAWSFirewall) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	if s.AWSNGFWModeSettings != nil {
-		o.AWSNGFWModeSettings = s.AWSNGFWModeSettings
-	}
-	if s.AWSTAPModeSettings != nil {
-		o.AWSTAPModeSettings = s.AWSTAPModeSettings
-	}
 	id := s.ID.Hex()
 	o.ID = &id
 	if s.NGFWExternalID != nil {
@@ -1615,6 +1552,9 @@ func (o *SparseAWSFirewall) SetBSON(raw bson.Raw) error {
 	}
 	if s.LicenseType != nil {
 		o.LicenseType = s.LicenseType
+	}
+	if s.LogDefinitionID != nil {
+		o.LogDefinitionID = s.LogDefinitionID
 	}
 	if s.Mode != nil {
 		o.Mode = s.Mode
@@ -1663,12 +1603,6 @@ func (o *SparseAWSFirewall) Version() int {
 func (o *SparseAWSFirewall) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewAWSFirewall()
-	if o.AWSNGFWModeSettings != nil {
-		out.AWSNGFWModeSettings = o.AWSNGFWModeSettings
-	}
-	if o.AWSTAPModeSettings != nil {
-		out.AWSTAPModeSettings = o.AWSTAPModeSettings
-	}
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
@@ -1704,6 +1638,9 @@ func (o *SparseAWSFirewall) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.LicenseType != nil {
 		out.LicenseType = *o.LicenseType
+	}
+	if o.LogDefinitionID != nil {
+		out.LogDefinitionID = *o.LogDefinitionID
 	}
 	if o.Mode != nil {
 		out.Mode = *o.Mode
@@ -1863,8 +1800,6 @@ func (o *SparseAWSFirewall) DeepCopyInto(out *SparseAWSFirewall) {
 }
 
 type mongoAttributesAWSFirewall struct {
-	AWSNGFWModeSettings *AWSNGFWModeSettings        `bson:"awsngfwmodesettings"`
-	AWSTAPModeSettings  *AWSTAPModeSettings         `bson:"awstapmodesettings"`
 	ID                  bson.ObjectId               `bson:"_id,omitempty"`
 	NGFWExternalID      string                      `bson:"ngfwexternalid"`
 	NGFWFirewall        string                      `bson:"ngfwfirewall"`
@@ -1877,6 +1812,7 @@ type mongoAttributesAWSFirewall struct {
 	Endpoints           []*AWSEndpoint              `bson:"endpoints"`
 	LastCommitTime      time.Time                   `bson:"lastcommittime"`
 	LicenseType         AWSFirewallLicenseTypeValue `bson:"licensetype"`
+	LogDefinitionID     string                      `bson:"logdefinitionid"`
 	Mode                AWSFirewallModeValue        `bson:"mode"`
 	Name                string                      `bson:"name"`
 	Namespace           string                      `bson:"namespace"`
@@ -1890,8 +1826,6 @@ type mongoAttributesAWSFirewall struct {
 	Zone                int                         `bson:"zone"`
 }
 type mongoAttributesSparseAWSFirewall struct {
-	AWSNGFWModeSettings *AWSNGFWModeSettings         `bson:"awsngfwmodesettings,omitempty"`
-	AWSTAPModeSettings  *AWSTAPModeSettings          `bson:"awstapmodesettings,omitempty"`
 	ID                  bson.ObjectId                `bson:"_id,omitempty"`
 	NGFWExternalID      *string                      `bson:"ngfwexternalid,omitempty"`
 	NGFWFirewall        *string                      `bson:"ngfwfirewall,omitempty"`
@@ -1904,6 +1838,7 @@ type mongoAttributesSparseAWSFirewall struct {
 	Endpoints           *[]*AWSEndpoint              `bson:"endpoints,omitempty"`
 	LastCommitTime      *time.Time                   `bson:"lastcommittime,omitempty"`
 	LicenseType         *AWSFirewallLicenseTypeValue `bson:"licensetype,omitempty"`
+	LogDefinitionID     *string                      `bson:"logdefinitionid,omitempty"`
 	Mode                *AWSFirewallModeValue        `bson:"mode,omitempty"`
 	Name                *string                      `bson:"name,omitempty"`
 	Namespace           *string                      `bson:"namespace,omitempty"`

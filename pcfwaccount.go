@@ -12,6 +12,23 @@ import (
 	"go.aporeto.io/elemental"
 )
 
+// PCFWAccountLogDestinationTypeValue represents the possible values for attribute "logDestinationType".
+type PCFWAccountLogDestinationTypeValue string
+
+const (
+	// PCFWAccountLogDestinationTypeCloudwatch represents the value Cloudwatch.
+	PCFWAccountLogDestinationTypeCloudwatch PCFWAccountLogDestinationTypeValue = "Cloudwatch"
+
+	// PCFWAccountLogDestinationTypeKinesisFirehose represents the value KinesisFirehose.
+	PCFWAccountLogDestinationTypeKinesisFirehose PCFWAccountLogDestinationTypeValue = "KinesisFirehose"
+
+	// PCFWAccountLogDestinationTypePrisma represents the value Prisma.
+	PCFWAccountLogDestinationTypePrisma PCFWAccountLogDestinationTypeValue = "Prisma"
+
+	// PCFWAccountLogDestinationTypeS3 represents the value S3.
+	PCFWAccountLogDestinationTypeS3 PCFWAccountLogDestinationTypeValue = "S3"
+)
+
 // PCFWAccountStatusValue represents the possible values for attribute "status".
 type PCFWAccountStatusValue string
 
@@ -137,6 +154,9 @@ type PCFWAccount struct {
 	// The log destination for logging.
 	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
 
+	// Destination type for log output.
+	LogDestinationType PCFWAccountLogDestinationTypeValue `json:"logDestinationType" msgpack:"logDestinationType" bson:"logdestinationtype" mapstructure:"logDestinationType,omitempty"`
+
 	// The AWS region where logging data lives.
 	LogRegion string `json:"logRegion" msgpack:"logRegion" bson:"logregion" mapstructure:"logRegion,omitempty"`
 
@@ -172,7 +192,8 @@ type PCFWAccount struct {
 func NewPCFWAccount() *PCFWAccount {
 
 	return &PCFWAccount{
-		ModelVersion: 1,
+		ModelVersion:       1,
+		LogDestinationType: PCFWAccountLogDestinationTypePrisma,
 	}
 }
 
@@ -217,6 +238,7 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.DecryptionRoleARN = o.DecryptionRoleARN
 	s.EndpointRoleARN = o.EndpointRoleARN
 	s.LogDestination = o.LogDestination
+	s.LogDestinationType = o.LogDestinationType
 	s.LogRegion = o.LogRegion
 	s.LoggingRoleARN = o.LoggingRoleARN
 	s.Namespace = o.Namespace
@@ -254,6 +276,7 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.DecryptionRoleARN = s.DecryptionRoleARN
 	o.EndpointRoleARN = s.EndpointRoleARN
 	o.LogDestination = s.LogDestination
+	o.LogDestinationType = s.LogDestinationType
 	o.LogRegion = s.LogRegion
 	o.LoggingRoleARN = s.LoggingRoleARN
 	o.Namespace = s.Namespace
@@ -350,6 +373,7 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			DecryptionRoleARN:    &o.DecryptionRoleARN,
 			EndpointRoleARN:      &o.EndpointRoleARN,
 			LogDestination:       &o.LogDestination,
+			LogDestinationType:   &o.LogDestinationType,
 			LogRegion:            &o.LogRegion,
 			LoggingRoleARN:       &o.LoggingRoleARN,
 			Namespace:            &o.Namespace,
@@ -387,6 +411,8 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.EndpointRoleARN = &(o.EndpointRoleARN)
 		case "logDestination":
 			sp.LogDestination = &(o.LogDestination)
+		case "logDestinationType":
+			sp.LogDestinationType = &(o.LogDestinationType)
 		case "logRegion":
 			sp.LogRegion = &(o.LogRegion)
 		case "loggingRoleARN":
@@ -450,6 +476,9 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.LogDestination != nil {
 		o.LogDestination = *so.LogDestination
+	}
+	if so.LogDestinationType != nil {
+		o.LogDestinationType = *so.LogDestinationType
 	}
 	if so.LogRegion != nil {
 		o.LogRegion = *so.LogRegion
@@ -526,7 +555,19 @@ func (o *PCFWAccount) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("logDestinationType", string(o.LogDestinationType)); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateStringInList("logDestinationType", string(o.LogDestinationType), []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"}, false); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("loggingRoleARN", o.LoggingRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
@@ -590,6 +631,8 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.EndpointRoleARN
 	case "logDestination":
 		return o.LogDestination
+	case "logDestinationType":
+		return o.LogDestinationType
 	case "logRegion":
 		return o.LogRegion
 	case "loggingRoleARN":
@@ -749,6 +792,18 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+	"LogDestinationType": {
+		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
+		BSONFieldName:  "logdestinationtype",
+		ConvertedName:  "LogDestinationType",
+		DefaultValue:   PCFWAccountLogDestinationTypePrisma,
+		Description:    `Destination type for log output.`,
+		Exposed:        true,
+		Name:           "logDestinationType",
+		Required:       true,
+		Stored:         true,
+		Type:           "enum",
+	},
 	"LogRegion": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logregion",
@@ -767,6 +822,7 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `AWS logging role ARN.`,
 		Exposed:        true,
 		Name:           "loggingRoleARN",
+		Required:       true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -975,6 +1031,18 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
+	"logdestinationtype": {
+		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
+		BSONFieldName:  "logdestinationtype",
+		ConvertedName:  "LogDestinationType",
+		DefaultValue:   PCFWAccountLogDestinationTypePrisma,
+		Description:    `Destination type for log output.`,
+		Exposed:        true,
+		Name:           "logDestinationType",
+		Required:       true,
+		Stored:         true,
+		Type:           "enum",
+	},
 	"logregion": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logregion",
@@ -993,6 +1061,7 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description:    `AWS logging role ARN.`,
 		Exposed:        true,
 		Name:           "loggingRoleARN",
+		Required:       true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -1161,6 +1230,9 @@ type SparsePCFWAccount struct {
 	// The log destination for logging.
 	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
 
+	// Destination type for log output.
+	LogDestinationType *PCFWAccountLogDestinationTypeValue `json:"logDestinationType,omitempty" msgpack:"logDestinationType,omitempty" bson:"logdestinationtype,omitempty" mapstructure:"logDestinationType,omitempty"`
+
 	// The AWS region where logging data lives.
 	LogRegion *string `json:"logRegion,omitempty" msgpack:"logRegion,omitempty" bson:"logregion,omitempty" mapstructure:"logRegion,omitempty"`
 
@@ -1265,6 +1337,9 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.LogDestination != nil {
 		s.LogDestination = o.LogDestination
 	}
+	if o.LogDestinationType != nil {
+		s.LogDestinationType = o.LogDestinationType
+	}
 	if o.LogRegion != nil {
 		s.LogRegion = o.LogRegion
 	}
@@ -1341,6 +1416,9 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.LogDestination != nil {
 		o.LogDestination = s.LogDestination
 	}
+	if s.LogDestinationType != nil {
+		o.LogDestinationType = s.LogDestinationType
+	}
 	if s.LogRegion != nil {
 		o.LogRegion = s.LogRegion
 	}
@@ -1414,6 +1492,9 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.LogDestination != nil {
 		out.LogDestination = *o.LogDestination
+	}
+	if o.LogDestinationType != nil {
+		out.LogDestinationType = *o.LogDestinationType
 	}
 	if o.LogRegion != nil {
 		out.LogRegion = *o.LogRegion
@@ -1519,46 +1600,48 @@ func (o *SparsePCFWAccount) DeepCopyInto(out *SparsePCFWAccount) {
 }
 
 type mongoAttributesPCFWAccount struct {
-	AWSAccountID         string                 `bson:"awsaccountid"`
-	ID                   bson.ObjectId          `bson:"_id,omitempty"`
-	NGFWCFTHash          string                 `bson:"ngfwcfthash"`
-	NGFWExternalID       string                 `bson:"ngfwexternalid"`
-	NGFWOnboardingStatus string                 `bson:"ngfwonboardingstatus"`
-	NGFWServiceAccountID string                 `bson:"ngfwserviceaccountid"`
-	NGFWTenantID         string                 `bson:"ngfwtenantid"`
-	CreateTime           time.Time              `bson:"createtime"`
-	DecryptionRoleARN    string                 `bson:"decryptionrolearn"`
-	EndpointRoleARN      string                 `bson:"endpointrolearn"`
-	LogDestination       string                 `bson:"logdestination"`
-	LogRegion            string                 `bson:"logregion"`
-	LoggingRoleARN       string                 `bson:"loggingrolearn"`
-	Namespace            string                 `bson:"namespace"`
-	PrimaryAccount       bool                   `bson:"primaryaccount"`
-	Status               PCFWAccountStatusValue `bson:"status"`
-	StatusReason         string                 `bson:"statusreason"`
-	UpdateTime           time.Time              `bson:"updatetime"`
-	ZHash                int                    `bson:"zhash"`
-	Zone                 int                    `bson:"zone"`
+	AWSAccountID         string                             `bson:"awsaccountid"`
+	ID                   bson.ObjectId                      `bson:"_id,omitempty"`
+	NGFWCFTHash          string                             `bson:"ngfwcfthash"`
+	NGFWExternalID       string                             `bson:"ngfwexternalid"`
+	NGFWOnboardingStatus string                             `bson:"ngfwonboardingstatus"`
+	NGFWServiceAccountID string                             `bson:"ngfwserviceaccountid"`
+	NGFWTenantID         string                             `bson:"ngfwtenantid"`
+	CreateTime           time.Time                          `bson:"createtime"`
+	DecryptionRoleARN    string                             `bson:"decryptionrolearn"`
+	EndpointRoleARN      string                             `bson:"endpointrolearn"`
+	LogDestination       string                             `bson:"logdestination"`
+	LogDestinationType   PCFWAccountLogDestinationTypeValue `bson:"logdestinationtype"`
+	LogRegion            string                             `bson:"logregion"`
+	LoggingRoleARN       string                             `bson:"loggingrolearn"`
+	Namespace            string                             `bson:"namespace"`
+	PrimaryAccount       bool                               `bson:"primaryaccount"`
+	Status               PCFWAccountStatusValue             `bson:"status"`
+	StatusReason         string                             `bson:"statusreason"`
+	UpdateTime           time.Time                          `bson:"updatetime"`
+	ZHash                int                                `bson:"zhash"`
+	Zone                 int                                `bson:"zone"`
 }
 type mongoAttributesSparsePCFWAccount struct {
-	AWSAccountID         *string                 `bson:"awsaccountid,omitempty"`
-	ID                   bson.ObjectId           `bson:"_id,omitempty"`
-	NGFWCFTHash          *string                 `bson:"ngfwcfthash,omitempty"`
-	NGFWExternalID       *string                 `bson:"ngfwexternalid,omitempty"`
-	NGFWOnboardingStatus *string                 `bson:"ngfwonboardingstatus,omitempty"`
-	NGFWServiceAccountID *string                 `bson:"ngfwserviceaccountid,omitempty"`
-	NGFWTenantID         *string                 `bson:"ngfwtenantid,omitempty"`
-	CreateTime           *time.Time              `bson:"createtime,omitempty"`
-	DecryptionRoleARN    *string                 `bson:"decryptionrolearn,omitempty"`
-	EndpointRoleARN      *string                 `bson:"endpointrolearn,omitempty"`
-	LogDestination       *string                 `bson:"logdestination,omitempty"`
-	LogRegion            *string                 `bson:"logregion,omitempty"`
-	LoggingRoleARN       *string                 `bson:"loggingrolearn,omitempty"`
-	Namespace            *string                 `bson:"namespace,omitempty"`
-	PrimaryAccount       *bool                   `bson:"primaryaccount,omitempty"`
-	Status               *PCFWAccountStatusValue `bson:"status,omitempty"`
-	StatusReason         *string                 `bson:"statusreason,omitempty"`
-	UpdateTime           *time.Time              `bson:"updatetime,omitempty"`
-	ZHash                *int                    `bson:"zhash,omitempty"`
-	Zone                 *int                    `bson:"zone,omitempty"`
+	AWSAccountID         *string                             `bson:"awsaccountid,omitempty"`
+	ID                   bson.ObjectId                       `bson:"_id,omitempty"`
+	NGFWCFTHash          *string                             `bson:"ngfwcfthash,omitempty"`
+	NGFWExternalID       *string                             `bson:"ngfwexternalid,omitempty"`
+	NGFWOnboardingStatus *string                             `bson:"ngfwonboardingstatus,omitempty"`
+	NGFWServiceAccountID *string                             `bson:"ngfwserviceaccountid,omitempty"`
+	NGFWTenantID         *string                             `bson:"ngfwtenantid,omitempty"`
+	CreateTime           *time.Time                          `bson:"createtime,omitempty"`
+	DecryptionRoleARN    *string                             `bson:"decryptionrolearn,omitempty"`
+	EndpointRoleARN      *string                             `bson:"endpointrolearn,omitempty"`
+	LogDestination       *string                             `bson:"logdestination,omitempty"`
+	LogDestinationType   *PCFWAccountLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
+	LogRegion            *string                             `bson:"logregion,omitempty"`
+	LoggingRoleARN       *string                             `bson:"loggingrolearn,omitempty"`
+	Namespace            *string                             `bson:"namespace,omitempty"`
+	PrimaryAccount       *bool                               `bson:"primaryaccount,omitempty"`
+	Status               *PCFWAccountStatusValue             `bson:"status,omitempty"`
+	StatusReason         *string                             `bson:"statusreason,omitempty"`
+	UpdateTime           *time.Time                          `bson:"updatetime,omitempty"`
+	ZHash                *int                                `bson:"zhash,omitempty"`
+	Zone                 *int                                `bson:"zone,omitempty"`
 }

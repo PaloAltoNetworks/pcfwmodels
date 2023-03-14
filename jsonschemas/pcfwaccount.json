@@ -121,6 +121,20 @@
         }
       ]
     },
+    "logDestinationType": {
+      "$defaultValue": "Prisma",
+      "$required": true,
+      "anyOf": [
+        {
+          "enum": [
+            "Prisma",
+            "S3",
+            "Cloudwatch",
+            "KinesisFirehose"
+          ]
+        }
+      ]
+    },
     "logRegion": {
       "$required": true,
       "anyOf": [
@@ -130,10 +144,8 @@
       ]
     },
     "loggingRoleARN": {
+      "$required": true,
       "anyOf": [
-        {
-          "type": "null"
-        },
         {
           "type": "string"
         }
@@ -207,7 +219,9 @@
     "decryptionRoleARN",
     "endpointRoleARN",
     "logDestination",
-    "logRegion"
+    "logDestinationType",
+    "logRegion",
+    "loggingRoleARN"
   ],
   "title": "PCFWAccount",
   "type": "object"

@@ -4,12 +4,6 @@
       "awsfirewall": {
         "description": "Represents an AWS firewall instance.",
         "properties": {
-          "AWSNGFWModeSettings": {
-            "$ref": "./awsngfwmodesettings#/components/schemas/awsngfwmodesettings"
-          },
-          "AWSTAPModeSettings": {
-            "$ref": "./awstapmodesettings#/components/schemas/awstapmodesettings"
-          },
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
@@ -69,6 +63,11 @@
               "Advanced"
             ],
             "readOnly": true
+          },
+          "logDefinitionID": {
+            "description": "An awslogdefinition ID.",
+            "example": "xxxxxxxxx",
+            "type": "string"
           },
           "mode": {
             "default": "TAP",

@@ -14,26 +14,6 @@
   "$modelRestName": "awsfirewall",
   "additionalProperties": true,
   "properties": {
-    "AWSNGFWModeSettings": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "awsngfwmodesettings.json"
-        }
-      ]
-    },
-    "AWSTAPModeSettings": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "awstapmodesettings.json"
-        }
-      ]
-    },
     "ID": {
       "$readOnly": true,
       "anyOf": [
@@ -140,6 +120,16 @@
             "Basic",
             "Advanced"
           ]
+        }
+      ]
+    },
+    "logDefinitionID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
         }
       ]
     },

@@ -15,12 +15,6 @@
     "awslogdefinition": {
       "$ref": "awslogdefinition.json"
     },
-    "awsngfwmodesettings": {
-      "$ref": "awsngfwmodesettings.json"
-    },
-    "awstapmodesettings": {
-      "$ref": "awstapmodesettings.json"
-    },
     "firewallappidlist": {
       "$ref": "firewallappidlist.json"
     },
