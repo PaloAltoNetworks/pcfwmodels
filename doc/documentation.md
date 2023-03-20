@@ -682,221 +682,221 @@ Represents a log line in a logquery result.
 
 #### Attributes
 
-##### `accountID`
+##### `XFFIP` [`read_only`]
 
 Type: `string`
 
-AWS account id that generated the log.
+The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.
 
-##### `action`
-
-Type: `string`
-
-Action the NGFW took.
-
-##### `app`
+##### `accountID` [`read_only`]
 
 Type: `string`
 
-Application.
+AWS account ID that generated the log.
 
-##### `destinationIP`
+##### `action` [`read_only`]
 
 Type: `string`
 
-Destination ip.
+Action taken for the session.
 
-##### `destinationPort`
+##### `app` [`read_only`]
+
+Type: `string`
+
+Application associated with the session.
+
+##### `destinationIP` [`read_only`]
+
+Type: `string`
+
+Original session destination IP address.
+
+##### `destinationPort` [`read_only`]
 
 Type: `integer`
 
-Destination port.
+Destination port utilized by the session.
 
-##### `firewallName`
+##### `firewallName` [`read_only`]
 
 Type: `string`
 
 Name of firewall that generated the log.
 
-##### `protocol`
+##### `protocol` [`read_only`]
 
 Type: `string`
 
-Network protocol.
+IP protocol associated with the session.
 
-##### `region`
+##### `region` [`read_only`]
 
 Type: `string`
 
 AWS region that generated the log.
 
-##### `repeatCount`
+##### `repeatCount` [`read_only`]
 
 Type: `integer`
 
-Repeat count.
+Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
 
-##### `rule`
-
-Type: `string`
-
-NGFW rule.
-
-##### `sessionID`
+##### `rule` [`read_only`]
 
 Type: `string`
 
-Session id.
+Name of the rule that the session matched.
 
-##### `sourceIP`
+##### `sessionID` [`read_only`]
 
 Type: `string`
 
-Source ip.
+An internal numerical identifier applied to each session.
 
-##### `sourcePort`
+##### `sourceIP` [`read_only`]
+
+Type: `string`
+
+Original session source IP address.
+
+##### `sourcePort` [`read_only`]
 
 Type: `integer`
 
-Source port.
+Source port utilized by the session.
 
-##### `threatCategory`
-
-Type: `string`
-
-Threat category.
-
-##### `threatContentName`
+##### `threatCategory` [`read_only`]
 
 Type: `string`
 
-Threat content name.
+Describes threat categories used to classify different types of threat signatures.
 
-##### `threatContentver`
-
-Type: `string`
-
-Contentver.
-
-##### `threatDataFilterReason`
+##### `threatContentName` [`read_only`]
 
 Type: `string`
 
-Data filter reason.
+Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
 
-##### `threatDirection`
-
-Type: `string`
-
-Traffic direction.
-
-##### `threatFileType`
+##### `threatContentver` [`read_only`]
 
 Type: `string`
 
-Filetype.
+Applications and Threats version on your firewall when the log was generated.
 
-##### `threatSeverity`
-
-Type: `string`
-
-Severity.
-
-##### `threatSubType`
+##### `threatDataFilterReason` [`read_only`]
 
 Type: `string`
 
-Sub type.
+Reason for Data Filtering action.
 
-##### `timeGenerated`
+##### `threatDirection` [`read_only`]
+
+Type: `string`
+
+Indicates the direction of the attack, client-to-server or server-to-client.
+
+##### `threatFileType` [`read_only`]
+
+Type: `string`
+
+File type associated with the threat.
+
+##### `threatSeverity` [`read_only`]
+
+Type: `string`
+
+Severity associated with the threat; values are informational, low, medium, high, critical.
+
+##### `threatSubType` [`read_only`]
+
+Type: `string`
+
+Subtype of threat log.
+
+##### `timeGenerated` [`read_only`]
 
 Type: `time`
 
-Time generated.
+Time the log was generated on the dataplane.
 
-##### `trafficBytesReceived`
-
-Type: `string`
-
-Bytes received.
-
-##### `trafficBytesSent`
+##### `trafficBytesReceived` [`read_only`]
 
 Type: `string`
 
-Bytes sent.
+Number of bytes in the server-to-client direction of the session.
 
-##### `trafficCategory`
-
-Type: `string`
-
-Category.
-
-##### `trafficDestinationCountry`
+##### `trafficBytesSent` [`read_only`]
 
 Type: `string`
 
-Traffic destination country.
+Number of bytes in the client-to-server direction of the session.
 
-##### `trafficElapsedTime`
+##### `trafficCategory` [`read_only`]
+
+Type: `string`
+
+URL category associated with the session (if applicable).
+
+##### `trafficDestinationCountry` [`read_only`]
+
+Type: `string`
+
+Destination country or Internal region for private addresses. Maximum length is 32 bytes.
+
+##### `trafficElapsedTime` [`read_only`]
 
 Type: `integer`
 
-Elapsed time.
+Elapsed time of the session.
 
-##### `trafficPacketsReceived`
-
-Type: `string`
-
-Bytes received.
-
-##### `trafficPacketsSent`
+##### `trafficPacketsReceived` [`read_only`]
 
 Type: `string`
 
-Bytes received.
+Number of server-to-client packets for the session.
 
-##### `trafficSessionEndReason`
-
-Type: `string`
-
-Session end reason.
-
-##### `trafficSourceCountry`
+##### `trafficPacketsSent` [`read_only`]
 
 Type: `string`
 
-Traffic source country.
+Number of client-to-server packets for the session.
 
-##### `trafficStartTime`
+##### `trafficSessionEndReason` [`read_only`]
+
+Type: `string`
+
+The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
+
+##### `trafficSourceCountry` [`read_only`]
+
+Type: `string`
+
+Source country or Internal region for private addresses; maximum length is 32 bytes.
+
+##### `trafficStartTime` [`read_only`]
 
 Type: `time`
 
-Start time.
+Time of session start.
 
-##### `type`
+##### `type` [`read_only`]
 
 Type: `enum(Traffic | Threat | URLFiltering)`
 
 Type of the log.
 
-##### `urlFilteringCategory`
+##### `urlFilteringCategory` [`read_only`]
 
 Type: `string`
 
-Url filtering Category.
+URL category associated with the session (if applicable).
 
-##### `urlFilteringStartTime`
+##### `urlFilteringStartTime` [`read_only`]
 
 Type: `time`
 
-Start time.
-
-##### `xffIP`
-
-Type: `string`
-
-Xff ip.
+Time of session start.
 
 ### LogQuery
 

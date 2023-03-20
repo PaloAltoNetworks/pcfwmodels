@@ -4,136 +4,173 @@
       "firewalllog": {
         "description": "Represents a log line in a logquery result.",
         "properties": {
+          "XFFIP": {
+            "description": "The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.",
+            "readOnly": true,
+            "type": "string"
+          },
           "accountID": {
-            "description": "AWS account id that generated the log.",
+            "description": "AWS account ID that generated the log.",
+            "readOnly": true,
             "type": "string"
           },
           "action": {
-            "description": "Action the NGFW took.",
+            "description": "Action taken for the session.",
+            "readOnly": true,
             "type": "string"
           },
           "app": {
-            "description": "Application.",
+            "description": "Application associated with the session.",
+            "readOnly": true,
             "type": "string"
           },
           "destinationIP": {
-            "description": "Destination ip.",
+            "description": "Original session destination IP address.",
+            "readOnly": true,
             "type": "string"
           },
           "destinationPort": {
-            "description": "Destination port.",
+            "description": "Destination port utilized by the session.",
+            "readOnly": true,
             "type": "integer"
           },
           "firewallName": {
             "description": "Name of firewall that generated the log.",
+            "readOnly": true,
             "type": "string"
           },
           "protocol": {
-            "description": "Network protocol.",
+            "description": "IP protocol associated with the session.",
+            "readOnly": true,
             "type": "string"
           },
           "region": {
             "description": "AWS region that generated the log.",
+            "readOnly": true,
             "type": "string"
           },
           "repeatCount": {
-            "description": "Repeat count.",
+            "description": "Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.",
+            "readOnly": true,
             "type": "integer"
           },
           "rule": {
-            "description": "NGFW rule.",
+            "description": "Name of the rule that the session matched.",
+            "readOnly": true,
             "type": "string"
           },
           "sessionID": {
-            "description": "Session id.",
+            "description": "An internal numerical identifier applied to each session.",
+            "readOnly": true,
             "type": "string"
           },
           "sourceIP": {
-            "description": "Source ip.",
+            "description": "Original session source IP address.",
+            "readOnly": true,
             "type": "string"
           },
           "sourcePort": {
-            "description": "Source port.",
+            "description": "Source port utilized by the session.",
+            "readOnly": true,
             "type": "integer"
           },
           "threatCategory": {
-            "description": "Threat category.",
+            "description": "Describes threat categories used to classify different types of threat signatures.",
+            "readOnly": true,
             "type": "string"
           },
           "threatContentName": {
-            "description": "Threat content name.",
+            "description": "Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.",
+            "readOnly": true,
             "type": "string"
           },
           "threatContentver": {
-            "description": "Contentver.",
+            "description": "Applications and Threats version on your firewall when the log was generated.",
+            "readOnly": true,
             "type": "string"
           },
           "threatDataFilterReason": {
-            "description": "Data filter reason.",
+            "description": "Reason for Data Filtering action.",
+            "readOnly": true,
             "type": "string"
           },
           "threatDirection": {
-            "description": "Traffic direction.",
+            "description": "Indicates the direction of the attack, client-to-server or server-to-client.",
+            "readOnly": true,
             "type": "string"
           },
           "threatFileType": {
-            "description": "Filetype.",
+            "description": "File type associated with the threat.",
+            "readOnly": true,
             "type": "string"
           },
           "threatSeverity": {
-            "description": "Severity.",
+            "description": "Severity associated with the threat; values are informational, low, medium, high, critical.",
+            "readOnly": true,
             "type": "string"
           },
           "threatSubType": {
-            "description": "Sub type.",
+            "description": "Subtype of threat log.",
+            "readOnly": true,
             "type": "string"
           },
           "timeGenerated": {
-            "description": "Time generated.",
+            "description": "Time the log was generated on the dataplane.",
             "example": "2023-03-06T20:50:56Z",
             "format": "date-time",
+            "readOnly": true,
             "type": "string"
           },
           "trafficBytesReceived": {
-            "description": "Bytes received.",
+            "description": "Number of bytes in the server-to-client direction of the session.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficBytesSent": {
-            "description": "Bytes sent.",
+            "description": "Number of bytes in the client-to-server direction of the session.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficCategory": {
-            "description": "Category.",
+            "description": "URL category associated with the session (if applicable).",
+            "readOnly": true,
             "type": "string"
           },
           "trafficDestinationCountry": {
-            "description": "Traffic destination country.",
+            "description": "Destination country or Internal region for private addresses. Maximum length is 32 bytes.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficElapsedTime": {
-            "description": "Elapsed time.",
+            "description": "Elapsed time of the session.",
+            "readOnly": true,
             "type": "integer"
           },
           "trafficPacketsReceived": {
-            "description": "Bytes received.",
+            "description": "Number of server-to-client packets for the session.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficPacketsSent": {
-            "description": "Bytes received.",
+            "description": "Number of client-to-server packets for the session.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficSessionEndReason": {
-            "description": "Session end reason.",
+            "description": "The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficSourceCountry": {
-            "description": "Traffic source country.",
+            "description": "Source country or Internal region for private addresses; maximum length is 32 bytes.",
+            "readOnly": true,
             "type": "string"
           },
           "trafficStartTime": {
-            "description": "Start time.",
+            "description": "Time of session start.",
             "example": "2023-03-06T20:50:56Z",
             "format": "date-time",
+            "readOnly": true,
             "type": "string"
           },
           "type": {
@@ -142,20 +179,19 @@
               "Traffic",
               "Threat",
               "URLFiltering"
-            ]
+            ],
+            "readOnly": true
           },
           "urlFilteringCategory": {
-            "description": "Url filtering Category.",
+            "description": "URL category associated with the session (if applicable).",
+            "readOnly": true,
             "type": "string"
           },
           "urlFilteringStartTime": {
-            "description": "Start time.",
+            "description": "Time of session start.",
             "example": "2023-03-06T20:50:56Z",
             "format": "date-time",
-            "type": "string"
-          },
-          "xffIP": {
-            "description": "Xff ip.",
+            "readOnly": true,
             "type": "string"
           }
         },

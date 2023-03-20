@@ -12,166 +12,198 @@ model:
 attributes:
   v1:
   - name: accountID
-    description: AWS account id that generated the log.
+    description: AWS account ID that generated the log.
     type: string
     exposed: true
+    read_only: true
 
   - name: action
-    description: Action the NGFW took.
+    description: Action taken for the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: app
-    description: Application.
+    description: Application associated with the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: destinationIP
-    description: Destination ip.
+    description: Original session destination IP address.
     type: string
     exposed: true
+    read_only: true
 
   - name: destinationPort
-    description: Destination port.
+    description: Destination port utilized by the session.
     type: integer
     exposed: true
+    read_only: true
 
   - name: firewallName
     description: Name of firewall that generated the log.
     type: string
     exposed: true
+    read_only: true
 
   - name: protocol
-    description: Network protocol.
+    description: IP protocol associated with the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: region
     description: AWS region that generated the log.
     type: string
     exposed: true
+    read_only: true
 
   - name: repeatCount
-    description: Repeat count.
+    description: Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
     type: integer
     exposed: true
+    read_only: true
 
   - name: rule
-    description: NGFW rule.
+    description: Name of the rule that the session matched.
     type: string
     exposed: true
+    read_only: true
 
   - name: sessionID
-    description: Session id.
+    description: An internal numerical identifier applied to each session.
     type: string
     exposed: true
+    read_only: true
 
   - name: sourceIP
-    description: Source ip.
+    description: Original session source IP address.
     type: string
     exposed: true
+    read_only: true
 
   - name: sourcePort
-    description: Source port.
+    description: Source port utilized by the session.
     type: integer
     exposed: true
+    read_only: true
 
   - name: threatCategory
-    description: Threat category.
+    description: Describes threat categories used to classify different types of threat signatures.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatContentName
-    description: Threat content name.
+    description: Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatContentver
-    description: Contentver.
+    description: Applications and Threats version on your firewall when the log was generated.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatDataFilterReason
-    description: Data filter reason.
+    description: Reason for Data Filtering action.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatDirection
-    description: Traffic direction.
+    description: Indicates the direction of the attack, client-to-server or server-to-client.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatFileType
-    description: Filetype.
+    description: File type associated with the threat.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatSeverity
-    description: Severity.
+    description: Severity associated with the threat; values are informational, low, medium, high, critical.
     type: string
     exposed: true
+    read_only: true
 
   - name: threatSubType
-    description: Sub type.
+    description: Subtype of threat log.
     type: string
     exposed: true
+    read_only: true
 
   - name: timeGenerated
-    description: Time generated.
+    description: Time the log was generated on the dataplane.
     type: time
     exposed: true
     example_value: "2023-03-06T20:50:56Z"
+    read_only: true
 
   - name: trafficBytesReceived
-    description: Bytes received.
+    description: Number of bytes in the server-to-client direction of the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficBytesSent
-    description: Bytes sent.
+    description: Number of bytes in the client-to-server direction of the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficCategory
-    description: Category.
+    description: URL category associated with the session (if applicable).
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficDestinationCountry
-    description: Traffic destination country.
+    description: Destination country or Internal region for private addresses. Maximum length is 32 bytes.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficElapsedTime
-    description: Elapsed time.
+    description: Elapsed time of the session.
     type: integer
     exposed: true
+    read_only: true
 
   - name: trafficPacketsReceived
-    description: Bytes received.
+    description: Number of server-to-client packets for the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficPacketsSent
-    description: Bytes received.
+    description: Number of client-to-server packets for the session.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficSessionEndReason
-    description: Session end reason.
+    description: The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficSourceCountry
-    description: Traffic source country.
+    description: Source country or Internal region for private addresses; maximum length is 32 bytes.
     type: string
     exposed: true
+    read_only: true
 
   - name: trafficStartTime
-    description: Start time.
+    description: Time of session start.
     type: time
     exposed: true
     example_value: "2023-03-06T20:50:56Z"
+    read_only: true
 
   - name: type
     description: Type of the log.
@@ -181,19 +213,26 @@ attributes:
     - Traffic
     - Threat
     - URLFiltering
+    read_only: true
 
   - name: urlFilteringCategory
-    description: Url filtering Category.
+    description: URL category associated with the session (if applicable).
     type: string
     exposed: true
+    read_only: true
 
   - name: urlFilteringStartTime
-    description: Start time.
+    description: Time of session start.
     type: time
     exposed: true
     example_value: "2023-03-06T20:50:56Z"
+    read_only: true
 
-  - name: xffIP
-    description: Xff ip.
+  - name: XFFIP
+    description:
+      The IP address of the user who requested the web page or the IP address of the next to last device that the 
+      request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, 
+      the firewall displays the IP address of the most recent device.
     type: string
     exposed: true
+    read_only: true

@@ -28,113 +28,113 @@ const (
 
 // FirewallLog represents the model of a firewalllog
 type FirewallLog struct {
-	// AWS account id that generated the log.
+	// The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.
+	XFFIP string `json:"XFFIP" msgpack:"XFFIP" bson:"-" mapstructure:"XFFIP,omitempty"`
+
+	// AWS account ID that generated the log.
 	AccountID string `json:"accountID" msgpack:"accountID" bson:"-" mapstructure:"accountID,omitempty"`
 
-	// Action the NGFW took.
+	// Action taken for the session.
 	Action string `json:"action" msgpack:"action" bson:"-" mapstructure:"action,omitempty"`
 
-	// Application.
+	// Application associated with the session.
 	App string `json:"app" msgpack:"app" bson:"-" mapstructure:"app,omitempty"`
 
-	// Destination ip.
+	// Original session destination IP address.
 	DestinationIP string `json:"destinationIP" msgpack:"destinationIP" bson:"-" mapstructure:"destinationIP,omitempty"`
 
-	// Destination port.
+	// Destination port utilized by the session.
 	DestinationPort int `json:"destinationPort" msgpack:"destinationPort" bson:"-" mapstructure:"destinationPort,omitempty"`
 
 	// Name of firewall that generated the log.
 	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"-" mapstructure:"firewallName,omitempty"`
 
-	// Network protocol.
+	// IP protocol associated with the session.
 	Protocol string `json:"protocol" msgpack:"protocol" bson:"-" mapstructure:"protocol,omitempty"`
 
 	// AWS region that generated the log.
 	Region string `json:"region" msgpack:"region" bson:"-" mapstructure:"region,omitempty"`
 
-	// Repeat count.
+	// Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
 	RepeatCount int `json:"repeatCount" msgpack:"repeatCount" bson:"-" mapstructure:"repeatCount,omitempty"`
 
-	// NGFW rule.
+	// Name of the rule that the session matched.
 	Rule string `json:"rule" msgpack:"rule" bson:"-" mapstructure:"rule,omitempty"`
 
-	// Session id.
+	// An internal numerical identifier applied to each session.
 	SessionID string `json:"sessionID" msgpack:"sessionID" bson:"-" mapstructure:"sessionID,omitempty"`
 
-	// Source ip.
+	// Original session source IP address.
 	SourceIP string `json:"sourceIP" msgpack:"sourceIP" bson:"-" mapstructure:"sourceIP,omitempty"`
 
-	// Source port.
+	// Source port utilized by the session.
 	SourcePort int `json:"sourcePort" msgpack:"sourcePort" bson:"-" mapstructure:"sourcePort,omitempty"`
 
-	// Threat category.
+	// Describes threat categories used to classify different types of threat signatures.
 	ThreatCategory string `json:"threatCategory" msgpack:"threatCategory" bson:"-" mapstructure:"threatCategory,omitempty"`
 
-	// Threat content name.
+	// Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
 	ThreatContentName string `json:"threatContentName" msgpack:"threatContentName" bson:"-" mapstructure:"threatContentName,omitempty"`
 
-	// Contentver.
+	// Applications and Threats version on your firewall when the log was generated.
 	ThreatContentver string `json:"threatContentver" msgpack:"threatContentver" bson:"-" mapstructure:"threatContentver,omitempty"`
 
-	// Data filter reason.
+	// Reason for Data Filtering action.
 	ThreatDataFilterReason string `json:"threatDataFilterReason" msgpack:"threatDataFilterReason" bson:"-" mapstructure:"threatDataFilterReason,omitempty"`
 
-	// Traffic direction.
+	// Indicates the direction of the attack, client-to-server or server-to-client.
 	ThreatDirection string `json:"threatDirection" msgpack:"threatDirection" bson:"-" mapstructure:"threatDirection,omitempty"`
 
-	// Filetype.
+	// File type associated with the threat.
 	ThreatFileType string `json:"threatFileType" msgpack:"threatFileType" bson:"-" mapstructure:"threatFileType,omitempty"`
 
-	// Severity.
+	// Severity associated with the threat; values are informational, low, medium, high, critical.
 	ThreatSeverity string `json:"threatSeverity" msgpack:"threatSeverity" bson:"-" mapstructure:"threatSeverity,omitempty"`
 
-	// Sub type.
+	// Subtype of threat log.
 	ThreatSubType string `json:"threatSubType" msgpack:"threatSubType" bson:"-" mapstructure:"threatSubType,omitempty"`
 
-	// Time generated.
+	// Time the log was generated on the dataplane.
 	TimeGenerated time.Time `json:"timeGenerated" msgpack:"timeGenerated" bson:"-" mapstructure:"timeGenerated,omitempty"`
 
-	// Bytes received.
+	// Number of bytes in the server-to-client direction of the session.
 	TrafficBytesReceived string `json:"trafficBytesReceived" msgpack:"trafficBytesReceived" bson:"-" mapstructure:"trafficBytesReceived,omitempty"`
 
-	// Bytes sent.
+	// Number of bytes in the client-to-server direction of the session.
 	TrafficBytesSent string `json:"trafficBytesSent" msgpack:"trafficBytesSent" bson:"-" mapstructure:"trafficBytesSent,omitempty"`
 
-	// Category.
+	// URL category associated with the session (if applicable).
 	TrafficCategory string `json:"trafficCategory" msgpack:"trafficCategory" bson:"-" mapstructure:"trafficCategory,omitempty"`
 
-	// Traffic destination country.
+	// Destination country or Internal region for private addresses. Maximum length is 32 bytes.
 	TrafficDestinationCountry string `json:"trafficDestinationCountry" msgpack:"trafficDestinationCountry" bson:"-" mapstructure:"trafficDestinationCountry,omitempty"`
 
-	// Elapsed time.
+	// Elapsed time of the session.
 	TrafficElapsedTime int `json:"trafficElapsedTime" msgpack:"trafficElapsedTime" bson:"-" mapstructure:"trafficElapsedTime,omitempty"`
 
-	// Bytes received.
+	// Number of server-to-client packets for the session.
 	TrafficPacketsReceived string `json:"trafficPacketsReceived" msgpack:"trafficPacketsReceived" bson:"-" mapstructure:"trafficPacketsReceived,omitempty"`
 
-	// Bytes received.
+	// Number of client-to-server packets for the session.
 	TrafficPacketsSent string `json:"trafficPacketsSent" msgpack:"trafficPacketsSent" bson:"-" mapstructure:"trafficPacketsSent,omitempty"`
 
-	// Session end reason.
+	// The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
 	TrafficSessionEndReason string `json:"trafficSessionEndReason" msgpack:"trafficSessionEndReason" bson:"-" mapstructure:"trafficSessionEndReason,omitempty"`
 
-	// Traffic source country.
+	// Source country or Internal region for private addresses; maximum length is 32 bytes.
 	TrafficSourceCountry string `json:"trafficSourceCountry" msgpack:"trafficSourceCountry" bson:"-" mapstructure:"trafficSourceCountry,omitempty"`
 
-	// Start time.
+	// Time of session start.
 	TrafficStartTime time.Time `json:"trafficStartTime" msgpack:"trafficStartTime" bson:"-" mapstructure:"trafficStartTime,omitempty"`
 
 	// Type of the log.
 	Type FirewallLogTypeValue `json:"type" msgpack:"type" bson:"-" mapstructure:"type,omitempty"`
 
-	// Url filtering Category.
+	// URL category associated with the session (if applicable).
 	UrlFilteringCategory string `json:"urlFilteringCategory" msgpack:"urlFilteringCategory" bson:"-" mapstructure:"urlFilteringCategory,omitempty"`
 
-	// Start time.
+	// Time of session start.
 	UrlFilteringStartTime time.Time `json:"urlFilteringStartTime" msgpack:"urlFilteringStartTime" bson:"-" mapstructure:"urlFilteringStartTime,omitempty"`
-
-	// Xff ip.
-	XffIP string `json:"xffIP" msgpack:"xffIP" bson:"-" mapstructure:"xffIP,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -250,6 +250,8 @@ func (*FirewallLog) AttributeSpecifications() map[string]elemental.AttributeSpec
 func (o *FirewallLog) ValueForAttribute(name string) any {
 
 	switch name {
+	case "XFFIP":
+		return o.XFFIP
 	case "accountID":
 		return o.AccountID
 	case "action":
@@ -320,8 +322,6 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.UrlFilteringCategory
 	case "urlFilteringStartTime":
 		return o.UrlFilteringStartTime
-	case "xffIP":
-		return o.XffIP
 	}
 
 	return nil
@@ -329,44 +329,58 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 
 // FirewallLogAttributesMap represents the map of attribute for FirewallLog.
 var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
+	"XFFIP": {
+		AllowedChoices: []string{},
+		ConvertedName:  "XFFIP",
+		Description:    `The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.`,
+		Exposed:        true,
+		Name:           "XFFIP",
+		ReadOnly:       true,
+		Type:           "string",
+	},
 	"AccountID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "AccountID",
-		Description:    `AWS account id that generated the log.`,
+		Description:    `AWS account ID that generated the log.`,
 		Exposed:        true,
 		Name:           "accountID",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"Action": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Action",
-		Description:    `Action the NGFW took.`,
+		Description:    `Action taken for the session.`,
 		Exposed:        true,
 		Name:           "action",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"App": {
 		AllowedChoices: []string{},
 		ConvertedName:  "App",
-		Description:    `Application.`,
+		Description:    `Application associated with the session.`,
 		Exposed:        true,
 		Name:           "app",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"DestinationIP": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationIP",
-		Description:    `Destination ip.`,
+		Description:    `Original session destination IP address.`,
 		Exposed:        true,
 		Name:           "destinationIP",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"DestinationPort": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationPort",
-		Description:    `Destination port.`,
+		Description:    `Destination port utilized by the session.`,
 		Exposed:        true,
 		Name:           "destinationPort",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"FirewallName": {
@@ -375,14 +389,16 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `Name of firewall that generated the log.`,
 		Exposed:        true,
 		Name:           "firewallName",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"Protocol": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Protocol",
-		Description:    `Network protocol.`,
+		Description:    `IP protocol associated with the session.`,
 		Exposed:        true,
 		Name:           "protocol",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"Region": {
@@ -391,198 +407,223 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `AWS region that generated the log.`,
 		Exposed:        true,
 		Name:           "region",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"RepeatCount": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RepeatCount",
-		Description:    `Repeat count.`,
+		Description:    `Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.`,
 		Exposed:        true,
 		Name:           "repeatCount",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"Rule": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Rule",
-		Description:    `NGFW rule.`,
+		Description:    `Name of the rule that the session matched.`,
 		Exposed:        true,
 		Name:           "rule",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"SessionID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SessionID",
-		Description:    `Session id.`,
+		Description:    `An internal numerical identifier applied to each session.`,
 		Exposed:        true,
 		Name:           "sessionID",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"SourceIP": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SourceIP",
-		Description:    `Source ip.`,
+		Description:    `Original session source IP address.`,
 		Exposed:        true,
 		Name:           "sourceIP",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"SourcePort": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SourcePort",
-		Description:    `Source port.`,
+		Description:    `Source port utilized by the session.`,
 		Exposed:        true,
 		Name:           "sourcePort",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"ThreatCategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatCategory",
-		Description:    `Threat category.`,
+		Description:    `Describes threat categories used to classify different types of threat signatures.`,
 		Exposed:        true,
 		Name:           "threatCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatContentName": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentName",
-		Description:    `Threat content name.`,
+		Description:    `Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.`,
 		Exposed:        true,
 		Name:           "threatContentName",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatContentver": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentver",
-		Description:    `Contentver.`,
+		Description:    `Applications and Threats version on your firewall when the log was generated.`,
 		Exposed:        true,
 		Name:           "threatContentver",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatDataFilterReason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatDataFilterReason",
-		Description:    `Data filter reason.`,
+		Description:    `Reason for Data Filtering action.`,
 		Exposed:        true,
 		Name:           "threatDataFilterReason",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatDirection": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatDirection",
-		Description:    `Traffic direction.`,
+		Description:    `Indicates the direction of the attack, client-to-server or server-to-client.`,
 		Exposed:        true,
 		Name:           "threatDirection",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatFileType": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatFileType",
-		Description:    `Filetype.`,
+		Description:    `File type associated with the threat.`,
 		Exposed:        true,
 		Name:           "threatFileType",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatSeverity": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSeverity",
-		Description:    `Severity.`,
+		Description:    `Severity associated with the threat; values are informational, low, medium, high, critical.`,
 		Exposed:        true,
 		Name:           "threatSeverity",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"ThreatSubType": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSubType",
-		Description:    `Sub type.`,
+		Description:    `Subtype of threat log.`,
 		Exposed:        true,
 		Name:           "threatSubType",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TimeGenerated": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TimeGenerated",
-		Description:    `Time generated.`,
+		Description:    `Time the log was generated on the dataplane.`,
 		Exposed:        true,
 		Name:           "timeGenerated",
+		ReadOnly:       true,
 		Type:           "time",
 	},
 	"TrafficBytesReceived": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficBytesReceived",
-		Description:    `Bytes received.`,
+		Description:    `Number of bytes in the server-to-client direction of the session.`,
 		Exposed:        true,
 		Name:           "trafficBytesReceived",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficBytesSent": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficBytesSent",
-		Description:    `Bytes sent.`,
+		Description:    `Number of bytes in the client-to-server direction of the session.`,
 		Exposed:        true,
 		Name:           "trafficBytesSent",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficCategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficCategory",
-		Description:    `Category.`,
+		Description:    `URL category associated with the session (if applicable).`,
 		Exposed:        true,
 		Name:           "trafficCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficDestinationCountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficDestinationCountry",
-		Description:    `Traffic destination country.`,
+		Description:    `Destination country or Internal region for private addresses. Maximum length is 32 bytes.`,
 		Exposed:        true,
 		Name:           "trafficDestinationCountry",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficElapsedTime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficElapsedTime",
-		Description:    `Elapsed time.`,
+		Description:    `Elapsed time of the session.`,
 		Exposed:        true,
 		Name:           "trafficElapsedTime",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"TrafficPacketsReceived": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficPacketsReceived",
-		Description:    `Bytes received.`,
+		Description:    `Number of server-to-client packets for the session.`,
 		Exposed:        true,
 		Name:           "trafficPacketsReceived",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficPacketsSent": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficPacketsSent",
-		Description:    `Bytes received.`,
+		Description:    `Number of client-to-server packets for the session.`,
 		Exposed:        true,
 		Name:           "trafficPacketsSent",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficSessionEndReason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSessionEndReason",
-		Description:    `Session end reason.`,
+		Description:    `The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.`,
 		Exposed:        true,
 		Name:           "trafficSessionEndReason",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficSourceCountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSourceCountry",
-		Description:    `Traffic source country.`,
+		Description:    `Source country or Internal region for private addresses; maximum length is 32 bytes.`,
 		Exposed:        true,
 		Name:           "trafficSourceCountry",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"TrafficStartTime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficStartTime",
-		Description:    `Start time.`,
+		Description:    `Time of session start.`,
 		Exposed:        true,
 		Name:           "trafficStartTime",
+		ReadOnly:       true,
 		Type:           "time",
 	},
 	"Type": {
@@ -591,74 +632,83 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 		Description:    `Type of the log.`,
 		Exposed:        true,
 		Name:           "type",
+		ReadOnly:       true,
 		Type:           "enum",
 	},
 	"UrlFilteringCategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringCategory",
-		Description:    `Url filtering Category.`,
+		Description:    `URL category associated with the session (if applicable).`,
 		Exposed:        true,
 		Name:           "urlFilteringCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"UrlFilteringStartTime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringStartTime",
-		Description:    `Start time.`,
+		Description:    `Time of session start.`,
 		Exposed:        true,
 		Name:           "urlFilteringStartTime",
+		ReadOnly:       true,
 		Type:           "time",
-	},
-	"XffIP": {
-		AllowedChoices: []string{},
-		ConvertedName:  "XffIP",
-		Description:    `Xff ip.`,
-		Exposed:        true,
-		Name:           "xffIP",
-		Type:           "string",
 	},
 }
 
 // FirewallLogLowerCaseAttributesMap represents the map of attribute for FirewallLog.
 var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+	"xffip": {
+		AllowedChoices: []string{},
+		ConvertedName:  "XFFIP",
+		Description:    `The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.`,
+		Exposed:        true,
+		Name:           "XFFIP",
+		ReadOnly:       true,
+		Type:           "string",
+	},
 	"accountid": {
 		AllowedChoices: []string{},
 		ConvertedName:  "AccountID",
-		Description:    `AWS account id that generated the log.`,
+		Description:    `AWS account ID that generated the log.`,
 		Exposed:        true,
 		Name:           "accountID",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"action": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Action",
-		Description:    `Action the NGFW took.`,
+		Description:    `Action taken for the session.`,
 		Exposed:        true,
 		Name:           "action",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"app": {
 		AllowedChoices: []string{},
 		ConvertedName:  "App",
-		Description:    `Application.`,
+		Description:    `Application associated with the session.`,
 		Exposed:        true,
 		Name:           "app",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"destinationip": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationIP",
-		Description:    `Destination ip.`,
+		Description:    `Original session destination IP address.`,
 		Exposed:        true,
 		Name:           "destinationIP",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"destinationport": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationPort",
-		Description:    `Destination port.`,
+		Description:    `Destination port utilized by the session.`,
 		Exposed:        true,
 		Name:           "destinationPort",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"firewallname": {
@@ -667,14 +717,16 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description:    `Name of firewall that generated the log.`,
 		Exposed:        true,
 		Name:           "firewallName",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"protocol": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Protocol",
-		Description:    `Network protocol.`,
+		Description:    `IP protocol associated with the session.`,
 		Exposed:        true,
 		Name:           "protocol",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"region": {
@@ -683,198 +735,223 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description:    `AWS region that generated the log.`,
 		Exposed:        true,
 		Name:           "region",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"repeatcount": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RepeatCount",
-		Description:    `Repeat count.`,
+		Description:    `Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.`,
 		Exposed:        true,
 		Name:           "repeatCount",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"rule": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Rule",
-		Description:    `NGFW rule.`,
+		Description:    `Name of the rule that the session matched.`,
 		Exposed:        true,
 		Name:           "rule",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"sessionid": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SessionID",
-		Description:    `Session id.`,
+		Description:    `An internal numerical identifier applied to each session.`,
 		Exposed:        true,
 		Name:           "sessionID",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"sourceip": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SourceIP",
-		Description:    `Source ip.`,
+		Description:    `Original session source IP address.`,
 		Exposed:        true,
 		Name:           "sourceIP",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"sourceport": {
 		AllowedChoices: []string{},
 		ConvertedName:  "SourcePort",
-		Description:    `Source port.`,
+		Description:    `Source port utilized by the session.`,
 		Exposed:        true,
 		Name:           "sourcePort",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"threatcategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatCategory",
-		Description:    `Threat category.`,
+		Description:    `Describes threat categories used to classify different types of threat signatures.`,
 		Exposed:        true,
 		Name:           "threatCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatcontentname": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentName",
-		Description:    `Threat content name.`,
+		Description:    `Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.`,
 		Exposed:        true,
 		Name:           "threatContentName",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatcontentver": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentver",
-		Description:    `Contentver.`,
+		Description:    `Applications and Threats version on your firewall when the log was generated.`,
 		Exposed:        true,
 		Name:           "threatContentver",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatdatafilterreason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatDataFilterReason",
-		Description:    `Data filter reason.`,
+		Description:    `Reason for Data Filtering action.`,
 		Exposed:        true,
 		Name:           "threatDataFilterReason",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatdirection": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatDirection",
-		Description:    `Traffic direction.`,
+		Description:    `Indicates the direction of the attack, client-to-server or server-to-client.`,
 		Exposed:        true,
 		Name:           "threatDirection",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatfiletype": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatFileType",
-		Description:    `Filetype.`,
+		Description:    `File type associated with the threat.`,
 		Exposed:        true,
 		Name:           "threatFileType",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatseverity": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSeverity",
-		Description:    `Severity.`,
+		Description:    `Severity associated with the threat; values are informational, low, medium, high, critical.`,
 		Exposed:        true,
 		Name:           "threatSeverity",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"threatsubtype": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSubType",
-		Description:    `Sub type.`,
+		Description:    `Subtype of threat log.`,
 		Exposed:        true,
 		Name:           "threatSubType",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"timegenerated": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TimeGenerated",
-		Description:    `Time generated.`,
+		Description:    `Time the log was generated on the dataplane.`,
 		Exposed:        true,
 		Name:           "timeGenerated",
+		ReadOnly:       true,
 		Type:           "time",
 	},
 	"trafficbytesreceived": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficBytesReceived",
-		Description:    `Bytes received.`,
+		Description:    `Number of bytes in the server-to-client direction of the session.`,
 		Exposed:        true,
 		Name:           "trafficBytesReceived",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficbytessent": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficBytesSent",
-		Description:    `Bytes sent.`,
+		Description:    `Number of bytes in the client-to-server direction of the session.`,
 		Exposed:        true,
 		Name:           "trafficBytesSent",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficcategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficCategory",
-		Description:    `Category.`,
+		Description:    `URL category associated with the session (if applicable).`,
 		Exposed:        true,
 		Name:           "trafficCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficdestinationcountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficDestinationCountry",
-		Description:    `Traffic destination country.`,
+		Description:    `Destination country or Internal region for private addresses. Maximum length is 32 bytes.`,
 		Exposed:        true,
 		Name:           "trafficDestinationCountry",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficelapsedtime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficElapsedTime",
-		Description:    `Elapsed time.`,
+		Description:    `Elapsed time of the session.`,
 		Exposed:        true,
 		Name:           "trafficElapsedTime",
+		ReadOnly:       true,
 		Type:           "integer",
 	},
 	"trafficpacketsreceived": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficPacketsReceived",
-		Description:    `Bytes received.`,
+		Description:    `Number of server-to-client packets for the session.`,
 		Exposed:        true,
 		Name:           "trafficPacketsReceived",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficpacketssent": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficPacketsSent",
-		Description:    `Bytes received.`,
+		Description:    `Number of client-to-server packets for the session.`,
 		Exposed:        true,
 		Name:           "trafficPacketsSent",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficsessionendreason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSessionEndReason",
-		Description:    `Session end reason.`,
+		Description:    `The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.`,
 		Exposed:        true,
 		Name:           "trafficSessionEndReason",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficsourcecountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSourceCountry",
-		Description:    `Traffic source country.`,
+		Description:    `Source country or Internal region for private addresses; maximum length is 32 bytes.`,
 		Exposed:        true,
 		Name:           "trafficSourceCountry",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"trafficstarttime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficStartTime",
-		Description:    `Start time.`,
+		Description:    `Time of session start.`,
 		Exposed:        true,
 		Name:           "trafficStartTime",
+		ReadOnly:       true,
 		Type:           "time",
 	},
 	"type": {
@@ -883,31 +960,26 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description:    `Type of the log.`,
 		Exposed:        true,
 		Name:           "type",
+		ReadOnly:       true,
 		Type:           "enum",
 	},
 	"urlfilteringcategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringCategory",
-		Description:    `Url filtering Category.`,
+		Description:    `URL category associated with the session (if applicable).`,
 		Exposed:        true,
 		Name:           "urlFilteringCategory",
+		ReadOnly:       true,
 		Type:           "string",
 	},
 	"urlfilteringstarttime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringStartTime",
-		Description:    `Start time.`,
+		Description:    `Time of session start.`,
 		Exposed:        true,
 		Name:           "urlFilteringStartTime",
+		ReadOnly:       true,
 		Type:           "time",
-	},
-	"xffip": {
-		AllowedChoices: []string{},
-		ConvertedName:  "XffIP",
-		Description:    `Xff ip.`,
-		Exposed:        true,
-		Name:           "xffIP",
-		Type:           "string",
 	},
 }
 

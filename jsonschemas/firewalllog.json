@@ -6,7 +6,19 @@
   "$modelRestName": "firewalllog",
   "additionalProperties": true,
   "properties": {
+    "XFFIP": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "accountID": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -17,6 +29,7 @@
       ]
     },
     "action": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -27,6 +40,7 @@
       ]
     },
     "app": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -37,6 +51,7 @@
       ]
     },
     "destinationIP": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -47,6 +62,7 @@
       ]
     },
     "destinationPort": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -57,6 +73,7 @@
       ]
     },
     "firewallName": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -67,6 +84,7 @@
       ]
     },
     "protocol": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -77,6 +95,7 @@
       ]
     },
     "region": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -87,6 +106,7 @@
       ]
     },
     "repeatCount": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -97,6 +117,7 @@
       ]
     },
     "rule": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -107,6 +128,7 @@
       ]
     },
     "sessionID": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -117,6 +139,7 @@
       ]
     },
     "sourceIP": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -127,6 +150,7 @@
       ]
     },
     "sourcePort": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -137,6 +161,7 @@
       ]
     },
     "threatCategory": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -147,6 +172,7 @@
       ]
     },
     "threatContentName": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -157,6 +183,7 @@
       ]
     },
     "threatContentver": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -167,6 +194,7 @@
       ]
     },
     "threatDataFilterReason": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -177,6 +205,7 @@
       ]
     },
     "threatDirection": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -187,6 +216,7 @@
       ]
     },
     "threatFileType": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -197,6 +227,7 @@
       ]
     },
     "threatSeverity": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -207,6 +238,7 @@
       ]
     },
     "threatSubType": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -217,6 +249,7 @@
       ]
     },
     "timeGenerated": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -228,6 +261,7 @@
       ]
     },
     "trafficBytesReceived": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -238,6 +272,7 @@
       ]
     },
     "trafficBytesSent": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -248,6 +283,7 @@
       ]
     },
     "trafficCategory": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -258,6 +294,7 @@
       ]
     },
     "trafficDestinationCountry": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -268,6 +305,7 @@
       ]
     },
     "trafficElapsedTime": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -278,6 +316,7 @@
       ]
     },
     "trafficPacketsReceived": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -288,6 +327,7 @@
       ]
     },
     "trafficPacketsSent": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -298,6 +338,7 @@
       ]
     },
     "trafficSessionEndReason": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -308,6 +349,7 @@
       ]
     },
     "trafficSourceCountry": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -318,6 +360,7 @@
       ]
     },
     "trafficStartTime": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -329,6 +372,7 @@
       ]
     },
     "type": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -343,6 +387,7 @@
       ]
     },
     "urlFilteringCategory": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -353,22 +398,13 @@
       ]
     },
     "urlFilteringStartTime": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
         },
         {
           "format": "date-time",
-          "type": "string"
-        }
-      ]
-    },
-    "xffIP": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
           "type": "string"
         }
       ]
