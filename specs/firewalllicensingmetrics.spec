@@ -7,10 +7,16 @@ model:
   group: core/licensing
   description: Represents firewall licensing metrics.
   private: true
+  get:
+    description: Retrieves the firewall licensing metrics with the given ID.
+  delete:
+    description: Deletes the firewall licensing metrics with the given ID.
   extends:
-  - '@namespaced'
   - '@identifiable-stored'
+  - '@namespaced'
+  - '@base'
   - '@zoned'
+  - '@timeable'
 
 # Indexes
 indexes:

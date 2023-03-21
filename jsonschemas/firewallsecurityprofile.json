@@ -4,7 +4,7 @@
     "@named",
     "@described",
     "@namespaced",
-    "@tags",
+    "@base",
     "@zoned",
     "@timeable"
   ],
@@ -45,6 +45,22 @@
         }
       ]
     },
+    "annotations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      ]
+    },
     "antiSpywareEnabled": {
       "anyOf": [
         {
@@ -62,6 +78,19 @@
         },
         {
           "type": "boolean"
+        }
+      ]
+    },
+    "associatedTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ]
     },
@@ -142,7 +171,8 @@
         }
       ]
     },
-    "tags": {
+    "normalizedTags": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -152,6 +182,16 @@
             "type": "string"
           },
           "type": "array"
+        }
+      ]
+    },
+    "protected": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
         }
       ]
     },

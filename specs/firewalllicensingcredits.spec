@@ -7,11 +7,15 @@ model:
   group: core/licensing
   description: Represents firewall licensing credits.
   get:
-    description: Retrieves the firewalllicensingcredits with the given ID.
+    description: Retrieves the firewall licensing credits with the given ID.
+  delete:
+    description: Deletes the firewall licensing credits with the given ID.
   extends:
-  - '@namespaced'
   - '@identifiable-stored'
+  - '@namespaced'
+  - '@base'
   - '@zoned'
+  - '@timeable'
 
 # Indexes
 indexes:

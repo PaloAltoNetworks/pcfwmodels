@@ -9,6 +9,23 @@
             "readOnly": true,
             "type": "string"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "committedTime": {
             "description": "The date when the ruleset or template was committed.",
             "format": "date-time",
@@ -26,6 +43,14 @@
             "readOnly": true,
             "type": "string"
           },
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
           "objectID": {
             "description": "The ID of the ruleset or template that was committed.",
             "format": "date-time",
@@ -39,6 +64,10 @@
               "FirewallRuleset",
               "FirewallTemplate"
             ]
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
           },
           "updateTime": {
             "description": "Last update date of the object.",

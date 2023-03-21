@@ -130,8 +130,17 @@ type FirewallRule struct {
 	// The action the firewall should take.
 	Action FirewallRuleActionValue `json:"action" msgpack:"action" bson:"action" mapstructure:"action,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
+
 	// Application matching criteria. Any if nil.
 	Applications *FirewallApplicationCriteria `json:"applications" msgpack:"applications" bson:"applications" mapstructure:"applications,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
 
 	// Creation date of the object.
 	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
@@ -145,6 +154,9 @@ type FirewallRule struct {
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags []string `json:"normalizedTags" msgpack:"normalizedTags" bson:"normalizedtags" mapstructure:"normalizedTags,omitempty"`
+
 	// The FirewallTemplate ID, FirewallRuleset ID, or FirewallCommittedRuleset ID
 	// to which the rule belongs.
 	ParentID string `json:"parentID" msgpack:"parentID" bson:"parentid" mapstructure:"parentID,omitempty"`
@@ -155,11 +167,17 @@ type FirewallRule struct {
 	// Values 1-100 for a Templates and 101+ for a Ruleset.
 	Priority int `json:"priority" msgpack:"priority" bson:"priority" mapstructure:"priority,omitempty"`
 
+	// Defines if the object is protected.
+	Protected bool `json:"protected" msgpack:"protected" bson:"protected" mapstructure:"protected,omitempty"`
+
 	// Protocols and Ports. Any if nil.
 	Protoports *FirewallProtoPortsCriteria `json:"protoports" msgpack:"protoports" bson:"protoports" mapstructure:"protoports,omitempty"`
 
 	// Source matching criteria. Any if nil.
 	Source *FirewallTargetCriteria `json:"source" msgpack:"source" bson:"source" mapstructure:"source,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey string `json:"-" msgpack:"-" bson:"updateidempotencykey" mapstructure:"-,omitempty"`
 
 	// Last update date of the object.
 	UpdateTime time.Time `json:"updateTime" msgpack:"updateTime" bson:"updatetime" mapstructure:"updateTime,omitempty"`
@@ -178,14 +196,17 @@ type FirewallRule struct {
 func NewFirewallRule() *FirewallRule {
 
 	return &FirewallRule{
-		ModelVersion:  1,
-		TLSDecryption: FirewallRuleTLSDecryptionNone,
-		URLCategories: NewFirewallURLCategoryCriteria(),
-		Action:        FirewallRuleActionDeny,
-		Applications:  NewFirewallApplicationCriteria(),
-		Destination:   NewFirewallTargetCriteria(),
-		Protoports:    NewFirewallProtoPortsCriteria(),
-		Source:        NewFirewallTargetCriteria(),
+		ModelVersion:   1,
+		TLSDecryption:  FirewallRuleTLSDecryptionNone,
+		URLCategories:  NewFirewallURLCategoryCriteria(),
+		Action:         FirewallRuleActionDeny,
+		Annotations:    map[string][]string{},
+		Applications:   NewFirewallApplicationCriteria(),
+		AssociatedTags: []string{},
+		Destination:    NewFirewallTargetCriteria(),
+		NormalizedTags: []string{},
+		Protoports:     NewFirewallProtoPortsCriteria(),
+		Source:         NewFirewallTargetCriteria(),
 	}
 }
 
@@ -224,16 +245,22 @@ func (o *FirewallRule) GetBSON() (any, error) {
 	s.TLSDecryptionCertificateID = o.TLSDecryptionCertificateID
 	s.URLCategories = o.URLCategories
 	s.Action = o.Action
+	s.Annotations = o.Annotations
 	s.Applications = o.Applications
+	s.AssociatedTags = o.AssociatedTags
+	s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	s.CreateTime = o.CreateTime
 	s.Destination = o.Destination
 	s.Logging = o.Logging
 	s.Namespace = o.Namespace
+	s.NormalizedTags = o.NormalizedTags
 	s.ParentID = o.ParentID
 	s.ParentType = o.ParentType
 	s.Priority = o.Priority
+	s.Protected = o.Protected
 	s.Protoports = o.Protoports
 	s.Source = o.Source
+	s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
 	s.Zone = o.Zone
@@ -259,16 +286,22 @@ func (o *FirewallRule) SetBSON(raw bson.Raw) error {
 	o.TLSDecryptionCertificateID = s.TLSDecryptionCertificateID
 	o.URLCategories = s.URLCategories
 	o.Action = s.Action
+	o.Annotations = s.Annotations
 	o.Applications = s.Applications
+	o.AssociatedTags = s.AssociatedTags
+	o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	o.CreateTime = s.CreateTime
 	o.Destination = s.Destination
 	o.Logging = s.Logging
 	o.Namespace = s.Namespace
+	o.NormalizedTags = s.NormalizedTags
 	o.ParentID = s.ParentID
 	o.ParentType = s.ParentType
 	o.Priority = s.Priority
+	o.Protected = s.Protected
 	o.Protoports = s.Protoports
 	o.Source = s.Source
+	o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
 	o.Zone = s.Zone
@@ -305,6 +338,30 @@ func (o *FirewallRule) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
+// GetAnnotations returns the Annotations of the receiver.
+func (o *FirewallRule) GetAnnotations() map[string][]string {
+
+	return o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the given value.
+func (o *FirewallRule) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *FirewallRule) GetAssociatedTags() []string {
+
+	return o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the given value.
+func (o *FirewallRule) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = associatedTags
+}
+
 // GetCreateTime returns the CreateTime of the receiver.
 func (o *FirewallRule) GetCreateTime() time.Time {
 
@@ -327,6 +384,30 @@ func (o *FirewallRule) GetNamespace() string {
 func (o *FirewallRule) SetNamespace(namespace string) {
 
 	o.Namespace = namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *FirewallRule) GetNormalizedTags() []string {
+
+	return o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the given value.
+func (o *FirewallRule) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *FirewallRule) GetProtected() bool {
+
+	return o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the given value.
+func (o *FirewallRule) SetProtected(protected bool) {
+
+	o.Protected = protected
 }
 
 // GetUpdateTime returns the UpdateTime of the receiver.
@@ -353,16 +434,22 @@ func (o *FirewallRule) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			TLSDecryptionCertificateID: &o.TLSDecryptionCertificateID,
 			URLCategories:              o.URLCategories,
 			Action:                     &o.Action,
+			Annotations:                &o.Annotations,
 			Applications:               o.Applications,
+			AssociatedTags:             &o.AssociatedTags,
+			CreateIdempotencyKey:       &o.CreateIdempotencyKey,
 			CreateTime:                 &o.CreateTime,
 			Destination:                o.Destination,
 			Logging:                    &o.Logging,
 			Namespace:                  &o.Namespace,
+			NormalizedTags:             &o.NormalizedTags,
 			ParentID:                   &o.ParentID,
 			ParentType:                 &o.ParentType,
 			Priority:                   &o.Priority,
+			Protected:                  &o.Protected,
 			Protoports:                 o.Protoports,
 			Source:                     o.Source,
+			UpdateIdempotencyKey:       &o.UpdateIdempotencyKey,
 			UpdateTime:                 &o.UpdateTime,
 			ZHash:                      &o.ZHash,
 			Zone:                       &o.Zone,
@@ -382,8 +469,14 @@ func (o *FirewallRule) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.URLCategories = o.URLCategories
 		case "action":
 			sp.Action = &(o.Action)
+		case "annotations":
+			sp.Annotations = &(o.Annotations)
 		case "applications":
 			sp.Applications = o.Applications
+		case "associatedTags":
+			sp.AssociatedTags = &(o.AssociatedTags)
+		case "createIdempotencyKey":
+			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
 		case "createTime":
 			sp.CreateTime = &(o.CreateTime)
 		case "destination":
@@ -392,16 +485,22 @@ func (o *FirewallRule) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.Logging = &(o.Logging)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
+		case "normalizedTags":
+			sp.NormalizedTags = &(o.NormalizedTags)
 		case "parentID":
 			sp.ParentID = &(o.ParentID)
 		case "parentType":
 			sp.ParentType = &(o.ParentType)
 		case "priority":
 			sp.Priority = &(o.Priority)
+		case "protected":
+			sp.Protected = &(o.Protected)
 		case "protoports":
 			sp.Protoports = o.Protoports
 		case "source":
 			sp.Source = o.Source
+		case "updateIdempotencyKey":
+			sp.UpdateIdempotencyKey = &(o.UpdateIdempotencyKey)
 		case "updateTime":
 			sp.UpdateTime = &(o.UpdateTime)
 		case "zHash":
@@ -436,8 +535,17 @@ func (o *FirewallRule) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Action != nil {
 		o.Action = *so.Action
 	}
+	if so.Annotations != nil {
+		o.Annotations = *so.Annotations
+	}
 	if so.Applications != nil {
 		o.Applications = so.Applications
+	}
+	if so.AssociatedTags != nil {
+		o.AssociatedTags = *so.AssociatedTags
+	}
+	if so.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
 	}
 	if so.CreateTime != nil {
 		o.CreateTime = *so.CreateTime
@@ -451,6 +559,9 @@ func (o *FirewallRule) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
 	}
+	if so.NormalizedTags != nil {
+		o.NormalizedTags = *so.NormalizedTags
+	}
 	if so.ParentID != nil {
 		o.ParentID = *so.ParentID
 	}
@@ -460,11 +571,17 @@ func (o *FirewallRule) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Priority != nil {
 		o.Priority = *so.Priority
 	}
+	if so.Protected != nil {
+		o.Protected = *so.Protected
+	}
 	if so.Protoports != nil {
 		o.Protoports = so.Protoports
 	}
 	if so.Source != nil {
 		o.Source = so.Source
+	}
+	if so.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = *so.UpdateIdempotencyKey
 	}
 	if so.UpdateTime != nil {
 		o.UpdateTime = *so.UpdateTime
@@ -527,6 +644,10 @@ func (o *FirewallRule) Validate() error {
 		if err := o.Applications.Validate(); err != nil {
 			errors = errors.Append(err)
 		}
+	}
+
+	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if o.Destination != nil {
@@ -602,8 +723,14 @@ func (o *FirewallRule) ValueForAttribute(name string) any {
 		return o.URLCategories
 	case "action":
 		return o.Action
+	case "annotations":
+		return o.Annotations
 	case "applications":
 		return o.Applications
+	case "associatedTags":
+		return o.AssociatedTags
+	case "createIdempotencyKey":
+		return o.CreateIdempotencyKey
 	case "createTime":
 		return o.CreateTime
 	case "destination":
@@ -612,16 +739,22 @@ func (o *FirewallRule) ValueForAttribute(name string) any {
 		return o.Logging
 	case "namespace":
 		return o.Namespace
+	case "normalizedTags":
+		return o.NormalizedTags
 	case "parentID":
 		return o.ParentID
 	case "parentType":
 		return o.ParentType
 	case "priority":
 		return o.Priority
+	case "protected":
+		return o.Protected
 	case "protoports":
 		return o.Protoports
 	case "source":
 		return o.Source
+	case "updateIdempotencyKey":
+		return o.UpdateIdempotencyKey
 	case "updateTime":
 		return o.UpdateTime
 	case "zHash":
@@ -693,6 +826,19 @@ var FirewallRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "enum",
 	},
+	"Annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
 	"Applications": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "applications",
@@ -704,6 +850,20 @@ var FirewallRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		SubType:        "firewallapplicationcriteria",
 		Type:           "ref",
 	},
+	"AssociatedTags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
 	"CreateTime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -756,6 +916,22 @@ var FirewallRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+	"NormalizedTags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
 	"ParentID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -793,6 +969,19 @@ to which the rule belongs.`,
 		Stored:         true,
 		Type:           "integer",
 	},
+	"Protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"Protoports": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "protoports",
@@ -815,6 +1004,7 @@ to which the rule belongs.`,
 		SubType:        "firewalltargetcriteria",
 		Type:           "ref",
 	},
+
 	"UpdateTime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -892,6 +1082,19 @@ var FirewallRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecifica
 		Stored:         true,
 		Type:           "enum",
 	},
+	"annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
 	"applications": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "applications",
@@ -903,6 +1106,20 @@ var FirewallRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecifica
 		SubType:        "firewallapplicationcriteria",
 		Type:           "ref",
 	},
+	"associatedtags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
 	"createtime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -955,6 +1172,22 @@ var FirewallRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecifica
 		Stored:         true,
 		Type:           "string",
 	},
+	"normalizedtags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
 	"parentid": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -992,6 +1225,19 @@ to which the rule belongs.`,
 		Stored:         true,
 		Type:           "integer",
 	},
+	"protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"protoports": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "protoports",
@@ -1014,6 +1260,7 @@ to which the rule belongs.`,
 		SubType:        "firewalltargetcriteria",
 		Type:           "ref",
 	},
+
 	"updatetime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1109,8 +1356,17 @@ type SparseFirewallRule struct {
 	// The action the firewall should take.
 	Action *FirewallRuleActionValue `json:"action,omitempty" msgpack:"action,omitempty" bson:"action,omitempty" mapstructure:"action,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
+
 	// Application matching criteria. Any if nil.
 	Applications *FirewallApplicationCriteria `json:"applications,omitempty" msgpack:"applications,omitempty" bson:"applications,omitempty" mapstructure:"applications,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
 
 	// Creation date of the object.
 	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
@@ -1124,6 +1380,9 @@ type SparseFirewallRule struct {
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags *[]string `json:"normalizedTags,omitempty" msgpack:"normalizedTags,omitempty" bson:"normalizedtags,omitempty" mapstructure:"normalizedTags,omitempty"`
+
 	// The FirewallTemplate ID, FirewallRuleset ID, or FirewallCommittedRuleset ID
 	// to which the rule belongs.
 	ParentID *string `json:"parentID,omitempty" msgpack:"parentID,omitempty" bson:"parentid,omitempty" mapstructure:"parentID,omitempty"`
@@ -1134,11 +1393,17 @@ type SparseFirewallRule struct {
 	// Values 1-100 for a Templates and 101+ for a Ruleset.
 	Priority *int `json:"priority,omitempty" msgpack:"priority,omitempty" bson:"priority,omitempty" mapstructure:"priority,omitempty"`
 
+	// Defines if the object is protected.
+	Protected *bool `json:"protected,omitempty" msgpack:"protected,omitempty" bson:"protected,omitempty" mapstructure:"protected,omitempty"`
+
 	// Protocols and Ports. Any if nil.
 	Protoports *FirewallProtoPortsCriteria `json:"protoports,omitempty" msgpack:"protoports,omitempty" bson:"protoports,omitempty" mapstructure:"protoports,omitempty"`
 
 	// Source matching criteria. Any if nil.
 	Source *FirewallTargetCriteria `json:"source,omitempty" msgpack:"source,omitempty" bson:"source,omitempty" mapstructure:"source,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey *string `json:"-" msgpack:"-" bson:"updateidempotencykey,omitempty" mapstructure:"-,omitempty"`
 
 	// Last update date of the object.
 	UpdateTime *time.Time `json:"updateTime,omitempty" msgpack:"updateTime,omitempty" bson:"updatetime,omitempty" mapstructure:"updateTime,omitempty"`
@@ -1208,8 +1473,17 @@ func (o *SparseFirewallRule) GetBSON() (any, error) {
 	if o.Action != nil {
 		s.Action = o.Action
 	}
+	if o.Annotations != nil {
+		s.Annotations = o.Annotations
+	}
 	if o.Applications != nil {
 		s.Applications = o.Applications
+	}
+	if o.AssociatedTags != nil {
+		s.AssociatedTags = o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	}
 	if o.CreateTime != nil {
 		s.CreateTime = o.CreateTime
@@ -1223,6 +1497,9 @@ func (o *SparseFirewallRule) GetBSON() (any, error) {
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		s.NormalizedTags = o.NormalizedTags
+	}
 	if o.ParentID != nil {
 		s.ParentID = o.ParentID
 	}
@@ -1232,11 +1509,17 @@ func (o *SparseFirewallRule) GetBSON() (any, error) {
 	if o.Priority != nil {
 		s.Priority = o.Priority
 	}
+	if o.Protected != nil {
+		s.Protected = o.Protected
+	}
 	if o.Protoports != nil {
 		s.Protoports = o.Protoports
 	}
 	if o.Source != nil {
 		s.Source = o.Source
+	}
+	if o.UpdateIdempotencyKey != nil {
+		s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	}
 	if o.UpdateTime != nil {
 		s.UpdateTime = o.UpdateTime
@@ -1278,8 +1561,17 @@ func (o *SparseFirewallRule) SetBSON(raw bson.Raw) error {
 	if s.Action != nil {
 		o.Action = s.Action
 	}
+	if s.Annotations != nil {
+		o.Annotations = s.Annotations
+	}
 	if s.Applications != nil {
 		o.Applications = s.Applications
+	}
+	if s.AssociatedTags != nil {
+		o.AssociatedTags = s.AssociatedTags
+	}
+	if s.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	}
 	if s.CreateTime != nil {
 		o.CreateTime = s.CreateTime
@@ -1293,6 +1585,9 @@ func (o *SparseFirewallRule) SetBSON(raw bson.Raw) error {
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
 	}
+	if s.NormalizedTags != nil {
+		o.NormalizedTags = s.NormalizedTags
+	}
 	if s.ParentID != nil {
 		o.ParentID = s.ParentID
 	}
@@ -1302,11 +1597,17 @@ func (o *SparseFirewallRule) SetBSON(raw bson.Raw) error {
 	if s.Priority != nil {
 		o.Priority = s.Priority
 	}
+	if s.Protected != nil {
+		o.Protected = s.Protected
+	}
 	if s.Protoports != nil {
 		o.Protoports = s.Protoports
 	}
 	if s.Source != nil {
 		o.Source = s.Source
+	}
+	if s.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	}
 	if s.UpdateTime != nil {
 		o.UpdateTime = s.UpdateTime
@@ -1346,8 +1647,17 @@ func (o *SparseFirewallRule) ToPlain() elemental.PlainIdentifiable {
 	if o.Action != nil {
 		out.Action = *o.Action
 	}
+	if o.Annotations != nil {
+		out.Annotations = *o.Annotations
+	}
 	if o.Applications != nil {
 		out.Applications = o.Applications
+	}
+	if o.AssociatedTags != nil {
+		out.AssociatedTags = *o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
 	}
 	if o.CreateTime != nil {
 		out.CreateTime = *o.CreateTime
@@ -1361,6 +1671,9 @@ func (o *SparseFirewallRule) ToPlain() elemental.PlainIdentifiable {
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		out.NormalizedTags = *o.NormalizedTags
+	}
 	if o.ParentID != nil {
 		out.ParentID = *o.ParentID
 	}
@@ -1370,11 +1683,17 @@ func (o *SparseFirewallRule) ToPlain() elemental.PlainIdentifiable {
 	if o.Priority != nil {
 		out.Priority = *o.Priority
 	}
+	if o.Protected != nil {
+		out.Protected = *o.Protected
+	}
 	if o.Protoports != nil {
 		out.Protoports = o.Protoports
 	}
 	if o.Source != nil {
 		out.Source = o.Source
+	}
+	if o.UpdateIdempotencyKey != nil {
+		out.UpdateIdempotencyKey = *o.UpdateIdempotencyKey
 	}
 	if o.UpdateTime != nil {
 		out.UpdateTime = *o.UpdateTime
@@ -1387,6 +1706,38 @@ func (o *SparseFirewallRule) ToPlain() elemental.PlainIdentifiable {
 	}
 
 	return out
+}
+
+// GetAnnotations returns the Annotations of the receiver.
+func (o *SparseFirewallRule) GetAnnotations() (out map[string][]string) {
+
+	if o.Annotations == nil {
+		return
+	}
+
+	return *o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the address of the given value.
+func (o *SparseFirewallRule) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = &annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *SparseFirewallRule) GetAssociatedTags() (out []string) {
+
+	if o.AssociatedTags == nil {
+		return
+	}
+
+	return *o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the address of the given value.
+func (o *SparseFirewallRule) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = &associatedTags
 }
 
 // GetCreateTime returns the CreateTime of the receiver.
@@ -1419,6 +1770,38 @@ func (o *SparseFirewallRule) GetNamespace() (out string) {
 func (o *SparseFirewallRule) SetNamespace(namespace string) {
 
 	o.Namespace = &namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *SparseFirewallRule) GetNormalizedTags() (out []string) {
+
+	if o.NormalizedTags == nil {
+		return
+	}
+
+	return *o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the address of the given value.
+func (o *SparseFirewallRule) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = &normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *SparseFirewallRule) GetProtected() (out bool) {
+
+	if o.Protected == nil {
+		return
+	}
+
+	return *o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the address of the given value.
+func (o *SparseFirewallRule) SetProtected(protected bool) {
+
+	o.Protected = &protected
 }
 
 // GetUpdateTime returns the UpdateTime of the receiver.
@@ -1467,16 +1850,22 @@ type mongoAttributesFirewallRule struct {
 	TLSDecryptionCertificateID string                         `bson:"tlsdecryptioncertificateid"`
 	URLCategories              *FirewallURLCategoryCriteria   `bson:"urlcategories"`
 	Action                     FirewallRuleActionValue        `bson:"action"`
+	Annotations                map[string][]string            `bson:"annotations"`
 	Applications               *FirewallApplicationCriteria   `bson:"applications"`
+	AssociatedTags             []string                       `bson:"associatedtags"`
+	CreateIdempotencyKey       string                         `bson:"createidempotencykey"`
 	CreateTime                 time.Time                      `bson:"createtime"`
 	Destination                *FirewallTargetCriteria        `bson:"destination"`
 	Logging                    bool                           `bson:"logging"`
 	Namespace                  string                         `bson:"namespace"`
+	NormalizedTags             []string                       `bson:"normalizedtags"`
 	ParentID                   string                         `bson:"parentid"`
 	ParentType                 string                         `bson:"parenttype"`
 	Priority                   int                            `bson:"priority"`
+	Protected                  bool                           `bson:"protected"`
 	Protoports                 *FirewallProtoPortsCriteria    `bson:"protoports"`
 	Source                     *FirewallTargetCriteria        `bson:"source"`
+	UpdateIdempotencyKey       string                         `bson:"updateidempotencykey"`
 	UpdateTime                 time.Time                      `bson:"updatetime"`
 	ZHash                      int                            `bson:"zhash"`
 	Zone                       int                            `bson:"zone"`
@@ -1487,16 +1876,22 @@ type mongoAttributesSparseFirewallRule struct {
 	TLSDecryptionCertificateID *string                         `bson:"tlsdecryptioncertificateid,omitempty"`
 	URLCategories              *FirewallURLCategoryCriteria    `bson:"urlcategories,omitempty"`
 	Action                     *FirewallRuleActionValue        `bson:"action,omitempty"`
+	Annotations                *map[string][]string            `bson:"annotations,omitempty"`
 	Applications               *FirewallApplicationCriteria    `bson:"applications,omitempty"`
+	AssociatedTags             *[]string                       `bson:"associatedtags,omitempty"`
+	CreateIdempotencyKey       *string                         `bson:"createidempotencykey,omitempty"`
 	CreateTime                 *time.Time                      `bson:"createtime,omitempty"`
 	Destination                *FirewallTargetCriteria         `bson:"destination,omitempty"`
 	Logging                    *bool                           `bson:"logging,omitempty"`
 	Namespace                  *string                         `bson:"namespace,omitempty"`
+	NormalizedTags             *[]string                       `bson:"normalizedtags,omitempty"`
 	ParentID                   *string                         `bson:"parentid,omitempty"`
 	ParentType                 *string                         `bson:"parenttype,omitempty"`
 	Priority                   *int                            `bson:"priority,omitempty"`
+	Protected                  *bool                           `bson:"protected,omitempty"`
 	Protoports                 *FirewallProtoPortsCriteria     `bson:"protoports,omitempty"`
 	Source                     *FirewallTargetCriteria         `bson:"source,omitempty"`
+	UpdateIdempotencyKey       *string                         `bson:"updateidempotencykey,omitempty"`
 	UpdateTime                 *time.Time                      `bson:"updatetime,omitempty"`
 	ZHash                      *int                            `bson:"zhash,omitempty"`
 	Zone                       *int                            `bson:"zone,omitempty"`

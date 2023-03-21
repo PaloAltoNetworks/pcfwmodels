@@ -15,6 +15,7 @@ model:
   extends:
   - '@identifiable-stored'
   - '@namespaced'
+  - '@base'
   - '@zoned'
   - '@timeable'
 

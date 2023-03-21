@@ -17,6 +17,16 @@
             "description": "Enables best practice URL Categories.",
             "type": "boolean"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
           "antiSpywareEnabled": {
             "description": "Enables AntiSpyware.",
             "type": "boolean"
@@ -24,6 +34,13 @@
           "antiVirusEnabled": {
             "description": "Enables AntiVirus.",
             "type": "boolean"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "createTime": {
             "description": "Creation date of the object.",
@@ -61,12 +78,17 @@
             "readOnly": true,
             "type": "string"
           },
-          "tags": {
-            "description": "List of tags attached to an entity.",
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
             "items": {
               "type": "string"
             },
+            "readOnly": true,
             "type": "array"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
           },
           "trustedCertificateID": {
             "description": "The trusted Certificate ID for Outbound Decryption.",

@@ -5,6 +5,7 @@ package api
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/globalsign/mgo/bson"
 	"github.com/mitchellh/copystructure"
@@ -99,6 +100,18 @@ type PCFWAccountMirrorSourceState struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
+
+	// Creation date of the object.
+	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
+
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
 
@@ -114,11 +127,23 @@ type PCFWAccountMirrorSourceState struct {
 	// The ENI that is the source of traffic mirroring.
 	NetworkInterface string `json:"networkInterface" msgpack:"networkInterface" bson:"networkinterface" mapstructure:"networkInterface,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags []string `json:"normalizedTags" msgpack:"normalizedTags" bson:"normalizedtags" mapstructure:"normalizedTags,omitempty"`
+
+	// Defines if the object is protected.
+	Protected bool `json:"protected" msgpack:"protected" bson:"protected" mapstructure:"protected,omitempty"`
+
 	// The status of the traffic mirroring session.
 	Status PCFWAccountMirrorSourceStateStatusValue `json:"status" msgpack:"status" bson:"status" mapstructure:"status,omitempty"`
 
 	// The status description of the traffic mirroring session.
 	StatusReason string `json:"statusReason" msgpack:"statusReason" bson:"statusreason" mapstructure:"statusReason,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey string `json:"-" msgpack:"-" bson:"updateidempotencykey" mapstructure:"-,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime time.Time `json:"updateTime" msgpack:"updateTime" bson:"updatetime" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -134,7 +159,10 @@ type PCFWAccountMirrorSourceState struct {
 func NewPCFWAccountMirrorSourceState() *PCFWAccountMirrorSourceState {
 
 	return &PCFWAccountMirrorSourceState{
-		ModelVersion: 1,
+		ModelVersion:   1,
+		Annotations:    map[string][]string{},
+		AssociatedTags: []string{},
+		NormalizedTags: []string{},
 	}
 }
 
@@ -169,13 +197,21 @@ func (o *PCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
+	s.Annotations = o.Annotations
+	s.AssociatedTags = o.AssociatedTags
+	s.CreateIdempotencyKey = o.CreateIdempotencyKey
+	s.CreateTime = o.CreateTime
 	s.Description = o.Description
 	s.InstanceID = o.InstanceID
 	s.Name = o.Name
 	s.Namespace = o.Namespace
 	s.NetworkInterface = o.NetworkInterface
+	s.NormalizedTags = o.NormalizedTags
+	s.Protected = o.Protected
 	s.Status = o.Status
 	s.StatusReason = o.StatusReason
+	s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
+	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
 	s.Zone = o.Zone
 
@@ -196,13 +232,21 @@ func (o *PCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	}
 
 	o.ID = s.ID.Hex()
+	o.Annotations = s.Annotations
+	o.AssociatedTags = s.AssociatedTags
+	o.CreateIdempotencyKey = s.CreateIdempotencyKey
+	o.CreateTime = s.CreateTime
 	o.Description = s.Description
 	o.InstanceID = s.InstanceID
 	o.Name = s.Name
 	o.Namespace = s.Namespace
 	o.NetworkInterface = s.NetworkInterface
+	o.NormalizedTags = s.NormalizedTags
+	o.Protected = s.Protected
 	o.Status = s.Status
 	o.StatusReason = s.StatusReason
+	o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
+	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
 	o.Zone = s.Zone
 
@@ -241,6 +285,42 @@ func (o *PCFWAccountMirrorSourceState) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
+// GetAnnotations returns the Annotations of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetAnnotations() map[string][]string {
+
+	return o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetAssociatedTags() []string {
+
+	return o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = associatedTags
+}
+
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetCreateTime() time.Time {
+
+	return o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = createTime
+}
+
 // GetDescription returns the Description of the receiver.
 func (o *PCFWAccountMirrorSourceState) GetDescription() string {
 
@@ -277,6 +357,42 @@ func (o *PCFWAccountMirrorSourceState) SetNamespace(namespace string) {
 	o.Namespace = namespace
 }
 
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetNormalizedTags() []string {
+
+	return o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetProtected() bool {
+
+	return o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetProtected(protected bool) {
+
+	o.Protected = protected
+}
+
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *PCFWAccountMirrorSourceState) GetUpdateTime() time.Time {
+
+	return o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the given value.
+func (o *PCFWAccountMirrorSourceState) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = updateTime
+}
+
 // ToSparse returns the sparse version of the model.
 // The returned object will only contain the given fields. No field means entire field set.
 func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.SparseIdentifiable {
@@ -284,16 +400,24 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparsePCFWAccountMirrorSourceState{
-			ID:               &o.ID,
-			Description:      &o.Description,
-			InstanceID:       &o.InstanceID,
-			Name:             &o.Name,
-			Namespace:        &o.Namespace,
-			NetworkInterface: &o.NetworkInterface,
-			Status:           &o.Status,
-			StatusReason:     &o.StatusReason,
-			ZHash:            &o.ZHash,
-			Zone:             &o.Zone,
+			ID:                   &o.ID,
+			Annotations:          &o.Annotations,
+			AssociatedTags:       &o.AssociatedTags,
+			CreateIdempotencyKey: &o.CreateIdempotencyKey,
+			CreateTime:           &o.CreateTime,
+			Description:          &o.Description,
+			InstanceID:           &o.InstanceID,
+			Name:                 &o.Name,
+			Namespace:            &o.Namespace,
+			NetworkInterface:     &o.NetworkInterface,
+			NormalizedTags:       &o.NormalizedTags,
+			Protected:            &o.Protected,
+			Status:               &o.Status,
+			StatusReason:         &o.StatusReason,
+			UpdateIdempotencyKey: &o.UpdateIdempotencyKey,
+			UpdateTime:           &o.UpdateTime,
+			ZHash:                &o.ZHash,
+			Zone:                 &o.Zone,
 		}
 	}
 
@@ -302,6 +426,14 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 		switch f {
 		case "ID":
 			sp.ID = &(o.ID)
+		case "annotations":
+			sp.Annotations = &(o.Annotations)
+		case "associatedTags":
+			sp.AssociatedTags = &(o.AssociatedTags)
+		case "createIdempotencyKey":
+			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
+		case "createTime":
+			sp.CreateTime = &(o.CreateTime)
 		case "description":
 			sp.Description = &(o.Description)
 		case "instanceID":
@@ -312,10 +444,18 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 			sp.Namespace = &(o.Namespace)
 		case "networkInterface":
 			sp.NetworkInterface = &(o.NetworkInterface)
+		case "normalizedTags":
+			sp.NormalizedTags = &(o.NormalizedTags)
+		case "protected":
+			sp.Protected = &(o.Protected)
 		case "status":
 			sp.Status = &(o.Status)
 		case "statusReason":
 			sp.StatusReason = &(o.StatusReason)
+		case "updateIdempotencyKey":
+			sp.UpdateIdempotencyKey = &(o.UpdateIdempotencyKey)
+		case "updateTime":
+			sp.UpdateTime = &(o.UpdateTime)
 		case "zHash":
 			sp.ZHash = &(o.ZHash)
 		case "zone":
@@ -336,6 +476,18 @@ func (o *PCFWAccountMirrorSourceState) Patch(sparse elemental.SparseIdentifiable
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
+	if so.Annotations != nil {
+		o.Annotations = *so.Annotations
+	}
+	if so.AssociatedTags != nil {
+		o.AssociatedTags = *so.AssociatedTags
+	}
+	if so.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
+	}
+	if so.CreateTime != nil {
+		o.CreateTime = *so.CreateTime
+	}
 	if so.Description != nil {
 		o.Description = *so.Description
 	}
@@ -351,11 +503,23 @@ func (o *PCFWAccountMirrorSourceState) Patch(sparse elemental.SparseIdentifiable
 	if so.NetworkInterface != nil {
 		o.NetworkInterface = *so.NetworkInterface
 	}
+	if so.NormalizedTags != nil {
+		o.NormalizedTags = *so.NormalizedTags
+	}
+	if so.Protected != nil {
+		o.Protected = *so.Protected
+	}
 	if so.Status != nil {
 		o.Status = *so.Status
 	}
 	if so.StatusReason != nil {
 		o.StatusReason = *so.StatusReason
+	}
+	if so.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = *so.UpdateIdempotencyKey
+	}
+	if so.UpdateTime != nil {
+		o.UpdateTime = *so.UpdateTime
 	}
 	if so.ZHash != nil {
 		o.ZHash = *so.ZHash
@@ -394,6 +558,10 @@ func (o *PCFWAccountMirrorSourceState) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
+
+	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
+		errors = errors.Append(err)
+	}
 
 	if err := elemental.ValidateMaximumLength("description", o.Description, 1024, false); err != nil {
 		errors = errors.Append(err)
@@ -447,6 +615,14 @@ func (o *PCFWAccountMirrorSourceState) ValueForAttribute(name string) any {
 	switch name {
 	case "ID":
 		return o.ID
+	case "annotations":
+		return o.Annotations
+	case "associatedTags":
+		return o.AssociatedTags
+	case "createIdempotencyKey":
+		return o.CreateIdempotencyKey
+	case "createTime":
+		return o.CreateTime
 	case "description":
 		return o.Description
 	case "instanceID":
@@ -457,10 +633,18 @@ func (o *PCFWAccountMirrorSourceState) ValueForAttribute(name string) any {
 		return o.Namespace
 	case "networkInterface":
 		return o.NetworkInterface
+	case "normalizedTags":
+		return o.NormalizedTags
+	case "protected":
+		return o.Protected
 	case "status":
 		return o.Status
 	case "statusReason":
 		return o.StatusReason
+	case "updateIdempotencyKey":
+		return o.UpdateIdempotencyKey
+	case "updateTime":
+		return o.UpdateTime
 	case "zHash":
 		return o.ZHash
 	case "zone":
@@ -486,6 +670,48 @@ var PCFWAccountMirrorSourceStateAttributesMap = map[string]elemental.AttributeSp
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
+	},
+	"Annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"AssociatedTags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
+	"CreateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 	"Description": {
 		AllowedChoices: []string{},
@@ -553,6 +779,35 @@ var PCFWAccountMirrorSourceStateAttributesMap = map[string]elemental.AttributeSp
 		Stored:         true,
 		Type:           "string",
 	},
+	"NormalizedTags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
+	"Protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"Status": {
 		AllowedChoices: []string{"Success", "Failed"},
 		BSONFieldName:  "status",
@@ -573,6 +828,22 @@ var PCFWAccountMirrorSourceStateAttributesMap = map[string]elemental.AttributeSp
 		Stored:         true,
 		Type:           "string",
 	},
+
+	"UpdateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
+	},
 }
 
 // PCFWAccountMirrorSourceStateLowerCaseAttributesMap represents the map of attribute for PCFWAccountMirrorSourceState.
@@ -591,6 +862,48 @@ var PCFWAccountMirrorSourceStateLowerCaseAttributesMap = map[string]elemental.At
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
+	},
+	"annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"associatedtags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
+	"createtime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 	"description": {
 		AllowedChoices: []string{},
@@ -658,6 +971,35 @@ var PCFWAccountMirrorSourceStateLowerCaseAttributesMap = map[string]elemental.At
 		Stored:         true,
 		Type:           "string",
 	},
+	"normalizedtags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
+	"protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"status": {
 		AllowedChoices: []string{"Success", "Failed"},
 		BSONFieldName:  "status",
@@ -677,6 +1019,22 @@ var PCFWAccountMirrorSourceStateLowerCaseAttributesMap = map[string]elemental.At
 		Name:           "statusReason",
 		Stored:         true,
 		Type:           "string",
+	},
+
+	"updatetime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 }
 
@@ -748,6 +1106,18 @@ type SparsePCFWAccountMirrorSourceState struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
+
+	// Creation date of the object.
+	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
+
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
 
@@ -763,11 +1133,23 @@ type SparsePCFWAccountMirrorSourceState struct {
 	// The ENI that is the source of traffic mirroring.
 	NetworkInterface *string `json:"networkInterface,omitempty" msgpack:"networkInterface,omitempty" bson:"networkinterface,omitempty" mapstructure:"networkInterface,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags *[]string `json:"normalizedTags,omitempty" msgpack:"normalizedTags,omitempty" bson:"normalizedtags,omitempty" mapstructure:"normalizedTags,omitempty"`
+
+	// Defines if the object is protected.
+	Protected *bool `json:"protected,omitempty" msgpack:"protected,omitempty" bson:"protected,omitempty" mapstructure:"protected,omitempty"`
+
 	// The status of the traffic mirroring session.
 	Status *PCFWAccountMirrorSourceStateStatusValue `json:"status,omitempty" msgpack:"status,omitempty" bson:"status,omitempty" mapstructure:"status,omitempty"`
 
 	// The status description of the traffic mirroring session.
 	StatusReason *string `json:"statusReason,omitempty" msgpack:"statusReason,omitempty" bson:"statusreason,omitempty" mapstructure:"statusReason,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey *string `json:"-" msgpack:"-" bson:"updateidempotencykey,omitempty" mapstructure:"-,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime *time.Time `json:"updateTime,omitempty" msgpack:"updateTime,omitempty" bson:"updatetime,omitempty" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -822,6 +1204,18 @@ func (o *SparsePCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
+	if o.Annotations != nil {
+		s.Annotations = o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		s.AssociatedTags = o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		s.CreateIdempotencyKey = o.CreateIdempotencyKey
+	}
+	if o.CreateTime != nil {
+		s.CreateTime = o.CreateTime
+	}
 	if o.Description != nil {
 		s.Description = o.Description
 	}
@@ -837,11 +1231,23 @@ func (o *SparsePCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.NetworkInterface != nil {
 		s.NetworkInterface = o.NetworkInterface
 	}
+	if o.NormalizedTags != nil {
+		s.NormalizedTags = o.NormalizedTags
+	}
+	if o.Protected != nil {
+		s.Protected = o.Protected
+	}
 	if o.Status != nil {
 		s.Status = o.Status
 	}
 	if o.StatusReason != nil {
 		s.StatusReason = o.StatusReason
+	}
+	if o.UpdateIdempotencyKey != nil {
+		s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
+	}
+	if o.UpdateTime != nil {
+		s.UpdateTime = o.UpdateTime
 	}
 	if o.ZHash != nil {
 		s.ZHash = o.ZHash
@@ -868,6 +1274,18 @@ func (o *SparsePCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 
 	id := s.ID.Hex()
 	o.ID = &id
+	if s.Annotations != nil {
+		o.Annotations = s.Annotations
+	}
+	if s.AssociatedTags != nil {
+		o.AssociatedTags = s.AssociatedTags
+	}
+	if s.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = s.CreateIdempotencyKey
+	}
+	if s.CreateTime != nil {
+		o.CreateTime = s.CreateTime
+	}
 	if s.Description != nil {
 		o.Description = s.Description
 	}
@@ -883,11 +1301,23 @@ func (o *SparsePCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	if s.NetworkInterface != nil {
 		o.NetworkInterface = s.NetworkInterface
 	}
+	if s.NormalizedTags != nil {
+		o.NormalizedTags = s.NormalizedTags
+	}
+	if s.Protected != nil {
+		o.Protected = s.Protected
+	}
 	if s.Status != nil {
 		o.Status = s.Status
 	}
 	if s.StatusReason != nil {
 		o.StatusReason = s.StatusReason
+	}
+	if s.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
+	}
+	if s.UpdateTime != nil {
+		o.UpdateTime = s.UpdateTime
 	}
 	if s.ZHash != nil {
 		o.ZHash = s.ZHash
@@ -912,6 +1342,18 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
+	if o.Annotations != nil {
+		out.Annotations = *o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		out.AssociatedTags = *o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
+	}
+	if o.CreateTime != nil {
+		out.CreateTime = *o.CreateTime
+	}
 	if o.Description != nil {
 		out.Description = *o.Description
 	}
@@ -927,11 +1369,23 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	if o.NetworkInterface != nil {
 		out.NetworkInterface = *o.NetworkInterface
 	}
+	if o.NormalizedTags != nil {
+		out.NormalizedTags = *o.NormalizedTags
+	}
+	if o.Protected != nil {
+		out.Protected = *o.Protected
+	}
 	if o.Status != nil {
 		out.Status = *o.Status
 	}
 	if o.StatusReason != nil {
 		out.StatusReason = *o.StatusReason
+	}
+	if o.UpdateIdempotencyKey != nil {
+		out.UpdateIdempotencyKey = *o.UpdateIdempotencyKey
+	}
+	if o.UpdateTime != nil {
+		out.UpdateTime = *o.UpdateTime
 	}
 	if o.ZHash != nil {
 		out.ZHash = *o.ZHash
@@ -941,6 +1395,54 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	}
 
 	return out
+}
+
+// GetAnnotations returns the Annotations of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetAnnotations() (out map[string][]string) {
+
+	if o.Annotations == nil {
+		return
+	}
+
+	return *o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = &annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetAssociatedTags() (out []string) {
+
+	if o.AssociatedTags == nil {
+		return
+	}
+
+	return *o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = &associatedTags
+}
+
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetCreateTime() (out time.Time) {
+
+	if o.CreateTime == nil {
+		return
+	}
+
+	return *o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = &createTime
 }
 
 // GetDescription returns the Description of the receiver.
@@ -991,6 +1493,54 @@ func (o *SparsePCFWAccountMirrorSourceState) SetNamespace(namespace string) {
 	o.Namespace = &namespace
 }
 
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetNormalizedTags() (out []string) {
+
+	if o.NormalizedTags == nil {
+		return
+	}
+
+	return *o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = &normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetProtected() (out bool) {
+
+	if o.Protected == nil {
+		return
+	}
+
+	return *o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetProtected(protected bool) {
+
+	o.Protected = &protected
+}
+
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *SparsePCFWAccountMirrorSourceState) GetUpdateTime() (out time.Time) {
+
+	if o.UpdateTime == nil {
+		return
+	}
+
+	return *o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the address of the given value.
+func (o *SparsePCFWAccountMirrorSourceState) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = &updateTime
+}
+
 // DeepCopy returns a deep copy if the SparsePCFWAccountMirrorSourceState.
 func (o *SparsePCFWAccountMirrorSourceState) DeepCopy() *SparsePCFWAccountMirrorSourceState {
 
@@ -1016,26 +1566,42 @@ func (o *SparsePCFWAccountMirrorSourceState) DeepCopyInto(out *SparsePCFWAccount
 }
 
 type mongoAttributesPCFWAccountMirrorSourceState struct {
-	ID               bson.ObjectId                           `bson:"_id,omitempty"`
-	Description      string                                  `bson:"description"`
-	InstanceID       string                                  `bson:"instanceid"`
-	Name             string                                  `bson:"name"`
-	Namespace        string                                  `bson:"namespace"`
-	NetworkInterface string                                  `bson:"networkinterface"`
-	Status           PCFWAccountMirrorSourceStateStatusValue `bson:"status"`
-	StatusReason     string                                  `bson:"statusreason"`
-	ZHash            int                                     `bson:"zhash"`
-	Zone             int                                     `bson:"zone"`
+	ID                   bson.ObjectId                           `bson:"_id,omitempty"`
+	Annotations          map[string][]string                     `bson:"annotations"`
+	AssociatedTags       []string                                `bson:"associatedtags"`
+	CreateIdempotencyKey string                                  `bson:"createidempotencykey"`
+	CreateTime           time.Time                               `bson:"createtime"`
+	Description          string                                  `bson:"description"`
+	InstanceID           string                                  `bson:"instanceid"`
+	Name                 string                                  `bson:"name"`
+	Namespace            string                                  `bson:"namespace"`
+	NetworkInterface     string                                  `bson:"networkinterface"`
+	NormalizedTags       []string                                `bson:"normalizedtags"`
+	Protected            bool                                    `bson:"protected"`
+	Status               PCFWAccountMirrorSourceStateStatusValue `bson:"status"`
+	StatusReason         string                                  `bson:"statusreason"`
+	UpdateIdempotencyKey string                                  `bson:"updateidempotencykey"`
+	UpdateTime           time.Time                               `bson:"updatetime"`
+	ZHash                int                                     `bson:"zhash"`
+	Zone                 int                                     `bson:"zone"`
 }
 type mongoAttributesSparsePCFWAccountMirrorSourceState struct {
-	ID               bson.ObjectId                            `bson:"_id,omitempty"`
-	Description      *string                                  `bson:"description,omitempty"`
-	InstanceID       *string                                  `bson:"instanceid,omitempty"`
-	Name             *string                                  `bson:"name,omitempty"`
-	Namespace        *string                                  `bson:"namespace,omitempty"`
-	NetworkInterface *string                                  `bson:"networkinterface,omitempty"`
-	Status           *PCFWAccountMirrorSourceStateStatusValue `bson:"status,omitempty"`
-	StatusReason     *string                                  `bson:"statusreason,omitempty"`
-	ZHash            *int                                     `bson:"zhash,omitempty"`
-	Zone             *int                                     `bson:"zone,omitempty"`
+	ID                   bson.ObjectId                            `bson:"_id,omitempty"`
+	Annotations          *map[string][]string                     `bson:"annotations,omitempty"`
+	AssociatedTags       *[]string                                `bson:"associatedtags,omitempty"`
+	CreateIdempotencyKey *string                                  `bson:"createidempotencykey,omitempty"`
+	CreateTime           *time.Time                               `bson:"createtime,omitempty"`
+	Description          *string                                  `bson:"description,omitempty"`
+	InstanceID           *string                                  `bson:"instanceid,omitempty"`
+	Name                 *string                                  `bson:"name,omitempty"`
+	Namespace            *string                                  `bson:"namespace,omitempty"`
+	NetworkInterface     *string                                  `bson:"networkinterface,omitempty"`
+	NormalizedTags       *[]string                                `bson:"normalizedtags,omitempty"`
+	Protected            *bool                                    `bson:"protected,omitempty"`
+	Status               *PCFWAccountMirrorSourceStateStatusValue `bson:"status,omitempty"`
+	StatusReason         *string                                  `bson:"statusreason,omitempty"`
+	UpdateIdempotencyKey *string                                  `bson:"updateidempotencykey,omitempty"`
+	UpdateTime           *time.Time                               `bson:"updatetime,omitempty"`
+	ZHash                *int                                     `bson:"zhash,omitempty"`
+	Zone                 *int                                     `bson:"zone,omitempty"`
 }

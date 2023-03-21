@@ -39,6 +39,23 @@
             "readOnly": true,
             "type": "string"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "createTime": {
             "description": "Creation date of the object.",
             "format": "date-time",
@@ -85,9 +102,21 @@
             "readOnly": true,
             "type": "string"
           },
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
           "primaryAccount": {
             "description": "indicates the primary AWS account.",
             "readOnly": true,
+            "type": "boolean"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
             "type": "boolean"
           },
           "status": {

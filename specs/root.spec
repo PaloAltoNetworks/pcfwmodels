@@ -110,9 +110,13 @@ relations:
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewalllicensingcredits.
+    description: Creates a new firewall licensing credits.
 
 - rest_name: firewalllicensingmetrics
+  get:
+    description: Retrieves the list of firewall licensing metrics.
+    global_parameters:
+    - $queryable
   create:
     description: Creates a new firewall licensing metrics.
 

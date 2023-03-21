@@ -105,8 +105,20 @@ type FirewallLicensingCredits struct {
 	// Represents url filtering usage credits.
 	URLFUsageCredits int `json:"URLFUsageCredits" msgpack:"URLFUsageCredits" bson:"urlfusagecredits" mapstructure:"URLFUsageCredits,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
+
 	// Represents the user cloud account ID.
 	CloudAccountID string `json:"cloudAccountID" msgpack:"cloudAccountID" bson:"cloudaccountid" mapstructure:"cloudAccountID,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
+
+	// Creation date of the object.
+	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
 
 	// Represents firewall resource.
 	FirewallResource string `json:"firewallResource" msgpack:"firewallResource" bson:"firewallresource" mapstructure:"firewallResource,omitempty"`
@@ -114,11 +126,23 @@ type FirewallLicensingCredits struct {
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags []string `json:"normalizedTags" msgpack:"normalizedTags" bson:"normalizedtags" mapstructure:"normalizedTags,omitempty"`
+
+	// Defines if the object is protected.
+	Protected bool `json:"protected" msgpack:"protected" bson:"protected" mapstructure:"protected,omitempty"`
+
 	// Represents the cloud ngfw tenant ID.
 	TenantID string `json:"tenantID" msgpack:"tenantID" bson:"tenantid" mapstructure:"tenantID,omitempty"`
 
 	// The timestamp of this record.
 	Timestamp time.Time `json:"timestamp" msgpack:"timestamp" bson:"timestamp" mapstructure:"timestamp,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey string `json:"-" msgpack:"-" bson:"updateidempotencykey" mapstructure:"-,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime time.Time `json:"updateTime" msgpack:"updateTime" bson:"updatetime" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -134,7 +158,10 @@ type FirewallLicensingCredits struct {
 func NewFirewallLicensingCredits() *FirewallLicensingCredits {
 
 	return &FirewallLicensingCredits{
-		ModelVersion: 1,
+		ModelVersion:   1,
+		Annotations:    map[string][]string{},
+		AssociatedTags: []string{},
+		NormalizedTags: []string{},
 	}
 }
 
@@ -175,11 +202,19 @@ func (o *FirewallLicensingCredits) GetBSON() (any, error) {
 	s.TPUsageCredits = o.TPUsageCredits
 	s.TrafficSecuredCredits = o.TrafficSecuredCredits
 	s.URLFUsageCredits = o.URLFUsageCredits
+	s.Annotations = o.Annotations
+	s.AssociatedTags = o.AssociatedTags
 	s.CloudAccountID = o.CloudAccountID
+	s.CreateIdempotencyKey = o.CreateIdempotencyKey
+	s.CreateTime = o.CreateTime
 	s.FirewallResource = o.FirewallResource
 	s.Namespace = o.Namespace
+	s.NormalizedTags = o.NormalizedTags
+	s.Protected = o.Protected
 	s.TenantID = o.TenantID
 	s.Timestamp = o.Timestamp
+	s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
+	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
 	s.Zone = o.Zone
 
@@ -206,11 +241,19 @@ func (o *FirewallLicensingCredits) SetBSON(raw bson.Raw) error {
 	o.TPUsageCredits = s.TPUsageCredits
 	o.TrafficSecuredCredits = s.TrafficSecuredCredits
 	o.URLFUsageCredits = s.URLFUsageCredits
+	o.Annotations = s.Annotations
+	o.AssociatedTags = s.AssociatedTags
 	o.CloudAccountID = s.CloudAccountID
+	o.CreateIdempotencyKey = s.CreateIdempotencyKey
+	o.CreateTime = s.CreateTime
 	o.FirewallResource = s.FirewallResource
 	o.Namespace = s.Namespace
+	o.NormalizedTags = s.NormalizedTags
+	o.Protected = s.Protected
 	o.TenantID = s.TenantID
 	o.Timestamp = s.Timestamp
+	o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
+	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
 	o.Zone = s.Zone
 
@@ -246,6 +289,42 @@ func (o *FirewallLicensingCredits) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
+// GetAnnotations returns the Annotations of the receiver.
+func (o *FirewallLicensingCredits) GetAnnotations() map[string][]string {
+
+	return o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *FirewallLicensingCredits) GetAssociatedTags() []string {
+
+	return o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = associatedTags
+}
+
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *FirewallLicensingCredits) GetCreateTime() time.Time {
+
+	return o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = createTime
+}
+
 // GetNamespace returns the Namespace of the receiver.
 func (o *FirewallLicensingCredits) GetNamespace() string {
 
@@ -256,6 +335,42 @@ func (o *FirewallLicensingCredits) GetNamespace() string {
 func (o *FirewallLicensingCredits) SetNamespace(namespace string) {
 
 	o.Namespace = namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *FirewallLicensingCredits) GetNormalizedTags() []string {
+
+	return o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *FirewallLicensingCredits) GetProtected() bool {
+
+	return o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetProtected(protected bool) {
+
+	o.Protected = protected
+}
+
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *FirewallLicensingCredits) GetUpdateTime() time.Time {
+
+	return o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the given value.
+func (o *FirewallLicensingCredits) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = updateTime
 }
 
 // ToSparse returns the sparse version of the model.
@@ -272,11 +387,19 @@ func (o *FirewallLicensingCredits) ToSparse(fields ...string) elemental.SparseId
 			TPUsageCredits:         &o.TPUsageCredits,
 			TrafficSecuredCredits:  &o.TrafficSecuredCredits,
 			URLFUsageCredits:       &o.URLFUsageCredits,
+			Annotations:            &o.Annotations,
+			AssociatedTags:         &o.AssociatedTags,
 			CloudAccountID:         &o.CloudAccountID,
+			CreateIdempotencyKey:   &o.CreateIdempotencyKey,
+			CreateTime:             &o.CreateTime,
 			FirewallResource:       &o.FirewallResource,
 			Namespace:              &o.Namespace,
+			NormalizedTags:         &o.NormalizedTags,
+			Protected:              &o.Protected,
 			TenantID:               &o.TenantID,
 			Timestamp:              &o.Timestamp,
+			UpdateIdempotencyKey:   &o.UpdateIdempotencyKey,
+			UpdateTime:             &o.UpdateTime,
 			ZHash:                  &o.ZHash,
 			Zone:                   &o.Zone,
 		}
@@ -299,16 +422,32 @@ func (o *FirewallLicensingCredits) ToSparse(fields ...string) elemental.SparseId
 			sp.TrafficSecuredCredits = &(o.TrafficSecuredCredits)
 		case "URLFUsageCredits":
 			sp.URLFUsageCredits = &(o.URLFUsageCredits)
+		case "annotations":
+			sp.Annotations = &(o.Annotations)
+		case "associatedTags":
+			sp.AssociatedTags = &(o.AssociatedTags)
 		case "cloudAccountID":
 			sp.CloudAccountID = &(o.CloudAccountID)
+		case "createIdempotencyKey":
+			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
+		case "createTime":
+			sp.CreateTime = &(o.CreateTime)
 		case "firewallResource":
 			sp.FirewallResource = &(o.FirewallResource)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
+		case "normalizedTags":
+			sp.NormalizedTags = &(o.NormalizedTags)
+		case "protected":
+			sp.Protected = &(o.Protected)
 		case "tenantID":
 			sp.TenantID = &(o.TenantID)
 		case "timestamp":
 			sp.Timestamp = &(o.Timestamp)
+		case "updateIdempotencyKey":
+			sp.UpdateIdempotencyKey = &(o.UpdateIdempotencyKey)
+		case "updateTime":
+			sp.UpdateTime = &(o.UpdateTime)
 		case "zHash":
 			sp.ZHash = &(o.ZHash)
 		case "zone":
@@ -347,8 +486,20 @@ func (o *FirewallLicensingCredits) Patch(sparse elemental.SparseIdentifiable) {
 	if so.URLFUsageCredits != nil {
 		o.URLFUsageCredits = *so.URLFUsageCredits
 	}
+	if so.Annotations != nil {
+		o.Annotations = *so.Annotations
+	}
+	if so.AssociatedTags != nil {
+		o.AssociatedTags = *so.AssociatedTags
+	}
 	if so.CloudAccountID != nil {
 		o.CloudAccountID = *so.CloudAccountID
+	}
+	if so.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
+	}
+	if so.CreateTime != nil {
+		o.CreateTime = *so.CreateTime
 	}
 	if so.FirewallResource != nil {
 		o.FirewallResource = *so.FirewallResource
@@ -356,11 +507,23 @@ func (o *FirewallLicensingCredits) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
 	}
+	if so.NormalizedTags != nil {
+		o.NormalizedTags = *so.NormalizedTags
+	}
+	if so.Protected != nil {
+		o.Protected = *so.Protected
+	}
 	if so.TenantID != nil {
 		o.TenantID = *so.TenantID
 	}
 	if so.Timestamp != nil {
 		o.Timestamp = *so.Timestamp
+	}
+	if so.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = *so.UpdateIdempotencyKey
+	}
+	if so.UpdateTime != nil {
+		o.UpdateTime = *so.UpdateTime
 	}
 	if so.ZHash != nil {
 		o.ZHash = *so.ZHash
@@ -399,6 +562,10 @@ func (o *FirewallLicensingCredits) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
+
+	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
+		errors = errors.Append(err)
+	}
 
 	if err := elemental.ValidateRequiredString("cloudAccountID", o.CloudAccountID); err != nil {
 		requiredErrors = requiredErrors.Append(err)
@@ -464,16 +631,32 @@ func (o *FirewallLicensingCredits) ValueForAttribute(name string) any {
 		return o.TrafficSecuredCredits
 	case "URLFUsageCredits":
 		return o.URLFUsageCredits
+	case "annotations":
+		return o.Annotations
+	case "associatedTags":
+		return o.AssociatedTags
 	case "cloudAccountID":
 		return o.CloudAccountID
+	case "createIdempotencyKey":
+		return o.CreateIdempotencyKey
+	case "createTime":
+		return o.CreateTime
 	case "firewallResource":
 		return o.FirewallResource
 	case "namespace":
 		return o.Namespace
+	case "normalizedTags":
+		return o.NormalizedTags
+	case "protected":
+		return o.Protected
 	case "tenantID":
 		return o.TenantID
 	case "timestamp":
 		return o.Timestamp
+	case "updateIdempotencyKey":
+		return o.UpdateIdempotencyKey
+	case "updateTime":
+		return o.UpdateTime
 	case "zHash":
 		return o.ZHash
 	case "zone":
@@ -560,6 +743,32 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		Stored:         true,
 		Type:           "integer",
 	},
+	"Annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"AssociatedTags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
 	"CloudAccountID": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "cloudaccountid",
@@ -570,6 +779,22 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		Required:       true,
 		Stored:         true,
 		Type:           "string",
+	},
+
+	"CreateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 	"FirewallResource": {
 		AllowedChoices: []string{},
@@ -598,6 +823,35 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		Stored:         true,
 		Type:           "string",
 	},
+	"NormalizedTags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
+	"Protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"TenantID": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "tenantid",
@@ -617,6 +871,22 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		Exposed:        true,
 		Name:           "timestamp",
 		Required:       true,
+		Stored:         true,
+		Type:           "time",
+	},
+
+	"UpdateTime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
 		Stored:         true,
 		Type:           "time",
 	},
@@ -699,6 +969,32 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		Stored:         true,
 		Type:           "integer",
 	},
+	"annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"associatedtags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
 	"cloudaccountid": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "cloudaccountid",
@@ -709,6 +1005,22 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		Required:       true,
 		Stored:         true,
 		Type:           "string",
+	},
+
+	"createtime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "createtime",
+		ConvertedName:  "CreateTime",
+		Description:    `Creation date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "createTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "time",
 	},
 	"firewallresource": {
 		AllowedChoices: []string{},
@@ -737,6 +1049,35 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		Stored:         true,
 		Type:           "string",
 	},
+	"normalizedtags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
+	"protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "boolean",
+	},
 	"tenantid": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "tenantid",
@@ -756,6 +1097,22 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		Exposed:        true,
 		Name:           "timestamp",
 		Required:       true,
+		Stored:         true,
+		Type:           "time",
+	},
+
+	"updatetime": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "updatetime",
+		ConvertedName:  "UpdateTime",
+		Description:    `Last update date of the object.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "updateTime",
+		Orderable:      true,
+		ReadOnly:       true,
+		Setter:         true,
 		Stored:         true,
 		Type:           "time",
 	},
@@ -845,8 +1202,20 @@ type SparseFirewallLicensingCredits struct {
 	// Represents url filtering usage credits.
 	URLFUsageCredits *int `json:"URLFUsageCredits,omitempty" msgpack:"URLFUsageCredits,omitempty" bson:"urlfusagecredits,omitempty" mapstructure:"URLFUsageCredits,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
+
 	// Represents the user cloud account ID.
 	CloudAccountID *string `json:"cloudAccountID,omitempty" msgpack:"cloudAccountID,omitempty" bson:"cloudaccountid,omitempty" mapstructure:"cloudAccountID,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
+
+	// Creation date of the object.
+	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
 
 	// Represents firewall resource.
 	FirewallResource *string `json:"firewallResource,omitempty" msgpack:"firewallResource,omitempty" bson:"firewallresource,omitempty" mapstructure:"firewallResource,omitempty"`
@@ -854,11 +1223,23 @@ type SparseFirewallLicensingCredits struct {
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags *[]string `json:"normalizedTags,omitempty" msgpack:"normalizedTags,omitempty" bson:"normalizedtags,omitempty" mapstructure:"normalizedTags,omitempty"`
+
+	// Defines if the object is protected.
+	Protected *bool `json:"protected,omitempty" msgpack:"protected,omitempty" bson:"protected,omitempty" mapstructure:"protected,omitempty"`
+
 	// Represents the cloud ngfw tenant ID.
 	TenantID *string `json:"tenantID,omitempty" msgpack:"tenantID,omitempty" bson:"tenantid,omitempty" mapstructure:"tenantID,omitempty"`
 
 	// The timestamp of this record.
 	Timestamp *time.Time `json:"timestamp,omitempty" msgpack:"timestamp,omitempty" bson:"timestamp,omitempty" mapstructure:"timestamp,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey *string `json:"-" msgpack:"-" bson:"updateidempotencykey,omitempty" mapstructure:"-,omitempty"`
+
+	// Last update date of the object.
+	UpdateTime *time.Time `json:"updateTime,omitempty" msgpack:"updateTime,omitempty" bson:"updatetime,omitempty" mapstructure:"updateTime,omitempty"`
 
 	// geographical hash of the data. This is used for sharding and
 	// georedundancy.
@@ -931,8 +1312,20 @@ func (o *SparseFirewallLicensingCredits) GetBSON() (any, error) {
 	if o.URLFUsageCredits != nil {
 		s.URLFUsageCredits = o.URLFUsageCredits
 	}
+	if o.Annotations != nil {
+		s.Annotations = o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		s.AssociatedTags = o.AssociatedTags
+	}
 	if o.CloudAccountID != nil {
 		s.CloudAccountID = o.CloudAccountID
+	}
+	if o.CreateIdempotencyKey != nil {
+		s.CreateIdempotencyKey = o.CreateIdempotencyKey
+	}
+	if o.CreateTime != nil {
+		s.CreateTime = o.CreateTime
 	}
 	if o.FirewallResource != nil {
 		s.FirewallResource = o.FirewallResource
@@ -940,11 +1333,23 @@ func (o *SparseFirewallLicensingCredits) GetBSON() (any, error) {
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		s.NormalizedTags = o.NormalizedTags
+	}
+	if o.Protected != nil {
+		s.Protected = o.Protected
+	}
 	if o.TenantID != nil {
 		s.TenantID = o.TenantID
 	}
 	if o.Timestamp != nil {
 		s.Timestamp = o.Timestamp
+	}
+	if o.UpdateIdempotencyKey != nil {
+		s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
+	}
+	if o.UpdateTime != nil {
+		s.UpdateTime = o.UpdateTime
 	}
 	if o.ZHash != nil {
 		s.ZHash = o.ZHash
@@ -989,8 +1394,20 @@ func (o *SparseFirewallLicensingCredits) SetBSON(raw bson.Raw) error {
 	if s.URLFUsageCredits != nil {
 		o.URLFUsageCredits = s.URLFUsageCredits
 	}
+	if s.Annotations != nil {
+		o.Annotations = s.Annotations
+	}
+	if s.AssociatedTags != nil {
+		o.AssociatedTags = s.AssociatedTags
+	}
 	if s.CloudAccountID != nil {
 		o.CloudAccountID = s.CloudAccountID
+	}
+	if s.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = s.CreateIdempotencyKey
+	}
+	if s.CreateTime != nil {
+		o.CreateTime = s.CreateTime
 	}
 	if s.FirewallResource != nil {
 		o.FirewallResource = s.FirewallResource
@@ -998,11 +1415,23 @@ func (o *SparseFirewallLicensingCredits) SetBSON(raw bson.Raw) error {
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
 	}
+	if s.NormalizedTags != nil {
+		o.NormalizedTags = s.NormalizedTags
+	}
+	if s.Protected != nil {
+		o.Protected = s.Protected
+	}
 	if s.TenantID != nil {
 		o.TenantID = s.TenantID
 	}
 	if s.Timestamp != nil {
 		o.Timestamp = s.Timestamp
+	}
+	if s.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
+	}
+	if s.UpdateTime != nil {
+		o.UpdateTime = s.UpdateTime
 	}
 	if s.ZHash != nil {
 		o.ZHash = s.ZHash
@@ -1045,8 +1474,20 @@ func (o *SparseFirewallLicensingCredits) ToPlain() elemental.PlainIdentifiable {
 	if o.URLFUsageCredits != nil {
 		out.URLFUsageCredits = *o.URLFUsageCredits
 	}
+	if o.Annotations != nil {
+		out.Annotations = *o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		out.AssociatedTags = *o.AssociatedTags
+	}
 	if o.CloudAccountID != nil {
 		out.CloudAccountID = *o.CloudAccountID
+	}
+	if o.CreateIdempotencyKey != nil {
+		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
+	}
+	if o.CreateTime != nil {
+		out.CreateTime = *o.CreateTime
 	}
 	if o.FirewallResource != nil {
 		out.FirewallResource = *o.FirewallResource
@@ -1054,11 +1495,23 @@ func (o *SparseFirewallLicensingCredits) ToPlain() elemental.PlainIdentifiable {
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		out.NormalizedTags = *o.NormalizedTags
+	}
+	if o.Protected != nil {
+		out.Protected = *o.Protected
+	}
 	if o.TenantID != nil {
 		out.TenantID = *o.TenantID
 	}
 	if o.Timestamp != nil {
 		out.Timestamp = *o.Timestamp
+	}
+	if o.UpdateIdempotencyKey != nil {
+		out.UpdateIdempotencyKey = *o.UpdateIdempotencyKey
+	}
+	if o.UpdateTime != nil {
+		out.UpdateTime = *o.UpdateTime
 	}
 	if o.ZHash != nil {
 		out.ZHash = *o.ZHash
@@ -1068,6 +1521,54 @@ func (o *SparseFirewallLicensingCredits) ToPlain() elemental.PlainIdentifiable {
 	}
 
 	return out
+}
+
+// GetAnnotations returns the Annotations of the receiver.
+func (o *SparseFirewallLicensingCredits) GetAnnotations() (out map[string][]string) {
+
+	if o.Annotations == nil {
+		return
+	}
+
+	return *o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = &annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *SparseFirewallLicensingCredits) GetAssociatedTags() (out []string) {
+
+	if o.AssociatedTags == nil {
+		return
+	}
+
+	return *o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = &associatedTags
+}
+
+// GetCreateTime returns the CreateTime of the receiver.
+func (o *SparseFirewallLicensingCredits) GetCreateTime() (out time.Time) {
+
+	if o.CreateTime == nil {
+		return
+	}
+
+	return *o.CreateTime
+}
+
+// SetCreateTime sets the property CreateTime of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetCreateTime(createTime time.Time) {
+
+	o.CreateTime = &createTime
 }
 
 // GetNamespace returns the Namespace of the receiver.
@@ -1084,6 +1585,54 @@ func (o *SparseFirewallLicensingCredits) GetNamespace() (out string) {
 func (o *SparseFirewallLicensingCredits) SetNamespace(namespace string) {
 
 	o.Namespace = &namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *SparseFirewallLicensingCredits) GetNormalizedTags() (out []string) {
+
+	if o.NormalizedTags == nil {
+		return
+	}
+
+	return *o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = &normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *SparseFirewallLicensingCredits) GetProtected() (out bool) {
+
+	if o.Protected == nil {
+		return
+	}
+
+	return *o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetProtected(protected bool) {
+
+	o.Protected = &protected
+}
+
+// GetUpdateTime returns the UpdateTime of the receiver.
+func (o *SparseFirewallLicensingCredits) GetUpdateTime() (out time.Time) {
+
+	if o.UpdateTime == nil {
+		return
+	}
+
+	return *o.UpdateTime
+}
+
+// SetUpdateTime sets the property UpdateTime of the receiver using the address of the given value.
+func (o *SparseFirewallLicensingCredits) SetUpdateTime(updateTime time.Time) {
+
+	o.UpdateTime = &updateTime
 }
 
 // DeepCopy returns a deep copy if the SparseFirewallLicensingCredits.
@@ -1111,34 +1660,50 @@ func (o *SparseFirewallLicensingCredits) DeepCopyInto(out *SparseFirewallLicensi
 }
 
 type mongoAttributesFirewallLicensingCredits struct {
-	EnhancedSupportCredits int           `bson:"enhancedsupportcredits"`
-	FWUsageCredits         int           `bson:"fwusagecredits"`
-	ID                     bson.ObjectId `bson:"_id,omitempty"`
-	PrismaCloudCredits     int           `bson:"prismacloudcredits"`
-	TPUsageCredits         int           `bson:"tpusagecredits"`
-	TrafficSecuredCredits  int           `bson:"trafficsecuredcredits"`
-	URLFUsageCredits       int           `bson:"urlfusagecredits"`
-	CloudAccountID         string        `bson:"cloudaccountid"`
-	FirewallResource       string        `bson:"firewallresource"`
-	Namespace              string        `bson:"namespace"`
-	TenantID               string        `bson:"tenantid"`
-	Timestamp              time.Time     `bson:"timestamp"`
-	ZHash                  int           `bson:"zhash"`
-	Zone                   int           `bson:"zone"`
+	EnhancedSupportCredits int                 `bson:"enhancedsupportcredits"`
+	FWUsageCredits         int                 `bson:"fwusagecredits"`
+	ID                     bson.ObjectId       `bson:"_id,omitempty"`
+	PrismaCloudCredits     int                 `bson:"prismacloudcredits"`
+	TPUsageCredits         int                 `bson:"tpusagecredits"`
+	TrafficSecuredCredits  int                 `bson:"trafficsecuredcredits"`
+	URLFUsageCredits       int                 `bson:"urlfusagecredits"`
+	Annotations            map[string][]string `bson:"annotations"`
+	AssociatedTags         []string            `bson:"associatedtags"`
+	CloudAccountID         string              `bson:"cloudaccountid"`
+	CreateIdempotencyKey   string              `bson:"createidempotencykey"`
+	CreateTime             time.Time           `bson:"createtime"`
+	FirewallResource       string              `bson:"firewallresource"`
+	Namespace              string              `bson:"namespace"`
+	NormalizedTags         []string            `bson:"normalizedtags"`
+	Protected              bool                `bson:"protected"`
+	TenantID               string              `bson:"tenantid"`
+	Timestamp              time.Time           `bson:"timestamp"`
+	UpdateIdempotencyKey   string              `bson:"updateidempotencykey"`
+	UpdateTime             time.Time           `bson:"updatetime"`
+	ZHash                  int                 `bson:"zhash"`
+	Zone                   int                 `bson:"zone"`
 }
 type mongoAttributesSparseFirewallLicensingCredits struct {
-	EnhancedSupportCredits *int          `bson:"enhancedsupportcredits,omitempty"`
-	FWUsageCredits         *int          `bson:"fwusagecredits,omitempty"`
-	ID                     bson.ObjectId `bson:"_id,omitempty"`
-	PrismaCloudCredits     *int          `bson:"prismacloudcredits,omitempty"`
-	TPUsageCredits         *int          `bson:"tpusagecredits,omitempty"`
-	TrafficSecuredCredits  *int          `bson:"trafficsecuredcredits,omitempty"`
-	URLFUsageCredits       *int          `bson:"urlfusagecredits,omitempty"`
-	CloudAccountID         *string       `bson:"cloudaccountid,omitempty"`
-	FirewallResource       *string       `bson:"firewallresource,omitempty"`
-	Namespace              *string       `bson:"namespace,omitempty"`
-	TenantID               *string       `bson:"tenantid,omitempty"`
-	Timestamp              *time.Time    `bson:"timestamp,omitempty"`
-	ZHash                  *int          `bson:"zhash,omitempty"`
-	Zone                   *int          `bson:"zone,omitempty"`
+	EnhancedSupportCredits *int                 `bson:"enhancedsupportcredits,omitempty"`
+	FWUsageCredits         *int                 `bson:"fwusagecredits,omitempty"`
+	ID                     bson.ObjectId        `bson:"_id,omitempty"`
+	PrismaCloudCredits     *int                 `bson:"prismacloudcredits,omitempty"`
+	TPUsageCredits         *int                 `bson:"tpusagecredits,omitempty"`
+	TrafficSecuredCredits  *int                 `bson:"trafficsecuredcredits,omitempty"`
+	URLFUsageCredits       *int                 `bson:"urlfusagecredits,omitempty"`
+	Annotations            *map[string][]string `bson:"annotations,omitempty"`
+	AssociatedTags         *[]string            `bson:"associatedtags,omitempty"`
+	CloudAccountID         *string              `bson:"cloudaccountid,omitempty"`
+	CreateIdempotencyKey   *string              `bson:"createidempotencykey,omitempty"`
+	CreateTime             *time.Time           `bson:"createtime,omitempty"`
+	FirewallResource       *string              `bson:"firewallresource,omitempty"`
+	Namespace              *string              `bson:"namespace,omitempty"`
+	NormalizedTags         *[]string            `bson:"normalizedtags,omitempty"`
+	Protected              *bool                `bson:"protected,omitempty"`
+	TenantID               *string              `bson:"tenantid,omitempty"`
+	Timestamp              *time.Time           `bson:"timestamp,omitempty"`
+	UpdateIdempotencyKey   *string              `bson:"updateidempotencykey,omitempty"`
+	UpdateTime             *time.Time           `bson:"updatetime,omitempty"`
+	ZHash                  *int                 `bson:"zhash,omitempty"`
+	Zone                   *int                 `bson:"zone,omitempty"`
 }

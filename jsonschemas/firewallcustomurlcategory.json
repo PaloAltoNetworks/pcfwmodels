@@ -4,7 +4,7 @@
     "@named",
     "@described",
     "@namespaced",
-    "@tags",
+    "@base",
     "@zoned",
     "@timeable"
   ],
@@ -52,6 +52,35 @@
         }
       ]
     },
+    "annotations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "associatedTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "createTime": {
       "$readOnly": true,
       "anyOf": [
@@ -95,7 +124,8 @@
         }
       ]
     },
-    "tags": {
+    "normalizedTags": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"
@@ -105,6 +135,16 @@
             "type": "string"
           },
           "type": "array"
+        }
+      ]
+    },
+    "protected": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
         }
       ]
     },

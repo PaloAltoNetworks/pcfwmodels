@@ -18,9 +18,12 @@ model:
   extends:
   - '@identifiable-stored'
   - '@named'
+  - '@described'
   - '@namespaced'
-  - '@timeable'
+  - '@base'
   - '@zoned'
+  - '@timeable'
+  - '@migratable'
 
 # Indexes
 indexes:

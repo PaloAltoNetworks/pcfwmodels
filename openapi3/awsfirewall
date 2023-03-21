@@ -17,6 +17,23 @@
             },
             "type": "array"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "availabilityZones": {
             "description": "A list of availability zones.",
             "example": "us-east-1a",
@@ -88,6 +105,18 @@
             "readOnly": true,
             "type": "string"
           },
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
+          },
           "region": {
             "description": "The AWS region of this Firewall.",
             "example": "us-east-1",
@@ -110,13 +139,6 @@
             "description": "The status description of the firewall.",
             "readOnly": true,
             "type": "string"
-          },
-          "tags": {
-            "description": "List of tags attached to an entity.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
           },
           "updateTime": {
             "description": "Last update date of the object.",

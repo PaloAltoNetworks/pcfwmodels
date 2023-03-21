@@ -33,9 +33,32 @@
             "description": "Represents url filtering usage credits.",
             "type": "integer"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "cloudAccountID": {
             "description": "Represents the user cloud account ID.",
             "example": "cloudxyz",
+            "type": "string"
+          },
+          "createTime": {
+            "description": "Creation date of the object.",
+            "format": "date-time",
+            "readOnly": true,
             "type": "string"
           },
           "firewallResource": {
@@ -48,6 +71,18 @@
             "readOnly": true,
             "type": "string"
           },
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
+          },
           "tenantID": {
             "description": "Represents the cloud ngfw tenant ID.",
             "example": "tenantxyz",
@@ -57,6 +92,12 @@
             "description": "The timestamp of this record.",
             "example": "2018-06-14T23:10:46.420397985Z",
             "format": "date-time",
+            "type": "string"
+          },
+          "updateTime": {
+            "description": "Last update date of the object.",
+            "format": "date-time",
+            "readOnly": true,
             "type": "string"
           }
         },
@@ -119,7 +160,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewalllicensingcredits.",
+        "description": "Creates a new firewall licensing credits.",
         "operationId": "create-a-new-firewalllicensingcredits",
         "requestBody": {
           "content": {
@@ -149,8 +190,28 @@
       }
     },
     "/firewalllicensingcredits/{id}": {
+      "delete": {
+        "description": "Deletes the firewall licensing credits with the given ID.",
+        "operationId": "delete-firewalllicensingcredits-by-ID",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewalllicensingcredits"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/licensing",
+          "licensingsrv"
+        ]
+      },
       "get": {
-        "description": "Retrieves the firewalllicensingcredits with the given ID.",
+        "description": "Retrieves the firewall licensing credits with the given ID.",
         "operationId": "get-firewalllicensingcredits-by-ID",
         "responses": {
           "200": {

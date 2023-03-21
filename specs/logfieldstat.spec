@@ -20,6 +20,7 @@ model:
   - '@named'
   - '@described'
   - '@namespaced'
+  - '@base'
   - '@zoned'
 
 # Ordering

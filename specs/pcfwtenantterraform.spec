@@ -7,5 +7,5 @@ model:
   group: core/deploymentadvisor
   description: Represents PCFW tenant's all account setup terraform generator.
   extends:
-  - '@identifiable-stored'
+  - '@identifiable-not-stored'
   - '@namespaced'

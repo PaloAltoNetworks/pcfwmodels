@@ -13,10 +13,11 @@ model:
   delete:
     description: offboard the account.
   extends:
-  - '@namespaced'
   - '@identifiable-stored'
-  - '@timeable'
+  - '@namespaced'
+  - '@base'
   - '@zoned'
+  - '@timeable'
 
 # Attributes
 attributes:

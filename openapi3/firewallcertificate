@@ -9,6 +9,23 @@
             "readOnly": true,
             "type": "string"
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "certificate": {
             "description": "Depends on the Type. For AWS, it is the AWS Certificate ARN.",
             "type": "string"
@@ -33,16 +50,21 @@
             "readOnly": true,
             "type": "string"
           },
-          "selfSigned": {
-            "description": "A self-signed root CA certificate.",
-            "type": "boolean"
-          },
-          "tags": {
-            "description": "List of tags attached to an entity.",
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
             "items": {
               "type": "string"
             },
+            "readOnly": true,
             "type": "array"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
+          },
+          "selfSigned": {
+            "description": "A self-signed root CA certificate.",
+            "type": "boolean"
           },
           "updateTime": {
             "description": "Last update date of the object.",

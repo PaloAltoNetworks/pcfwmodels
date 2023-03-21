@@ -35,8 +35,25 @@
               "ResetBoth"
             ]
           },
+          "annotations": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Stores additional information about an entity.",
+            "type": "object"
+          },
           "applications": {
             "$ref": "./firewallapplicationcriteria#/components/schemas/firewallapplicationcriteria"
+          },
+          "associatedTags": {
+            "description": "List of tags attached to an entity.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "createTime": {
             "description": "Creation date of the object.",
@@ -56,6 +73,14 @@
             "readOnly": true,
             "type": "string"
           },
+          "normalizedTags": {
+            "description": "Contains the list of normalized tags of the entities.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
           "parentID": {
             "description": "The FirewallTemplate ID, FirewallRuleset ID, or FirewallCommittedRuleset ID\nto which the rule belongs.",
             "readOnly": true,
@@ -70,6 +95,10 @@
             "description": "Values 1-100 for a Templates and 101+ for a Ruleset.",
             "example": 1,
             "type": "integer"
+          },
+          "protected": {
+            "description": "Defines if the object is protected.",
+            "type": "boolean"
           },
           "protoports": {
             "$ref": "./firewallprotoportscriteria#/components/schemas/firewallprotoportscriteria"

@@ -1,8 +1,10 @@
 {
   "$extends": [
-    "@namespaced",
     "@identifiable-stored",
-    "@zoned"
+    "@namespaced",
+    "@base",
+    "@zoned",
+    "@timeable"
   ],
   "$modelName": "FirewallLicensingCredits",
   "$modelPackage": "licensingsrv",
@@ -81,10 +83,51 @@
         }
       ]
     },
+    "annotations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "associatedTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "cloudAccountID": {
       "$required": true,
       "anyOf": [
         {
+          "type": "string"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
           "type": "string"
         }
       ]
@@ -108,6 +151,30 @@
         }
       ]
     },
+    "normalizedTags": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "protected": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
     "tenantID": {
       "$required": true,
       "anyOf": [
@@ -119,6 +186,18 @@
     "timestamp": {
       "$required": true,
       "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
         {
           "format": "date-time",
           "type": "string"

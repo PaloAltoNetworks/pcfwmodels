@@ -4,7 +4,9 @@
     "@named",
     "@described",
     "@namespaced",
-    "@zoned"
+    "@base",
+    "@zoned",
+    "@timeable"
   ],
   "$modelName": "PCFWAccountMirrorSource",
   "$modelPackage": "deploymentadvisor",
@@ -36,6 +38,35 @@
         }
       ]
     },
+    "annotations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "associatedTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "autoScalingGroupNames": {
       "anyOf": [
         {
@@ -46,6 +77,18 @@
             "type": "string"
           },
           "type": "array"
+        }
+      ]
+    },
+    "createTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
         }
       ]
     },
@@ -120,6 +163,42 @@
           "type": "null"
         },
         {
+          "type": "string"
+        }
+      ]
+    },
+    "normalizedTags": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "protected": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "updateTime": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
           "type": "string"
         }
       ]

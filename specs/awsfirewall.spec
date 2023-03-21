@@ -24,7 +24,7 @@ model:
   - '@named'
   - '@described'
   - '@namespaced'
-  - '@tags'
+  - '@base'
   - '@zoned'
   - '@timeable'
 

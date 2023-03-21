@@ -1,6 +1,6 @@
 {
   "$extends": [
-    "@identifiable-stored",
+    "@identifiable-not-stored",
     "@namespaced"
   ],
   "$modelName": "PCFWTenantAccountTerraform",

@@ -11,10 +11,11 @@ model:
   delete:
     description: Delete the tenant with the given PrismaID.
   extends:
-  - '@namespaced'
   - '@identifiable-stored'
-  - '@timeable'
+  - '@namespaced'
+  - '@base'
   - '@zoned'
+  - '@timeable'
 
 # Attributes
 attributes:

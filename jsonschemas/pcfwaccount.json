@@ -1,9 +1,10 @@
 {
   "$extends": [
-    "@namespaced",
     "@identifiable-stored",
-    "@timeable",
-    "@zoned"
+    "@namespaced",
+    "@base",
+    "@zoned",
+    "@timeable"
   ],
   "$modelName": "PCFWAccount",
   "$modelPackage": "ngfw",
@@ -85,6 +86,35 @@
         }
       ]
     },
+    "annotations": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "associatedTags": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "createTime": {
       "$readOnly": true,
       "anyOf": [
@@ -162,8 +192,32 @@
         }
       ]
     },
+    "normalizedTags": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "primaryAccount": {
       "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "protected": {
       "anyOf": [
         {
           "type": "null"

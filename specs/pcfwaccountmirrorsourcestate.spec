@@ -20,7 +20,9 @@ model:
   - '@named'
   - '@described'
   - '@namespaced'
+  - '@base'
   - '@zoned'
+  - '@timeable'
 
 # Attributes
 attributes:

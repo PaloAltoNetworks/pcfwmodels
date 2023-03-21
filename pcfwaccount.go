@@ -142,6 +142,15 @@ type PCFWAccount struct {
 	// NGFW tenant ID.
 	NGFWTenantID string `json:"NGFWTenantID" msgpack:"NGFWTenantID" bson:"ngfwtenantid" mapstructure:"NGFWTenantID,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
+
 	// Creation date of the object.
 	CreateTime time.Time `json:"createTime" msgpack:"createTime" bson:"createtime" mapstructure:"createTime,omitempty"`
 
@@ -166,14 +175,23 @@ type PCFWAccount struct {
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags []string `json:"normalizedTags" msgpack:"normalizedTags" bson:"normalizedtags" mapstructure:"normalizedTags,omitempty"`
+
 	// indicates the primary AWS account.
 	PrimaryAccount bool `json:"primaryAccount" msgpack:"primaryAccount" bson:"primaryaccount" mapstructure:"primaryAccount,omitempty"`
+
+	// Defines if the object is protected.
+	Protected bool `json:"protected" msgpack:"protected" bson:"protected" mapstructure:"protected,omitempty"`
 
 	// status of account.
 	Status PCFWAccountStatusValue `json:"status" msgpack:"status" bson:"status" mapstructure:"status,omitempty"`
 
 	// status failure reason.
 	StatusReason string `json:"statusReason" msgpack:"statusReason" bson:"statusreason" mapstructure:"statusReason,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey string `json:"-" msgpack:"-" bson:"updateidempotencykey" mapstructure:"-,omitempty"`
 
 	// Last update date of the object.
 	UpdateTime time.Time `json:"updateTime" msgpack:"updateTime" bson:"updatetime" mapstructure:"updateTime,omitempty"`
@@ -193,7 +211,10 @@ func NewPCFWAccount() *PCFWAccount {
 
 	return &PCFWAccount{
 		ModelVersion:       1,
+		Annotations:        map[string][]string{},
+		AssociatedTags:     []string{},
 		LogDestinationType: PCFWAccountLogDestinationTypePrisma,
+		NormalizedTags:     []string{},
 	}
 }
 
@@ -234,6 +255,9 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.NGFWOnboardingStatus = o.NGFWOnboardingStatus
 	s.NGFWServiceAccountID = o.NGFWServiceAccountID
 	s.NGFWTenantID = o.NGFWTenantID
+	s.Annotations = o.Annotations
+	s.AssociatedTags = o.AssociatedTags
+	s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	s.CreateTime = o.CreateTime
 	s.DecryptionRoleARN = o.DecryptionRoleARN
 	s.EndpointRoleARN = o.EndpointRoleARN
@@ -242,9 +266,12 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.LogRegion = o.LogRegion
 	s.LoggingRoleARN = o.LoggingRoleARN
 	s.Namespace = o.Namespace
+	s.NormalizedTags = o.NormalizedTags
 	s.PrimaryAccount = o.PrimaryAccount
+	s.Protected = o.Protected
 	s.Status = o.Status
 	s.StatusReason = o.StatusReason
+	s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
 	s.Zone = o.Zone
@@ -272,6 +299,9 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.NGFWOnboardingStatus = s.NGFWOnboardingStatus
 	o.NGFWServiceAccountID = s.NGFWServiceAccountID
 	o.NGFWTenantID = s.NGFWTenantID
+	o.Annotations = s.Annotations
+	o.AssociatedTags = s.AssociatedTags
+	o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	o.CreateTime = s.CreateTime
 	o.DecryptionRoleARN = s.DecryptionRoleARN
 	o.EndpointRoleARN = s.EndpointRoleARN
@@ -280,9 +310,12 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.LogRegion = s.LogRegion
 	o.LoggingRoleARN = s.LoggingRoleARN
 	o.Namespace = s.Namespace
+	o.NormalizedTags = s.NormalizedTags
 	o.PrimaryAccount = s.PrimaryAccount
+	o.Protected = s.Protected
 	o.Status = s.Status
 	o.StatusReason = s.StatusReason
+	o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
 	o.Zone = s.Zone
@@ -319,6 +352,30 @@ func (o *PCFWAccount) String() string {
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
+// GetAnnotations returns the Annotations of the receiver.
+func (o *PCFWAccount) GetAnnotations() map[string][]string {
+
+	return o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the given value.
+func (o *PCFWAccount) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *PCFWAccount) GetAssociatedTags() []string {
+
+	return o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the given value.
+func (o *PCFWAccount) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = associatedTags
+}
+
 // GetCreateTime returns the CreateTime of the receiver.
 func (o *PCFWAccount) GetCreateTime() time.Time {
 
@@ -341,6 +398,30 @@ func (o *PCFWAccount) GetNamespace() string {
 func (o *PCFWAccount) SetNamespace(namespace string) {
 
 	o.Namespace = namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *PCFWAccount) GetNormalizedTags() []string {
+
+	return o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the given value.
+func (o *PCFWAccount) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *PCFWAccount) GetProtected() bool {
+
+	return o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the given value.
+func (o *PCFWAccount) SetProtected(protected bool) {
+
+	o.Protected = protected
 }
 
 // GetUpdateTime returns the UpdateTime of the receiver.
@@ -369,6 +450,9 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			NGFWOnboardingStatus: &o.NGFWOnboardingStatus,
 			NGFWServiceAccountID: &o.NGFWServiceAccountID,
 			NGFWTenantID:         &o.NGFWTenantID,
+			Annotations:          &o.Annotations,
+			AssociatedTags:       &o.AssociatedTags,
+			CreateIdempotencyKey: &o.CreateIdempotencyKey,
 			CreateTime:           &o.CreateTime,
 			DecryptionRoleARN:    &o.DecryptionRoleARN,
 			EndpointRoleARN:      &o.EndpointRoleARN,
@@ -377,9 +461,12 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			LogRegion:            &o.LogRegion,
 			LoggingRoleARN:       &o.LoggingRoleARN,
 			Namespace:            &o.Namespace,
+			NormalizedTags:       &o.NormalizedTags,
 			PrimaryAccount:       &o.PrimaryAccount,
+			Protected:            &o.Protected,
 			Status:               &o.Status,
 			StatusReason:         &o.StatusReason,
+			UpdateIdempotencyKey: &o.UpdateIdempotencyKey,
 			UpdateTime:           &o.UpdateTime,
 			ZHash:                &o.ZHash,
 			Zone:                 &o.Zone,
@@ -403,6 +490,12 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.NGFWServiceAccountID = &(o.NGFWServiceAccountID)
 		case "NGFWTenantID":
 			sp.NGFWTenantID = &(o.NGFWTenantID)
+		case "annotations":
+			sp.Annotations = &(o.Annotations)
+		case "associatedTags":
+			sp.AssociatedTags = &(o.AssociatedTags)
+		case "createIdempotencyKey":
+			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
 		case "createTime":
 			sp.CreateTime = &(o.CreateTime)
 		case "decryptionRoleARN":
@@ -419,12 +512,18 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.LoggingRoleARN = &(o.LoggingRoleARN)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
+		case "normalizedTags":
+			sp.NormalizedTags = &(o.NormalizedTags)
 		case "primaryAccount":
 			sp.PrimaryAccount = &(o.PrimaryAccount)
+		case "protected":
+			sp.Protected = &(o.Protected)
 		case "status":
 			sp.Status = &(o.Status)
 		case "statusReason":
 			sp.StatusReason = &(o.StatusReason)
+		case "updateIdempotencyKey":
+			sp.UpdateIdempotencyKey = &(o.UpdateIdempotencyKey)
 		case "updateTime":
 			sp.UpdateTime = &(o.UpdateTime)
 		case "zHash":
@@ -465,6 +564,15 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	if so.NGFWTenantID != nil {
 		o.NGFWTenantID = *so.NGFWTenantID
 	}
+	if so.Annotations != nil {
+		o.Annotations = *so.Annotations
+	}
+	if so.AssociatedTags != nil {
+		o.AssociatedTags = *so.AssociatedTags
+	}
+	if so.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
+	}
 	if so.CreateTime != nil {
 		o.CreateTime = *so.CreateTime
 	}
@@ -489,14 +597,23 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
 	}
+	if so.NormalizedTags != nil {
+		o.NormalizedTags = *so.NormalizedTags
+	}
 	if so.PrimaryAccount != nil {
 		o.PrimaryAccount = *so.PrimaryAccount
+	}
+	if so.Protected != nil {
+		o.Protected = *so.Protected
 	}
 	if so.Status != nil {
 		o.Status = *so.Status
 	}
 	if so.StatusReason != nil {
 		o.StatusReason = *so.StatusReason
+	}
+	if so.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = *so.UpdateIdempotencyKey
 	}
 	if so.UpdateTime != nil {
 		o.UpdateTime = *so.UpdateTime
@@ -541,6 +658,10 @@ func (o *PCFWAccount) Validate() error {
 
 	if err := elemental.ValidateRequiredString("AWSAccountID", o.AWSAccountID); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
@@ -623,6 +744,12 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.NGFWServiceAccountID
 	case "NGFWTenantID":
 		return o.NGFWTenantID
+	case "annotations":
+		return o.Annotations
+	case "associatedTags":
+		return o.AssociatedTags
+	case "createIdempotencyKey":
+		return o.CreateIdempotencyKey
 	case "createTime":
 		return o.CreateTime
 	case "decryptionRoleARN":
@@ -639,12 +766,18 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.LoggingRoleARN
 	case "namespace":
 		return o.Namespace
+	case "normalizedTags":
+		return o.NormalizedTags
 	case "primaryAccount":
 		return o.PrimaryAccount
+	case "protected":
+		return o.Protected
 	case "status":
 		return o.Status
 	case "statusReason":
 		return o.StatusReason
+	case "updateIdempotencyKey":
+		return o.UpdateIdempotencyKey
 	case "updateTime":
 		return o.UpdateTime
 	case "zHash":
@@ -744,6 +877,33 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+	"Annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"AssociatedTags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
 	"CreateTime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -842,6 +1002,22 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+	"NormalizedTags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
 	"PrimaryAccount": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -851,6 +1027,19 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Exposed:        true,
 		Name:           "primaryAccount",
 		ReadOnly:       true,
+		Stored:         true,
+		Type:           "boolean",
+	},
+	"Protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
 		Stored:         true,
 		Type:           "boolean",
 	},
@@ -878,6 +1067,7 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
+
 	"UpdateTime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -983,6 +1173,33 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
+	"annotations": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "annotations",
+		ConvertedName:  "Annotations",
+		Description:    `Stores additional information about an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "annotations",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "map[string][]string",
+		Type:           "external",
+	},
+	"associatedtags": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "associatedtags",
+		ConvertedName:  "AssociatedTags",
+		Description:    `List of tags attached to an entity.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "associatedTags",
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Type:           "list",
+	},
+
 	"createtime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1081,6 +1298,22 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
+	"normalizedtags": {
+		AllowedChoices: []string{},
+		Autogenerated:  true,
+		BSONFieldName:  "normalizedtags",
+		ConvertedName:  "NormalizedTags",
+		Description:    `Contains the list of normalized tags of the entities.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "normalizedTags",
+		ReadOnly:       true,
+		Setter:         true,
+		Stored:         true,
+		SubType:        "string",
+		Transient:      true,
+		Type:           "list",
+	},
 	"primaryaccount": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1090,6 +1323,19 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Exposed:        true,
 		Name:           "primaryAccount",
 		ReadOnly:       true,
+		Stored:         true,
+		Type:           "boolean",
+	},
+	"protected": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "protected",
+		ConvertedName:  "Protected",
+		Description:    `Defines if the object is protected.`,
+		Exposed:        true,
+		Getter:         true,
+		Name:           "protected",
+		Orderable:      true,
+		Setter:         true,
 		Stored:         true,
 		Type:           "boolean",
 	},
@@ -1117,6 +1363,7 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
+
 	"updatetime": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1218,6 +1465,15 @@ type SparsePCFWAccount struct {
 	// NGFW tenant ID.
 	NGFWTenantID *string `json:"NGFWTenantID,omitempty" msgpack:"NGFWTenantID,omitempty" bson:"ngfwtenantid,omitempty" mapstructure:"NGFWTenantID,omitempty"`
 
+	// Stores additional information about an entity.
+	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
+
+	// List of tags attached to an entity.
+	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
+
+	// internal idempotency key for a create operation.
+	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
+
 	// Creation date of the object.
 	CreateTime *time.Time `json:"createTime,omitempty" msgpack:"createTime,omitempty" bson:"createtime,omitempty" mapstructure:"createTime,omitempty"`
 
@@ -1242,14 +1498,23 @@ type SparsePCFWAccount struct {
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
 
+	// Contains the list of normalized tags of the entities.
+	NormalizedTags *[]string `json:"normalizedTags,omitempty" msgpack:"normalizedTags,omitempty" bson:"normalizedtags,omitempty" mapstructure:"normalizedTags,omitempty"`
+
 	// indicates the primary AWS account.
 	PrimaryAccount *bool `json:"primaryAccount,omitempty" msgpack:"primaryAccount,omitempty" bson:"primaryaccount,omitempty" mapstructure:"primaryAccount,omitempty"`
+
+	// Defines if the object is protected.
+	Protected *bool `json:"protected,omitempty" msgpack:"protected,omitempty" bson:"protected,omitempty" mapstructure:"protected,omitempty"`
 
 	// status of account.
 	Status *PCFWAccountStatusValue `json:"status,omitempty" msgpack:"status,omitempty" bson:"status,omitempty" mapstructure:"status,omitempty"`
 
 	// status failure reason.
 	StatusReason *string `json:"statusReason,omitempty" msgpack:"statusReason,omitempty" bson:"statusreason,omitempty" mapstructure:"statusReason,omitempty"`
+
+	// internal idempotency key for a update operation.
+	UpdateIdempotencyKey *string `json:"-" msgpack:"-" bson:"updateidempotencykey,omitempty" mapstructure:"-,omitempty"`
 
 	// Last update date of the object.
 	UpdateTime *time.Time `json:"updateTime,omitempty" msgpack:"updateTime,omitempty" bson:"updatetime,omitempty" mapstructure:"updateTime,omitempty"`
@@ -1325,6 +1590,15 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.NGFWTenantID != nil {
 		s.NGFWTenantID = o.NGFWTenantID
 	}
+	if o.Annotations != nil {
+		s.Annotations = o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		s.AssociatedTags = o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		s.CreateIdempotencyKey = o.CreateIdempotencyKey
+	}
 	if o.CreateTime != nil {
 		s.CreateTime = o.CreateTime
 	}
@@ -1349,14 +1623,23 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		s.NormalizedTags = o.NormalizedTags
+	}
 	if o.PrimaryAccount != nil {
 		s.PrimaryAccount = o.PrimaryAccount
+	}
+	if o.Protected != nil {
+		s.Protected = o.Protected
 	}
 	if o.Status != nil {
 		s.Status = o.Status
 	}
 	if o.StatusReason != nil {
 		s.StatusReason = o.StatusReason
+	}
+	if o.UpdateIdempotencyKey != nil {
+		s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	}
 	if o.UpdateTime != nil {
 		s.UpdateTime = o.UpdateTime
@@ -1404,6 +1687,15 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.NGFWTenantID != nil {
 		o.NGFWTenantID = s.NGFWTenantID
 	}
+	if s.Annotations != nil {
+		o.Annotations = s.Annotations
+	}
+	if s.AssociatedTags != nil {
+		o.AssociatedTags = s.AssociatedTags
+	}
+	if s.CreateIdempotencyKey != nil {
+		o.CreateIdempotencyKey = s.CreateIdempotencyKey
+	}
 	if s.CreateTime != nil {
 		o.CreateTime = s.CreateTime
 	}
@@ -1428,14 +1720,23 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
 	}
+	if s.NormalizedTags != nil {
+		o.NormalizedTags = s.NormalizedTags
+	}
 	if s.PrimaryAccount != nil {
 		o.PrimaryAccount = s.PrimaryAccount
+	}
+	if s.Protected != nil {
+		o.Protected = s.Protected
 	}
 	if s.Status != nil {
 		o.Status = s.Status
 	}
 	if s.StatusReason != nil {
 		o.StatusReason = s.StatusReason
+	}
+	if s.UpdateIdempotencyKey != nil {
+		o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	}
 	if s.UpdateTime != nil {
 		o.UpdateTime = s.UpdateTime
@@ -1481,6 +1782,15 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	if o.NGFWTenantID != nil {
 		out.NGFWTenantID = *o.NGFWTenantID
 	}
+	if o.Annotations != nil {
+		out.Annotations = *o.Annotations
+	}
+	if o.AssociatedTags != nil {
+		out.AssociatedTags = *o.AssociatedTags
+	}
+	if o.CreateIdempotencyKey != nil {
+		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
+	}
 	if o.CreateTime != nil {
 		out.CreateTime = *o.CreateTime
 	}
@@ -1505,14 +1815,23 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
 	}
+	if o.NormalizedTags != nil {
+		out.NormalizedTags = *o.NormalizedTags
+	}
 	if o.PrimaryAccount != nil {
 		out.PrimaryAccount = *o.PrimaryAccount
+	}
+	if o.Protected != nil {
+		out.Protected = *o.Protected
 	}
 	if o.Status != nil {
 		out.Status = *o.Status
 	}
 	if o.StatusReason != nil {
 		out.StatusReason = *o.StatusReason
+	}
+	if o.UpdateIdempotencyKey != nil {
+		out.UpdateIdempotencyKey = *o.UpdateIdempotencyKey
 	}
 	if o.UpdateTime != nil {
 		out.UpdateTime = *o.UpdateTime
@@ -1525,6 +1844,38 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	}
 
 	return out
+}
+
+// GetAnnotations returns the Annotations of the receiver.
+func (o *SparsePCFWAccount) GetAnnotations() (out map[string][]string) {
+
+	if o.Annotations == nil {
+		return
+	}
+
+	return *o.Annotations
+}
+
+// SetAnnotations sets the property Annotations of the receiver using the address of the given value.
+func (o *SparsePCFWAccount) SetAnnotations(annotations map[string][]string) {
+
+	o.Annotations = &annotations
+}
+
+// GetAssociatedTags returns the AssociatedTags of the receiver.
+func (o *SparsePCFWAccount) GetAssociatedTags() (out []string) {
+
+	if o.AssociatedTags == nil {
+		return
+	}
+
+	return *o.AssociatedTags
+}
+
+// SetAssociatedTags sets the property AssociatedTags of the receiver using the address of the given value.
+func (o *SparsePCFWAccount) SetAssociatedTags(associatedTags []string) {
+
+	o.AssociatedTags = &associatedTags
 }
 
 // GetCreateTime returns the CreateTime of the receiver.
@@ -1557,6 +1908,38 @@ func (o *SparsePCFWAccount) GetNamespace() (out string) {
 func (o *SparsePCFWAccount) SetNamespace(namespace string) {
 
 	o.Namespace = &namespace
+}
+
+// GetNormalizedTags returns the NormalizedTags of the receiver.
+func (o *SparsePCFWAccount) GetNormalizedTags() (out []string) {
+
+	if o.NormalizedTags == nil {
+		return
+	}
+
+	return *o.NormalizedTags
+}
+
+// SetNormalizedTags sets the property NormalizedTags of the receiver using the address of the given value.
+func (o *SparsePCFWAccount) SetNormalizedTags(normalizedTags []string) {
+
+	o.NormalizedTags = &normalizedTags
+}
+
+// GetProtected returns the Protected of the receiver.
+func (o *SparsePCFWAccount) GetProtected() (out bool) {
+
+	if o.Protected == nil {
+		return
+	}
+
+	return *o.Protected
+}
+
+// SetProtected sets the property Protected of the receiver using the address of the given value.
+func (o *SparsePCFWAccount) SetProtected(protected bool) {
+
+	o.Protected = &protected
 }
 
 // GetUpdateTime returns the UpdateTime of the receiver.
@@ -1607,6 +1990,9 @@ type mongoAttributesPCFWAccount struct {
 	NGFWOnboardingStatus string                             `bson:"ngfwonboardingstatus"`
 	NGFWServiceAccountID string                             `bson:"ngfwserviceaccountid"`
 	NGFWTenantID         string                             `bson:"ngfwtenantid"`
+	Annotations          map[string][]string                `bson:"annotations"`
+	AssociatedTags       []string                           `bson:"associatedtags"`
+	CreateIdempotencyKey string                             `bson:"createidempotencykey"`
 	CreateTime           time.Time                          `bson:"createtime"`
 	DecryptionRoleARN    string                             `bson:"decryptionrolearn"`
 	EndpointRoleARN      string                             `bson:"endpointrolearn"`
@@ -1615,9 +2001,12 @@ type mongoAttributesPCFWAccount struct {
 	LogRegion            string                             `bson:"logregion"`
 	LoggingRoleARN       string                             `bson:"loggingrolearn"`
 	Namespace            string                             `bson:"namespace"`
+	NormalizedTags       []string                           `bson:"normalizedtags"`
 	PrimaryAccount       bool                               `bson:"primaryaccount"`
+	Protected            bool                               `bson:"protected"`
 	Status               PCFWAccountStatusValue             `bson:"status"`
 	StatusReason         string                             `bson:"statusreason"`
+	UpdateIdempotencyKey string                             `bson:"updateidempotencykey"`
 	UpdateTime           time.Time                          `bson:"updatetime"`
 	ZHash                int                                `bson:"zhash"`
 	Zone                 int                                `bson:"zone"`
@@ -1630,6 +2019,9 @@ type mongoAttributesSparsePCFWAccount struct {
 	NGFWOnboardingStatus *string                             `bson:"ngfwonboardingstatus,omitempty"`
 	NGFWServiceAccountID *string                             `bson:"ngfwserviceaccountid,omitempty"`
 	NGFWTenantID         *string                             `bson:"ngfwtenantid,omitempty"`
+	Annotations          *map[string][]string                `bson:"annotations,omitempty"`
+	AssociatedTags       *[]string                           `bson:"associatedtags,omitempty"`
+	CreateIdempotencyKey *string                             `bson:"createidempotencykey,omitempty"`
 	CreateTime           *time.Time                          `bson:"createtime,omitempty"`
 	DecryptionRoleARN    *string                             `bson:"decryptionrolearn,omitempty"`
 	EndpointRoleARN      *string                             `bson:"endpointrolearn,omitempty"`
@@ -1638,9 +2030,12 @@ type mongoAttributesSparsePCFWAccount struct {
 	LogRegion            *string                             `bson:"logregion,omitempty"`
 	LoggingRoleARN       *string                             `bson:"loggingrolearn,omitempty"`
 	Namespace            *string                             `bson:"namespace,omitempty"`
+	NormalizedTags       *[]string                           `bson:"normalizedtags,omitempty"`
 	PrimaryAccount       *bool                               `bson:"primaryaccount,omitempty"`
+	Protected            *bool                               `bson:"protected,omitempty"`
 	Status               *PCFWAccountStatusValue             `bson:"status,omitempty"`
 	StatusReason         *string                             `bson:"statusreason,omitempty"`
+	UpdateIdempotencyKey *string                             `bson:"updateidempotencykey,omitempty"`
 	UpdateTime           *time.Time                          `bson:"updatetime,omitempty"`
 	ZHash                *int                                `bson:"zhash,omitempty"`
 	Zone                 *int                                `bson:"zone,omitempty"`
