@@ -200,11 +200,10 @@ relations:
   create:
     description: Retrieves the mirror source status of a firewall for a cloud account.
 
-- rest_name: pcfwaccountmirrorterraform
+- rest_name: pcfwfirewallconfigterraform
   create:
     description: |-
-      Creates a new mirroring terraform plan associated with a firewall for a cloud
-      account.
+      Creates a firewall configuration terraform plan associated for a cloud account.
     global_parameters:
     - $queryable
 

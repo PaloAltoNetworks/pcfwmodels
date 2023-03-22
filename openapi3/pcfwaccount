@@ -87,14 +87,24 @@
               "KinesisFirehose"
             ]
           },
+          "logPushRoleARN": {
+            "description": "ARN of AWS role that allows the NGFW to push logs.",
+            "example": "arn:aws:iam::1234567890:role/NGFWLogPushRole",
+            "type": "string"
+          },
+          "logQueryRoleARN": {
+            "description": "ARN of AWS role that allows the PCFW to query logs.",
+            "example": "arn:aws:iam::1234567890:role/PCFWLogQueryRole",
+            "type": "string"
+          },
           "logRegion": {
             "description": "The AWS region where logging data lives.",
             "example": "us-east-1",
             "type": "string"
           },
-          "loggingRoleARN": {
-            "description": "AWS logging role ARN.",
-            "example": "arn:aws:iam::640574671726:role/LogMetricRole",
+          "logResourcePrefix": {
+            "default": "pcfw",
+            "description": "Prefix to use for logging resources.",
             "type": "string"
           },
           "namespace": {
@@ -148,8 +158,10 @@
           "endpointRoleARN",
           "logDestination",
           "logDestinationType",
+          "logPushRoleARN",
+          "logQueryRoleARN",
           "logRegion",
-          "loggingRoleARN"
+          "logResourcePrefix"
         ],
         "type": "object"
       }

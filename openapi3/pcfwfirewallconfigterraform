@@ -1,8 +1,8 @@
 {
   "components": {
     "schemas": {
-      "pcfwaccountmirrorterraform": {
-        "description": "Represents PCFW account terraform generator.",
+      "pcfwfirewallconfigterraform": {
+        "description": "Represents PCFW firewall configuration terraform generator.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -35,15 +35,15 @@
       "name": "TODO"
     },
     "termsOfService": "https://localhost/TODO",
-    "title": "pcfwaccountmirrorterraform",
+    "title": "pcfwfirewallconfigterraform",
     "version": "1.0"
   },
   "openapi": "3.0.3",
   "paths": {
-    "/pcfwaccountmirrorterraform": {
+    "/pcfwfirewallconfigterraform": {
       "post": {
-        "description": "Creates a new mirroring terraform plan associated with a firewall for a cloud\naccount.",
-        "operationId": "create-a-new-pcfwaccountmirrorterraform",
+        "description": "Creates a firewall configuration terraform plan associated for a cloud account.",
+        "operationId": "create-a-new-pcfwfirewallconfigterraform",
         "parameters": [
           {
             "description": "Filtering query. Consequent `q` parameters will form an or.",
@@ -59,7 +59,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
+                "$ref": "#/components/schemas/pcfwfirewallconfigterraform"
               }
             }
           }
@@ -69,7 +69,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/pcfwaccountmirrorterraform"
+                  "$ref": "#/components/schemas/pcfwfirewallconfigterraform"
                 }
               }
             },

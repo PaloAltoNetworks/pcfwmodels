@@ -4,10 +4,10 @@
     "@named",
     "@namespaced"
   ],
-  "$modelName": "PCFWAccountMirrorTerraform",
+  "$modelName": "PCFWFirewallConfigTerraform",
   "$modelPackage": "deploymentadvisor",
-  "$modelResourceName": "pcfwaccountmirrorterraform",
-  "$modelRestName": "pcfwaccountmirrorterraform",
+  "$modelResourceName": "pcfwfirewallconfigterraform",
+  "$modelRestName": "pcfwfirewallconfigterraform",
   "additionalProperties": true,
   "properties": {
     "ID": {
@@ -45,6 +45,6 @@
   "required": [
     "name"
   ],
-  "title": "PCFWAccountMirrorTerraform",
+  "title": "PCFWFirewallConfigTerraform",
   "type": "object"
 }

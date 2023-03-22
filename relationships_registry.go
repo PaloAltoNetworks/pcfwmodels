@@ -882,7 +882,7 @@ func init() {
 		},
 	}
 
-	relationshipsRegistry[PCFWAccountMirrorTerraformIdentity] = &elemental.Relationship{
+	relationshipsRegistry[PCFWFirewallConfigTerraformIdentity] = &elemental.Relationship{
 		Create: map[string]*elemental.RelationshipInfo{
 			"root": {
 				Parameters: []elemental.ParameterDefinition{

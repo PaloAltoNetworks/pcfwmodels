@@ -11,43 +11,43 @@ import (
 	"go.aporeto.io/elemental"
 )
 
-// PCFWAccountMirrorTerraformIdentity represents the Identity of the object.
-var PCFWAccountMirrorTerraformIdentity = elemental.Identity{
-	Name:     "pcfwaccountmirrorterraform",
-	Category: "pcfwaccountmirrorterraform",
+// PCFWFirewallConfigTerraformIdentity represents the Identity of the object.
+var PCFWFirewallConfigTerraformIdentity = elemental.Identity{
+	Name:     "pcfwfirewallconfigterraform",
+	Category: "pcfwfirewallconfigterraform",
 	Package:  "deploymentadvisor",
 	Private:  false,
 }
 
-// PCFWAccountMirrorTerraformsList represents a list of PCFWAccountMirrorTerraforms
-type PCFWAccountMirrorTerraformsList []*PCFWAccountMirrorTerraform
+// PCFWFirewallConfigTerraformsList represents a list of PCFWFirewallConfigTerraforms
+type PCFWFirewallConfigTerraformsList []*PCFWFirewallConfigTerraform
 
 // Identity returns the identity of the objects in the list.
-func (o PCFWAccountMirrorTerraformsList) Identity() elemental.Identity {
+func (o PCFWFirewallConfigTerraformsList) Identity() elemental.Identity {
 
-	return PCFWAccountMirrorTerraformIdentity
+	return PCFWFirewallConfigTerraformIdentity
 }
 
-// Copy returns a pointer to a copy the PCFWAccountMirrorTerraformsList.
-func (o PCFWAccountMirrorTerraformsList) Copy() elemental.Identifiables {
+// Copy returns a pointer to a copy the PCFWFirewallConfigTerraformsList.
+func (o PCFWFirewallConfigTerraformsList) Copy() elemental.Identifiables {
 
-	copy := append(PCFWAccountMirrorTerraformsList{}, o...)
+	copy := append(PCFWFirewallConfigTerraformsList{}, o...)
 	return &copy
 }
 
-// Append appends the objects to the a new copy of the PCFWAccountMirrorTerraformsList.
-func (o PCFWAccountMirrorTerraformsList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
+// Append appends the objects to the a new copy of the PCFWFirewallConfigTerraformsList.
+func (o PCFWFirewallConfigTerraformsList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
 
-	out := append(PCFWAccountMirrorTerraformsList{}, o...)
+	out := append(PCFWFirewallConfigTerraformsList{}, o...)
 	for _, obj := range objects {
-		out = append(out, obj.(*PCFWAccountMirrorTerraform))
+		out = append(out, obj.(*PCFWFirewallConfigTerraform))
 	}
 
 	return out
 }
 
 // List converts the object to an elemental.IdentifiablesList.
-func (o PCFWAccountMirrorTerraformsList) List() elemental.IdentifiablesList {
+func (o PCFWFirewallConfigTerraformsList) List() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -58,33 +58,33 @@ func (o PCFWAccountMirrorTerraformsList) List() elemental.IdentifiablesList {
 }
 
 // DefaultOrder returns the default ordering fields of the content.
-func (o PCFWAccountMirrorTerraformsList) DefaultOrder() []string {
+func (o PCFWFirewallConfigTerraformsList) DefaultOrder() []string {
 
 	return []string{
 		"name",
 	}
 }
 
-// ToSparse returns the PCFWAccountMirrorTerraformsList converted to SparsePCFWAccountMirrorTerraformsList.
+// ToSparse returns the PCFWFirewallConfigTerraformsList converted to SparsePCFWFirewallConfigTerraformsList.
 // Objects in the list will only contain the given fields. No field means entire field set.
-func (o PCFWAccountMirrorTerraformsList) ToSparse(fields ...string) elemental.Identifiables {
+func (o PCFWFirewallConfigTerraformsList) ToSparse(fields ...string) elemental.Identifiables {
 
-	out := make(SparsePCFWAccountMirrorTerraformsList, len(o))
+	out := make(SparsePCFWFirewallConfigTerraformsList, len(o))
 	for i := 0; i < len(o); i++ {
-		out[i] = o[i].ToSparse(fields...).(*SparsePCFWAccountMirrorTerraform)
+		out[i] = o[i].ToSparse(fields...).(*SparsePCFWFirewallConfigTerraform)
 	}
 
 	return out
 }
 
 // Version returns the version of the content.
-func (o PCFWAccountMirrorTerraformsList) Version() int {
+func (o PCFWFirewallConfigTerraformsList) Version() int {
 
 	return 1
 }
 
-// PCFWAccountMirrorTerraform represents the model of a pcfwaccountmirrorterraform
-type PCFWAccountMirrorTerraform struct {
+// PCFWFirewallConfigTerraform represents the model of a pcfwfirewallconfigterraform
+type PCFWFirewallConfigTerraform struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -97,41 +97,41 @@ type PCFWAccountMirrorTerraform struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewPCFWAccountMirrorTerraform returns a new *PCFWAccountMirrorTerraform
-func NewPCFWAccountMirrorTerraform() *PCFWAccountMirrorTerraform {
+// NewPCFWFirewallConfigTerraform returns a new *PCFWFirewallConfigTerraform
+func NewPCFWFirewallConfigTerraform() *PCFWFirewallConfigTerraform {
 
-	return &PCFWAccountMirrorTerraform{
+	return &PCFWFirewallConfigTerraform{
 		ModelVersion: 1,
 	}
 }
 
 // Identity returns the Identity of the object.
-func (o *PCFWAccountMirrorTerraform) Identity() elemental.Identity {
+func (o *PCFWFirewallConfigTerraform) Identity() elemental.Identity {
 
-	return PCFWAccountMirrorTerraformIdentity
+	return PCFWFirewallConfigTerraformIdentity
 }
 
 // Identifier returns the value of the object's unique identifier.
-func (o *PCFWAccountMirrorTerraform) Identifier() string {
+func (o *PCFWFirewallConfigTerraform) Identifier() string {
 
 	return o.ID
 }
 
 // SetIdentifier sets the value of the object's unique identifier.
-func (o *PCFWAccountMirrorTerraform) SetIdentifier(id string) {
+func (o *PCFWFirewallConfigTerraform) SetIdentifier(id string) {
 
 	o.ID = id
 }
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *PCFWAccountMirrorTerraform) GetBSON() (any, error) {
+func (o *PCFWFirewallConfigTerraform) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesPCFWAccountMirrorTerraform{}
+	s := &mongoAttributesPCFWFirewallConfigTerraform{}
 
 	s.Name = o.Name
 	s.Namespace = o.Namespace
@@ -141,13 +141,13 @@ func (o *PCFWAccountMirrorTerraform) GetBSON() (any, error) {
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *PCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
+func (o *PCFWFirewallConfigTerraform) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesPCFWAccountMirrorTerraform{}
+	s := &mongoAttributesPCFWFirewallConfigTerraform{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -159,19 +159,19 @@ func (o *PCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
 }
 
 // Version returns the hardcoded version of the model.
-func (o *PCFWAccountMirrorTerraform) Version() int {
+func (o *PCFWFirewallConfigTerraform) Version() int {
 
 	return 1
 }
 
 // BleveType implements the bleve.Classifier Interface.
-func (o *PCFWAccountMirrorTerraform) BleveType() string {
+func (o *PCFWFirewallConfigTerraform) BleveType() string {
 
-	return "pcfwaccountmirrorterraform"
+	return "pcfwfirewallconfigterraform"
 }
 
 // DefaultOrder returns the list of default ordering fields.
-func (o *PCFWAccountMirrorTerraform) DefaultOrder() []string {
+func (o *PCFWFirewallConfigTerraform) DefaultOrder() []string {
 
 	return []string{
 		"name",
@@ -179,54 +179,54 @@ func (o *PCFWAccountMirrorTerraform) DefaultOrder() []string {
 }
 
 // Doc returns the documentation for the object
-func (o *PCFWAccountMirrorTerraform) Doc() string {
+func (o *PCFWFirewallConfigTerraform) Doc() string {
 
-	return `Represents PCFW account terraform generator.`
+	return `Represents PCFW firewall configuration terraform generator.`
 }
 
-func (o *PCFWAccountMirrorTerraform) String() string {
+func (o *PCFWFirewallConfigTerraform) String() string {
 
 	return fmt.Sprintf("<%s:%s>", o.Identity().Name, o.Identifier())
 }
 
 // GetName returns the Name of the receiver.
-func (o *PCFWAccountMirrorTerraform) GetName() string {
+func (o *PCFWFirewallConfigTerraform) GetName() string {
 
 	return o.Name
 }
 
 // SetName sets the property Name of the receiver using the given value.
-func (o *PCFWAccountMirrorTerraform) SetName(name string) {
+func (o *PCFWFirewallConfigTerraform) SetName(name string) {
 
 	o.Name = name
 }
 
 // GetNamespace returns the Namespace of the receiver.
-func (o *PCFWAccountMirrorTerraform) GetNamespace() string {
+func (o *PCFWFirewallConfigTerraform) GetNamespace() string {
 
 	return o.Namespace
 }
 
 // SetNamespace sets the property Namespace of the receiver using the given value.
-func (o *PCFWAccountMirrorTerraform) SetNamespace(namespace string) {
+func (o *PCFWFirewallConfigTerraform) SetNamespace(namespace string) {
 
 	o.Namespace = namespace
 }
 
 // ToSparse returns the sparse version of the model.
 // The returned object will only contain the given fields. No field means entire field set.
-func (o *PCFWAccountMirrorTerraform) ToSparse(fields ...string) elemental.SparseIdentifiable {
+func (o *PCFWFirewallConfigTerraform) ToSparse(fields ...string) elemental.SparseIdentifiable {
 
 	if len(fields) == 0 {
 		// nolint: goimports
-		return &SparsePCFWAccountMirrorTerraform{
+		return &SparsePCFWFirewallConfigTerraform{
 			ID:        &o.ID,
 			Name:      &o.Name,
 			Namespace: &o.Namespace,
 		}
 	}
 
-	sp := &SparsePCFWAccountMirrorTerraform{}
+	sp := &SparsePCFWFirewallConfigTerraform{}
 	for _, f := range fields {
 		switch f {
 		case "ID":
@@ -241,13 +241,13 @@ func (o *PCFWAccountMirrorTerraform) ToSparse(fields ...string) elemental.Sparse
 	return sp
 }
 
-// Patch apply the non nil value of a *SparsePCFWAccountMirrorTerraform to the object.
-func (o *PCFWAccountMirrorTerraform) Patch(sparse elemental.SparseIdentifiable) {
+// Patch apply the non nil value of a *SparsePCFWFirewallConfigTerraform to the object.
+func (o *PCFWFirewallConfigTerraform) Patch(sparse elemental.SparseIdentifiable) {
 	if !sparse.Identity().IsEqual(o.Identity()) {
 		panic("cannot patch from a parse with different identity")
 	}
 
-	so := sparse.(*SparsePCFWAccountMirrorTerraform)
+	so := sparse.(*SparsePCFWFirewallConfigTerraform)
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
@@ -259,32 +259,32 @@ func (o *PCFWAccountMirrorTerraform) Patch(sparse elemental.SparseIdentifiable) 
 	}
 }
 
-// DeepCopy returns a deep copy if the PCFWAccountMirrorTerraform.
-func (o *PCFWAccountMirrorTerraform) DeepCopy() *PCFWAccountMirrorTerraform {
+// DeepCopy returns a deep copy if the PCFWFirewallConfigTerraform.
+func (o *PCFWFirewallConfigTerraform) DeepCopy() *PCFWFirewallConfigTerraform {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &PCFWAccountMirrorTerraform{}
+	out := &PCFWFirewallConfigTerraform{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *PCFWAccountMirrorTerraform.
-func (o *PCFWAccountMirrorTerraform) DeepCopyInto(out *PCFWAccountMirrorTerraform) {
+// DeepCopyInto copies the receiver into the given *PCFWFirewallConfigTerraform.
+func (o *PCFWFirewallConfigTerraform) DeepCopyInto(out *PCFWFirewallConfigTerraform) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy PCFWAccountMirrorTerraform: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy PCFWFirewallConfigTerraform: %s", err))
 	}
 
-	*out = *target.(*PCFWAccountMirrorTerraform)
+	*out = *target.(*PCFWFirewallConfigTerraform)
 }
 
 // Validate valides the current information stored into the structure.
-func (o *PCFWAccountMirrorTerraform) Validate() error {
+func (o *PCFWFirewallConfigTerraform) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
@@ -309,26 +309,26 @@ func (o *PCFWAccountMirrorTerraform) Validate() error {
 }
 
 // SpecificationForAttribute returns the AttributeSpecification for the given attribute name key.
-func (*PCFWAccountMirrorTerraform) SpecificationForAttribute(name string) elemental.AttributeSpecification {
+func (*PCFWFirewallConfigTerraform) SpecificationForAttribute(name string) elemental.AttributeSpecification {
 
-	if v, ok := PCFWAccountMirrorTerraformAttributesMap[name]; ok {
+	if v, ok := PCFWFirewallConfigTerraformAttributesMap[name]; ok {
 		return v
 	}
 
 	// We could not find it, so let's check on the lower case indexed spec map
-	return PCFWAccountMirrorTerraformLowerCaseAttributesMap[name]
+	return PCFWFirewallConfigTerraformLowerCaseAttributesMap[name]
 }
 
 // AttributeSpecifications returns the full attribute specifications map.
-func (*PCFWAccountMirrorTerraform) AttributeSpecifications() map[string]elemental.AttributeSpecification {
+func (*PCFWFirewallConfigTerraform) AttributeSpecifications() map[string]elemental.AttributeSpecification {
 
-	return PCFWAccountMirrorTerraformAttributesMap
+	return PCFWFirewallConfigTerraformAttributesMap
 }
 
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *PCFWAccountMirrorTerraform) ValueForAttribute(name string) any {
+func (o *PCFWFirewallConfigTerraform) ValueForAttribute(name string) any {
 
 	switch name {
 	case "ID":
@@ -342,8 +342,8 @@ func (o *PCFWAccountMirrorTerraform) ValueForAttribute(name string) any {
 	return nil
 }
 
-// PCFWAccountMirrorTerraformAttributesMap represents the map of attribute for PCFWAccountMirrorTerraform.
-var PCFWAccountMirrorTerraformAttributesMap = map[string]elemental.AttributeSpecification{
+// PCFWFirewallConfigTerraformAttributesMap represents the map of attribute for PCFWFirewallConfigTerraform.
+var PCFWFirewallConfigTerraformAttributesMap = map[string]elemental.AttributeSpecification{
 	"ID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -391,8 +391,8 @@ var PCFWAccountMirrorTerraformAttributesMap = map[string]elemental.AttributeSpec
 	},
 }
 
-// PCFWAccountMirrorTerraformLowerCaseAttributesMap represents the map of attribute for PCFWAccountMirrorTerraform.
-var PCFWAccountMirrorTerraformLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+// PCFWFirewallConfigTerraformLowerCaseAttributesMap represents the map of attribute for PCFWFirewallConfigTerraform.
+var PCFWFirewallConfigTerraformLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
 	"id": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -440,35 +440,35 @@ var PCFWAccountMirrorTerraformLowerCaseAttributesMap = map[string]elemental.Attr
 	},
 }
 
-// SparsePCFWAccountMirrorTerraformsList represents a list of SparsePCFWAccountMirrorTerraforms
-type SparsePCFWAccountMirrorTerraformsList []*SparsePCFWAccountMirrorTerraform
+// SparsePCFWFirewallConfigTerraformsList represents a list of SparsePCFWFirewallConfigTerraforms
+type SparsePCFWFirewallConfigTerraformsList []*SparsePCFWFirewallConfigTerraform
 
 // Identity returns the identity of the objects in the list.
-func (o SparsePCFWAccountMirrorTerraformsList) Identity() elemental.Identity {
+func (o SparsePCFWFirewallConfigTerraformsList) Identity() elemental.Identity {
 
-	return PCFWAccountMirrorTerraformIdentity
+	return PCFWFirewallConfigTerraformIdentity
 }
 
-// Copy returns a pointer to a copy the SparsePCFWAccountMirrorTerraformsList.
-func (o SparsePCFWAccountMirrorTerraformsList) Copy() elemental.Identifiables {
+// Copy returns a pointer to a copy the SparsePCFWFirewallConfigTerraformsList.
+func (o SparsePCFWFirewallConfigTerraformsList) Copy() elemental.Identifiables {
 
-	copy := append(SparsePCFWAccountMirrorTerraformsList{}, o...)
+	copy := append(SparsePCFWFirewallConfigTerraformsList{}, o...)
 	return &copy
 }
 
-// Append appends the objects to the a new copy of the SparsePCFWAccountMirrorTerraformsList.
-func (o SparsePCFWAccountMirrorTerraformsList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
+// Append appends the objects to the a new copy of the SparsePCFWFirewallConfigTerraformsList.
+func (o SparsePCFWFirewallConfigTerraformsList) Append(objects ...elemental.Identifiable) elemental.Identifiables {
 
-	out := append(SparsePCFWAccountMirrorTerraformsList{}, o...)
+	out := append(SparsePCFWFirewallConfigTerraformsList{}, o...)
 	for _, obj := range objects {
-		out = append(out, obj.(*SparsePCFWAccountMirrorTerraform))
+		out = append(out, obj.(*SparsePCFWFirewallConfigTerraform))
 	}
 
 	return out
 }
 
 // List converts the object to an elemental.IdentifiablesList.
-func (o SparsePCFWAccountMirrorTerraformsList) List() elemental.IdentifiablesList {
+func (o SparsePCFWFirewallConfigTerraformsList) List() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -479,15 +479,15 @@ func (o SparsePCFWAccountMirrorTerraformsList) List() elemental.IdentifiablesLis
 }
 
 // DefaultOrder returns the default ordering fields of the content.
-func (o SparsePCFWAccountMirrorTerraformsList) DefaultOrder() []string {
+func (o SparsePCFWFirewallConfigTerraformsList) DefaultOrder() []string {
 
 	return []string{
 		"name",
 	}
 }
 
-// ToPlain returns the SparsePCFWAccountMirrorTerraformsList converted to PCFWAccountMirrorTerraformsList.
-func (o SparsePCFWAccountMirrorTerraformsList) ToPlain() elemental.IdentifiablesList {
+// ToPlain returns the SparsePCFWFirewallConfigTerraformsList converted to PCFWFirewallConfigTerraformsList.
+func (o SparsePCFWFirewallConfigTerraformsList) ToPlain() elemental.IdentifiablesList {
 
 	out := make(elemental.IdentifiablesList, len(o))
 	for i := 0; i < len(o); i++ {
@@ -498,13 +498,13 @@ func (o SparsePCFWAccountMirrorTerraformsList) ToPlain() elemental.Identifiables
 }
 
 // Version returns the version of the content.
-func (o SparsePCFWAccountMirrorTerraformsList) Version() int {
+func (o SparsePCFWFirewallConfigTerraformsList) Version() int {
 
 	return 1
 }
 
-// SparsePCFWAccountMirrorTerraform represents the sparse version of a pcfwaccountmirrorterraform.
-type SparsePCFWAccountMirrorTerraform struct {
+// SparsePCFWFirewallConfigTerraform represents the sparse version of a pcfwfirewallconfigterraform.
+type SparsePCFWFirewallConfigTerraform struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -517,19 +517,19 @@ type SparsePCFWAccountMirrorTerraform struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewSparsePCFWAccountMirrorTerraform returns a new  SparsePCFWAccountMirrorTerraform.
-func NewSparsePCFWAccountMirrorTerraform() *SparsePCFWAccountMirrorTerraform {
-	return &SparsePCFWAccountMirrorTerraform{}
+// NewSparsePCFWFirewallConfigTerraform returns a new  SparsePCFWFirewallConfigTerraform.
+func NewSparsePCFWFirewallConfigTerraform() *SparsePCFWFirewallConfigTerraform {
+	return &SparsePCFWFirewallConfigTerraform{}
 }
 
 // Identity returns the Identity of the sparse object.
-func (o *SparsePCFWAccountMirrorTerraform) Identity() elemental.Identity {
+func (o *SparsePCFWFirewallConfigTerraform) Identity() elemental.Identity {
 
-	return PCFWAccountMirrorTerraformIdentity
+	return PCFWFirewallConfigTerraformIdentity
 }
 
 // Identifier returns the value of the sparse object's unique identifier.
-func (o *SparsePCFWAccountMirrorTerraform) Identifier() string {
+func (o *SparsePCFWFirewallConfigTerraform) Identifier() string {
 
 	if o.ID == nil {
 		return ""
@@ -538,7 +538,7 @@ func (o *SparsePCFWAccountMirrorTerraform) Identifier() string {
 }
 
 // SetIdentifier sets the value of the sparse object's unique identifier.
-func (o *SparsePCFWAccountMirrorTerraform) SetIdentifier(id string) {
+func (o *SparsePCFWFirewallConfigTerraform) SetIdentifier(id string) {
 
 	if id != "" {
 		o.ID = &id
@@ -549,13 +549,13 @@ func (o *SparsePCFWAccountMirrorTerraform) SetIdentifier(id string) {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparsePCFWAccountMirrorTerraform) GetBSON() (any, error) {
+func (o *SparsePCFWFirewallConfigTerraform) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesSparsePCFWAccountMirrorTerraform{}
+	s := &mongoAttributesSparsePCFWFirewallConfigTerraform{}
 
 	if o.Name != nil {
 		s.Name = o.Name
@@ -569,13 +569,13 @@ func (o *SparsePCFWAccountMirrorTerraform) GetBSON() (any, error) {
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *SparsePCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
+func (o *SparsePCFWFirewallConfigTerraform) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesSparsePCFWAccountMirrorTerraform{}
+	s := &mongoAttributesSparsePCFWFirewallConfigTerraform{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -591,15 +591,15 @@ func (o *SparsePCFWAccountMirrorTerraform) SetBSON(raw bson.Raw) error {
 }
 
 // Version returns the hardcoded version of the model.
-func (o *SparsePCFWAccountMirrorTerraform) Version() int {
+func (o *SparsePCFWFirewallConfigTerraform) Version() int {
 
 	return 1
 }
 
 // ToPlain returns the plain version of the sparse model.
-func (o *SparsePCFWAccountMirrorTerraform) ToPlain() elemental.PlainIdentifiable {
+func (o *SparsePCFWFirewallConfigTerraform) ToPlain() elemental.PlainIdentifiable {
 
-	out := NewPCFWAccountMirrorTerraform()
+	out := NewPCFWFirewallConfigTerraform()
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
@@ -614,7 +614,7 @@ func (o *SparsePCFWAccountMirrorTerraform) ToPlain() elemental.PlainIdentifiable
 }
 
 // GetName returns the Name of the receiver.
-func (o *SparsePCFWAccountMirrorTerraform) GetName() (out string) {
+func (o *SparsePCFWFirewallConfigTerraform) GetName() (out string) {
 
 	if o.Name == nil {
 		return
@@ -624,13 +624,13 @@ func (o *SparsePCFWAccountMirrorTerraform) GetName() (out string) {
 }
 
 // SetName sets the property Name of the receiver using the address of the given value.
-func (o *SparsePCFWAccountMirrorTerraform) SetName(name string) {
+func (o *SparsePCFWFirewallConfigTerraform) SetName(name string) {
 
 	o.Name = &name
 }
 
 // GetNamespace returns the Namespace of the receiver.
-func (o *SparsePCFWAccountMirrorTerraform) GetNamespace() (out string) {
+func (o *SparsePCFWFirewallConfigTerraform) GetNamespace() (out string) {
 
 	if o.Namespace == nil {
 		return
@@ -640,40 +640,40 @@ func (o *SparsePCFWAccountMirrorTerraform) GetNamespace() (out string) {
 }
 
 // SetNamespace sets the property Namespace of the receiver using the address of the given value.
-func (o *SparsePCFWAccountMirrorTerraform) SetNamespace(namespace string) {
+func (o *SparsePCFWFirewallConfigTerraform) SetNamespace(namespace string) {
 
 	o.Namespace = &namespace
 }
 
-// DeepCopy returns a deep copy if the SparsePCFWAccountMirrorTerraform.
-func (o *SparsePCFWAccountMirrorTerraform) DeepCopy() *SparsePCFWAccountMirrorTerraform {
+// DeepCopy returns a deep copy if the SparsePCFWFirewallConfigTerraform.
+func (o *SparsePCFWFirewallConfigTerraform) DeepCopy() *SparsePCFWFirewallConfigTerraform {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &SparsePCFWAccountMirrorTerraform{}
+	out := &SparsePCFWFirewallConfigTerraform{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *SparsePCFWAccountMirrorTerraform.
-func (o *SparsePCFWAccountMirrorTerraform) DeepCopyInto(out *SparsePCFWAccountMirrorTerraform) {
+// DeepCopyInto copies the receiver into the given *SparsePCFWFirewallConfigTerraform.
+func (o *SparsePCFWFirewallConfigTerraform) DeepCopyInto(out *SparsePCFWFirewallConfigTerraform) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy SparsePCFWAccountMirrorTerraform: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy SparsePCFWFirewallConfigTerraform: %s", err))
 	}
 
-	*out = *target.(*SparsePCFWAccountMirrorTerraform)
+	*out = *target.(*SparsePCFWFirewallConfigTerraform)
 }
 
-type mongoAttributesPCFWAccountMirrorTerraform struct {
+type mongoAttributesPCFWFirewallConfigTerraform struct {
 	Name      string `bson:"name"`
 	Namespace string `bson:"namespace"`
 }
-type mongoAttributesSparsePCFWAccountMirrorTerraform struct {
+type mongoAttributesSparsePCFWFirewallConfigTerraform struct {
 	Name      *string `bson:"name,omitempty"`
 	Namespace *string `bson:"namespace,omitempty"`
 }

@@ -89,13 +89,29 @@ attributes:
     required: true
     example_value: us-east-1
 
-  - name: loggingRoleARN
-    description: AWS logging role ARN.
+  - name: logPushRoleARN
+    description: ARN of AWS role that allows the NGFW to push logs.
     type: string
     exposed: true
     stored: true
     required: true
-    example_value: arn:aws:iam::640574671726:role/LogMetricRole
+    example_value: arn:aws:iam::1234567890:role/NGFWLogPushRole
+
+  - name: logQueryRoleARN
+    description: ARN of AWS role that allows the PCFW to query logs.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: arn:aws:iam::1234567890:role/PCFWLogQueryRole
+
+  - name: logResourcePrefix
+    description: Prefix to use for logging resources.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    default_value: pcfw
 
   - name: offboardingTimestamp
     description: The timestamp when offboarding pending started.

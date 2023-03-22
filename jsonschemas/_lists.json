@@ -240,15 +240,15 @@
       },
       "type": "array"
     },
-    "pcfwaccountmirrorterraform": {
-      "items": {
-        "$ref": "pcfwaccountmirrorterraform.json"
-      },
-      "type": "array"
-    },
     "pcfwaccounts": {
       "items": {
         "$ref": "pcfwaccount.json"
+      },
+      "type": "array"
+    },
+    "pcfwfirewallconfigterraform": {
+      "items": {
+        "$ref": "pcfwfirewallconfigterraform.json"
       },
       "type": "array"
     },

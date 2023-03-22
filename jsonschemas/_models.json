@@ -123,8 +123,8 @@
     "pcfwaccountmirrorsourcestate": {
       "$ref": "pcfwaccountmirrorsourcestate.json"
     },
-    "pcfwaccountmirrorterraform": {
-      "$ref": "pcfwaccountmirrorterraform.json"
+    "pcfwfirewallconfigterraform": {
+      "$ref": "pcfwfirewallconfigterraform.json"
     },
     "pcfwsubnethelper": {
       "$ref": "pcfwsubnethelper.json"

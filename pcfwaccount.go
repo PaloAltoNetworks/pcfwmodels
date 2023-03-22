@@ -166,11 +166,17 @@ type PCFWAccount struct {
 	// Destination type for log output.
 	LogDestinationType PCFWAccountLogDestinationTypeValue `json:"logDestinationType" msgpack:"logDestinationType" bson:"logdestinationtype" mapstructure:"logDestinationType,omitempty"`
 
+	// ARN of AWS role that allows the NGFW to push logs.
+	LogPushRoleARN string `json:"logPushRoleARN" msgpack:"logPushRoleARN" bson:"logpushrolearn" mapstructure:"logPushRoleARN,omitempty"`
+
+	// ARN of AWS role that allows the PCFW to query logs.
+	LogQueryRoleARN string `json:"logQueryRoleARN" msgpack:"logQueryRoleARN" bson:"logqueryrolearn" mapstructure:"logQueryRoleARN,omitempty"`
+
 	// The AWS region where logging data lives.
 	LogRegion string `json:"logRegion" msgpack:"logRegion" bson:"logregion" mapstructure:"logRegion,omitempty"`
 
-	// AWS logging role ARN.
-	LoggingRoleARN string `json:"loggingRoleARN" msgpack:"loggingRoleARN" bson:"loggingrolearn" mapstructure:"loggingRoleARN,omitempty"`
+	// Prefix to use for logging resources.
+	LogResourcePrefix string `json:"logResourcePrefix" msgpack:"logResourcePrefix" bson:"logresourceprefix" mapstructure:"logResourcePrefix,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
@@ -214,6 +220,7 @@ func NewPCFWAccount() *PCFWAccount {
 		Annotations:        map[string][]string{},
 		AssociatedTags:     []string{},
 		LogDestinationType: PCFWAccountLogDestinationTypePrisma,
+		LogResourcePrefix:  "pcfw",
 		NormalizedTags:     []string{},
 	}
 }
@@ -263,8 +270,10 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.EndpointRoleARN = o.EndpointRoleARN
 	s.LogDestination = o.LogDestination
 	s.LogDestinationType = o.LogDestinationType
+	s.LogPushRoleARN = o.LogPushRoleARN
+	s.LogQueryRoleARN = o.LogQueryRoleARN
 	s.LogRegion = o.LogRegion
-	s.LoggingRoleARN = o.LoggingRoleARN
+	s.LogResourcePrefix = o.LogResourcePrefix
 	s.Namespace = o.Namespace
 	s.NormalizedTags = o.NormalizedTags
 	s.PrimaryAccount = o.PrimaryAccount
@@ -307,8 +316,10 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.EndpointRoleARN = s.EndpointRoleARN
 	o.LogDestination = s.LogDestination
 	o.LogDestinationType = s.LogDestinationType
+	o.LogPushRoleARN = s.LogPushRoleARN
+	o.LogQueryRoleARN = s.LogQueryRoleARN
 	o.LogRegion = s.LogRegion
-	o.LoggingRoleARN = s.LoggingRoleARN
+	o.LogResourcePrefix = s.LogResourcePrefix
 	o.Namespace = s.Namespace
 	o.NormalizedTags = s.NormalizedTags
 	o.PrimaryAccount = s.PrimaryAccount
@@ -458,8 +469,10 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			EndpointRoleARN:      &o.EndpointRoleARN,
 			LogDestination:       &o.LogDestination,
 			LogDestinationType:   &o.LogDestinationType,
+			LogPushRoleARN:       &o.LogPushRoleARN,
+			LogQueryRoleARN:      &o.LogQueryRoleARN,
 			LogRegion:            &o.LogRegion,
-			LoggingRoleARN:       &o.LoggingRoleARN,
+			LogResourcePrefix:    &o.LogResourcePrefix,
 			Namespace:            &o.Namespace,
 			NormalizedTags:       &o.NormalizedTags,
 			PrimaryAccount:       &o.PrimaryAccount,
@@ -506,10 +519,14 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.LogDestination = &(o.LogDestination)
 		case "logDestinationType":
 			sp.LogDestinationType = &(o.LogDestinationType)
+		case "logPushRoleARN":
+			sp.LogPushRoleARN = &(o.LogPushRoleARN)
+		case "logQueryRoleARN":
+			sp.LogQueryRoleARN = &(o.LogQueryRoleARN)
 		case "logRegion":
 			sp.LogRegion = &(o.LogRegion)
-		case "loggingRoleARN":
-			sp.LoggingRoleARN = &(o.LoggingRoleARN)
+		case "logResourcePrefix":
+			sp.LogResourcePrefix = &(o.LogResourcePrefix)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
 		case "normalizedTags":
@@ -588,11 +605,17 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	if so.LogDestinationType != nil {
 		o.LogDestinationType = *so.LogDestinationType
 	}
+	if so.LogPushRoleARN != nil {
+		o.LogPushRoleARN = *so.LogPushRoleARN
+	}
+	if so.LogQueryRoleARN != nil {
+		o.LogQueryRoleARN = *so.LogQueryRoleARN
+	}
 	if so.LogRegion != nil {
 		o.LogRegion = *so.LogRegion
 	}
-	if so.LoggingRoleARN != nil {
-		o.LoggingRoleARN = *so.LoggingRoleARN
+	if so.LogResourcePrefix != nil {
+		o.LogResourcePrefix = *so.LogResourcePrefix
 	}
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
@@ -684,11 +707,19 @@ func (o *PCFWAccount) Validate() error {
 		errors = errors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("logPushRoleARN", o.LogPushRoleARN); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("logQueryRoleARN", o.LogQueryRoleARN); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateRequiredString("loggingRoleARN", o.LoggingRoleARN); err != nil {
+	if err := elemental.ValidateRequiredString("logResourcePrefix", o.LogResourcePrefix); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
@@ -760,10 +791,14 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.LogDestination
 	case "logDestinationType":
 		return o.LogDestinationType
+	case "logPushRoleARN":
+		return o.LogPushRoleARN
+	case "logQueryRoleARN":
+		return o.LogQueryRoleARN
 	case "logRegion":
 		return o.LogRegion
-	case "loggingRoleARN":
-		return o.LoggingRoleARN
+	case "logResourcePrefix":
+		return o.LogResourcePrefix
 	case "namespace":
 		return o.Namespace
 	case "normalizedTags":
@@ -964,6 +999,28 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "enum",
 	},
+	"LogPushRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logpushrolearn",
+		ConvertedName:  "LogPushRoleARN",
+		Description:    `ARN of AWS role that allows the NGFW to push logs.`,
+		Exposed:        true,
+		Name:           "logPushRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogQueryRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logqueryrolearn",
+		ConvertedName:  "LogQueryRoleARN",
+		Description:    `ARN of AWS role that allows the PCFW to query logs.`,
+		Exposed:        true,
+		Name:           "logQueryRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"LogRegion": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logregion",
@@ -975,13 +1032,14 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
-	"LoggingRoleARN": {
+	"LogResourcePrefix": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "loggingrolearn",
-		ConvertedName:  "LoggingRoleARN",
-		Description:    `AWS logging role ARN.`,
+		BSONFieldName:  "logresourceprefix",
+		ConvertedName:  "LogResourcePrefix",
+		DefaultValue:   "pcfw",
+		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
-		Name:           "loggingRoleARN",
+		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,
 		Type:           "string",
@@ -1260,6 +1318,28 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "enum",
 	},
+	"logpushrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logpushrolearn",
+		ConvertedName:  "LogPushRoleARN",
+		Description:    `ARN of AWS role that allows the NGFW to push logs.`,
+		Exposed:        true,
+		Name:           "logPushRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"logqueryrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logqueryrolearn",
+		ConvertedName:  "LogQueryRoleARN",
+		Description:    `ARN of AWS role that allows the PCFW to query logs.`,
+		Exposed:        true,
+		Name:           "logQueryRoleARN",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"logregion": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logregion",
@@ -1271,13 +1351,14 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Stored:         true,
 		Type:           "string",
 	},
-	"loggingrolearn": {
+	"logresourceprefix": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "loggingrolearn",
-		ConvertedName:  "LoggingRoleARN",
-		Description:    `AWS logging role ARN.`,
+		BSONFieldName:  "logresourceprefix",
+		ConvertedName:  "LogResourcePrefix",
+		DefaultValue:   "pcfw",
+		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
-		Name:           "loggingRoleARN",
+		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,
 		Type:           "string",
@@ -1489,11 +1570,17 @@ type SparsePCFWAccount struct {
 	// Destination type for log output.
 	LogDestinationType *PCFWAccountLogDestinationTypeValue `json:"logDestinationType,omitempty" msgpack:"logDestinationType,omitempty" bson:"logdestinationtype,omitempty" mapstructure:"logDestinationType,omitempty"`
 
+	// ARN of AWS role that allows the NGFW to push logs.
+	LogPushRoleARN *string `json:"logPushRoleARN,omitempty" msgpack:"logPushRoleARN,omitempty" bson:"logpushrolearn,omitempty" mapstructure:"logPushRoleARN,omitempty"`
+
+	// ARN of AWS role that allows the PCFW to query logs.
+	LogQueryRoleARN *string `json:"logQueryRoleARN,omitempty" msgpack:"logQueryRoleARN,omitempty" bson:"logqueryrolearn,omitempty" mapstructure:"logQueryRoleARN,omitempty"`
+
 	// The AWS region where logging data lives.
 	LogRegion *string `json:"logRegion,omitempty" msgpack:"logRegion,omitempty" bson:"logregion,omitempty" mapstructure:"logRegion,omitempty"`
 
-	// AWS logging role ARN.
-	LoggingRoleARN *string `json:"loggingRoleARN,omitempty" msgpack:"loggingRoleARN,omitempty" bson:"loggingrolearn,omitempty" mapstructure:"loggingRoleARN,omitempty"`
+	// Prefix to use for logging resources.
+	LogResourcePrefix *string `json:"logResourcePrefix,omitempty" msgpack:"logResourcePrefix,omitempty" bson:"logresourceprefix,omitempty" mapstructure:"logResourcePrefix,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
@@ -1614,11 +1701,17 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.LogDestinationType != nil {
 		s.LogDestinationType = o.LogDestinationType
 	}
+	if o.LogPushRoleARN != nil {
+		s.LogPushRoleARN = o.LogPushRoleARN
+	}
+	if o.LogQueryRoleARN != nil {
+		s.LogQueryRoleARN = o.LogQueryRoleARN
+	}
 	if o.LogRegion != nil {
 		s.LogRegion = o.LogRegion
 	}
-	if o.LoggingRoleARN != nil {
-		s.LoggingRoleARN = o.LoggingRoleARN
+	if o.LogResourcePrefix != nil {
+		s.LogResourcePrefix = o.LogResourcePrefix
 	}
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
@@ -1711,11 +1804,17 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.LogDestinationType != nil {
 		o.LogDestinationType = s.LogDestinationType
 	}
+	if s.LogPushRoleARN != nil {
+		o.LogPushRoleARN = s.LogPushRoleARN
+	}
+	if s.LogQueryRoleARN != nil {
+		o.LogQueryRoleARN = s.LogQueryRoleARN
+	}
 	if s.LogRegion != nil {
 		o.LogRegion = s.LogRegion
 	}
-	if s.LoggingRoleARN != nil {
-		o.LoggingRoleARN = s.LoggingRoleARN
+	if s.LogResourcePrefix != nil {
+		o.LogResourcePrefix = s.LogResourcePrefix
 	}
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
@@ -1806,11 +1905,17 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	if o.LogDestinationType != nil {
 		out.LogDestinationType = *o.LogDestinationType
 	}
+	if o.LogPushRoleARN != nil {
+		out.LogPushRoleARN = *o.LogPushRoleARN
+	}
+	if o.LogQueryRoleARN != nil {
+		out.LogQueryRoleARN = *o.LogQueryRoleARN
+	}
 	if o.LogRegion != nil {
 		out.LogRegion = *o.LogRegion
 	}
-	if o.LoggingRoleARN != nil {
-		out.LoggingRoleARN = *o.LoggingRoleARN
+	if o.LogResourcePrefix != nil {
+		out.LogResourcePrefix = *o.LogResourcePrefix
 	}
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
@@ -1998,8 +2103,10 @@ type mongoAttributesPCFWAccount struct {
 	EndpointRoleARN      string                             `bson:"endpointrolearn"`
 	LogDestination       string                             `bson:"logdestination"`
 	LogDestinationType   PCFWAccountLogDestinationTypeValue `bson:"logdestinationtype"`
+	LogPushRoleARN       string                             `bson:"logpushrolearn"`
+	LogQueryRoleARN      string                             `bson:"logqueryrolearn"`
 	LogRegion            string                             `bson:"logregion"`
-	LoggingRoleARN       string                             `bson:"loggingrolearn"`
+	LogResourcePrefix    string                             `bson:"logresourceprefix"`
 	Namespace            string                             `bson:"namespace"`
 	NormalizedTags       []string                           `bson:"normalizedtags"`
 	PrimaryAccount       bool                               `bson:"primaryaccount"`
@@ -2027,8 +2134,10 @@ type mongoAttributesSparsePCFWAccount struct {
 	EndpointRoleARN      *string                             `bson:"endpointrolearn,omitempty"`
 	LogDestination       *string                             `bson:"logdestination,omitempty"`
 	LogDestinationType   *PCFWAccountLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
+	LogPushRoleARN       *string                             `bson:"logpushrolearn,omitempty"`
+	LogQueryRoleARN      *string                             `bson:"logqueryrolearn,omitempty"`
 	LogRegion            *string                             `bson:"logregion,omitempty"`
-	LoggingRoleARN       *string                             `bson:"loggingrolearn,omitempty"`
+	LogResourcePrefix    *string                             `bson:"logresourceprefix,omitempty"`
 	Namespace            *string                             `bson:"namespace,omitempty"`
 	NormalizedTags       *[]string                           `bson:"normalizedtags,omitempty"`
 	PrimaryAccount       *bool                               `bson:"primaryaccount,omitempty"`

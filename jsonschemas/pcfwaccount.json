@@ -165,6 +165,22 @@
         }
       ]
     },
+    "logPushRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logQueryRoleARN": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "logRegion": {
       "$required": true,
       "anyOf": [
@@ -173,7 +189,8 @@
         }
       ]
     },
-    "loggingRoleARN": {
+    "logResourcePrefix": {
+      "$defaultValue": "pcfw",
       "$required": true,
       "anyOf": [
         {
@@ -274,8 +291,10 @@
     "endpointRoleARN",
     "logDestination",
     "logDestinationType",
+    "logPushRoleARN",
+    "logQueryRoleARN",
     "logRegion",
-    "loggingRoleARN"
+    "logResourcePrefix"
   ],
   "title": "PCFWAccount",
   "type": "object"
