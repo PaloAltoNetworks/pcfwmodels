@@ -87,16 +87,6 @@
         }
       ]
     },
-    "logARN": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
     "logDestination": {
       "$required": true,
       "anyOf": [
@@ -115,6 +105,43 @@
             "Cloudwatch",
             "KinesisFirehose"
           ]
+        }
+      ]
+    },
+    "logPushRoleARN": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logQueryRoleARN": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logRegion": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logResourcePrefix": {
+      "$defaultValue": "pcfw",
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
         }
       ]
     },
@@ -198,6 +225,8 @@
   "required": [
     "logDestination",
     "logDestinationType",
+    "logRegion",
+    "logResourcePrefix",
     "name"
   ],
   "title": "AWSLogDefinition",

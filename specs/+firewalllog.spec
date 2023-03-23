@@ -11,6 +11,16 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: XFFIP
+    description: |-
+      The IP address of the user who requested the web page or the IP address of the
+      next to last device that the request traversed. If the request goes through one
+      or more proxies, load balancers, or other upstream devices, the firewall
+      displays the IP address of the most recent device.
+    type: string
+    exposed: true
+    read_only: true
+
   - name: accountID
     description: AWS account ID that generated the log.
     type: string
@@ -60,7 +70,9 @@ attributes:
     read_only: true
 
   - name: repeatCount
-    description: Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
+    description: |-
+      Number of sessions with same Source IP, Destination IP, Application, and Subtype
+      seen within 5 seconds.
     type: integer
     exposed: true
     read_only: true
@@ -90,19 +102,25 @@ attributes:
     read_only: true
 
   - name: threatCategory
-    description: Describes threat categories used to classify different types of threat signatures.
+    description: |-
+      Describes threat categories used to classify different types of threat
+      signatures.
     type: string
     exposed: true
     read_only: true
 
   - name: threatContentName
-    description: Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
+    description: |-
+      Palo Alto Networks identifier for known and custom threats. It is a description
+      string followed by a 64-bit numerical identifier in parentheses for some
+      Subtypes.
     type: string
     exposed: true
     read_only: true
 
   - name: threatContentver
-    description: Applications and Threats version on your firewall when the log was generated.
+    description: Applications and Threats version on your firewall when the log was
+      generated.
     type: string
     exposed: true
     read_only: true
@@ -126,7 +144,9 @@ attributes:
     read_only: true
 
   - name: threatSeverity
-    description: Severity associated with the threat; values are informational, low, medium, high, critical.
+    description: |-
+      Severity associated with the threat; values are informational, low, medium,
+      high, critical.
     type: string
     exposed: true
     read_only: true
@@ -141,8 +161,8 @@ attributes:
     description: Time the log was generated on the dataplane.
     type: time
     exposed: true
-    example_value: "2023-03-06T20:50:56Z"
     read_only: true
+    example_value: "2023-03-06T20:50:56Z"
 
   - name: trafficBytesReceived
     description: Number of bytes in the server-to-client direction of the session.
@@ -163,7 +183,9 @@ attributes:
     read_only: true
 
   - name: trafficDestinationCountry
-    description: Destination country or Internal region for private addresses. Maximum length is 32 bytes.
+    description: |-
+      Destination country or Internal region for private addresses. Maximum length is
+      32 bytes.
     type: string
     exposed: true
     read_only: true
@@ -187,13 +209,17 @@ attributes:
     read_only: true
 
   - name: trafficSessionEndReason
-    description: The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
+    description: |-
+      The reason a session terminated. If the termination had multiple causes, this
+      field displays only the highest priority reason.
     type: string
     exposed: true
     read_only: true
 
   - name: trafficSourceCountry
-    description: Source country or Internal region for private addresses; maximum length is 32 bytes.
+    description: |-
+      Source country or Internal region for private addresses; maximum length is 32
+      bytes.
     type: string
     exposed: true
     read_only: true
@@ -202,18 +228,18 @@ attributes:
     description: Time of session start.
     type: time
     exposed: true
-    example_value: "2023-03-06T20:50:56Z"
     read_only: true
+    example_value: "2023-03-06T20:50:56Z"
 
   - name: type
     description: Type of the log.
     type: enum
     exposed: true
+    read_only: true
     allowed_choices:
     - Traffic
     - Threat
     - URLFiltering
-    read_only: true
 
   - name: urlFilteringCategory
     description: URL category associated with the session (if applicable).
@@ -225,14 +251,5 @@ attributes:
     description: Time of session start.
     type: time
     exposed: true
+    read_only: true
     example_value: "2023-03-06T20:50:56Z"
-    read_only: true
-
-  - name: XFFIP
-    description:
-      The IP address of the user who requested the web page or the IP address of the next to last device that the 
-      request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, 
-      the firewall displays the IP address of the most recent device.
-    type: string
-    exposed: true
-    read_only: true

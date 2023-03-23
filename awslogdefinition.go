@@ -124,14 +124,23 @@ type AWSLogDefinition struct {
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
 
-	// The ARN to access the log destination.
-	LogARN string `json:"logARN" msgpack:"logARN" bson:"logarn" mapstructure:"logARN,omitempty"`
-
 	// Destination for log output.
 	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
 
 	// Destination type for log output.
 	LogDestinationType AWSLogDefinitionLogDestinationTypeValue `json:"logDestinationType" msgpack:"logDestinationType" bson:"logdestinationtype" mapstructure:"logDestinationType,omitempty"`
+
+	// The ARN for NGFW to write to the destination.
+	LogPushRoleARN string `json:"logPushRoleARN" msgpack:"logPushRoleARN" bson:"logpushrolearn" mapstructure:"logPushRoleARN,omitempty"`
+
+	// The ARN for PCFW to query the destination.
+	LogQueryRoleARN string `json:"logQueryRoleARN" msgpack:"logQueryRoleARN" bson:"logqueryrolearn" mapstructure:"logQueryRoleARN,omitempty"`
+
+	// The AWS region where logging data lives.
+	LogRegion string `json:"logRegion" msgpack:"logRegion" bson:"logregion" mapstructure:"logRegion,omitempty"`
+
+	// Prefix to use for logging resources.
+	LogResourcePrefix string `json:"logResourcePrefix" msgpack:"logResourcePrefix" bson:"logresourceprefix" mapstructure:"logResourcePrefix,omitempty"`
 
 	// Name of the entity.
 	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
@@ -171,10 +180,11 @@ type AWSLogDefinition struct {
 func NewAWSLogDefinition() *AWSLogDefinition {
 
 	return &AWSLogDefinition{
-		ModelVersion:   1,
-		Annotations:    map[string][]string{},
-		AssociatedTags: []string{},
-		NormalizedTags: []string{},
+		ModelVersion:      1,
+		Annotations:       map[string][]string{},
+		AssociatedTags:    []string{},
+		LogResourcePrefix: "pcfw",
+		NormalizedTags:    []string{},
 	}
 }
 
@@ -215,9 +225,12 @@ func (o *AWSLogDefinition) GetBSON() (any, error) {
 	s.CreateTime = o.CreateTime
 	s.DecryptionEnabled = o.DecryptionEnabled
 	s.Description = o.Description
-	s.LogARN = o.LogARN
 	s.LogDestination = o.LogDestination
 	s.LogDestinationType = o.LogDestinationType
+	s.LogPushRoleARN = o.LogPushRoleARN
+	s.LogQueryRoleARN = o.LogQueryRoleARN
+	s.LogRegion = o.LogRegion
+	s.LogResourcePrefix = o.LogResourcePrefix
 	s.Name = o.Name
 	s.Namespace = o.Namespace
 	s.NormalizedTags = o.NormalizedTags
@@ -252,9 +265,12 @@ func (o *AWSLogDefinition) SetBSON(raw bson.Raw) error {
 	o.CreateTime = s.CreateTime
 	o.DecryptionEnabled = s.DecryptionEnabled
 	o.Description = s.Description
-	o.LogARN = s.LogARN
 	o.LogDestination = s.LogDestination
 	o.LogDestinationType = s.LogDestinationType
+	o.LogPushRoleARN = s.LogPushRoleARN
+	o.LogQueryRoleARN = s.LogQueryRoleARN
+	o.LogRegion = s.LogRegion
+	o.LogResourcePrefix = s.LogResourcePrefix
 	o.Name = s.Name
 	o.Namespace = s.Namespace
 	o.NormalizedTags = s.NormalizedTags
@@ -422,9 +438,12 @@ func (o *AWSLogDefinition) ToSparse(fields ...string) elemental.SparseIdentifiab
 			CreateTime:           &o.CreateTime,
 			DecryptionEnabled:    &o.DecryptionEnabled,
 			Description:          &o.Description,
-			LogARN:               &o.LogARN,
 			LogDestination:       &o.LogDestination,
 			LogDestinationType:   &o.LogDestinationType,
+			LogPushRoleARN:       &o.LogPushRoleARN,
+			LogQueryRoleARN:      &o.LogQueryRoleARN,
+			LogRegion:            &o.LogRegion,
+			LogResourcePrefix:    &o.LogResourcePrefix,
 			Name:                 &o.Name,
 			Namespace:            &o.Namespace,
 			NormalizedTags:       &o.NormalizedTags,
@@ -455,12 +474,18 @@ func (o *AWSLogDefinition) ToSparse(fields ...string) elemental.SparseIdentifiab
 			sp.DecryptionEnabled = &(o.DecryptionEnabled)
 		case "description":
 			sp.Description = &(o.Description)
-		case "logARN":
-			sp.LogARN = &(o.LogARN)
 		case "logDestination":
 			sp.LogDestination = &(o.LogDestination)
 		case "logDestinationType":
 			sp.LogDestinationType = &(o.LogDestinationType)
+		case "logPushRoleARN":
+			sp.LogPushRoleARN = &(o.LogPushRoleARN)
+		case "logQueryRoleARN":
+			sp.LogQueryRoleARN = &(o.LogQueryRoleARN)
+		case "logRegion":
+			sp.LogRegion = &(o.LogRegion)
+		case "logResourcePrefix":
+			sp.LogResourcePrefix = &(o.LogResourcePrefix)
 		case "name":
 			sp.Name = &(o.Name)
 		case "namespace":
@@ -515,14 +540,23 @@ func (o *AWSLogDefinition) Patch(sparse elemental.SparseIdentifiable) {
 	if so.Description != nil {
 		o.Description = *so.Description
 	}
-	if so.LogARN != nil {
-		o.LogARN = *so.LogARN
-	}
 	if so.LogDestination != nil {
 		o.LogDestination = *so.LogDestination
 	}
 	if so.LogDestinationType != nil {
 		o.LogDestinationType = *so.LogDestinationType
+	}
+	if so.LogPushRoleARN != nil {
+		o.LogPushRoleARN = *so.LogPushRoleARN
+	}
+	if so.LogQueryRoleARN != nil {
+		o.LogQueryRoleARN = *so.LogQueryRoleARN
+	}
+	if so.LogRegion != nil {
+		o.LogRegion = *so.LogRegion
+	}
+	if so.LogResourcePrefix != nil {
+		o.LogResourcePrefix = *so.LogResourcePrefix
 	}
 	if so.Name != nil {
 		o.Name = *so.Name
@@ -606,6 +640,14 @@ func (o *AWSLogDefinition) Validate() error {
 		errors = errors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("logResourcePrefix", o.LogResourcePrefix); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -662,12 +704,18 @@ func (o *AWSLogDefinition) ValueForAttribute(name string) any {
 		return o.DecryptionEnabled
 	case "description":
 		return o.Description
-	case "logARN":
-		return o.LogARN
 	case "logDestination":
 		return o.LogDestination
 	case "logDestinationType":
 		return o.LogDestinationType
+	case "logPushRoleARN":
+		return o.LogPushRoleARN
+	case "logQueryRoleARN":
+		return o.LogQueryRoleARN
+	case "logRegion":
+		return o.LogRegion
+	case "logResourcePrefix":
+		return o.LogResourcePrefix
 	case "name":
 		return o.Name
 	case "namespace":
@@ -776,16 +824,6 @@ var AWSLogDefinitionAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		Type:           "string",
 	},
-	"LogARN": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "logarn",
-		ConvertedName:  "LogARN",
-		Description:    `The ARN to access the log destination.`,
-		Exposed:        true,
-		Name:           "logARN",
-		Stored:         true,
-		Type:           "string",
-	},
 	"LogDestination": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
@@ -807,6 +845,49 @@ var AWSLogDefinitionAttributesMap = map[string]elemental.AttributeSpecification{
 		Required:       true,
 		Stored:         true,
 		Type:           "enum",
+	},
+	"LogPushRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logpushrolearn",
+		ConvertedName:  "LogPushRoleARN",
+		Description:    `The ARN for NGFW to write to the destination.`,
+		Exposed:        true,
+		Name:           "logPushRoleARN",
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogQueryRoleARN": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logqueryrolearn",
+		ConvertedName:  "LogQueryRoleARN",
+		Description:    `The ARN for PCFW to query the destination.`,
+		Exposed:        true,
+		Name:           "logQueryRoleARN",
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogRegion": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logregion",
+		ConvertedName:  "LogRegion",
+		Description:    `The AWS region where logging data lives.`,
+		Exposed:        true,
+		Name:           "logRegion",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"LogResourcePrefix": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logresourceprefix",
+		ConvertedName:  "LogResourcePrefix",
+		DefaultValue:   "pcfw",
+		Description:    `Prefix to use for logging resources.`,
+		Exposed:        true,
+		Name:           "logResourcePrefix",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"Name": {
 		AllowedChoices: []string{},
@@ -990,16 +1071,6 @@ var AWSLogDefinitionLowerCaseAttributesMap = map[string]elemental.AttributeSpeci
 		Stored:         true,
 		Type:           "string",
 	},
-	"logarn": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "logarn",
-		ConvertedName:  "LogARN",
-		Description:    `The ARN to access the log destination.`,
-		Exposed:        true,
-		Name:           "logARN",
-		Stored:         true,
-		Type:           "string",
-	},
 	"logdestination": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
@@ -1021,6 +1092,49 @@ var AWSLogDefinitionLowerCaseAttributesMap = map[string]elemental.AttributeSpeci
 		Required:       true,
 		Stored:         true,
 		Type:           "enum",
+	},
+	"logpushrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logpushrolearn",
+		ConvertedName:  "LogPushRoleARN",
+		Description:    `The ARN for NGFW to write to the destination.`,
+		Exposed:        true,
+		Name:           "logPushRoleARN",
+		Stored:         true,
+		Type:           "string",
+	},
+	"logqueryrolearn": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logqueryrolearn",
+		ConvertedName:  "LogQueryRoleARN",
+		Description:    `The ARN for PCFW to query the destination.`,
+		Exposed:        true,
+		Name:           "logQueryRoleARN",
+		Stored:         true,
+		Type:           "string",
+	},
+	"logregion": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logregion",
+		ConvertedName:  "LogRegion",
+		Description:    `The AWS region where logging data lives.`,
+		Exposed:        true,
+		Name:           "logRegion",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"logresourceprefix": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "logresourceprefix",
+		ConvertedName:  "LogResourcePrefix",
+		DefaultValue:   "pcfw",
+		Description:    `Prefix to use for logging resources.`,
+		Exposed:        true,
+		Name:           "logResourcePrefix",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"name": {
 		AllowedChoices: []string{},
@@ -1207,14 +1321,23 @@ type SparseAWSLogDefinition struct {
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
 
-	// The ARN to access the log destination.
-	LogARN *string `json:"logARN,omitempty" msgpack:"logARN,omitempty" bson:"logarn,omitempty" mapstructure:"logARN,omitempty"`
-
 	// Destination for log output.
 	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
 
 	// Destination type for log output.
 	LogDestinationType *AWSLogDefinitionLogDestinationTypeValue `json:"logDestinationType,omitempty" msgpack:"logDestinationType,omitempty" bson:"logdestinationtype,omitempty" mapstructure:"logDestinationType,omitempty"`
+
+	// The ARN for NGFW to write to the destination.
+	LogPushRoleARN *string `json:"logPushRoleARN,omitempty" msgpack:"logPushRoleARN,omitempty" bson:"logpushrolearn,omitempty" mapstructure:"logPushRoleARN,omitempty"`
+
+	// The ARN for PCFW to query the destination.
+	LogQueryRoleARN *string `json:"logQueryRoleARN,omitempty" msgpack:"logQueryRoleARN,omitempty" bson:"logqueryrolearn,omitempty" mapstructure:"logQueryRoleARN,omitempty"`
+
+	// The AWS region where logging data lives.
+	LogRegion *string `json:"logRegion,omitempty" msgpack:"logRegion,omitempty" bson:"logregion,omitempty" mapstructure:"logRegion,omitempty"`
+
+	// Prefix to use for logging resources.
+	LogResourcePrefix *string `json:"logResourcePrefix,omitempty" msgpack:"logResourcePrefix,omitempty" bson:"logresourceprefix,omitempty" mapstructure:"logResourcePrefix,omitempty"`
 
 	// Name of the entity.
 	Name *string `json:"name,omitempty" msgpack:"name,omitempty" bson:"name,omitempty" mapstructure:"name,omitempty"`
@@ -1311,14 +1434,23 @@ func (o *SparseAWSLogDefinition) GetBSON() (any, error) {
 	if o.Description != nil {
 		s.Description = o.Description
 	}
-	if o.LogARN != nil {
-		s.LogARN = o.LogARN
-	}
 	if o.LogDestination != nil {
 		s.LogDestination = o.LogDestination
 	}
 	if o.LogDestinationType != nil {
 		s.LogDestinationType = o.LogDestinationType
+	}
+	if o.LogPushRoleARN != nil {
+		s.LogPushRoleARN = o.LogPushRoleARN
+	}
+	if o.LogQueryRoleARN != nil {
+		s.LogQueryRoleARN = o.LogQueryRoleARN
+	}
+	if o.LogRegion != nil {
+		s.LogRegion = o.LogRegion
+	}
+	if o.LogResourcePrefix != nil {
+		s.LogResourcePrefix = o.LogResourcePrefix
 	}
 	if o.Name != nil {
 		s.Name = o.Name
@@ -1387,14 +1519,23 @@ func (o *SparseAWSLogDefinition) SetBSON(raw bson.Raw) error {
 	if s.Description != nil {
 		o.Description = s.Description
 	}
-	if s.LogARN != nil {
-		o.LogARN = s.LogARN
-	}
 	if s.LogDestination != nil {
 		o.LogDestination = s.LogDestination
 	}
 	if s.LogDestinationType != nil {
 		o.LogDestinationType = s.LogDestinationType
+	}
+	if s.LogPushRoleARN != nil {
+		o.LogPushRoleARN = s.LogPushRoleARN
+	}
+	if s.LogQueryRoleARN != nil {
+		o.LogQueryRoleARN = s.LogQueryRoleARN
+	}
+	if s.LogRegion != nil {
+		o.LogRegion = s.LogRegion
+	}
+	if s.LogResourcePrefix != nil {
+		o.LogResourcePrefix = s.LogResourcePrefix
 	}
 	if s.Name != nil {
 		o.Name = s.Name
@@ -1461,14 +1602,23 @@ func (o *SparseAWSLogDefinition) ToPlain() elemental.PlainIdentifiable {
 	if o.Description != nil {
 		out.Description = *o.Description
 	}
-	if o.LogARN != nil {
-		out.LogARN = *o.LogARN
-	}
 	if o.LogDestination != nil {
 		out.LogDestination = *o.LogDestination
 	}
 	if o.LogDestinationType != nil {
 		out.LogDestinationType = *o.LogDestinationType
+	}
+	if o.LogPushRoleARN != nil {
+		out.LogPushRoleARN = *o.LogPushRoleARN
+	}
+	if o.LogQueryRoleARN != nil {
+		out.LogQueryRoleARN = *o.LogQueryRoleARN
+	}
+	if o.LogRegion != nil {
+		out.LogRegion = *o.LogRegion
+	}
+	if o.LogResourcePrefix != nil {
+		out.LogResourcePrefix = *o.LogResourcePrefix
 	}
 	if o.Name != nil {
 		out.Name = *o.Name
@@ -1680,9 +1830,12 @@ type mongoAttributesAWSLogDefinition struct {
 	CreateTime           time.Time                               `bson:"createtime"`
 	DecryptionEnabled    bool                                    `bson:"decryptionenabled"`
 	Description          string                                  `bson:"description"`
-	LogARN               string                                  `bson:"logarn"`
 	LogDestination       string                                  `bson:"logdestination"`
 	LogDestinationType   AWSLogDefinitionLogDestinationTypeValue `bson:"logdestinationtype"`
+	LogPushRoleARN       string                                  `bson:"logpushrolearn"`
+	LogQueryRoleARN      string                                  `bson:"logqueryrolearn"`
+	LogRegion            string                                  `bson:"logregion"`
+	LogResourcePrefix    string                                  `bson:"logresourceprefix"`
 	Name                 string                                  `bson:"name"`
 	Namespace            string                                  `bson:"namespace"`
 	NormalizedTags       []string                                `bson:"normalizedtags"`
@@ -1702,9 +1855,12 @@ type mongoAttributesSparseAWSLogDefinition struct {
 	CreateTime           *time.Time                               `bson:"createtime,omitempty"`
 	DecryptionEnabled    *bool                                    `bson:"decryptionenabled,omitempty"`
 	Description          *string                                  `bson:"description,omitempty"`
-	LogARN               *string                                  `bson:"logarn,omitempty"`
 	LogDestination       *string                                  `bson:"logdestination,omitempty"`
 	LogDestinationType   *AWSLogDefinitionLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
+	LogPushRoleARN       *string                                  `bson:"logpushrolearn,omitempty"`
+	LogQueryRoleARN      *string                                  `bson:"logqueryrolearn,omitempty"`
+	LogRegion            *string                                  `bson:"logregion,omitempty"`
+	LogResourcePrefix    *string                                  `bson:"logresourceprefix,omitempty"`
 	Name                 *string                                  `bson:"name,omitempty"`
 	Namespace            *string                                  `bson:"namespace,omitempty"`
 	NormalizedTags       *[]string                                `bson:"normalizedtags,omitempty"`

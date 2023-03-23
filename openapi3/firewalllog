@@ -5,7 +5,7 @@
         "description": "Represents a log line in a logquery result.",
         "properties": {
           "XFFIP": {
-            "description": "The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.",
+            "description": "The IP address of the user who requested the web page or the IP address of the\nnext to last device that the request traversed. If the request goes through one\nor more proxies, load balancers, or other upstream devices, the firewall\ndisplays the IP address of the most recent device.",
             "readOnly": true,
             "type": "string"
           },
@@ -50,7 +50,7 @@
             "type": "string"
           },
           "repeatCount": {
-            "description": "Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.",
+            "description": "Number of sessions with same Source IP, Destination IP, Application, and Subtype\nseen within 5 seconds.",
             "readOnly": true,
             "type": "integer"
           },
@@ -75,12 +75,12 @@
             "type": "integer"
           },
           "threatCategory": {
-            "description": "Describes threat categories used to classify different types of threat signatures.",
+            "description": "Describes threat categories used to classify different types of threat\nsignatures.",
             "readOnly": true,
             "type": "string"
           },
           "threatContentName": {
-            "description": "Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.",
+            "description": "Palo Alto Networks identifier for known and custom threats. It is a description\nstring followed by a 64-bit numerical identifier in parentheses for some\nSubtypes.",
             "readOnly": true,
             "type": "string"
           },
@@ -105,7 +105,7 @@
             "type": "string"
           },
           "threatSeverity": {
-            "description": "Severity associated with the threat; values are informational, low, medium, high, critical.",
+            "description": "Severity associated with the threat; values are informational, low, medium,\nhigh, critical.",
             "readOnly": true,
             "type": "string"
           },
@@ -137,7 +137,7 @@
             "type": "string"
           },
           "trafficDestinationCountry": {
-            "description": "Destination country or Internal region for private addresses. Maximum length is 32 bytes.",
+            "description": "Destination country or Internal region for private addresses. Maximum length is\n32 bytes.",
             "readOnly": true,
             "type": "string"
           },
@@ -157,12 +157,12 @@
             "type": "string"
           },
           "trafficSessionEndReason": {
-            "description": "The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.",
+            "description": "The reason a session terminated. If the termination had multiple causes, this\nfield displays only the highest priority reason.",
             "readOnly": true,
             "type": "string"
           },
           "trafficSourceCountry": {
-            "description": "Source country or Internal region for private addresses; maximum length is 32 bytes.",
+            "description": "Source country or Internal region for private addresses; maximum length is 32\nbytes.",
             "readOnly": true,
             "type": "string"
           },

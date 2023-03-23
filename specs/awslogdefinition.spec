@@ -30,13 +30,6 @@ attributes:
     exposed: true
     stored: true
 
-  - name: logARN
-    description: The ARN to access the log destination.
-    type: string
-    exposed: true
-    stored: true
-    example_value: arn:aws:iam::833962752675:role/SomeRole
-
   - name: logDestination
     description: Destination for log output.
     type: string
@@ -57,6 +50,36 @@ attributes:
     - Cloudwatch
     - KinesisFirehose
     example_value: Prisma
+
+  - name: logPushRoleARN
+    description: The ARN for NGFW to write to the destination.
+    type: string
+    exposed: true
+    stored: true
+    example_value: arn:aws:iam::833962752675:role/SomeRole
+
+  - name: logQueryRoleARN
+    description: The ARN for PCFW to query the destination.
+    type: string
+    exposed: true
+    stored: true
+    example_value: arn:aws:iam::833962752675:role/SomeRole
+
+  - name: logRegion
+    description: The AWS region where logging data lives.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: us-east-1
+
+  - name: logResourcePrefix
+    description: Prefix to use for logging resources.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    default_value: pcfw
 
   - name: threatEnabled
     description: The Threat log is enabled.

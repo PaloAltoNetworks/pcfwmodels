@@ -40,11 +40,6 @@
             "description": "Description of the object.",
             "type": "string"
           },
-          "logARN": {
-            "description": "The ARN to access the log destination.",
-            "example": "arn:aws:iam::833962752675:role/SomeRole",
-            "type": "string"
-          },
           "logDestination": {
             "description": "Destination for log output.",
             "example": "name",
@@ -59,6 +54,26 @@
               "KinesisFirehose"
             ],
             "example": "Prisma"
+          },
+          "logPushRoleARN": {
+            "description": "The ARN for NGFW to write to the destination.",
+            "example": "arn:aws:iam::833962752675:role/SomeRole",
+            "type": "string"
+          },
+          "logQueryRoleARN": {
+            "description": "The ARN for PCFW to query the destination.",
+            "example": "arn:aws:iam::833962752675:role/SomeRole",
+            "type": "string"
+          },
+          "logRegion": {
+            "description": "The AWS region where logging data lives.",
+            "example": "us-east-1",
+            "type": "string"
+          },
+          "logResourcePrefix": {
+            "default": "pcfw",
+            "description": "Prefix to use for logging resources.",
+            "type": "string"
           },
           "name": {
             "description": "Name of the entity.",
@@ -100,6 +115,8 @@
         "required": [
           "logDestination",
           "logDestinationType",
+          "logRegion",
+          "logResourcePrefix",
           "name"
         ],
         "type": "object"

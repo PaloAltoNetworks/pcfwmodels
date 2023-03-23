@@ -202,8 +202,8 @@ relations:
 
 - rest_name: pcfwfirewallconfigterraform
   create:
-    description: |-
-      Creates a firewall configuration terraform plan associated for a cloud account.
+    description: Creates a firewall configuration terraform plan associated for a
+      cloud account.
     global_parameters:
     - $queryable
 

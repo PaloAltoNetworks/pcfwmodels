@@ -81,14 +81,6 @@ attributes:
     - KinesisFirehose
     default_value: Prisma
 
-  - name: logRegion
-    description: The AWS region where logging data lives.
-    type: string
-    exposed: true
-    stored: true
-    required: true
-    example_value: us-east-1
-
   - name: logPushRoleARN
     description: ARN of AWS role that allows the NGFW to push logs.
     type: string
@@ -104,6 +96,14 @@ attributes:
     stored: true
     required: true
     example_value: arn:aws:iam::1234567890:role/PCFWLogQueryRole
+
+  - name: logRegion
+    description: The AWS region where logging data lives.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: us-east-1
 
   - name: logResourcePrefix
     description: Prefix to use for logging resources.

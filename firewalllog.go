@@ -28,7 +28,10 @@ const (
 
 // FirewallLog represents the model of a firewalllog
 type FirewallLog struct {
-	// The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.
+	// The IP address of the user who requested the web page or the IP address of the
+	// next to last device that the request traversed. If the request goes through one
+	// or more proxies, load balancers, or other upstream devices, the firewall
+	// displays the IP address of the most recent device.
 	XFFIP string `json:"XFFIP" msgpack:"XFFIP" bson:"-" mapstructure:"XFFIP,omitempty"`
 
 	// AWS account ID that generated the log.
@@ -55,7 +58,8 @@ type FirewallLog struct {
 	// AWS region that generated the log.
 	Region string `json:"region" msgpack:"region" bson:"-" mapstructure:"region,omitempty"`
 
-	// Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
+	// Number of sessions with same Source IP, Destination IP, Application, and Subtype
+	// seen within 5 seconds.
 	RepeatCount int `json:"repeatCount" msgpack:"repeatCount" bson:"-" mapstructure:"repeatCount,omitempty"`
 
 	// Name of the rule that the session matched.
@@ -70,10 +74,13 @@ type FirewallLog struct {
 	// Source port utilized by the session.
 	SourcePort int `json:"sourcePort" msgpack:"sourcePort" bson:"-" mapstructure:"sourcePort,omitempty"`
 
-	// Describes threat categories used to classify different types of threat signatures.
+	// Describes threat categories used to classify different types of threat
+	// signatures.
 	ThreatCategory string `json:"threatCategory" msgpack:"threatCategory" bson:"-" mapstructure:"threatCategory,omitempty"`
 
-	// Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
+	// Palo Alto Networks identifier for known and custom threats. It is a description
+	// string followed by a 64-bit numerical identifier in parentheses for some
+	// Subtypes.
 	ThreatContentName string `json:"threatContentName" msgpack:"threatContentName" bson:"-" mapstructure:"threatContentName,omitempty"`
 
 	// Applications and Threats version on your firewall when the log was generated.
@@ -88,7 +95,8 @@ type FirewallLog struct {
 	// File type associated with the threat.
 	ThreatFileType string `json:"threatFileType" msgpack:"threatFileType" bson:"-" mapstructure:"threatFileType,omitempty"`
 
-	// Severity associated with the threat; values are informational, low, medium, high, critical.
+	// Severity associated with the threat; values are informational, low, medium,
+	// high, critical.
 	ThreatSeverity string `json:"threatSeverity" msgpack:"threatSeverity" bson:"-" mapstructure:"threatSeverity,omitempty"`
 
 	// Subtype of threat log.
@@ -106,7 +114,8 @@ type FirewallLog struct {
 	// URL category associated with the session (if applicable).
 	TrafficCategory string `json:"trafficCategory" msgpack:"trafficCategory" bson:"-" mapstructure:"trafficCategory,omitempty"`
 
-	// Destination country or Internal region for private addresses. Maximum length is 32 bytes.
+	// Destination country or Internal region for private addresses. Maximum length is
+	// 32 bytes.
 	TrafficDestinationCountry string `json:"trafficDestinationCountry" msgpack:"trafficDestinationCountry" bson:"-" mapstructure:"trafficDestinationCountry,omitempty"`
 
 	// Elapsed time of the session.
@@ -118,10 +127,12 @@ type FirewallLog struct {
 	// Number of client-to-server packets for the session.
 	TrafficPacketsSent string `json:"trafficPacketsSent" msgpack:"trafficPacketsSent" bson:"-" mapstructure:"trafficPacketsSent,omitempty"`
 
-	// The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
+	// The reason a session terminated. If the termination had multiple causes, this
+	// field displays only the highest priority reason.
 	TrafficSessionEndReason string `json:"trafficSessionEndReason" msgpack:"trafficSessionEndReason" bson:"-" mapstructure:"trafficSessionEndReason,omitempty"`
 
-	// Source country or Internal region for private addresses; maximum length is 32 bytes.
+	// Source country or Internal region for private addresses; maximum length is 32
+	// bytes.
 	TrafficSourceCountry string `json:"trafficSourceCountry" msgpack:"trafficSourceCountry" bson:"-" mapstructure:"trafficSourceCountry,omitempty"`
 
 	// Time of session start.
@@ -332,11 +343,14 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"XFFIP": {
 		AllowedChoices: []string{},
 		ConvertedName:  "XFFIP",
-		Description:    `The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.`,
-		Exposed:        true,
-		Name:           "XFFIP",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `The IP address of the user who requested the web page or the IP address of the
+next to last device that the request traversed. If the request goes through one
+or more proxies, load balancers, or other upstream devices, the firewall
+displays the IP address of the most recent device.`,
+		Exposed:  true,
+		Name:     "XFFIP",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"AccountID": {
 		AllowedChoices: []string{},
@@ -413,11 +427,12 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"RepeatCount": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RepeatCount",
-		Description:    `Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.`,
-		Exposed:        true,
-		Name:           "repeatCount",
-		ReadOnly:       true,
-		Type:           "integer",
+		Description: `Number of sessions with same Source IP, Destination IP, Application, and Subtype
+seen within 5 seconds.`,
+		Exposed:  true,
+		Name:     "repeatCount",
+		ReadOnly: true,
+		Type:     "integer",
 	},
 	"Rule": {
 		AllowedChoices: []string{},
@@ -458,20 +473,23 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"ThreatCategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatCategory",
-		Description:    `Describes threat categories used to classify different types of threat signatures.`,
-		Exposed:        true,
-		Name:           "threatCategory",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Describes threat categories used to classify different types of threat
+signatures.`,
+		Exposed:  true,
+		Name:     "threatCategory",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"ThreatContentName": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentName",
-		Description:    `Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.`,
-		Exposed:        true,
-		Name:           "threatContentName",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Palo Alto Networks identifier for known and custom threats. It is a description
+string followed by a 64-bit numerical identifier in parentheses for some
+Subtypes.`,
+		Exposed:  true,
+		Name:     "threatContentName",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"ThreatContentver": {
 		AllowedChoices: []string{},
@@ -512,11 +530,12 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"ThreatSeverity": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSeverity",
-		Description:    `Severity associated with the threat; values are informational, low, medium, high, critical.`,
-		Exposed:        true,
-		Name:           "threatSeverity",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Severity associated with the threat; values are informational, low, medium,
+high, critical.`,
+		Exposed:  true,
+		Name:     "threatSeverity",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"ThreatSubType": {
 		AllowedChoices: []string{},
@@ -566,11 +585,12 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"TrafficDestinationCountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficDestinationCountry",
-		Description:    `Destination country or Internal region for private addresses. Maximum length is 32 bytes.`,
-		Exposed:        true,
-		Name:           "trafficDestinationCountry",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Destination country or Internal region for private addresses. Maximum length is
+32 bytes.`,
+		Exposed:  true,
+		Name:     "trafficDestinationCountry",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"TrafficElapsedTime": {
 		AllowedChoices: []string{},
@@ -602,20 +622,22 @@ var FirewallLogAttributesMap = map[string]elemental.AttributeSpecification{
 	"TrafficSessionEndReason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSessionEndReason",
-		Description:    `The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.`,
-		Exposed:        true,
-		Name:           "trafficSessionEndReason",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `The reason a session terminated. If the termination had multiple causes, this
+field displays only the highest priority reason.`,
+		Exposed:  true,
+		Name:     "trafficSessionEndReason",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"TrafficSourceCountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSourceCountry",
-		Description:    `Source country or Internal region for private addresses; maximum length is 32 bytes.`,
-		Exposed:        true,
-		Name:           "trafficSourceCountry",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Source country or Internal region for private addresses; maximum length is 32
+bytes.`,
+		Exposed:  true,
+		Name:     "trafficSourceCountry",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"TrafficStartTime": {
 		AllowedChoices: []string{},
@@ -660,11 +682,14 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"xffip": {
 		AllowedChoices: []string{},
 		ConvertedName:  "XFFIP",
-		Description:    `The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.`,
-		Exposed:        true,
-		Name:           "XFFIP",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `The IP address of the user who requested the web page or the IP address of the
+next to last device that the request traversed. If the request goes through one
+or more proxies, load balancers, or other upstream devices, the firewall
+displays the IP address of the most recent device.`,
+		Exposed:  true,
+		Name:     "XFFIP",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"accountid": {
 		AllowedChoices: []string{},
@@ -741,11 +766,12 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"repeatcount": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RepeatCount",
-		Description:    `Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.`,
-		Exposed:        true,
-		Name:           "repeatCount",
-		ReadOnly:       true,
-		Type:           "integer",
+		Description: `Number of sessions with same Source IP, Destination IP, Application, and Subtype
+seen within 5 seconds.`,
+		Exposed:  true,
+		Name:     "repeatCount",
+		ReadOnly: true,
+		Type:     "integer",
 	},
 	"rule": {
 		AllowedChoices: []string{},
@@ -786,20 +812,23 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"threatcategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatCategory",
-		Description:    `Describes threat categories used to classify different types of threat signatures.`,
-		Exposed:        true,
-		Name:           "threatCategory",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Describes threat categories used to classify different types of threat
+signatures.`,
+		Exposed:  true,
+		Name:     "threatCategory",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"threatcontentname": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatContentName",
-		Description:    `Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.`,
-		Exposed:        true,
-		Name:           "threatContentName",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Palo Alto Networks identifier for known and custom threats. It is a description
+string followed by a 64-bit numerical identifier in parentheses for some
+Subtypes.`,
+		Exposed:  true,
+		Name:     "threatContentName",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"threatcontentver": {
 		AllowedChoices: []string{},
@@ -840,11 +869,12 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"threatseverity": {
 		AllowedChoices: []string{},
 		ConvertedName:  "ThreatSeverity",
-		Description:    `Severity associated with the threat; values are informational, low, medium, high, critical.`,
-		Exposed:        true,
-		Name:           "threatSeverity",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Severity associated with the threat; values are informational, low, medium,
+high, critical.`,
+		Exposed:  true,
+		Name:     "threatSeverity",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"threatsubtype": {
 		AllowedChoices: []string{},
@@ -894,11 +924,12 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"trafficdestinationcountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficDestinationCountry",
-		Description:    `Destination country or Internal region for private addresses. Maximum length is 32 bytes.`,
-		Exposed:        true,
-		Name:           "trafficDestinationCountry",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Destination country or Internal region for private addresses. Maximum length is
+32 bytes.`,
+		Exposed:  true,
+		Name:     "trafficDestinationCountry",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"trafficelapsedtime": {
 		AllowedChoices: []string{},
@@ -930,20 +961,22 @@ var FirewallLogLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 	"trafficsessionendreason": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSessionEndReason",
-		Description:    `The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.`,
-		Exposed:        true,
-		Name:           "trafficSessionEndReason",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `The reason a session terminated. If the termination had multiple causes, this
+field displays only the highest priority reason.`,
+		Exposed:  true,
+		Name:     "trafficSessionEndReason",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"trafficsourcecountry": {
 		AllowedChoices: []string{},
 		ConvertedName:  "TrafficSourceCountry",
-		Description:    `Source country or Internal region for private addresses; maximum length is 32 bytes.`,
-		Exposed:        true,
-		Name:           "trafficSourceCountry",
-		ReadOnly:       true,
-		Type:           "string",
+		Description: `Source country or Internal region for private addresses; maximum length is 32
+bytes.`,
+		Exposed:  true,
+		Name:     "trafficSourceCountry",
+		ReadOnly: true,
+		Type:     "string",
 	},
 	"trafficstarttime": {
 		AllowedChoices: []string{},

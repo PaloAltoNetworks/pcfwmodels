@@ -800,7 +800,10 @@ Represents a log line in a logquery result.
 
 Type: `string`
 
-The IP address of the user who requested the web page or the IP address of the next to last device that the request traversed. If the request goes through one or more proxies, load balancers, or other upstream devices, the firewall displays the IP address of the most recent device.
+The IP address of the user who requested the web page or the IP address of the
+next to last device that the request traversed. If the request goes through one
+or more proxies, load balancers, or other upstream devices, the firewall
+displays the IP address of the most recent device.
 
 ##### `accountID` [`read_only`]
 
@@ -854,7 +857,8 @@ AWS region that generated the log.
 
 Type: `integer`
 
-Number of sessions with same Source IP, Destination IP, Application, and Subtype seen within 5 seconds.
+Number of sessions with same Source IP, Destination IP, Application, and Subtype
+seen within 5 seconds.
 
 ##### `rule` [`read_only`]
 
@@ -884,13 +888,16 @@ Source port utilized by the session.
 
 Type: `string`
 
-Describes threat categories used to classify different types of threat signatures.
+Describes threat categories used to classify different types of threat
+signatures.
 
 ##### `threatContentName` [`read_only`]
 
 Type: `string`
 
-Palo Alto Networks identifier for known and custom threats. It is a description string followed by a 64-bit numerical identifier in parentheses for some Subtypes.
+Palo Alto Networks identifier for known and custom threats. It is a description
+string followed by a 64-bit numerical identifier in parentheses for some
+Subtypes.
 
 ##### `threatContentver` [`read_only`]
 
@@ -920,7 +927,8 @@ File type associated with the threat.
 
 Type: `string`
 
-Severity associated with the threat; values are informational, low, medium, high, critical.
+Severity associated with the threat; values are informational, low, medium,
+high, critical.
 
 ##### `threatSubType` [`read_only`]
 
@@ -956,7 +964,8 @@ URL category associated with the session (if applicable).
 
 Type: `string`
 
-Destination country or Internal region for private addresses. Maximum length is 32 bytes.
+Destination country or Internal region for private addresses. Maximum length is
+32 bytes.
 
 ##### `trafficElapsedTime` [`read_only`]
 
@@ -980,13 +989,15 @@ Number of client-to-server packets for the session.
 
 Type: `string`
 
-The reason a session terminated. If the termination had multiple causes, this field displays only the highest priority reason.
+The reason a session terminated. If the termination had multiple causes, this
+field displays only the highest priority reason.
 
 ##### `trafficSourceCountry` [`read_only`]
 
 Type: `string`
 
-Source country or Internal region for private addresses; maximum length is 32 bytes.
+Source country or Internal region for private addresses; maximum length is 32
+bytes.
 
 ##### `trafficStartTime` [`read_only`]
 
@@ -1404,7 +1415,6 @@ Represents an AWS firewall instance.
 {
   "VPCIDs": "vpc-23af3b89cd23, vpc-23af3b89cd24",
   "availabilityZones": "us-east-1a",
-  "logDefinitionID": "xxxxxxxxx",
   "mode": "TAP",
   "name": "the name",
   "protected": false,
@@ -1522,12 +1532,6 @@ Default value:
 "TAP"
 ```
 
-##### `logDefinitionID`
-
-Type: `string`
-
-An awslogdefinition ID.
-
 ##### `mode` [`read_only`]
 
 Type: `enum(TAP | NGFW)`
@@ -1603,9 +1607,12 @@ Represents a Log Definition.
 ```json
 {
   "decryptionEnabled": false,
-  "logARN": "arn:aws:iam::833962752675:role/SomeRole",
   "logDestination": "name",
   "logDestinationType": "Prisma",
+  "logPushRoleARN": "arn:aws:iam::833962752675:role/SomeRole",
+  "logQueryRoleARN": "arn:aws:iam::833962752675:role/SomeRole",
+  "logRegion": "us-east-1",
+  "logResourcePrefix": "pcfw",
   "name": "the name",
   "protected": false,
   "threatEnabled": false,
@@ -1677,12 +1684,6 @@ Type: `string`
 
 Description of the object.
 
-##### `logARN`
-
-Type: `string`
-
-The ARN to access the log destination.
-
 ##### `logDestination` [`required`]
 
 Type: `string`
@@ -1694,6 +1695,36 @@ Destination for log output.
 Type: `enum(Prisma | S3 | Cloudwatch | KinesisFirehose)`
 
 Destination type for log output.
+
+##### `logPushRoleARN`
+
+Type: `string`
+
+The ARN for NGFW to write to the destination.
+
+##### `logQueryRoleARN`
+
+Type: `string`
+
+The ARN for PCFW to query the destination.
+
+##### `logRegion` [`required`]
+
+Type: `string`
+
+The AWS region where logging data lives.
+
+##### `logResourcePrefix` [`required`]
+
+Type: `string`
+
+Prefix to use for logging resources.
+
+Default value:
+
+```json
+"pcfw"
+```
 
 ##### `name` [`required`,`max_length=256`]
 

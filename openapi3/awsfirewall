@@ -86,11 +86,6 @@
             ],
             "readOnly": true
           },
-          "logDefinitionID": {
-            "description": "An awslogdefinition ID.",
-            "example": "xxxxxxxxx",
-            "type": "string"
-          },
           "mode": {
             "default": "TAP",
             "description": "The mode of the of firewall.",

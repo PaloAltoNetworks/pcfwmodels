@@ -163,16 +163,6 @@
         }
       ]
     },
-    "logDefinitionID": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
     "mode": {
       "$defaultValue": "TAP",
       "$readOnly": true,
