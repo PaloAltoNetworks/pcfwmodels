@@ -45,8 +45,8 @@ func (o LogQueriesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the LogQueriesList.
 func (o LogQueriesList) Copy() elemental.Identifiables {
 
-	copy := append(LogQueriesList{}, o...)
-	return &copy
+	out := append(LogQueriesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the LogQueriesList.

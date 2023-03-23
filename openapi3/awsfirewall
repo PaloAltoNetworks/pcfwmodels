@@ -9,6 +9,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "NGFWFirewall": {
+            "description": "The internal name of the NGFW firewall.",
+            "readOnly": true,
+            "type": "string"
+          },
           "VPCIDs": {
             "description": "The list of VPC IDs.",
             "example": "vpc-23af3b89cd23, vpc-23af3b89cd24",

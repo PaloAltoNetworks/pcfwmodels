@@ -32,8 +32,8 @@ func (o FirewallTemplatesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallTemplatesList.
 func (o FirewallTemplatesList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallTemplatesList{}, o...)
-	return &copy
+	out := append(FirewallTemplatesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallTemplatesList.

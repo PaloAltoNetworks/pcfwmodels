@@ -32,8 +32,8 @@ func (o FirewallCertificatesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallCertificatesList.
 func (o FirewallCertificatesList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallCertificatesList{}, o...)
-	return &copy
+	out := append(FirewallCertificatesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallCertificatesList.

@@ -63,8 +63,8 @@ func (o FirewallRulesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallRulesList.
 func (o FirewallRulesList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallRulesList{}, o...)
-	return &copy
+	out := append(FirewallRulesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallRulesList.

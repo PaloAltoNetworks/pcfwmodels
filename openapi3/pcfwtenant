@@ -41,6 +41,11 @@
             },
             "type": "array"
           },
+          "athenaWorkgroup": {
+            "default": "logs_workgroup",
+            "description": "Athena workgroup to execute queries in.",
+            "type": "string"
+          },
           "createTime": {
             "description": "Creation date of the object.",
             "format": "date-time",
@@ -136,6 +141,7 @@
         },
         "required": [
           "AWSAccountID",
+          "athenaWorkgroup",
           "decryptionRoleARN",
           "endpointRoleARN",
           "logDestination",

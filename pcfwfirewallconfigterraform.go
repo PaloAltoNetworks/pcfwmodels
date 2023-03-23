@@ -31,8 +31,8 @@ func (o PCFWFirewallConfigTerraformsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the PCFWFirewallConfigTerraformsList.
 func (o PCFWFirewallConfigTerraformsList) Copy() elemental.Identifiables {
 
-	copy := append(PCFWFirewallConfigTerraformsList{}, o...)
-	return &copy
+	out := append(PCFWFirewallConfigTerraformsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the PCFWFirewallConfigTerraformsList.

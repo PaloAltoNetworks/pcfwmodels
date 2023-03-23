@@ -80,8 +80,8 @@ func (o AWSFirewallsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the AWSFirewallsList.
 func (o AWSFirewallsList) Copy() elemental.Identifiables {
 
-	copy := append(AWSFirewallsList{}, o...)
-	return &copy
+	out := append(AWSFirewallsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the AWSFirewallsList.
@@ -141,7 +141,7 @@ type AWSFirewall struct {
 	NGFWExternalID string `json:"-" msgpack:"-" bson:"ngfwexternalid" mapstructure:"-,omitempty"`
 
 	// The internal name of the NGFW firewall.
-	NGFWFirewall string `json:"-" msgpack:"-" bson:"ngfwfirewall" mapstructure:"-,omitempty"`
+	NGFWFirewall string `json:"NGFWFirewall" msgpack:"NGFWFirewall" bson:"ngfwfirewall" mapstructure:"NGFWFirewall,omitempty"`
 
 	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack string `json:"-" msgpack:"-" bson:"ngfwrulestack" mapstructure:"-,omitempty"`
@@ -891,6 +891,18 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Type:           "string",
 	},
 
+	"NGFWFirewall": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "ngfwfirewall",
+		ConvertedName:  "NGFWFirewall",
+		Description:    `The internal name of the NGFW firewall.`,
+		Exposed:        true,
+		Name:           "NGFWFirewall",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+
 	"VPCIDs": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "vpcids",
@@ -1169,6 +1181,18 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Identifier:     true,
 		Name:           "ID",
 		Orderable:      true,
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+
+	"ngfwfirewall": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "ngfwfirewall",
+		ConvertedName:  "NGFWFirewall",
+		Description:    `The internal name of the NGFW firewall.`,
+		Exposed:        true,
+		Name:           "NGFWFirewall",
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
@@ -1511,7 +1535,7 @@ type SparseAWSFirewall struct {
 	NGFWExternalID *string `json:"-" msgpack:"-" bson:"ngfwexternalid,omitempty" mapstructure:"-,omitempty"`
 
 	// The internal name of the NGFW firewall.
-	NGFWFirewall *string `json:"-" msgpack:"-" bson:"ngfwfirewall,omitempty" mapstructure:"-,omitempty"`
+	NGFWFirewall *string `json:"NGFWFirewall,omitempty" msgpack:"NGFWFirewall,omitempty" bson:"ngfwfirewall,omitempty" mapstructure:"NGFWFirewall,omitempty"`
 
 	// The internal name of the NGFW rulestack associated with the firewall.
 	NGFWRuleStack *string `json:"-" msgpack:"-" bson:"ngfwrulestack,omitempty" mapstructure:"-,omitempty"`

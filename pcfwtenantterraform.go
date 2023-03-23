@@ -31,8 +31,8 @@ func (o PCFWTenantTerraformsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the PCFWTenantTerraformsList.
 func (o PCFWTenantTerraformsList) Copy() elemental.Identifiables {
 
-	copy := append(PCFWTenantTerraformsList{}, o...)
-	return &copy
+	out := append(PCFWTenantTerraformsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the PCFWTenantTerraformsList.

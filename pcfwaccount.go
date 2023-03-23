@@ -69,8 +69,8 @@ func (o PCFWAccountsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the PCFWAccountsList.
 func (o PCFWAccountsList) Copy() elemental.Identifiables {
 
-	copy := append(PCFWAccountsList{}, o...)
-	return &copy
+	out := append(PCFWAccountsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the PCFWAccountsList.
@@ -148,6 +148,9 @@ type PCFWAccount struct {
 	// List of tags attached to an entity.
 	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
 
+	// Athena workgroup to execute queries in.
+	AthenaWorkgroup string `json:"athenaWorkgroup" msgpack:"athenaWorkgroup" bson:"athenaworkgroup" mapstructure:"athenaWorkgroup,omitempty"`
+
 	// internal idempotency key for a create operation.
 	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
 
@@ -219,6 +222,7 @@ func NewPCFWAccount() *PCFWAccount {
 		ModelVersion:       1,
 		Annotations:        map[string][]string{},
 		AssociatedTags:     []string{},
+		AthenaWorkgroup:    "logs_workgroup",
 		LogDestinationType: PCFWAccountLogDestinationTypePrisma,
 		LogResourcePrefix:  "pcfw",
 		NormalizedTags:     []string{},
@@ -264,6 +268,7 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.NGFWTenantID = o.NGFWTenantID
 	s.Annotations = o.Annotations
 	s.AssociatedTags = o.AssociatedTags
+	s.AthenaWorkgroup = o.AthenaWorkgroup
 	s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	s.CreateTime = o.CreateTime
 	s.DecryptionRoleARN = o.DecryptionRoleARN
@@ -310,6 +315,7 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.NGFWTenantID = s.NGFWTenantID
 	o.Annotations = s.Annotations
 	o.AssociatedTags = s.AssociatedTags
+	o.AthenaWorkgroup = s.AthenaWorkgroup
 	o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	o.CreateTime = s.CreateTime
 	o.DecryptionRoleARN = s.DecryptionRoleARN
@@ -463,6 +469,7 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			NGFWTenantID:         &o.NGFWTenantID,
 			Annotations:          &o.Annotations,
 			AssociatedTags:       &o.AssociatedTags,
+			AthenaWorkgroup:      &o.AthenaWorkgroup,
 			CreateIdempotencyKey: &o.CreateIdempotencyKey,
 			CreateTime:           &o.CreateTime,
 			DecryptionRoleARN:    &o.DecryptionRoleARN,
@@ -507,6 +514,8 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.Annotations = &(o.Annotations)
 		case "associatedTags":
 			sp.AssociatedTags = &(o.AssociatedTags)
+		case "athenaWorkgroup":
+			sp.AthenaWorkgroup = &(o.AthenaWorkgroup)
 		case "createIdempotencyKey":
 			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
 		case "createTime":
@@ -586,6 +595,9 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.AssociatedTags != nil {
 		o.AssociatedTags = *so.AssociatedTags
+	}
+	if so.AthenaWorkgroup != nil {
+		o.AthenaWorkgroup = *so.AthenaWorkgroup
 	}
 	if so.CreateIdempotencyKey != nil {
 		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
@@ -687,6 +699,10 @@ func (o *PCFWAccount) Validate() error {
 		errors = errors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("athenaWorkgroup", o.AthenaWorkgroup); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -779,6 +795,8 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.Annotations
 	case "associatedTags":
 		return o.AssociatedTags
+	case "athenaWorkgroup":
+		return o.AthenaWorkgroup
 	case "createIdempotencyKey":
 		return o.CreateIdempotencyKey
 	case "createTime":
@@ -937,6 +955,18 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Stored:         true,
 		SubType:        "string",
 		Type:           "list",
+	},
+	"AthenaWorkgroup": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "athenaworkgroup",
+		ConvertedName:  "AthenaWorkgroup",
+		DefaultValue:   "logs_workgroup",
+		Description:    `Athena workgroup to execute queries in.`,
+		Exposed:        true,
+		Name:           "athenaWorkgroup",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 
 	"CreateTime": {
@@ -1257,6 +1287,18 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		SubType:        "string",
 		Type:           "list",
 	},
+	"athenaworkgroup": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "athenaworkgroup",
+		ConvertedName:  "AthenaWorkgroup",
+		DefaultValue:   "logs_workgroup",
+		Description:    `Athena workgroup to execute queries in.`,
+		Exposed:        true,
+		Name:           "athenaWorkgroup",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 
 	"createtime": {
 		AllowedChoices: []string{},
@@ -1552,6 +1594,9 @@ type SparsePCFWAccount struct {
 	// List of tags attached to an entity.
 	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
 
+	// Athena workgroup to execute queries in.
+	AthenaWorkgroup *string `json:"athenaWorkgroup,omitempty" msgpack:"athenaWorkgroup,omitempty" bson:"athenaworkgroup,omitempty" mapstructure:"athenaWorkgroup,omitempty"`
+
 	// internal idempotency key for a create operation.
 	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
 
@@ -1683,6 +1728,9 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.AssociatedTags != nil {
 		s.AssociatedTags = o.AssociatedTags
 	}
+	if o.AthenaWorkgroup != nil {
+		s.AthenaWorkgroup = o.AthenaWorkgroup
+	}
 	if o.CreateIdempotencyKey != nil {
 		s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	}
@@ -1786,6 +1834,9 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.AssociatedTags != nil {
 		o.AssociatedTags = s.AssociatedTags
 	}
+	if s.AthenaWorkgroup != nil {
+		o.AthenaWorkgroup = s.AthenaWorkgroup
+	}
 	if s.CreateIdempotencyKey != nil {
 		o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	}
@@ -1886,6 +1937,9 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.AssociatedTags != nil {
 		out.AssociatedTags = *o.AssociatedTags
+	}
+	if o.AthenaWorkgroup != nil {
+		out.AthenaWorkgroup = *o.AthenaWorkgroup
 	}
 	if o.CreateIdempotencyKey != nil {
 		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
@@ -2097,6 +2151,7 @@ type mongoAttributesPCFWAccount struct {
 	NGFWTenantID         string                             `bson:"ngfwtenantid"`
 	Annotations          map[string][]string                `bson:"annotations"`
 	AssociatedTags       []string                           `bson:"associatedtags"`
+	AthenaWorkgroup      string                             `bson:"athenaworkgroup"`
 	CreateIdempotencyKey string                             `bson:"createidempotencykey"`
 	CreateTime           time.Time                          `bson:"createtime"`
 	DecryptionRoleARN    string                             `bson:"decryptionrolearn"`
@@ -2128,6 +2183,7 @@ type mongoAttributesSparsePCFWAccount struct {
 	NGFWTenantID         *string                             `bson:"ngfwtenantid,omitempty"`
 	Annotations          *map[string][]string                `bson:"annotations,omitempty"`
 	AssociatedTags       *[]string                           `bson:"associatedtags,omitempty"`
+	AthenaWorkgroup      *string                             `bson:"athenaworkgroup,omitempty"`
 	CreateIdempotencyKey *string                             `bson:"createidempotencykey,omitempty"`
 	CreateTime           *time.Time                          `bson:"createtime,omitempty"`
 	DecryptionRoleARN    *string                             `bson:"decryptionrolearn,omitempty"`

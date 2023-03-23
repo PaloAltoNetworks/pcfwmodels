@@ -69,8 +69,8 @@ func (o TopQueriesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the TopQueriesList.
 func (o TopQueriesList) Copy() elemental.Identifiables {
 
-	copy := append(TopQueriesList{}, o...)
-	return &copy
+	out := append(TopQueriesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the TopQueriesList.

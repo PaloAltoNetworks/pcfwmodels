@@ -82,6 +82,15 @@
         }
       ]
     },
+    "athenaWorkgroup": {
+      "$defaultValue": "logs_workgroup",
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "createTime": {
       "$readOnly": true,
       "anyOf": [
@@ -245,6 +254,7 @@
   },
   "required": [
     "AWSAccountID",
+    "athenaWorkgroup",
     "decryptionRoleARN",
     "endpointRoleARN",
     "logDestination",

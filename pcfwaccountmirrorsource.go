@@ -32,8 +32,8 @@ func (o PCFWAccountMirrorSourcesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the PCFWAccountMirrorSourcesList.
 func (o PCFWAccountMirrorSourcesList) Copy() elemental.Identifiables {
 
-	copy := append(PCFWAccountMirrorSourcesList{}, o...)
-	return &copy
+	out := append(PCFWAccountMirrorSourcesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the PCFWAccountMirrorSourcesList.

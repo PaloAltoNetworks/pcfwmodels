@@ -49,8 +49,8 @@ func (o AWSLogDefinitionsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the AWSLogDefinitionsList.
 func (o AWSLogDefinitionsList) Copy() elemental.Identifiables {
 
-	copy := append(AWSLogDefinitionsList{}, o...)
-	return &copy
+	out := append(AWSLogDefinitionsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the AWSLogDefinitionsList.

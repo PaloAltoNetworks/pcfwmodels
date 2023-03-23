@@ -31,8 +31,8 @@ func (o FirewallCountryCodelistsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallCountryCodelistsList.
 func (o FirewallCountryCodelistsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallCountryCodelistsList{}, o...)
-	return &copy
+	out := append(FirewallCountryCodelistsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallCountryCodelistsList.

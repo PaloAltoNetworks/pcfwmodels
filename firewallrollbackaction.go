@@ -42,8 +42,8 @@ func (o FirewallRollbackActionsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallRollbackActionsList.
 func (o FirewallRollbackActionsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallRollbackActionsList{}, o...)
-	return &copy
+	out := append(FirewallRollbackActionsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallRollbackActionsList.

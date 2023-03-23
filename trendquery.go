@@ -51,8 +51,8 @@ func (o TrendQueriesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the TrendQueriesList.
 func (o TrendQueriesList) Copy() elemental.Identifiables {
 
-	copy := append(TrendQueriesList{}, o...)
-	return &copy
+	out := append(TrendQueriesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the TrendQueriesList.

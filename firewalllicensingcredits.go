@@ -32,8 +32,8 @@ func (o FirewallLicensingCreditsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallLicensingCreditsList.
 func (o FirewallLicensingCreditsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallLicensingCreditsList{}, o...)
-	return &copy
+	out := append(FirewallLicensingCreditsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallLicensingCreditsList.

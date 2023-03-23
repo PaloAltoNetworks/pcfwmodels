@@ -32,8 +32,8 @@ func (o FirewallFQDNListsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallFQDNListsList.
 func (o FirewallFQDNListsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallFQDNListsList{}, o...)
-	return &copy
+	out := append(FirewallFQDNListsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallFQDNListsList.

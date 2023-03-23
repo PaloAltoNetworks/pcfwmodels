@@ -51,8 +51,8 @@ func (o TotalQueriesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the TotalQueriesList.
 func (o TotalQueriesList) Copy() elemental.Identifiables {
 
-	copy := append(TotalQueriesList{}, o...)
-	return &copy
+	out := append(TotalQueriesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the TotalQueriesList.

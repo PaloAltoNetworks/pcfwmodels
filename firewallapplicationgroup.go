@@ -32,8 +32,8 @@ func (o FirewallApplicationGroupsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallApplicationGroupsList.
 func (o FirewallApplicationGroupsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallApplicationGroupsList{}, o...)
-	return &copy
+	out := append(FirewallApplicationGroupsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallApplicationGroupsList.

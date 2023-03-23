@@ -31,8 +31,8 @@ func (o FirewallExternalFeedListsList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallExternalFeedListsList.
 func (o FirewallExternalFeedListsList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallExternalFeedListsList{}, o...)
-	return &copy
+	out := append(FirewallExternalFeedListsList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallExternalFeedListsList.

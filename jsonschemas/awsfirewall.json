@@ -25,6 +25,17 @@
         }
       ]
     },
+    "NGFWFirewall": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "VPCIDs": {
       "$required": true,
       "anyOf": [

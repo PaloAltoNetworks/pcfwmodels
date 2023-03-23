@@ -32,8 +32,8 @@ func (o FirewallSecurityProfilesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallSecurityProfilesList.
 func (o FirewallSecurityProfilesList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallSecurityProfilesList{}, o...)
-	return &copy
+	out := append(FirewallSecurityProfilesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallSecurityProfilesList.

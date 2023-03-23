@@ -49,8 +49,8 @@ func (o FirewallCustomURLCategoriesList) Identity() elemental.Identity {
 // Copy returns a pointer to a copy the FirewallCustomURLCategoriesList.
 func (o FirewallCustomURLCategoriesList) Copy() elemental.Identifiables {
 
-	copy := append(FirewallCustomURLCategoriesList{}, o...)
-	return &copy
+	out := append(FirewallCustomURLCategoriesList{}, o...)
+	return &out
 }
 
 // Append appends the objects to the a new copy of the FirewallCustomURLCategoriesList.
