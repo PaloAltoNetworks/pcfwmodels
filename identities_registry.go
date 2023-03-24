@@ -28,6 +28,8 @@ var (
 		"firewallgroup":            FirewallGroupIdentity,
 		"firewalllicensingcredits": FirewallLicensingCreditsIdentity,
 
+		"firewalloption": FirewallOptionIdentity,
+
 		"firewallrollbackaction":  FirewallRollbackActionIdentity,
 		"firewallrule":            FirewallRuleIdentity,
 		"firewallruleset":         FirewallRulesetIdentity,
@@ -76,6 +78,8 @@ var (
 		"firewallfqdnlists":         FirewallFQDNListIdentity,
 		"firewallgroups":            FirewallGroupIdentity,
 		"firewalllicensingcredits":  FirewallLicensingCreditsIdentity,
+
+		"firewalloptions": FirewallOptionIdentity,
 
 		"firewallrollbackactions":  FirewallRollbackActionIdentity,
 		"firewallrules":            FirewallRuleIdentity,
@@ -202,6 +206,7 @@ var (
 			{"namespace", "firewallResource"},
 			{"updateIdempotencyKey"},
 		},
+		"firewalloption":         nil,
 		"firewallrollbackaction": nil,
 		"firewallrule": {
 			{":shard", ":unique", "zone", "zHash"},
@@ -351,6 +356,8 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewFirewallGroup()
 	case FirewallLicensingCreditsIdentity:
 		return NewFirewallLicensingCredits()
+	case FirewallOptionIdentity:
+		return NewFirewallOption()
 	case FirewallRollbackActionIdentity:
 		return NewFirewallRollbackAction()
 	case FirewallRuleIdentity:
@@ -428,6 +435,8 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseFirewallGroup()
 	case FirewallLicensingCreditsIdentity:
 		return NewSparseFirewallLicensingCredits()
+	case FirewallOptionIdentity:
+		return NewSparseFirewallOption()
 	case FirewallRollbackActionIdentity:
 		return NewSparseFirewallRollbackAction()
 	case FirewallRuleIdentity:
@@ -513,6 +522,8 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &FirewallGroupsList{}
 	case FirewallLicensingCreditsIdentity:
 		return &FirewallLicensingCreditsList{}
+	case FirewallOptionIdentity:
+		return &FirewallOptionsList{}
 	case FirewallRollbackActionIdentity:
 		return &FirewallRollbackActionsList{}
 	case FirewallRuleIdentity:
@@ -588,6 +599,8 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseFirewallGroupsList{}
 	case FirewallLicensingCreditsIdentity:
 		return &SparseFirewallLicensingCreditsList{}
+	case FirewallOptionIdentity:
+		return &SparseFirewallOptionsList{}
 	case FirewallRollbackActionIdentity:
 		return &SparseFirewallRollbackActionsList{}
 	case FirewallRuleIdentity:
@@ -667,6 +680,7 @@ func AllIdentities() []elemental.Identity {
 		FirewallFQDNListIdentity,
 		FirewallGroupIdentity,
 		FirewallLicensingCreditsIdentity,
+		FirewallOptionIdentity,
 		FirewallRollbackActionIdentity,
 		FirewallRuleIdentity,
 		FirewallRulesetIdentity,
@@ -722,6 +736,8 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case FirewallGroupIdentity:
 		return []string{}
 	case FirewallLicensingCreditsIdentity:
+		return []string{}
+	case FirewallOptionIdentity:
 		return []string{}
 	case FirewallRollbackActionIdentity:
 		return []string{}

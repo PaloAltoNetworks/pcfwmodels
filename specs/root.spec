@@ -120,6 +120,10 @@ relations:
   create:
     description: Creates a new firewall licensing metrics.
 
+- rest_name: firewalloption
+  create:
+    description: Discovers firewall deployment options.
+
 - rest_name: firewallrollbackaction
   create:
     description: Creates a new firewallrollbackaction.

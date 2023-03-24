@@ -1,0 +1,38 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallOptionRegion",
+  "$modelPackage": "discovery",
+  "$modelResourceName": "firewalloptionregions",
+  "$modelRestName": "firewalloptionregion",
+  "additionalProperties": true,
+  "properties": {
+    "VPCs": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewalloptionvpc.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "region": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallOptionRegion",
+  "type": "object"
+}

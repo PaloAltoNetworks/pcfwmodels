@@ -1,0 +1,80 @@
+{
+  "components": {
+    "schemas": {
+      "firewalloption": {
+        "description": "Discovers firewall deployment options.",
+        "properties": {
+          "regionFilter": {
+            "description": "Optionally restrict results to this AWS region.",
+            "example": "us-east-1",
+            "type": "string"
+          },
+          "regionVPCs": {
+            "description": "List of VPC IDs and their region and associated availability zones.",
+            "items": {
+              "$ref": "./firewalloptionregion#/components/schemas/firewalloptionregion"
+            },
+            "readOnly": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewalloption",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/firewalloptions": {
+      "post": {
+        "description": "Discovers firewall deployment options.",
+        "operationId": "create-a-new-firewalloption",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/firewalloption"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/firewalloption"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/discovery",
+          "discovery"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/discovery'",
+      "name": "core/discovery"
+    },
+    {
+      "description": "This tag is for package 'discovery'",
+      "name": "discovery"
+    }
+  ]
+}

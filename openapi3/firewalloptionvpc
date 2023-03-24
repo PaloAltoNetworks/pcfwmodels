@@ -1,0 +1,48 @@
+{
+  "components": {
+    "schemas": {
+      "firewalloptionvpc": {
+        "description": "Includes information about a VPC for use in firewall configuration.",
+        "properties": {
+          "ID": {
+            "description": "An AWS VPC ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "availabilityZones": {
+            "description": "The availability zones associated with the VPC.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewalloptionvpc",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/discovery'",
+      "name": "core/discovery"
+    },
+    {
+      "description": "This tag is for package 'discovery'",
+      "name": "discovery"
+    }
+  ]
+}

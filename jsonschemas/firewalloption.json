@@ -1,0 +1,38 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallOption",
+  "$modelPackage": "discovery",
+  "$modelResourceName": "firewalloptions",
+  "$modelRestName": "firewalloption",
+  "additionalProperties": true,
+  "properties": {
+    "regionFilter": {
+      "$creationOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "regionVPCs": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewalloptionregion.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallOption",
+  "type": "object"
+}

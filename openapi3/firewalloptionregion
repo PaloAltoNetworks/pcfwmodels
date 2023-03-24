@@ -1,0 +1,49 @@
+{
+  "components": {
+    "schemas": {
+      "firewalloptionregion": {
+        "description": "Includes information about region, along with its VPCs, for use in firewall\nconfiguration.",
+        "properties": {
+          "VPCs": {
+            "description": "List of VPC IDs and their associated availability zones.",
+            "items": {
+              "$ref": "./firewalloptionvpc#/components/schemas/firewalloptionvpc"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "region": {
+            "description": "The AWS region of the VPC.",
+            "example": "us-east-1",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "firewalloptionregion",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/discovery'",
+      "name": "core/discovery"
+    },
+    {
+      "description": "This tag is for package 'discovery'",
+      "name": "discovery"
+    }
+  ]
+}

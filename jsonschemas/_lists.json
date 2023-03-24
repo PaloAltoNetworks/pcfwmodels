@@ -138,6 +138,24 @@
       },
       "type": "array"
     },
+    "firewalloptionregions": {
+      "items": {
+        "$ref": "firewalloptionregion.json"
+      },
+      "type": "array"
+    },
+    "firewalloptions": {
+      "items": {
+        "$ref": "firewalloption.json"
+      },
+      "type": "array"
+    },
+    "firewalloptionvpcs": {
+      "items": {
+        "$ref": "firewalloptionvpc.json"
+      },
+      "type": "array"
+    },
     "firewallprotoportscriterias": {
       "items": {
         "$ref": "firewallprotoportscriteria.json"

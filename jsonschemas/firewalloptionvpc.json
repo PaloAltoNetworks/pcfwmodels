@@ -1,0 +1,38 @@
+{
+  "$extends": [],
+  "$modelName": "FirewallOptionVPC",
+  "$modelPackage": "discovery",
+  "$modelResourceName": "firewalloptionvpcs",
+  "$modelRestName": "firewalloptionvpc",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "availabilityZones": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "FirewallOptionVPC",
+  "type": "object"
+}

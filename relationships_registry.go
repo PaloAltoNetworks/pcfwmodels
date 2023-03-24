@@ -505,6 +505,12 @@ func init() {
 		},
 	}
 
+	relationshipsRegistry[FirewallOptionIdentity] = &elemental.Relationship{
+		Create: map[string]*elemental.RelationshipInfo{
+			"root": {},
+		},
+	}
+
 	relationshipsRegistry[FirewallRollbackActionIdentity] = &elemental.Relationship{
 		Create: map[string]*elemental.RelationshipInfo{
 			"root": {},

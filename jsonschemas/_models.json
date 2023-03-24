@@ -69,6 +69,15 @@
     "firewalllog": {
       "$ref": "firewalllog.json"
     },
+    "firewalloption": {
+      "$ref": "firewalloption.json"
+    },
+    "firewalloptionregion": {
+      "$ref": "firewalloptionregion.json"
+    },
+    "firewalloptionvpc": {
+      "$ref": "firewalloptionvpc.json"
+    },
     "firewallprotoportscriteria": {
       "$ref": "firewallprotoportscriteria.json"
     },
