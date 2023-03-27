@@ -12,14 +12,6 @@
   "$modelRestName": "pcfwtenant",
   "additionalProperties": true,
   "properties": {
-    "AWSAccountID": {
-      "$required": true,
-      "anyOf": [
-        {
-          "type": "string"
-        }
-      ]
-    },
     "ID": {
       "$readOnly": true,
       "anyOf": [
@@ -199,6 +191,22 @@
         }
       ]
     },
+    "primaryAWSAccountID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "primaryAccountNamespace": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "protected": {
       "anyOf": [
         {
@@ -253,7 +261,6 @@
     }
   },
   "required": [
-    "AWSAccountID",
     "athenaWorkgroup",
     "decryptionRoleARN",
     "endpointRoleARN",
@@ -262,7 +269,9 @@
     "logPushRoleARN",
     "logQueryRoleARN",
     "logRegion",
-    "logResourcePrefix"
+    "logResourcePrefix",
+    "primaryAWSAccountID",
+    "primaryAccountNamespace"
   ],
   "title": "PCFWTenant",
   "type": "object"

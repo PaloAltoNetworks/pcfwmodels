@@ -40,8 +40,8 @@ attributes:
   - name: NGFWFirewall
     description: The internal name of the NGFW firewall.
     type: string
-    stored: true
     exposed: true
+    stored: true
     read_only: true
 
   - name: NGFWRuleStack

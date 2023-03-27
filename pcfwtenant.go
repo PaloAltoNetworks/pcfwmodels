@@ -127,9 +127,6 @@ func (o PCFWTenantsList) Version() int {
 
 // PCFWTenant represents the model of a pcfwtenant
 type PCFWTenant struct {
-	// AWS Account ID.
-	AWSAccountID string `json:"AWSAccountID" msgpack:"AWSAccountID" bson:"awsaccountid" mapstructure:"AWSAccountID,omitempty"`
-
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -186,6 +183,12 @@ type PCFWTenant struct {
 
 	// The timestamp when offboarding pending started.
 	OffboardingTimestamp time.Time `json:"-" msgpack:"-" bson:"offboardingtimestamp" mapstructure:"-,omitempty"`
+
+	// The primary AWS Account ID.
+	PrimaryAWSAccountID string `json:"primaryAWSAccountID" msgpack:"primaryAWSAccountID" bson:"primaryawsaccountid" mapstructure:"primaryAWSAccountID,omitempty"`
+
+	// The namespace where the primary pcfwaccount will be created.
+	PrimaryAccountNamespace string `json:"primaryAccountNamespace" msgpack:"primaryAccountNamespace" bson:"primaryaccountnamespace" mapstructure:"primaryAccountNamespace,omitempty"`
 
 	// Defines if the object is protected.
 	Protected bool `json:"protected" msgpack:"protected" bson:"protected" mapstructure:"protected,omitempty"`
@@ -254,7 +257,6 @@ func (o *PCFWTenant) GetBSON() (any, error) {
 
 	s := &mongoAttributesPCFWTenant{}
 
-	s.AWSAccountID = o.AWSAccountID
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
@@ -276,6 +278,8 @@ func (o *PCFWTenant) GetBSON() (any, error) {
 	s.Namespace = o.Namespace
 	s.NormalizedTags = o.NormalizedTags
 	s.OffboardingTimestamp = o.OffboardingTimestamp
+	s.PrimaryAWSAccountID = o.PrimaryAWSAccountID
+	s.PrimaryAccountNamespace = o.PrimaryAccountNamespace
 	s.Protected = o.Protected
 	s.Status = o.Status
 	s.StatusReason = o.StatusReason
@@ -300,7 +304,6 @@ func (o *PCFWTenant) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	o.AWSAccountID = s.AWSAccountID
 	o.ID = s.ID.Hex()
 	o.NGFWExternalID = s.NGFWExternalID
 	o.NGFWTenantID = s.NGFWTenantID
@@ -320,6 +323,8 @@ func (o *PCFWTenant) SetBSON(raw bson.Raw) error {
 	o.Namespace = s.Namespace
 	o.NormalizedTags = s.NormalizedTags
 	o.OffboardingTimestamp = s.OffboardingTimestamp
+	o.PrimaryAWSAccountID = s.PrimaryAWSAccountID
+	o.PrimaryAccountNamespace = s.PrimaryAccountNamespace
 	o.Protected = s.Protected
 	o.Status = s.Status
 	o.StatusReason = s.StatusReason
@@ -451,41 +456,40 @@ func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparsePCFWTenant{
-			AWSAccountID:         &o.AWSAccountID,
-			ID:                   &o.ID,
-			NGFWExternalID:       &o.NGFWExternalID,
-			NGFWTenantID:         &o.NGFWTenantID,
-			Annotations:          &o.Annotations,
-			AssociatedTags:       &o.AssociatedTags,
-			AthenaWorkgroup:      &o.AthenaWorkgroup,
-			CreateIdempotencyKey: &o.CreateIdempotencyKey,
-			CreateTime:           &o.CreateTime,
-			DecryptionRoleARN:    &o.DecryptionRoleARN,
-			EndpointRoleARN:      &o.EndpointRoleARN,
-			LogDestination:       &o.LogDestination,
-			LogDestinationType:   &o.LogDestinationType,
-			LogPushRoleARN:       &o.LogPushRoleARN,
-			LogQueryRoleARN:      &o.LogQueryRoleARN,
-			LogRegion:            &o.LogRegion,
-			LogResourcePrefix:    &o.LogResourcePrefix,
-			Namespace:            &o.Namespace,
-			NormalizedTags:       &o.NormalizedTags,
-			OffboardingTimestamp: &o.OffboardingTimestamp,
-			Protected:            &o.Protected,
-			Status:               &o.Status,
-			StatusReason:         &o.StatusReason,
-			UpdateIdempotencyKey: &o.UpdateIdempotencyKey,
-			UpdateTime:           &o.UpdateTime,
-			ZHash:                &o.ZHash,
-			Zone:                 &o.Zone,
+			ID:                      &o.ID,
+			NGFWExternalID:          &o.NGFWExternalID,
+			NGFWTenantID:            &o.NGFWTenantID,
+			Annotations:             &o.Annotations,
+			AssociatedTags:          &o.AssociatedTags,
+			AthenaWorkgroup:         &o.AthenaWorkgroup,
+			CreateIdempotencyKey:    &o.CreateIdempotencyKey,
+			CreateTime:              &o.CreateTime,
+			DecryptionRoleARN:       &o.DecryptionRoleARN,
+			EndpointRoleARN:         &o.EndpointRoleARN,
+			LogDestination:          &o.LogDestination,
+			LogDestinationType:      &o.LogDestinationType,
+			LogPushRoleARN:          &o.LogPushRoleARN,
+			LogQueryRoleARN:         &o.LogQueryRoleARN,
+			LogRegion:               &o.LogRegion,
+			LogResourcePrefix:       &o.LogResourcePrefix,
+			Namespace:               &o.Namespace,
+			NormalizedTags:          &o.NormalizedTags,
+			OffboardingTimestamp:    &o.OffboardingTimestamp,
+			PrimaryAWSAccountID:     &o.PrimaryAWSAccountID,
+			PrimaryAccountNamespace: &o.PrimaryAccountNamespace,
+			Protected:               &o.Protected,
+			Status:                  &o.Status,
+			StatusReason:            &o.StatusReason,
+			UpdateIdempotencyKey:    &o.UpdateIdempotencyKey,
+			UpdateTime:              &o.UpdateTime,
+			ZHash:                   &o.ZHash,
+			Zone:                    &o.Zone,
 		}
 	}
 
 	sp := &SparsePCFWTenant{}
 	for _, f := range fields {
 		switch f {
-		case "AWSAccountID":
-			sp.AWSAccountID = &(o.AWSAccountID)
 		case "ID":
 			sp.ID = &(o.ID)
 		case "NGFWExternalID":
@@ -524,6 +528,10 @@ func (o *PCFWTenant) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.NormalizedTags = &(o.NormalizedTags)
 		case "offboardingTimestamp":
 			sp.OffboardingTimestamp = &(o.OffboardingTimestamp)
+		case "primaryAWSAccountID":
+			sp.PrimaryAWSAccountID = &(o.PrimaryAWSAccountID)
+		case "primaryAccountNamespace":
+			sp.PrimaryAccountNamespace = &(o.PrimaryAccountNamespace)
 		case "protected":
 			sp.Protected = &(o.Protected)
 		case "status":
@@ -551,9 +559,6 @@ func (o *PCFWTenant) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparsePCFWTenant)
-	if so.AWSAccountID != nil {
-		o.AWSAccountID = *so.AWSAccountID
-	}
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
@@ -611,6 +616,12 @@ func (o *PCFWTenant) Patch(sparse elemental.SparseIdentifiable) {
 	if so.OffboardingTimestamp != nil {
 		o.OffboardingTimestamp = *so.OffboardingTimestamp
 	}
+	if so.PrimaryAWSAccountID != nil {
+		o.PrimaryAWSAccountID = *so.PrimaryAWSAccountID
+	}
+	if so.PrimaryAccountNamespace != nil {
+		o.PrimaryAccountNamespace = *so.PrimaryAccountNamespace
+	}
 	if so.Protected != nil {
 		o.Protected = *so.Protected
 	}
@@ -664,10 +675,6 @@ func (o *PCFWTenant) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := elemental.ValidateRequiredString("AWSAccountID", o.AWSAccountID); err != nil {
-		requiredErrors = requiredErrors.Append(err)
-	}
-
 	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
 		errors = errors.Append(err)
 	}
@@ -712,6 +719,14 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("primaryAWSAccountID", o.PrimaryAWSAccountID); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("primaryAccountNamespace", o.PrimaryAccountNamespace); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Creating", "Success", "Failed", "Unsubscribe", "UnsubscribePending", "Deleting", "FailedCreatingPrimaryAccount"}, true); err != nil {
 		errors = errors.Append(err)
 	}
@@ -750,8 +765,6 @@ func (*PCFWTenant) AttributeSpecifications() map[string]elemental.AttributeSpeci
 func (o *PCFWTenant) ValueForAttribute(name string) any {
 
 	switch name {
-	case "AWSAccountID":
-		return o.AWSAccountID
 	case "ID":
 		return o.ID
 	case "NGFWExternalID":
@@ -790,6 +803,10 @@ func (o *PCFWTenant) ValueForAttribute(name string) any {
 		return o.NormalizedTags
 	case "offboardingTimestamp":
 		return o.OffboardingTimestamp
+	case "primaryAWSAccountID":
+		return o.PrimaryAWSAccountID
+	case "primaryAccountNamespace":
+		return o.PrimaryAccountNamespace
 	case "protected":
 		return o.Protected
 	case "status":
@@ -811,17 +828,6 @@ func (o *PCFWTenant) ValueForAttribute(name string) any {
 
 // PCFWTenantAttributesMap represents the map of attribute for PCFWTenant.
 var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
-	"AWSAccountID": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awsaccountid",
-		ConvertedName:  "AWSAccountID",
-		Description:    `AWS Account ID.`,
-		Exposed:        true,
-		Name:           "AWSAccountID",
-		Required:       true,
-		Stored:         true,
-		Type:           "string",
-	},
 	"ID": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1038,6 +1044,28 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Type:           "list",
 	},
 
+	"PrimaryAWSAccountID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "primaryawsaccountid",
+		ConvertedName:  "PrimaryAWSAccountID",
+		Description:    `The primary AWS Account ID.`,
+		Exposed:        true,
+		Name:           "primaryAWSAccountID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"PrimaryAccountNamespace": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "primaryaccountnamespace",
+		ConvertedName:  "PrimaryAccountNamespace",
+		Description:    `The namespace where the primary pcfwaccount will be created.`,
+		Exposed:        true,
+		Name:           "primaryAccountNamespace",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"Protected": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "protected",
@@ -1095,17 +1123,6 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 
 // PCFWTenantLowerCaseAttributesMap represents the map of attribute for PCFWTenant.
 var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"awsaccountid": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "awsaccountid",
-		ConvertedName:  "AWSAccountID",
-		Description:    `AWS Account ID.`,
-		Exposed:        true,
-		Name:           "AWSAccountID",
-		Required:       true,
-		Stored:         true,
-		Type:           "string",
-	},
 	"id": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1322,6 +1339,28 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Type:           "list",
 	},
 
+	"primaryawsaccountid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "primaryawsaccountid",
+		ConvertedName:  "PrimaryAWSAccountID",
+		Description:    `The primary AWS Account ID.`,
+		Exposed:        true,
+		Name:           "primaryAWSAccountID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"primaryaccountnamespace": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "primaryaccountnamespace",
+		ConvertedName:  "PrimaryAccountNamespace",
+		Description:    `The namespace where the primary pcfwaccount will be created.`,
+		Exposed:        true,
+		Name:           "primaryAccountNamespace",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"protected": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "protected",
@@ -1440,9 +1479,6 @@ func (o SparsePCFWTenantsList) Version() int {
 
 // SparsePCFWTenant represents the sparse version of a pcfwtenant.
 type SparsePCFWTenant struct {
-	// AWS Account ID.
-	AWSAccountID *string `json:"AWSAccountID,omitempty" msgpack:"AWSAccountID,omitempty" bson:"awsaccountid,omitempty" mapstructure:"AWSAccountID,omitempty"`
-
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
@@ -1499,6 +1535,12 @@ type SparsePCFWTenant struct {
 
 	// The timestamp when offboarding pending started.
 	OffboardingTimestamp *time.Time `json:"-" msgpack:"-" bson:"offboardingtimestamp,omitempty" mapstructure:"-,omitempty"`
+
+	// The primary AWS Account ID.
+	PrimaryAWSAccountID *string `json:"primaryAWSAccountID,omitempty" msgpack:"primaryAWSAccountID,omitempty" bson:"primaryawsaccountid,omitempty" mapstructure:"primaryAWSAccountID,omitempty"`
+
+	// The namespace where the primary pcfwaccount will be created.
+	PrimaryAccountNamespace *string `json:"primaryAccountNamespace,omitempty" msgpack:"primaryAccountNamespace,omitempty" bson:"primaryaccountnamespace,omitempty" mapstructure:"primaryAccountNamespace,omitempty"`
 
 	// Defines if the object is protected.
 	Protected *bool `json:"protected,omitempty" msgpack:"protected,omitempty" bson:"protected,omitempty" mapstructure:"protected,omitempty"`
@@ -1565,9 +1607,6 @@ func (o *SparsePCFWTenant) GetBSON() (any, error) {
 
 	s := &mongoAttributesSparsePCFWTenant{}
 
-	if o.AWSAccountID != nil {
-		s.AWSAccountID = o.AWSAccountID
-	}
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
@@ -1625,6 +1664,12 @@ func (o *SparsePCFWTenant) GetBSON() (any, error) {
 	if o.OffboardingTimestamp != nil {
 		s.OffboardingTimestamp = o.OffboardingTimestamp
 	}
+	if o.PrimaryAWSAccountID != nil {
+		s.PrimaryAWSAccountID = o.PrimaryAWSAccountID
+	}
+	if o.PrimaryAccountNamespace != nil {
+		s.PrimaryAccountNamespace = o.PrimaryAccountNamespace
+	}
 	if o.Protected != nil {
 		s.Protected = o.Protected
 	}
@@ -1663,9 +1708,6 @@ func (o *SparsePCFWTenant) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	if s.AWSAccountID != nil {
-		o.AWSAccountID = s.AWSAccountID
-	}
 	id := s.ID.Hex()
 	o.ID = &id
 	if s.NGFWExternalID != nil {
@@ -1722,6 +1764,12 @@ func (o *SparsePCFWTenant) SetBSON(raw bson.Raw) error {
 	if s.OffboardingTimestamp != nil {
 		o.OffboardingTimestamp = s.OffboardingTimestamp
 	}
+	if s.PrimaryAWSAccountID != nil {
+		o.PrimaryAWSAccountID = s.PrimaryAWSAccountID
+	}
+	if s.PrimaryAccountNamespace != nil {
+		o.PrimaryAccountNamespace = s.PrimaryAccountNamespace
+	}
 	if s.Protected != nil {
 		o.Protected = s.Protected
 	}
@@ -1757,9 +1805,6 @@ func (o *SparsePCFWTenant) Version() int {
 func (o *SparsePCFWTenant) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewPCFWTenant()
-	if o.AWSAccountID != nil {
-		out.AWSAccountID = *o.AWSAccountID
-	}
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
@@ -1816,6 +1861,12 @@ func (o *SparsePCFWTenant) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.OffboardingTimestamp != nil {
 		out.OffboardingTimestamp = *o.OffboardingTimestamp
+	}
+	if o.PrimaryAWSAccountID != nil {
+		out.PrimaryAWSAccountID = *o.PrimaryAWSAccountID
+	}
+	if o.PrimaryAccountNamespace != nil {
+		out.PrimaryAccountNamespace = *o.PrimaryAccountNamespace
 	}
 	if o.Protected != nil {
 		out.Protected = *o.Protected
@@ -1979,60 +2030,62 @@ func (o *SparsePCFWTenant) DeepCopyInto(out *SparsePCFWTenant) {
 }
 
 type mongoAttributesPCFWTenant struct {
-	AWSAccountID         string                            `bson:"awsaccountid"`
-	ID                   bson.ObjectId                     `bson:"_id,omitempty"`
-	NGFWExternalID       string                            `bson:"ngfwexternalid"`
-	NGFWTenantID         string                            `bson:"ngfwtenantid"`
-	Annotations          map[string][]string               `bson:"annotations"`
-	AssociatedTags       []string                          `bson:"associatedtags"`
-	AthenaWorkgroup      string                            `bson:"athenaworkgroup"`
-	CreateIdempotencyKey string                            `bson:"createidempotencykey"`
-	CreateTime           time.Time                         `bson:"createtime"`
-	DecryptionRoleARN    string                            `bson:"decryptionrolearn"`
-	EndpointRoleARN      string                            `bson:"endpointrolearn"`
-	LogDestination       string                            `bson:"logdestination"`
-	LogDestinationType   PCFWTenantLogDestinationTypeValue `bson:"logdestinationtype"`
-	LogPushRoleARN       string                            `bson:"logpushrolearn"`
-	LogQueryRoleARN      string                            `bson:"logqueryrolearn"`
-	LogRegion            string                            `bson:"logregion"`
-	LogResourcePrefix    string                            `bson:"logresourceprefix"`
-	Namespace            string                            `bson:"namespace"`
-	NormalizedTags       []string                          `bson:"normalizedtags"`
-	OffboardingTimestamp time.Time                         `bson:"offboardingtimestamp"`
-	Protected            bool                              `bson:"protected"`
-	Status               PCFWTenantStatusValue             `bson:"status"`
-	StatusReason         string                            `bson:"statusreason"`
-	UpdateIdempotencyKey string                            `bson:"updateidempotencykey"`
-	UpdateTime           time.Time                         `bson:"updatetime"`
-	ZHash                int                               `bson:"zhash"`
-	Zone                 int                               `bson:"zone"`
+	ID                      bson.ObjectId                     `bson:"_id,omitempty"`
+	NGFWExternalID          string                            `bson:"ngfwexternalid"`
+	NGFWTenantID            string                            `bson:"ngfwtenantid"`
+	Annotations             map[string][]string               `bson:"annotations"`
+	AssociatedTags          []string                          `bson:"associatedtags"`
+	AthenaWorkgroup         string                            `bson:"athenaworkgroup"`
+	CreateIdempotencyKey    string                            `bson:"createidempotencykey"`
+	CreateTime              time.Time                         `bson:"createtime"`
+	DecryptionRoleARN       string                            `bson:"decryptionrolearn"`
+	EndpointRoleARN         string                            `bson:"endpointrolearn"`
+	LogDestination          string                            `bson:"logdestination"`
+	LogDestinationType      PCFWTenantLogDestinationTypeValue `bson:"logdestinationtype"`
+	LogPushRoleARN          string                            `bson:"logpushrolearn"`
+	LogQueryRoleARN         string                            `bson:"logqueryrolearn"`
+	LogRegion               string                            `bson:"logregion"`
+	LogResourcePrefix       string                            `bson:"logresourceprefix"`
+	Namespace               string                            `bson:"namespace"`
+	NormalizedTags          []string                          `bson:"normalizedtags"`
+	OffboardingTimestamp    time.Time                         `bson:"offboardingtimestamp"`
+	PrimaryAWSAccountID     string                            `bson:"primaryawsaccountid"`
+	PrimaryAccountNamespace string                            `bson:"primaryaccountnamespace"`
+	Protected               bool                              `bson:"protected"`
+	Status                  PCFWTenantStatusValue             `bson:"status"`
+	StatusReason            string                            `bson:"statusreason"`
+	UpdateIdempotencyKey    string                            `bson:"updateidempotencykey"`
+	UpdateTime              time.Time                         `bson:"updatetime"`
+	ZHash                   int                               `bson:"zhash"`
+	Zone                    int                               `bson:"zone"`
 }
 type mongoAttributesSparsePCFWTenant struct {
-	AWSAccountID         *string                            `bson:"awsaccountid,omitempty"`
-	ID                   bson.ObjectId                      `bson:"_id,omitempty"`
-	NGFWExternalID       *string                            `bson:"ngfwexternalid,omitempty"`
-	NGFWTenantID         *string                            `bson:"ngfwtenantid,omitempty"`
-	Annotations          *map[string][]string               `bson:"annotations,omitempty"`
-	AssociatedTags       *[]string                          `bson:"associatedtags,omitempty"`
-	AthenaWorkgroup      *string                            `bson:"athenaworkgroup,omitempty"`
-	CreateIdempotencyKey *string                            `bson:"createidempotencykey,omitempty"`
-	CreateTime           *time.Time                         `bson:"createtime,omitempty"`
-	DecryptionRoleARN    *string                            `bson:"decryptionrolearn,omitempty"`
-	EndpointRoleARN      *string                            `bson:"endpointrolearn,omitempty"`
-	LogDestination       *string                            `bson:"logdestination,omitempty"`
-	LogDestinationType   *PCFWTenantLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
-	LogPushRoleARN       *string                            `bson:"logpushrolearn,omitempty"`
-	LogQueryRoleARN      *string                            `bson:"logqueryrolearn,omitempty"`
-	LogRegion            *string                            `bson:"logregion,omitempty"`
-	LogResourcePrefix    *string                            `bson:"logresourceprefix,omitempty"`
-	Namespace            *string                            `bson:"namespace,omitempty"`
-	NormalizedTags       *[]string                          `bson:"normalizedtags,omitempty"`
-	OffboardingTimestamp *time.Time                         `bson:"offboardingtimestamp,omitempty"`
-	Protected            *bool                              `bson:"protected,omitempty"`
-	Status               *PCFWTenantStatusValue             `bson:"status,omitempty"`
-	StatusReason         *string                            `bson:"statusreason,omitempty"`
-	UpdateIdempotencyKey *string                            `bson:"updateidempotencykey,omitempty"`
-	UpdateTime           *time.Time                         `bson:"updatetime,omitempty"`
-	ZHash                *int                               `bson:"zhash,omitempty"`
-	Zone                 *int                               `bson:"zone,omitempty"`
+	ID                      bson.ObjectId                      `bson:"_id,omitempty"`
+	NGFWExternalID          *string                            `bson:"ngfwexternalid,omitempty"`
+	NGFWTenantID            *string                            `bson:"ngfwtenantid,omitempty"`
+	Annotations             *map[string][]string               `bson:"annotations,omitempty"`
+	AssociatedTags          *[]string                          `bson:"associatedtags,omitempty"`
+	AthenaWorkgroup         *string                            `bson:"athenaworkgroup,omitempty"`
+	CreateIdempotencyKey    *string                            `bson:"createidempotencykey,omitempty"`
+	CreateTime              *time.Time                         `bson:"createtime,omitempty"`
+	DecryptionRoleARN       *string                            `bson:"decryptionrolearn,omitempty"`
+	EndpointRoleARN         *string                            `bson:"endpointrolearn,omitempty"`
+	LogDestination          *string                            `bson:"logdestination,omitempty"`
+	LogDestinationType      *PCFWTenantLogDestinationTypeValue `bson:"logdestinationtype,omitempty"`
+	LogPushRoleARN          *string                            `bson:"logpushrolearn,omitempty"`
+	LogQueryRoleARN         *string                            `bson:"logqueryrolearn,omitempty"`
+	LogRegion               *string                            `bson:"logregion,omitempty"`
+	LogResourcePrefix       *string                            `bson:"logresourceprefix,omitempty"`
+	Namespace               *string                            `bson:"namespace,omitempty"`
+	NormalizedTags          *[]string                          `bson:"normalizedtags,omitempty"`
+	OffboardingTimestamp    *time.Time                         `bson:"offboardingtimestamp,omitempty"`
+	PrimaryAWSAccountID     *string                            `bson:"primaryawsaccountid,omitempty"`
+	PrimaryAccountNamespace *string                            `bson:"primaryaccountnamespace,omitempty"`
+	Protected               *bool                              `bson:"protected,omitempty"`
+	Status                  *PCFWTenantStatusValue             `bson:"status,omitempty"`
+	StatusReason            *string                            `bson:"statusreason,omitempty"`
+	UpdateIdempotencyKey    *string                            `bson:"updateidempotencykey,omitempty"`
+	UpdateTime              *time.Time                         `bson:"updatetime,omitempty"`
+	ZHash                   *int                               `bson:"zhash,omitempty"`
+	Zone                    *int                               `bson:"zone,omitempty"`
 }

@@ -4,11 +4,6 @@
       "pcfwtenant": {
         "description": "Represents Prisma Cloud Firewall Tenant.",
         "properties": {
-          "AWSAccountID": {
-            "description": "AWS Account ID.",
-            "example": 640574671726,
-            "type": "string"
-          },
           "ID": {
             "description": "Identifier of the object.",
             "readOnly": true,
@@ -110,6 +105,16 @@
             "readOnly": true,
             "type": "array"
           },
+          "primaryAWSAccountID": {
+            "description": "The primary AWS Account ID.",
+            "example": 640574671726,
+            "type": "string"
+          },
+          "primaryAccountNamespace": {
+            "description": "The namespace where the primary pcfwaccount will be created.",
+            "example": "/tenant/account",
+            "type": "string"
+          },
           "protected": {
             "description": "Defines if the object is protected.",
             "type": "boolean"
@@ -140,7 +145,6 @@
           }
         },
         "required": [
-          "AWSAccountID",
           "athenaWorkgroup",
           "decryptionRoleARN",
           "endpointRoleARN",
@@ -149,7 +153,9 @@
           "logPushRoleARN",
           "logQueryRoleARN",
           "logRegion",
-          "logResourcePrefix"
+          "logResourcePrefix",
+          "primaryAWSAccountID",
+          "primaryAccountNamespace"
         ],
         "type": "object"
       }
