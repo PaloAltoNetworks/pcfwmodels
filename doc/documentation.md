@@ -3996,7 +3996,7 @@ Represents Prisma Cloud Firewall Account.
   "athenaWorkgroup": "logs_workgroup",
   "decryptionRoleARN": "arn:aws:iam::640574671726:role/DecryptionRole",
   "endpointRoleARN": "arn:aws:iam::640574671726:role/CustomerManagedEndpoint",
-  "logDestination": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
+  "logDestination": "logs",
   "logDestinationType": "Prisma",
   "logPushRoleARN": "arn:aws:iam::1234567890:role/NGFWLogPushRole",
   "logQueryRoleARN": "arn:aws:iam::1234567890:role/PCFWLogQueryRole",
@@ -4122,7 +4122,7 @@ AWS endpoint role ARN.
 
 Type: `string`
 
-The log destination for logging.
+The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
 
@@ -4219,7 +4219,7 @@ Represents Prisma Cloud Firewall Tenant.
   "athenaWorkgroup": "logs_workgroup",
   "decryptionRoleARN": "arn:aws:iam::640574671726:role/DecryptionRole",
   "endpointRoleARN": "arn:aws:iam::640574671726:role/CustomerManagedEndpoint",
-  "logDestination": "s3://640574671726-us-east-1-api-auth-bucket/Logging",
+  "logDestination": "logs",
   "logDestinationType": "Prisma",
   "logPushRoleARN": "arn:aws:iam::1234567890:role/NGFWLogPushRole",
   "logQueryRoleARN": "arn:aws:iam::1234567890:role/PCFWLogQueryRole",
@@ -4319,7 +4319,7 @@ AWS endpoint role ARN.
 
 Type: `string`
 
-The log destination for logging.
+The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
 

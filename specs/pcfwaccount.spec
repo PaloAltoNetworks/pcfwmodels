@@ -95,12 +95,14 @@ attributes:
     example_value: arn:aws:iam::640574671726:role/CustomerManagedEndpoint
 
   - name: logDestination
-    description: The log destination for logging.
+    description:
+      The log destination for logging. The value will be converted to lower case and have the aws 
+      account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
     type: string
     exposed: true
     stored: true
     required: true
-    example_value: s3://640574671726-us-east-1-api-auth-bucket/Logging
+    example_value: logs
 
   - name: logDestinationType
     description: Destination type for log output.

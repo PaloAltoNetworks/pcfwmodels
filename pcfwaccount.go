@@ -163,7 +163,7 @@ type PCFWAccount struct {
 	// AWS endpoint role ARN.
 	EndpointRoleARN string `json:"endpointRoleARN" msgpack:"endpointRoleARN" bson:"endpointrolearn" mapstructure:"endpointRoleARN,omitempty"`
 
-	// The log destination for logging.
+	// The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
 	LogDestination string `json:"logDestination" msgpack:"logDestination" bson:"logdestination" mapstructure:"logDestination,omitempty"`
 
 	// Destination type for log output.
@@ -1010,7 +1010,7 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
 		ConvertedName:  "LogDestination",
-		Description:    `The log destination for logging.`,
+		Description:    `The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		Exposed:        true,
 		Name:           "logDestination",
 		Required:       true,
@@ -1341,7 +1341,7 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		AllowedChoices: []string{},
 		BSONFieldName:  "logdestination",
 		ConvertedName:  "LogDestination",
-		Description:    `The log destination for logging.`,
+		Description:    `The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		Exposed:        true,
 		Name:           "logDestination",
 		Required:       true,
@@ -1609,7 +1609,7 @@ type SparsePCFWAccount struct {
 	// AWS endpoint role ARN.
 	EndpointRoleARN *string `json:"endpointRoleARN,omitempty" msgpack:"endpointRoleARN,omitempty" bson:"endpointrolearn,omitempty" mapstructure:"endpointRoleARN,omitempty"`
 
-	// The log destination for logging.
+	// The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
 	LogDestination *string `json:"logDestination,omitempty" msgpack:"logDestination,omitempty" bson:"logdestination,omitempty" mapstructure:"logDestination,omitempty"`
 
 	// Destination type for log output.
