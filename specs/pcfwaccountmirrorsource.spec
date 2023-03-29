@@ -41,15 +41,6 @@ attributes:
     subtype: string
     stored: true
 
-  - name: dynamicPolicyUpdateEnabled
-    description: |-
-      Whether or not perform dynamic updates in customer VPC e.g. for creating
-      mirroring policies on new instances.
-    type: boolean
-    exposed: true
-    stored: true
-    default_value: true
-
   - name: endpointAbsent
     description: Whether or not any required endpoint for any VPC is absent.
     type: boolean

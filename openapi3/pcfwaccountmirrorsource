@@ -50,11 +50,6 @@
             "description": "Description of the object.",
             "type": "string"
           },
-          "dynamicPolicyUpdateEnabled": {
-            "default": true,
-            "description": "Whether or not perform dynamic updates in customer VPC e.g. for creating\nmirroring policies on new instances.",
-            "type": "boolean"
-          },
           "endpointAbsent": {
             "description": "Whether or not any required endpoint for any VPC is absent.",
             "type": "boolean"

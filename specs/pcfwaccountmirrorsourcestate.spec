@@ -27,6 +27,27 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: VPCID
+    description: The AWS VPC ID of the instance that is the source of traffic mirroring.
+    type: string
+    exposed: true
+    stored: true
+
+  - name: autoScalingGroupName
+    description: |-
+      The autoscaling group name of the instance that is the source of traffic
+      mirroring.
+    type: string
+    exposed: true
+    stored: true
+
+  - name: availabilityZone
+    description: The availability zone of the instance that is the source of traffic
+      mirroring.
+    type: string
+    exposed: true
+    stored: true
+
   - name: instanceID
     description: The instance ID that is the source of traffic mirroring.
     type: string

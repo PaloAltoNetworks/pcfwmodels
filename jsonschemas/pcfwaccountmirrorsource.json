@@ -103,17 +103,6 @@
         }
       ]
     },
-    "dynamicPolicyUpdateEnabled": {
-      "$defaultValue": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "boolean"
-        }
-      ]
-    },
     "endpointAbsent": {
       "anyOf": [
         {

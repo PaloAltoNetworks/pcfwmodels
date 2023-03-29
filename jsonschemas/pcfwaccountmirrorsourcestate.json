@@ -25,6 +25,16 @@
         }
       ]
     },
+    "VPCID": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "annotations": {
       "anyOf": [
         {
@@ -51,6 +61,26 @@
             "type": "string"
           },
           "type": "array"
+        }
+      ]
+    },
+    "autoScalingGroupName": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "availabilityZone": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
         }
       ]
     },

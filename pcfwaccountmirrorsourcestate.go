@@ -100,11 +100,21 @@ type PCFWAccountMirrorSourceState struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
+	// The AWS VPC ID of the instance that is the source of traffic mirroring.
+	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"vpcid" mapstructure:"VPCID,omitempty"`
+
 	// Stores additional information about an entity.
 	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
 
 	// List of tags attached to an entity.
 	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
+
+	// The autoscaling group name of the instance that is the source of traffic
+	// mirroring.
+	AutoScalingGroupName string `json:"autoScalingGroupName" msgpack:"autoScalingGroupName" bson:"autoscalinggroupname" mapstructure:"autoScalingGroupName,omitempty"`
+
+	// The availability zone of the instance that is the source of traffic mirroring.
+	AvailabilityZone string `json:"availabilityZone" msgpack:"availabilityZone" bson:"availabilityzone" mapstructure:"availabilityZone,omitempty"`
 
 	// internal idempotency key for a create operation.
 	CreateIdempotencyKey string `json:"-" msgpack:"-" bson:"createidempotencykey" mapstructure:"-,omitempty"`
@@ -197,8 +207,11 @@ func (o *PCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
+	s.VPCID = o.VPCID
 	s.Annotations = o.Annotations
 	s.AssociatedTags = o.AssociatedTags
+	s.AutoScalingGroupName = o.AutoScalingGroupName
+	s.AvailabilityZone = o.AvailabilityZone
 	s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	s.CreateTime = o.CreateTime
 	s.Description = o.Description
@@ -232,8 +245,11 @@ func (o *PCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	}
 
 	o.ID = s.ID.Hex()
+	o.VPCID = s.VPCID
 	o.Annotations = s.Annotations
 	o.AssociatedTags = s.AssociatedTags
+	o.AutoScalingGroupName = s.AutoScalingGroupName
+	o.AvailabilityZone = s.AvailabilityZone
 	o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	o.CreateTime = s.CreateTime
 	o.Description = s.Description
@@ -401,8 +417,11 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 		// nolint: goimports
 		return &SparsePCFWAccountMirrorSourceState{
 			ID:                   &o.ID,
+			VPCID:                &o.VPCID,
 			Annotations:          &o.Annotations,
 			AssociatedTags:       &o.AssociatedTags,
+			AutoScalingGroupName: &o.AutoScalingGroupName,
+			AvailabilityZone:     &o.AvailabilityZone,
 			CreateIdempotencyKey: &o.CreateIdempotencyKey,
 			CreateTime:           &o.CreateTime,
 			Description:          &o.Description,
@@ -426,10 +445,16 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 		switch f {
 		case "ID":
 			sp.ID = &(o.ID)
+		case "VPCID":
+			sp.VPCID = &(o.VPCID)
 		case "annotations":
 			sp.Annotations = &(o.Annotations)
 		case "associatedTags":
 			sp.AssociatedTags = &(o.AssociatedTags)
+		case "autoScalingGroupName":
+			sp.AutoScalingGroupName = &(o.AutoScalingGroupName)
+		case "availabilityZone":
+			sp.AvailabilityZone = &(o.AvailabilityZone)
 		case "createIdempotencyKey":
 			sp.CreateIdempotencyKey = &(o.CreateIdempotencyKey)
 		case "createTime":
@@ -476,11 +501,20 @@ func (o *PCFWAccountMirrorSourceState) Patch(sparse elemental.SparseIdentifiable
 	if so.ID != nil {
 		o.ID = *so.ID
 	}
+	if so.VPCID != nil {
+		o.VPCID = *so.VPCID
+	}
 	if so.Annotations != nil {
 		o.Annotations = *so.Annotations
 	}
 	if so.AssociatedTags != nil {
 		o.AssociatedTags = *so.AssociatedTags
+	}
+	if so.AutoScalingGroupName != nil {
+		o.AutoScalingGroupName = *so.AutoScalingGroupName
+	}
+	if so.AvailabilityZone != nil {
+		o.AvailabilityZone = *so.AvailabilityZone
 	}
 	if so.CreateIdempotencyKey != nil {
 		o.CreateIdempotencyKey = *so.CreateIdempotencyKey
@@ -615,10 +649,16 @@ func (o *PCFWAccountMirrorSourceState) ValueForAttribute(name string) any {
 	switch name {
 	case "ID":
 		return o.ID
+	case "VPCID":
+		return o.VPCID
 	case "annotations":
 		return o.Annotations
 	case "associatedTags":
 		return o.AssociatedTags
+	case "autoScalingGroupName":
+		return o.AutoScalingGroupName
+	case "availabilityZone":
+		return o.AvailabilityZone
 	case "createIdempotencyKey":
 		return o.CreateIdempotencyKey
 	case "createTime":
@@ -671,6 +711,16 @@ var PCFWAccountMirrorSourceStateAttributesMap = map[string]elemental.AttributeSp
 		Stored:         true,
 		Type:           "string",
 	},
+	"VPCID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `The AWS VPC ID of the instance that is the source of traffic mirroring.`,
+		Exposed:        true,
+		Name:           "VPCID",
+		Stored:         true,
+		Type:           "string",
+	},
 	"Annotations": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "annotations",
@@ -696,6 +746,27 @@ var PCFWAccountMirrorSourceStateAttributesMap = map[string]elemental.AttributeSp
 		Stored:         true,
 		SubType:        "string",
 		Type:           "list",
+	},
+	"AutoScalingGroupName": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "autoscalinggroupname",
+		ConvertedName:  "AutoScalingGroupName",
+		Description: `The autoscaling group name of the instance that is the source of traffic
+mirroring.`,
+		Exposed: true,
+		Name:    "autoScalingGroupName",
+		Stored:  true,
+		Type:    "string",
+	},
+	"AvailabilityZone": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "availabilityzone",
+		ConvertedName:  "AvailabilityZone",
+		Description:    `The availability zone of the instance that is the source of traffic mirroring.`,
+		Exposed:        true,
+		Name:           "availabilityZone",
+		Stored:         true,
+		Type:           "string",
 	},
 
 	"CreateTime": {
@@ -863,6 +934,16 @@ var PCFWAccountMirrorSourceStateLowerCaseAttributesMap = map[string]elemental.At
 		Stored:         true,
 		Type:           "string",
 	},
+	"vpcid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "vpcid",
+		ConvertedName:  "VPCID",
+		Description:    `The AWS VPC ID of the instance that is the source of traffic mirroring.`,
+		Exposed:        true,
+		Name:           "VPCID",
+		Stored:         true,
+		Type:           "string",
+	},
 	"annotations": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "annotations",
@@ -888,6 +969,27 @@ var PCFWAccountMirrorSourceStateLowerCaseAttributesMap = map[string]elemental.At
 		Stored:         true,
 		SubType:        "string",
 		Type:           "list",
+	},
+	"autoscalinggroupname": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "autoscalinggroupname",
+		ConvertedName:  "AutoScalingGroupName",
+		Description: `The autoscaling group name of the instance that is the source of traffic
+mirroring.`,
+		Exposed: true,
+		Name:    "autoScalingGroupName",
+		Stored:  true,
+		Type:    "string",
+	},
+	"availabilityzone": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "availabilityzone",
+		ConvertedName:  "AvailabilityZone",
+		Description:    `The availability zone of the instance that is the source of traffic mirroring.`,
+		Exposed:        true,
+		Name:           "availabilityZone",
+		Stored:         true,
+		Type:           "string",
 	},
 
 	"createtime": {
@@ -1106,11 +1208,21 @@ type SparsePCFWAccountMirrorSourceState struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
+	// The AWS VPC ID of the instance that is the source of traffic mirroring.
+	VPCID *string `json:"VPCID,omitempty" msgpack:"VPCID,omitempty" bson:"vpcid,omitempty" mapstructure:"VPCID,omitempty"`
+
 	// Stores additional information about an entity.
 	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
 
 	// List of tags attached to an entity.
 	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
+
+	// The autoscaling group name of the instance that is the source of traffic
+	// mirroring.
+	AutoScalingGroupName *string `json:"autoScalingGroupName,omitempty" msgpack:"autoScalingGroupName,omitempty" bson:"autoscalinggroupname,omitempty" mapstructure:"autoScalingGroupName,omitempty"`
+
+	// The availability zone of the instance that is the source of traffic mirroring.
+	AvailabilityZone *string `json:"availabilityZone,omitempty" msgpack:"availabilityZone,omitempty" bson:"availabilityzone,omitempty" mapstructure:"availabilityZone,omitempty"`
 
 	// internal idempotency key for a create operation.
 	CreateIdempotencyKey *string `json:"-" msgpack:"-" bson:"createidempotencykey,omitempty" mapstructure:"-,omitempty"`
@@ -1204,11 +1316,20 @@ func (o *SparsePCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
+	if o.VPCID != nil {
+		s.VPCID = o.VPCID
+	}
 	if o.Annotations != nil {
 		s.Annotations = o.Annotations
 	}
 	if o.AssociatedTags != nil {
 		s.AssociatedTags = o.AssociatedTags
+	}
+	if o.AutoScalingGroupName != nil {
+		s.AutoScalingGroupName = o.AutoScalingGroupName
+	}
+	if o.AvailabilityZone != nil {
+		s.AvailabilityZone = o.AvailabilityZone
 	}
 	if o.CreateIdempotencyKey != nil {
 		s.CreateIdempotencyKey = o.CreateIdempotencyKey
@@ -1274,11 +1395,20 @@ func (o *SparsePCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 
 	id := s.ID.Hex()
 	o.ID = &id
+	if s.VPCID != nil {
+		o.VPCID = s.VPCID
+	}
 	if s.Annotations != nil {
 		o.Annotations = s.Annotations
 	}
 	if s.AssociatedTags != nil {
 		o.AssociatedTags = s.AssociatedTags
+	}
+	if s.AutoScalingGroupName != nil {
+		o.AutoScalingGroupName = s.AutoScalingGroupName
+	}
+	if s.AvailabilityZone != nil {
+		o.AvailabilityZone = s.AvailabilityZone
 	}
 	if s.CreateIdempotencyKey != nil {
 		o.CreateIdempotencyKey = s.CreateIdempotencyKey
@@ -1342,11 +1472,20 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	if o.ID != nil {
 		out.ID = *o.ID
 	}
+	if o.VPCID != nil {
+		out.VPCID = *o.VPCID
+	}
 	if o.Annotations != nil {
 		out.Annotations = *o.Annotations
 	}
 	if o.AssociatedTags != nil {
 		out.AssociatedTags = *o.AssociatedTags
+	}
+	if o.AutoScalingGroupName != nil {
+		out.AutoScalingGroupName = *o.AutoScalingGroupName
+	}
+	if o.AvailabilityZone != nil {
+		out.AvailabilityZone = *o.AvailabilityZone
 	}
 	if o.CreateIdempotencyKey != nil {
 		out.CreateIdempotencyKey = *o.CreateIdempotencyKey
@@ -1567,8 +1706,11 @@ func (o *SparsePCFWAccountMirrorSourceState) DeepCopyInto(out *SparsePCFWAccount
 
 type mongoAttributesPCFWAccountMirrorSourceState struct {
 	ID                   bson.ObjectId                           `bson:"_id,omitempty"`
+	VPCID                string                                  `bson:"vpcid"`
 	Annotations          map[string][]string                     `bson:"annotations"`
 	AssociatedTags       []string                                `bson:"associatedtags"`
+	AutoScalingGroupName string                                  `bson:"autoscalinggroupname"`
+	AvailabilityZone     string                                  `bson:"availabilityzone"`
 	CreateIdempotencyKey string                                  `bson:"createidempotencykey"`
 	CreateTime           time.Time                               `bson:"createtime"`
 	Description          string                                  `bson:"description"`
@@ -1587,8 +1729,11 @@ type mongoAttributesPCFWAccountMirrorSourceState struct {
 }
 type mongoAttributesSparsePCFWAccountMirrorSourceState struct {
 	ID                   bson.ObjectId                            `bson:"_id,omitempty"`
+	VPCID                *string                                  `bson:"vpcid,omitempty"`
 	Annotations          *map[string][]string                     `bson:"annotations,omitempty"`
 	AssociatedTags       *[]string                                `bson:"associatedtags,omitempty"`
+	AutoScalingGroupName *string                                  `bson:"autoscalinggroupname,omitempty"`
+	AvailabilityZone     *string                                  `bson:"availabilityzone,omitempty"`
 	CreateIdempotencyKey *string                                  `bson:"createidempotencykey,omitempty"`
 	CreateTime           *time.Time                               `bson:"createtime,omitempty"`
 	Description          *string                                  `bson:"description,omitempty"`
