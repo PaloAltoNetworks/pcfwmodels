@@ -41,6 +41,7 @@ var (
 
 		"logquery": LogQueryIdentity,
 
+		"mirrorsourceoption":           MirrorSourceOptionIdentity,
 		"pcfwaccount":                  PCFWAccountIdentity,
 		"pcfwaccountmirrorsource":      PCFWAccountMirrorSourceIdentity,
 		"pcfwaccountmirrorsourcestate": PCFWAccountMirrorSourceStateIdentity,
@@ -92,6 +93,7 @@ var (
 
 		"logqueries": LogQueryIdentity,
 
+		"mirrorsourceoptions":           MirrorSourceOptionIdentity,
 		"pcfwaccounts":                  PCFWAccountIdentity,
 		"pcfwaccountmirrorsources":      PCFWAccountMirrorSourceIdentity,
 		"pcfwaccountmirrorsourcestates": PCFWAccountMirrorSourceStateIdentity,
@@ -241,7 +243,8 @@ var (
 		"firewallurlcategorylist": {
 			{"namespace"},
 		},
-		"logquery": nil,
+		"logquery":           nil,
+		"mirrorsourceoption": nil,
 		"pcfwaccount": {
 			{":shard", ":unique", "zone", "zHash"},
 			{"createIdempotencyKey"},
@@ -372,6 +375,8 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewFirewallURLCategoryList()
 	case LogQueryIdentity:
 		return NewLogQuery()
+	case MirrorSourceOptionIdentity:
+		return NewMirrorSourceOption()
 	case PCFWAccountIdentity:
 		return NewPCFWAccount()
 	case PCFWAccountMirrorSourceIdentity:
@@ -451,6 +456,8 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseFirewallURLCategoryList()
 	case LogQueryIdentity:
 		return NewSparseLogQuery()
+	case MirrorSourceOptionIdentity:
+		return NewSparseMirrorSourceOption()
 	case PCFWAccountIdentity:
 		return NewSparsePCFWAccount()
 	case PCFWAccountMirrorSourceIdentity:
@@ -538,6 +545,8 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &FirewallURLCategoryListsList{}
 	case LogQueryIdentity:
 		return &LogQueriesList{}
+	case MirrorSourceOptionIdentity:
+		return &MirrorSourceOptionsList{}
 	case PCFWAccountIdentity:
 		return &PCFWAccountsList{}
 	case PCFWAccountMirrorSourceIdentity:
@@ -615,6 +624,8 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseFirewallURLCategoryListsList{}
 	case LogQueryIdentity:
 		return &SparseLogQueriesList{}
+	case MirrorSourceOptionIdentity:
+		return &SparseMirrorSourceOptionsList{}
 	case PCFWAccountIdentity:
 		return &SparsePCFWAccountsList{}
 	case PCFWAccountMirrorSourceIdentity:
@@ -688,6 +699,7 @@ func AllIdentities() []elemental.Identity {
 		FirewallTemplateIdentity,
 		FirewallURLCategoryListIdentity,
 		LogQueryIdentity,
+		MirrorSourceOptionIdentity,
 		PCFWAccountIdentity,
 		PCFWAccountMirrorSourceIdentity,
 		PCFWAccountMirrorSourceStateIdentity,
@@ -752,6 +764,8 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case FirewallURLCategoryListIdentity:
 		return []string{}
 	case LogQueryIdentity:
+		return []string{}
+	case MirrorSourceOptionIdentity:
 		return []string{}
 	case PCFWAccountIdentity:
 		return []string{}

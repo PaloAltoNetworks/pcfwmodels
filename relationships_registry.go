@@ -768,6 +768,12 @@ func init() {
 		},
 	}
 
+	relationshipsRegistry[MirrorSourceOptionIdentity] = &elemental.Relationship{
+		Create: map[string]*elemental.RelationshipInfo{
+			"root": {},
+		},
+	}
+
 	relationshipsRegistry[PCFWAccountIdentity] = &elemental.Relationship{
 		Create: map[string]*elemental.RelationshipInfo{
 			"root": {},

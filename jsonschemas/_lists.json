@@ -240,9 +240,21 @@
       },
       "type": "array"
     },
+    "mirrorinstances": {
+      "items": {
+        "$ref": "mirrorinstance.json"
+      },
+      "type": "array"
+    },
     "mirrorrules": {
       "items": {
         "$ref": "mirrorrule.json"
+      },
+      "type": "array"
+    },
+    "mirrorsourceoptions": {
+      "items": {
+        "$ref": "mirrorsourceoption.json"
       },
       "type": "array"
     },

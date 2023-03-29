@@ -1,0 +1,37 @@
+{
+  "$extends": [
+    "@named"
+  ],
+  "$modelName": "MirrorInstance",
+  "$modelPackage": "discovery",
+  "$modelResourceName": "mirrorinstances",
+  "$modelRestName": "mirrorinstance",
+  "additionalProperties": true,
+  "properties": {
+    "ID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "MirrorInstance",
+  "type": "object"
+}

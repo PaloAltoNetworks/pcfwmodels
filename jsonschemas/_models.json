@@ -120,8 +120,14 @@
     "mirrorfilter": {
       "$ref": "mirrorfilter.json"
     },
+    "mirrorinstance": {
+      "$ref": "mirrorinstance.json"
+    },
     "mirrorrule": {
       "$ref": "mirrorrule.json"
+    },
+    "mirrorsourceoption": {
+      "$ref": "mirrorsourceoption.json"
     },
     "pcfwaccount": {
       "$ref": "pcfwaccount.json"

@@ -13,7 +13,7 @@ model:
 # Attributes
 attributes:
   v1:
-  - name: VPCs
+  - name: VPCAvailabilityZones
     description: List of VPC IDs and their associated availability zones.
     type: refList
     exposed: true
@@ -24,7 +24,7 @@ attributes:
       refMode: pointer
 
   - name: region
-    description: The AWS region of the VPC.
+    description: The AWS region of the VPCs.
     type: string
     exposed: true
     read_only: true

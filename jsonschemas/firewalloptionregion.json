@@ -6,7 +6,7 @@
   "$modelRestName": "firewalloptionregion",
   "additionalProperties": true,
   "properties": {
-    "VPCs": {
+    "VPCAvailabilityZones": {
       "$readOnly": true,
       "anyOf": [
         {

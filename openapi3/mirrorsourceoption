@@ -1,0 +1,91 @@
+{
+  "components": {
+    "schemas": {
+      "mirrorsourceoption": {
+        "description": "Discovers eligible traffic mirror source instances and auto-scaling groups.",
+        "properties": {
+          "autoScalingGroupNames": {
+            "description": "List of discovered auto-scaling groups.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "firewallName": {
+            "description": "The firewall name whose VPCs/AZs should be used to search for instances.",
+            "example": "firewall1",
+            "type": "string"
+          },
+          "instances": {
+            "description": "List of discovered mirror source instances.",
+            "items": {
+              "$ref": "./mirrorinstance#/components/schemas/mirrorinstance"
+            },
+            "readOnly": true,
+            "type": "array"
+          }
+        },
+        "required": [
+          "firewallName"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "mirrorsourceoption",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/mirrorsourceoptions": {
+      "post": {
+        "description": "Discovers eligible traffic mirror source instances and auto-scaling groups.",
+        "operationId": "create-a-new-mirrorsourceoption",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/mirrorsourceoption"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/mirrorsourceoption"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/discovery",
+          "discovery"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/discovery'",
+      "name": "core/discovery"
+    },
+    {
+      "description": "This tag is for package 'discovery'",
+      "name": "discovery"
+    }
+  ]
+}

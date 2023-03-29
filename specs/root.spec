@@ -180,6 +180,11 @@ relations:
     - $timewindow
     - $queryable
 
+- rest_name: mirrorsourceoption
+  create:
+    description: Discovers eligible traffic mirror source instances and auto-scaling
+      groups.
+
 - rest_name: pcfwaccount
   get:
     description: Retrieves the status of cloud account on Prisma firewall service.

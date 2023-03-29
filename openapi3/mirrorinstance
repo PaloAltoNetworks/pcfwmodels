@@ -1,24 +1,23 @@
 {
   "components": {
     "schemas": {
-      "firewalloptionregion": {
-        "description": "Includes information about region, along with its VPCs, for use in firewall\nconfiguration.",
+      "mirrorinstance": {
+        "description": "Includes name and ID of an instance that may be eligible for traffic mirroring.",
         "properties": {
-          "VPCAvailabilityZones": {
-            "description": "List of VPC IDs and their associated availability zones.",
-            "items": {
-              "$ref": "./firewalloptionvpc#/components/schemas/firewalloptionvpc"
-            },
+          "ID": {
+            "description": "The instance ID.",
             "readOnly": true,
-            "type": "array"
+            "type": "string"
           },
-          "region": {
-            "description": "The AWS region of the VPCs.",
-            "example": "us-east-1",
-            "readOnly": true,
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
             "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       }
     }
@@ -31,7 +30,7 @@
       "name": "TODO"
     },
     "termsOfService": "https://localhost/TODO",
-    "title": "firewalloptionregion",
+    "title": "mirrorinstance",
     "version": "1.0"
   },
   "openapi": "3.0.3",

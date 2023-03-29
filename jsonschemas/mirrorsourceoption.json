@@ -1,0 +1,51 @@
+{
+  "$extends": [],
+  "$modelName": "MirrorSourceOption",
+  "$modelPackage": "discovery",
+  "$modelResourceName": "mirrorsourceoptions",
+  "$modelRestName": "mirrorsourceoption",
+  "additionalProperties": true,
+  "properties": {
+    "autoScalingGroupNames": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "firewallName": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "instances": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "mirrorinstance.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [
+    "firewallName"
+  ],
+  "title": "MirrorSourceOption",
+  "type": "object"
+}
