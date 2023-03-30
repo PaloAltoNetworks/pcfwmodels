@@ -89,9 +89,6 @@ type PCFWAccountMirrorSource struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
-	// The list of all VPC IDs where traffic is to be monitored.
-	VPCIDs []string `json:"VPCIDs" msgpack:"VPCIDs" bson:"vpcids" mapstructure:"VPCIDs,omitempty"`
-
 	// Stores additional information about an entity.
 	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
 
@@ -152,7 +149,6 @@ func NewPCFWAccountMirrorSource() *PCFWAccountMirrorSource {
 
 	return &PCFWAccountMirrorSource{
 		ModelVersion:          1,
-		VPCIDs:                []string{},
 		Annotations:           map[string][]string{},
 		AssociatedTags:        []string{},
 		AutoScalingGroupNames: []string{},
@@ -193,7 +189,6 @@ func (o *PCFWAccountMirrorSource) GetBSON() (any, error) {
 	if o.ID != "" {
 		s.ID = bson.ObjectIdHex(o.ID)
 	}
-	s.VPCIDs = o.VPCIDs
 	s.Annotations = o.Annotations
 	s.AssociatedTags = o.AssociatedTags
 	s.AutoScalingGroupNames = o.AutoScalingGroupNames
@@ -228,7 +223,6 @@ func (o *PCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 	}
 
 	o.ID = s.ID.Hex()
-	o.VPCIDs = s.VPCIDs
 	o.Annotations = s.Annotations
 	o.AssociatedTags = s.AssociatedTags
 	o.AutoScalingGroupNames = s.AutoScalingGroupNames
@@ -397,7 +391,6 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 		// nolint: goimports
 		return &SparsePCFWAccountMirrorSource{
 			ID:                    &o.ID,
-			VPCIDs:                &o.VPCIDs,
 			Annotations:           &o.Annotations,
 			AssociatedTags:        &o.AssociatedTags,
 			AutoScalingGroupNames: &o.AutoScalingGroupNames,
@@ -423,8 +416,6 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 		switch f {
 		case "ID":
 			sp.ID = &(o.ID)
-		case "VPCIDs":
-			sp.VPCIDs = &(o.VPCIDs)
 		case "annotations":
 			sp.Annotations = &(o.Annotations)
 		case "associatedTags":
@@ -474,9 +465,6 @@ func (o *PCFWAccountMirrorSource) Patch(sparse elemental.SparseIdentifiable) {
 	so := sparse.(*SparsePCFWAccountMirrorSource)
 	if so.ID != nil {
 		o.ID = *so.ID
-	}
-	if so.VPCIDs != nil {
-		o.VPCIDs = *so.VPCIDs
 	}
 	if so.Annotations != nil {
 		o.Annotations = *so.Annotations
@@ -620,8 +608,6 @@ func (o *PCFWAccountMirrorSource) ValueForAttribute(name string) any {
 	switch name {
 	case "ID":
 		return o.ID
-	case "VPCIDs":
-		return o.VPCIDs
 	case "annotations":
 		return o.Annotations
 	case "associatedTags":
@@ -677,17 +663,6 @@ var PCFWAccountMirrorSourceAttributesMap = map[string]elemental.AttributeSpecifi
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
-	},
-	"VPCIDs": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "vpcids",
-		ConvertedName:  "VPCIDs",
-		Description:    `The list of all VPC IDs where traffic is to be monitored.`,
-		Exposed:        true,
-		Name:           "VPCIDs",
-		Stored:         true,
-		SubType:        "string",
-		Type:           "list",
 	},
 	"Annotations": {
 		AllowedChoices: []string{},
@@ -882,17 +857,6 @@ var PCFWAccountMirrorSourceLowerCaseAttributesMap = map[string]elemental.Attribu
 		ReadOnly:       true,
 		Stored:         true,
 		Type:           "string",
-	},
-	"vpcids": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "vpcids",
-		ConvertedName:  "VPCIDs",
-		Description:    `The list of all VPC IDs where traffic is to be monitored.`,
-		Exposed:        true,
-		Name:           "VPCIDs",
-		Stored:         true,
-		SubType:        "string",
-		Type:           "list",
 	},
 	"annotations": {
 		AllowedChoices: []string{},
@@ -1139,9 +1103,6 @@ type SparsePCFWAccountMirrorSource struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
-	// The list of all VPC IDs where traffic is to be monitored.
-	VPCIDs *[]string `json:"VPCIDs,omitempty" msgpack:"VPCIDs,omitempty" bson:"vpcids,omitempty" mapstructure:"VPCIDs,omitempty"`
-
 	// Stores additional information about an entity.
 	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
 
@@ -1240,9 +1201,6 @@ func (o *SparsePCFWAccountMirrorSource) GetBSON() (any, error) {
 	if o.ID != nil {
 		s.ID = bson.ObjectIdHex(*o.ID)
 	}
-	if o.VPCIDs != nil {
-		s.VPCIDs = o.VPCIDs
-	}
 	if o.Annotations != nil {
 		s.Annotations = o.Annotations
 	}
@@ -1310,9 +1268,6 @@ func (o *SparsePCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 
 	id := s.ID.Hex()
 	o.ID = &id
-	if s.VPCIDs != nil {
-		o.VPCIDs = s.VPCIDs
-	}
 	if s.Annotations != nil {
 		o.Annotations = s.Annotations
 	}
@@ -1377,9 +1332,6 @@ func (o *SparsePCFWAccountMirrorSource) ToPlain() elemental.PlainIdentifiable {
 	out := NewPCFWAccountMirrorSource()
 	if o.ID != nil {
 		out.ID = *o.ID
-	}
-	if o.VPCIDs != nil {
-		out.VPCIDs = *o.VPCIDs
 	}
 	if o.Annotations != nil {
 		out.Annotations = *o.Annotations
@@ -1606,7 +1558,6 @@ func (o *SparsePCFWAccountMirrorSource) DeepCopyInto(out *SparsePCFWAccountMirro
 
 type mongoAttributesPCFWAccountMirrorSource struct {
 	ID                    bson.ObjectId       `bson:"_id,omitempty"`
-	VPCIDs                []string            `bson:"vpcids"`
 	Annotations           map[string][]string `bson:"annotations"`
 	AssociatedTags        []string            `bson:"associatedtags"`
 	AutoScalingGroupNames []string            `bson:"autoscalinggroupnames"`
@@ -1626,7 +1577,6 @@ type mongoAttributesPCFWAccountMirrorSource struct {
 }
 type mongoAttributesSparsePCFWAccountMirrorSource struct {
 	ID                    bson.ObjectId        `bson:"_id,omitempty"`
-	VPCIDs                *[]string            `bson:"vpcids,omitempty"`
 	Annotations           *map[string][]string `bson:"annotations,omitempty"`
 	AssociatedTags        *[]string            `bson:"associatedtags,omitempty"`
 	AutoScalingGroupNames *[]string            `bson:"autoscalinggroupnames,omitempty"`

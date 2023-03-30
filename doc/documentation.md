@@ -222,12 +222,6 @@ Type: `string`
 
 Identifier of the object.
 
-##### `VPCIDs`
-
-Type: `[]string`
-
-The list of all VPC IDs where traffic is to be monitored.
-
 ##### `annotations`
 
 Type: `map[string][]string`
@@ -4191,7 +4185,9 @@ AWS endpoint role ARN.
 
 Type: `string`
 
-The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
+The log destination for logging. The value will be converted to lower case and
+have the aws account id and logging region appended to it (ie.
+logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
 
@@ -4388,7 +4384,9 @@ AWS endpoint role ARN.
 
 Type: `string`
 
-The log destination for logging. The value will be converted to lower case and have the aws account id and logging region appended to it (ie. logs-1234-us-east-2) when used to create an S3 bucket for logging.
+The log destination for logging. The value will be converted to lower case and
+have the aws account id and logging region appended to it (ie.
+logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
 

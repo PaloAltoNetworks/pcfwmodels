@@ -25,19 +25,6 @@
         }
       ]
     },
-    "VPCIDs": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      ]
-    },
     "annotations": {
       "anyOf": [
         {

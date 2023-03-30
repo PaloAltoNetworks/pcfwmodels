@@ -26,13 +26,6 @@ model:
 # Attributes
 attributes:
   v1:
-  - name: VPCIDs
-    description: The list of all VPC IDs where traffic is to be monitored.
-    type: list
-    exposed: true
-    subtype: string
-    stored: true
-
   - name: autoScalingGroupNames
     description: The list of all autoscaling group names where instances are to be
       monitored.

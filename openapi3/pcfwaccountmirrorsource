@@ -9,13 +9,6 @@
             "readOnly": true,
             "type": "string"
           },
-          "VPCIDs": {
-            "description": "The list of all VPC IDs where traffic is to be monitored.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
           "annotations": {
             "additionalProperties": {
               "items": {
