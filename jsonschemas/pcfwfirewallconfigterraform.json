@@ -1,7 +1,5 @@
 {
   "$extends": [
-    "@identifiable-not-stored",
-    "@named",
     "@namespaced"
   ],
   "$modelName": "PCFWFirewallConfigTerraform",
@@ -10,26 +8,6 @@
   "$modelRestName": "pcfwfirewallconfigterraform",
   "additionalProperties": true,
   "properties": {
-    "ID": {
-      "$readOnly": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
-    "name": {
-      "$required": true,
-      "anyOf": [
-        {
-          "maxLength": 256,
-          "type": "string"
-        }
-      ]
-    },
     "namespace": {
       "$readOnly": true,
       "anyOf": [
@@ -42,9 +20,7 @@
       ]
     }
   },
-  "required": [
-    "name"
-  ],
+  "required": [],
   "title": "PCFWFirewallConfigTerraform",
   "type": "object"
 }

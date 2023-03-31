@@ -7,6 +7,4 @@ model:
   group: core/deploymentadvisor
   description: Represents PCFW firewall configuration terraform generator.
   extends:
-  - '@identifiable-not-stored'
-  - '@named'
   - '@namespaced'

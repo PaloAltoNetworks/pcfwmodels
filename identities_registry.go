@@ -268,9 +268,7 @@ var (
 			{"updateIdempotencyKey"},
 		},
 		"pcfwfirewallconfigterraform": {
-			{"name"},
 			{"namespace"},
-			{"namespace", "name"},
 		},
 		"pcfwsubnethelper": nil,
 		"pcfwtenant": {

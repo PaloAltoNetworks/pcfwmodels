@@ -4,25 +4,12 @@
       "pcfwfirewallconfigterraform": {
         "description": "Represents PCFW firewall configuration terraform generator.",
         "properties": {
-          "ID": {
-            "description": "Identifier of the object.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Name of the entity.",
-            "example": "the name",
-            "type": "string"
-          },
           "namespace": {
             "description": "Namespace tag attached to an entity.",
             "readOnly": true,
             "type": "string"
           }
         },
-        "required": [
-          "name"
-        ],
         "type": "object"
       }
     }
