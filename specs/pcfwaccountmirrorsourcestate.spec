@@ -74,3 +74,9 @@ attributes:
     type: string
     exposed: true
     stored: true
+
+  - name: trafficMirrorSessionId
+    description: Traffic mirroring session ID of the created mirroring session.
+    type: string
+    exposed: true
+    stored: true

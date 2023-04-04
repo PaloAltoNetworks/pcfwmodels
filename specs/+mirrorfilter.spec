@@ -26,5 +26,7 @@ attributes:
     exposed: true
     subtype: mirrorrule
     stored: true
+    validations:
+    - $mirrorrules
     extensions:
       refMode: pointer

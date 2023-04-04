@@ -42,18 +42,14 @@ attributes:
     type: integer
     exposed: true
     stored: true
-    default_value: 0
-    validations:
-    - $port
+    default_value: -1
 
   - name: destinationToPort
     description: Destination port range end.
     type: integer
     exposed: true
     stored: true
-    default_value: 65535
-    validations:
-    - $port
+    default_value: -1
 
   - name: direction
     description: The direction of the traffic to be mirrored.
@@ -96,15 +92,11 @@ attributes:
     type: integer
     exposed: true
     stored: true
-    default_value: 0
-    validations:
-    - $port
+    default_value: -1
 
   - name: sourceToPort
     description: Source port range end.
     type: integer
     exposed: true
     stored: true
-    default_value: 65535
-    validations:
-    - $port
+    default_value: -1

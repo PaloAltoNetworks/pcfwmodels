@@ -149,6 +149,9 @@ type PCFWAccountMirrorSourceState struct {
 	// The status description of the traffic mirroring session.
 	StatusReason string `json:"statusReason" msgpack:"statusReason" bson:"statusreason" mapstructure:"statusReason,omitempty"`
 
+	// Traffic mirroring session ID of the created mirroring session.
+	TrafficMirrorSessionId string `json:"trafficMirrorSessionId" msgpack:"trafficMirrorSessionId" bson:"trafficmirrorsessionid" mapstructure:"trafficMirrorSessionId,omitempty"`
+
 	// internal idempotency key for a update operation.
 	UpdateIdempotencyKey string `json:"-" msgpack:"-" bson:"updateidempotencykey" mapstructure:"-,omitempty"`
 
@@ -223,6 +226,7 @@ func (o *PCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	s.Protected = o.Protected
 	s.Status = o.Status
 	s.StatusReason = o.StatusReason
+	s.TrafficMirrorSessionId = o.TrafficMirrorSessionId
 	s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	s.UpdateTime = o.UpdateTime
 	s.ZHash = o.ZHash
@@ -261,6 +265,7 @@ func (o *PCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	o.Protected = s.Protected
 	o.Status = s.Status
 	o.StatusReason = s.StatusReason
+	o.TrafficMirrorSessionId = s.TrafficMirrorSessionId
 	o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	o.UpdateTime = s.UpdateTime
 	o.ZHash = s.ZHash
@@ -416,27 +421,28 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparsePCFWAccountMirrorSourceState{
-			ID:                   &o.ID,
-			VPCID:                &o.VPCID,
-			Annotations:          &o.Annotations,
-			AssociatedTags:       &o.AssociatedTags,
-			AutoScalingGroupName: &o.AutoScalingGroupName,
-			AvailabilityZone:     &o.AvailabilityZone,
-			CreateIdempotencyKey: &o.CreateIdempotencyKey,
-			CreateTime:           &o.CreateTime,
-			Description:          &o.Description,
-			InstanceID:           &o.InstanceID,
-			Name:                 &o.Name,
-			Namespace:            &o.Namespace,
-			NetworkInterface:     &o.NetworkInterface,
-			NormalizedTags:       &o.NormalizedTags,
-			Protected:            &o.Protected,
-			Status:               &o.Status,
-			StatusReason:         &o.StatusReason,
-			UpdateIdempotencyKey: &o.UpdateIdempotencyKey,
-			UpdateTime:           &o.UpdateTime,
-			ZHash:                &o.ZHash,
-			Zone:                 &o.Zone,
+			ID:                     &o.ID,
+			VPCID:                  &o.VPCID,
+			Annotations:            &o.Annotations,
+			AssociatedTags:         &o.AssociatedTags,
+			AutoScalingGroupName:   &o.AutoScalingGroupName,
+			AvailabilityZone:       &o.AvailabilityZone,
+			CreateIdempotencyKey:   &o.CreateIdempotencyKey,
+			CreateTime:             &o.CreateTime,
+			Description:            &o.Description,
+			InstanceID:             &o.InstanceID,
+			Name:                   &o.Name,
+			Namespace:              &o.Namespace,
+			NetworkInterface:       &o.NetworkInterface,
+			NormalizedTags:         &o.NormalizedTags,
+			Protected:              &o.Protected,
+			Status:                 &o.Status,
+			StatusReason:           &o.StatusReason,
+			TrafficMirrorSessionId: &o.TrafficMirrorSessionId,
+			UpdateIdempotencyKey:   &o.UpdateIdempotencyKey,
+			UpdateTime:             &o.UpdateTime,
+			ZHash:                  &o.ZHash,
+			Zone:                   &o.Zone,
 		}
 	}
 
@@ -477,6 +483,8 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 			sp.Status = &(o.Status)
 		case "statusReason":
 			sp.StatusReason = &(o.StatusReason)
+		case "trafficMirrorSessionId":
+			sp.TrafficMirrorSessionId = &(o.TrafficMirrorSessionId)
 		case "updateIdempotencyKey":
 			sp.UpdateIdempotencyKey = &(o.UpdateIdempotencyKey)
 		case "updateTime":
@@ -548,6 +556,9 @@ func (o *PCFWAccountMirrorSourceState) Patch(sparse elemental.SparseIdentifiable
 	}
 	if so.StatusReason != nil {
 		o.StatusReason = *so.StatusReason
+	}
+	if so.TrafficMirrorSessionId != nil {
+		o.TrafficMirrorSessionId = *so.TrafficMirrorSessionId
 	}
 	if so.UpdateIdempotencyKey != nil {
 		o.UpdateIdempotencyKey = *so.UpdateIdempotencyKey
@@ -681,6 +692,8 @@ func (o *PCFWAccountMirrorSourceState) ValueForAttribute(name string) any {
 		return o.Status
 	case "statusReason":
 		return o.StatusReason
+	case "trafficMirrorSessionId":
+		return o.TrafficMirrorSessionId
 	case "updateIdempotencyKey":
 		return o.UpdateIdempotencyKey
 	case "updateTime":
@@ -896,6 +909,16 @@ mirroring.`,
 		Description:    `The status description of the traffic mirroring session.`,
 		Exposed:        true,
 		Name:           "statusReason",
+		Stored:         true,
+		Type:           "string",
+	},
+	"TrafficMirrorSessionId": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "trafficmirrorsessionid",
+		ConvertedName:  "TrafficMirrorSessionId",
+		Description:    `Traffic mirroring session ID of the created mirroring session.`,
+		Exposed:        true,
+		Name:           "trafficMirrorSessionId",
 		Stored:         true,
 		Type:           "string",
 	},
@@ -1122,6 +1145,16 @@ mirroring.`,
 		Stored:         true,
 		Type:           "string",
 	},
+	"trafficmirrorsessionid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "trafficmirrorsessionid",
+		ConvertedName:  "TrafficMirrorSessionId",
+		Description:    `Traffic mirroring session ID of the created mirroring session.`,
+		Exposed:        true,
+		Name:           "trafficMirrorSessionId",
+		Stored:         true,
+		Type:           "string",
+	},
 
 	"updatetime": {
 		AllowedChoices: []string{},
@@ -1257,6 +1290,9 @@ type SparsePCFWAccountMirrorSourceState struct {
 	// The status description of the traffic mirroring session.
 	StatusReason *string `json:"statusReason,omitempty" msgpack:"statusReason,omitempty" bson:"statusreason,omitempty" mapstructure:"statusReason,omitempty"`
 
+	// Traffic mirroring session ID of the created mirroring session.
+	TrafficMirrorSessionId *string `json:"trafficMirrorSessionId,omitempty" msgpack:"trafficMirrorSessionId,omitempty" bson:"trafficmirrorsessionid,omitempty" mapstructure:"trafficMirrorSessionId,omitempty"`
+
 	// internal idempotency key for a update operation.
 	UpdateIdempotencyKey *string `json:"-" msgpack:"-" bson:"updateidempotencykey,omitempty" mapstructure:"-,omitempty"`
 
@@ -1364,6 +1400,9 @@ func (o *SparsePCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.StatusReason != nil {
 		s.StatusReason = o.StatusReason
 	}
+	if o.TrafficMirrorSessionId != nil {
+		s.TrafficMirrorSessionId = o.TrafficMirrorSessionId
+	}
 	if o.UpdateIdempotencyKey != nil {
 		s.UpdateIdempotencyKey = o.UpdateIdempotencyKey
 	}
@@ -1443,6 +1482,9 @@ func (o *SparsePCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	if s.StatusReason != nil {
 		o.StatusReason = s.StatusReason
 	}
+	if s.TrafficMirrorSessionId != nil {
+		o.TrafficMirrorSessionId = s.TrafficMirrorSessionId
+	}
 	if s.UpdateIdempotencyKey != nil {
 		o.UpdateIdempotencyKey = s.UpdateIdempotencyKey
 	}
@@ -1519,6 +1561,9 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	}
 	if o.StatusReason != nil {
 		out.StatusReason = *o.StatusReason
+	}
+	if o.TrafficMirrorSessionId != nil {
+		out.TrafficMirrorSessionId = *o.TrafficMirrorSessionId
 	}
 	if o.UpdateIdempotencyKey != nil {
 		out.UpdateIdempotencyKey = *o.UpdateIdempotencyKey
@@ -1705,48 +1750,50 @@ func (o *SparsePCFWAccountMirrorSourceState) DeepCopyInto(out *SparsePCFWAccount
 }
 
 type mongoAttributesPCFWAccountMirrorSourceState struct {
-	ID                   bson.ObjectId                           `bson:"_id,omitempty"`
-	VPCID                string                                  `bson:"vpcid"`
-	Annotations          map[string][]string                     `bson:"annotations"`
-	AssociatedTags       []string                                `bson:"associatedtags"`
-	AutoScalingGroupName string                                  `bson:"autoscalinggroupname"`
-	AvailabilityZone     string                                  `bson:"availabilityzone"`
-	CreateIdempotencyKey string                                  `bson:"createidempotencykey"`
-	CreateTime           time.Time                               `bson:"createtime"`
-	Description          string                                  `bson:"description"`
-	InstanceID           string                                  `bson:"instanceid"`
-	Name                 string                                  `bson:"name"`
-	Namespace            string                                  `bson:"namespace"`
-	NetworkInterface     string                                  `bson:"networkinterface"`
-	NormalizedTags       []string                                `bson:"normalizedtags"`
-	Protected            bool                                    `bson:"protected"`
-	Status               PCFWAccountMirrorSourceStateStatusValue `bson:"status"`
-	StatusReason         string                                  `bson:"statusreason"`
-	UpdateIdempotencyKey string                                  `bson:"updateidempotencykey"`
-	UpdateTime           time.Time                               `bson:"updatetime"`
-	ZHash                int                                     `bson:"zhash"`
-	Zone                 int                                     `bson:"zone"`
+	ID                     bson.ObjectId                           `bson:"_id,omitempty"`
+	VPCID                  string                                  `bson:"vpcid"`
+	Annotations            map[string][]string                     `bson:"annotations"`
+	AssociatedTags         []string                                `bson:"associatedtags"`
+	AutoScalingGroupName   string                                  `bson:"autoscalinggroupname"`
+	AvailabilityZone       string                                  `bson:"availabilityzone"`
+	CreateIdempotencyKey   string                                  `bson:"createidempotencykey"`
+	CreateTime             time.Time                               `bson:"createtime"`
+	Description            string                                  `bson:"description"`
+	InstanceID             string                                  `bson:"instanceid"`
+	Name                   string                                  `bson:"name"`
+	Namespace              string                                  `bson:"namespace"`
+	NetworkInterface       string                                  `bson:"networkinterface"`
+	NormalizedTags         []string                                `bson:"normalizedtags"`
+	Protected              bool                                    `bson:"protected"`
+	Status                 PCFWAccountMirrorSourceStateStatusValue `bson:"status"`
+	StatusReason           string                                  `bson:"statusreason"`
+	TrafficMirrorSessionId string                                  `bson:"trafficmirrorsessionid"`
+	UpdateIdempotencyKey   string                                  `bson:"updateidempotencykey"`
+	UpdateTime             time.Time                               `bson:"updatetime"`
+	ZHash                  int                                     `bson:"zhash"`
+	Zone                   int                                     `bson:"zone"`
 }
 type mongoAttributesSparsePCFWAccountMirrorSourceState struct {
-	ID                   bson.ObjectId                            `bson:"_id,omitempty"`
-	VPCID                *string                                  `bson:"vpcid,omitempty"`
-	Annotations          *map[string][]string                     `bson:"annotations,omitempty"`
-	AssociatedTags       *[]string                                `bson:"associatedtags,omitempty"`
-	AutoScalingGroupName *string                                  `bson:"autoscalinggroupname,omitempty"`
-	AvailabilityZone     *string                                  `bson:"availabilityzone,omitempty"`
-	CreateIdempotencyKey *string                                  `bson:"createidempotencykey,omitempty"`
-	CreateTime           *time.Time                               `bson:"createtime,omitempty"`
-	Description          *string                                  `bson:"description,omitempty"`
-	InstanceID           *string                                  `bson:"instanceid,omitempty"`
-	Name                 *string                                  `bson:"name,omitempty"`
-	Namespace            *string                                  `bson:"namespace,omitempty"`
-	NetworkInterface     *string                                  `bson:"networkinterface,omitempty"`
-	NormalizedTags       *[]string                                `bson:"normalizedtags,omitempty"`
-	Protected            *bool                                    `bson:"protected,omitempty"`
-	Status               *PCFWAccountMirrorSourceStateStatusValue `bson:"status,omitempty"`
-	StatusReason         *string                                  `bson:"statusreason,omitempty"`
-	UpdateIdempotencyKey *string                                  `bson:"updateidempotencykey,omitempty"`
-	UpdateTime           *time.Time                               `bson:"updatetime,omitempty"`
-	ZHash                *int                                     `bson:"zhash,omitempty"`
-	Zone                 *int                                     `bson:"zone,omitempty"`
+	ID                     bson.ObjectId                            `bson:"_id,omitempty"`
+	VPCID                  *string                                  `bson:"vpcid,omitempty"`
+	Annotations            *map[string][]string                     `bson:"annotations,omitempty"`
+	AssociatedTags         *[]string                                `bson:"associatedtags,omitempty"`
+	AutoScalingGroupName   *string                                  `bson:"autoscalinggroupname,omitempty"`
+	AvailabilityZone       *string                                  `bson:"availabilityzone,omitempty"`
+	CreateIdempotencyKey   *string                                  `bson:"createidempotencykey,omitempty"`
+	CreateTime             *time.Time                               `bson:"createtime,omitempty"`
+	Description            *string                                  `bson:"description,omitempty"`
+	InstanceID             *string                                  `bson:"instanceid,omitempty"`
+	Name                   *string                                  `bson:"name,omitempty"`
+	Namespace              *string                                  `bson:"namespace,omitempty"`
+	NetworkInterface       *string                                  `bson:"networkinterface,omitempty"`
+	NormalizedTags         *[]string                                `bson:"normalizedtags,omitempty"`
+	Protected              *bool                                    `bson:"protected,omitempty"`
+	Status                 *PCFWAccountMirrorSourceStateStatusValue `bson:"status,omitempty"`
+	StatusReason           *string                                  `bson:"statusreason,omitempty"`
+	TrafficMirrorSessionId *string                                  `bson:"trafficmirrorsessionid,omitempty"`
+	UpdateIdempotencyKey   *string                                  `bson:"updateidempotencykey,omitempty"`
+	UpdateTime             *time.Time                               `bson:"updatetime,omitempty"`
+	ZHash                  *int                                     `bson:"zhash,omitempty"`
+	Zone                   *int                                     `bson:"zone,omitempty"`
 }

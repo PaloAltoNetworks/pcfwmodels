@@ -39,7 +39,7 @@
       ]
     },
     "destinationFromPort": {
-      "$defaultValue": 0,
+      "$defaultValue": -1,
       "anyOf": [
         {
           "type": "null"
@@ -50,7 +50,7 @@
       ]
     },
     "destinationToPort": {
-      "$defaultValue": 65535,
+      "$defaultValue": -1,
       "anyOf": [
         {
           "type": "null"
@@ -103,7 +103,7 @@
       ]
     },
     "sourceFromPort": {
-      "$defaultValue": 0,
+      "$defaultValue": -1,
       "anyOf": [
         {
           "type": "null"
@@ -114,7 +114,7 @@
       ]
     },
     "sourceToPort": {
-      "$defaultValue": 65535,
+      "$defaultValue": -1,
       "anyOf": [
         {
           "type": "null"

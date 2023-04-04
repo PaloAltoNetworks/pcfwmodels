@@ -194,6 +194,16 @@
         }
       ]
     },
+    "trafficMirrorSessionId": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "updateTime": {
       "$readOnly": true,
       "anyOf": [

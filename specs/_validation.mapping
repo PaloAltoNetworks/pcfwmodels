@@ -22,6 +22,10 @@ $fqdns:
   elemental:
     name: ValidateFQDNList
 
+$mirrorrules:
+  elemental:
+    name: ValidateMirrorRules
+
 $optionalcidrs:
   elemental:
     name: ValidateOptionalCIDRList
@@ -37,10 +41,6 @@ $optionalprotoports:
 $optionalurls:
   elemental:
     name: ValidateOptionalURLs
-
-$port:
-  elemental:
-    name: ValidatePort
 
 $protoport:
   elemental:

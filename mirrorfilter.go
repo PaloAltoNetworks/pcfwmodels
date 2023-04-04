@@ -117,6 +117,10 @@ func (o *MirrorFilter) Validate() error {
 		}
 	}
 
+	if err := ValidateMirrorRules("rules", o.Rules); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if len(requiredErrors) > 0 {
 		return requiredErrors
 	}

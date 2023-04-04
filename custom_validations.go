@@ -227,10 +227,30 @@ func ValidateOptionalProtoPorts(attribute string, protoports []string) error {
 	return nil
 }
 
-// ValidatePort validates a port number.
-func ValidatePort(attribute string, port int) error {
-	if port < 0 || port > 65535 {
-		return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Invalid port value %d.  Must be between 0:65535", attribute, port))
+// ValidateMirrorRules validates traffic mirror filter rules.
+func ValidateMirrorRules(attribute string, mirrorrules []*MirrorRule) error {
+	// Walk through each rule and validate it
+	for _, rule := range mirrorrules {
+		for _, port := range []int{rule.DestinationFromPort, rule.DestinationToPort, rule.SourceFromPort, rule.SourceToPort} {
+			if rule.Protocol == 6 || rule.Protocol == 17 {
+				// For TCP/UDP ports should be within 0:65535 range
+				if port < 0 || port > 65535 {
+					return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Invalid port value %d.  Must be between 0:65535", attribute, port))
+				}
+			} else if port != -1 {
+				// Ports shouldn't be specified if protocol is not TCP (6) or UDP (17)
+				return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Port %d not valid for protocol %d.", attribute, port, rule.Protocol))
+			}
+		}
+		if rule.DestinationFromPort > rule.DestinationToPort || rule.SourceFromPort > rule.SourceToPort {
+			return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Start port is greater than end port in the range", attribute))
+		}
+		if (rule.DestinationFromPort == -1 && rule.DestinationToPort != -1) || (rule.DestinationFromPort != -1 && rule.DestinationToPort == -1) {
+			return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Only one from destination start and end provided", attribute))
+		}
+		if (rule.SourceFromPort == -1 && rule.SourceToPort != -1) || (rule.SourceFromPort != -1 && rule.SourceToPort == -1) {
+			return makeErr(attribute, fmt.Sprintf("Attribute '%s' is an invalid.  Only one from source start and end provided", attribute))
+		}
 	}
 	return nil
 }

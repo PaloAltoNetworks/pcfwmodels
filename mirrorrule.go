@@ -77,12 +77,12 @@ func NewMirrorRule() *MirrorRule {
 	return &MirrorRule{
 		ModelVersion:        1,
 		DestinationCIDR:     "0.0.0.0/0",
-		DestinationFromPort: 0,
-		DestinationToPort:   65535,
+		DestinationFromPort: -1,
+		DestinationToPort:   -1,
 		Protocol:            -1,
 		SourceCIDR:          "0.0.0.0/0",
-		SourceFromPort:      0,
-		SourceToPort:        65535,
+		SourceFromPort:      -1,
+		SourceToPort:        -1,
 	}
 }
 
@@ -187,14 +187,6 @@ func (o *MirrorRule) Validate() error {
 		errors = errors.Append(err)
 	}
 
-	if err := ValidatePort("destinationFromPort", o.DestinationFromPort); err != nil {
-		errors = errors.Append(err)
-	}
-
-	if err := ValidatePort("destinationToPort", o.DestinationToPort); err != nil {
-		errors = errors.Append(err)
-	}
-
 	if err := elemental.ValidateRequiredString("direction", string(o.Direction)); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -212,14 +204,6 @@ func (o *MirrorRule) Validate() error {
 	}
 
 	if err := ValidateCIDR("sourceCIDR", o.SourceCIDR); err != nil {
-		errors = errors.Append(err)
-	}
-
-	if err := ValidatePort("sourceFromPort", o.SourceFromPort); err != nil {
-		errors = errors.Append(err)
-	}
-
-	if err := ValidatePort("sourceToPort", o.SourceToPort); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -322,6 +306,7 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "destinationfromport",
 		ConvertedName:  "DestinationFromPort",
+		DefaultValue:   -1,
 		Description:    `Destination port range start.`,
 		Exposed:        true,
 		Name:           "destinationFromPort",
@@ -332,7 +317,7 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "destinationtoport",
 		ConvertedName:  "DestinationToPort",
-		DefaultValue:   65535,
+		DefaultValue:   -1,
 		Description:    `Destination port range end.`,
 		Exposed:        true,
 		Name:           "destinationToPort",
@@ -388,6 +373,7 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "sourcefromport",
 		ConvertedName:  "SourceFromPort",
+		DefaultValue:   -1,
 		Description:    `Source port range start.`,
 		Exposed:        true,
 		Name:           "sourceFromPort",
@@ -398,7 +384,7 @@ var MirrorRuleAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "sourcetoport",
 		ConvertedName:  "SourceToPort",
-		DefaultValue:   65535,
+		DefaultValue:   -1,
 		Description:    `Source port range end.`,
 		Exposed:        true,
 		Name:           "sourceToPort",
@@ -445,6 +431,7 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{},
 		BSONFieldName:  "destinationfromport",
 		ConvertedName:  "DestinationFromPort",
+		DefaultValue:   -1,
 		Description:    `Destination port range start.`,
 		Exposed:        true,
 		Name:           "destinationFromPort",
@@ -455,7 +442,7 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{},
 		BSONFieldName:  "destinationtoport",
 		ConvertedName:  "DestinationToPort",
-		DefaultValue:   65535,
+		DefaultValue:   -1,
 		Description:    `Destination port range end.`,
 		Exposed:        true,
 		Name:           "destinationToPort",
@@ -511,6 +498,7 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{},
 		BSONFieldName:  "sourcefromport",
 		ConvertedName:  "SourceFromPort",
+		DefaultValue:   -1,
 		Description:    `Source port range start.`,
 		Exposed:        true,
 		Name:           "sourceFromPort",
@@ -521,7 +509,7 @@ var MirrorRuleLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{},
 		BSONFieldName:  "sourcetoport",
 		ConvertedName:  "SourceToPort",
-		DefaultValue:   65535,
+		DefaultValue:   -1,
 		Description:    `Source port range end.`,
 		Exposed:        true,
 		Name:           "sourceToPort",

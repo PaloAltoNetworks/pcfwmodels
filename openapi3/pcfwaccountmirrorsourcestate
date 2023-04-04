@@ -89,6 +89,10 @@
             "description": "The status description of the traffic mirroring session.",
             "type": "string"
           },
+          "trafficMirrorSessionId": {
+            "description": "Traffic mirroring session ID of the created mirroring session.",
+            "type": "string"
+          },
           "updateTime": {
             "description": "Last update date of the object.",
             "format": "date-time",

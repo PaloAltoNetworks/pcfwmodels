@@ -589,63 +589,6 @@ func TestValidateOptionalProtoPorts(t *testing.T) {
 	}
 }
 
-func TestValidatePort(t *testing.T) {
-	type args struct {
-		attribute string
-		port      int
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		// valid min value
-		{
-			"valid port min",
-			args{
-				"port",
-				0,
-			},
-			false,
-		},
-		// valid max value
-		{
-			"valid port max",
-			args{
-				"port",
-				65535,
-			},
-			false,
-		},
-		// invalid less than min
-		{
-			"smaller than min value",
-			args{
-				"port",
-				-1,
-			},
-			true,
-		},
-		// invalid more than max
-		{
-			"greater than max value",
-			args{
-				"port",
-				65536,
-			},
-			true,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := ValidatePort(tt.args.attribute, tt.args.port); (err != nil) != tt.wantErr {
-				t.Errorf("ValidatePort() test = %s error = %v, wantErr %v", tt.name, err, tt.wantErr)
-			}
-		})
-	}
-}
-
 func TestValidateAvailabilityZone(t *testing.T) {
 	type args struct {
 		attribute        string
@@ -835,6 +778,208 @@ func TestValidateVpcSubnetInfo(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := ValidateVpcSubnetInfo(tt.args.attribute, tt.args.VpcUsedSubnets); (err != nil) != tt.wantErr {
 				t.Errorf("ValidateVpcSubnetInfo() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateMirrorRules(t *testing.T) {
+	type args struct {
+		attribute   string
+		mirrorrules []*MirrorRule
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			// invalid ports since protocol is not tcp or udp
+			"invalid protocol for ports",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 0,
+						DestinationToPort:   650,
+						Protocol:            10,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"valid protocol but invalid ports",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 0,
+						DestinationToPort:   65536,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"invalid destination port range due to start being -1",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: -1,
+						DestinationToPort:   65536,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"invalid destination port range due to end being -1",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 1,
+						DestinationToPort:   -1,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"invalid source port range due to start being -1",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 1,
+						DestinationToPort:   65536,
+						Protocol:            17,
+						SourceFromPort:      -1,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"invalid source port range due to end being -1",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 1,
+						DestinationToPort:   10,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        -1,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"valid protocol but destination port start is greater than end",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 1000,
+						DestinationToPort:   10,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"valid protocol but source port start is greater than end",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 10,
+						DestinationToPort:   1000,
+						Protocol:            6,
+						SourceFromPort:      110,
+						SourceToPort:        10,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"one valid and one invalid rule",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 10,
+						DestinationToPort:   165,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+					{
+						DestinationFromPort: 100,
+						DestinationToPort:   0,
+						Protocol:            6,
+						SourceFromPort:      10,
+						SourceToPort:        100,
+					},
+				},
+			},
+			true,
+		},
+		{
+			"valid protocols and valid ports",
+			args{
+				"mirrorrules",
+				[]*MirrorRule{
+					{
+						DestinationFromPort: 10,
+						DestinationToPort:   165,
+						Protocol:            17,
+						SourceFromPort:      0,
+						SourceToPort:        10,
+					},
+					{
+						DestinationFromPort: 0,
+						DestinationToPort:   0,
+						Protocol:            6,
+						SourceFromPort:      10,
+						SourceToPort:        100,
+					},
+					{
+						DestinationFromPort: -1,
+						DestinationToPort:   -1,
+						Protocol:            100,
+						SourceFromPort:      -1,
+						SourceToPort:        -1,
+					},
+				},
+			},
+			false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateMirrorRules(tt.args.attribute, tt.args.mirrorrules); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateMirrorRules() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

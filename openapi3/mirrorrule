@@ -22,12 +22,12 @@
             "type": "string"
           },
           "destinationFromPort": {
-            "default": 0,
+            "default": -1,
             "description": "Destination port range start.",
             "type": "integer"
           },
           "destinationToPort": {
-            "default": 65535,
+            "default": -1,
             "description": "Destination port range end.",
             "type": "integer"
           },
@@ -55,12 +55,12 @@
             "type": "string"
           },
           "sourceFromPort": {
-            "default": 0,
+            "default": -1,
             "description": "Source port range start.",
             "type": "integer"
           },
           "sourceToPort": {
-            "default": 65535,
+            "default": -1,
             "description": "Source port range end.",
             "type": "integer"
           }
