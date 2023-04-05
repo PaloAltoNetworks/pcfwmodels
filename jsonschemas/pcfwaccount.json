@@ -31,6 +31,17 @@
         }
       ]
     },
+    "LogQueryExternalID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "NGFWCFTHash": {
       "$readOnly": true,
       "anyOf": [
@@ -76,6 +87,17 @@
       ]
     },
     "NGFWTenantID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "PCTenantIssuer": {
       "$readOnly": true,
       "anyOf": [
         {

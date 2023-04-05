@@ -14,6 +14,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "LogQueryExternalID": {
+            "description": "External ID used in logQueryRole.",
+            "readOnly": true,
+            "type": "string"
+          },
           "NGFWCFTHash": {
             "description": "NGFW cloud formation template hash.",
             "readOnly": true,
@@ -36,6 +41,11 @@
           },
           "NGFWTenantID": {
             "description": "NGFW tenant ID.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "PCTenantIssuer": {
+            "description": "Issuer for Prisma Cloud tenant (identifies the PC stack for IAM role usage).",
             "readOnly": true,
             "type": "string"
           },

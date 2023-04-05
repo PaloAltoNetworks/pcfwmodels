@@ -19,6 +19,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "PCTenantIssuer": {
+            "description": "Issuer for Prisma Cloud tenant (identifies the PC stack for IAM role usage).",
+            "readOnly": true,
+            "type": "string"
+          },
           "annotations": {
             "additionalProperties": {
               "items": {

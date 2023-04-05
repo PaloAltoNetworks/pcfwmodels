@@ -45,6 +45,17 @@
         }
       ]
     },
+    "PCTenantIssuer": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "annotations": {
       "anyOf": [
         {
