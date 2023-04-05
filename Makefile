@@ -101,6 +101,11 @@ codecgen:
 	rm -f values_codecgen.go ; codecgen -o values_codecgen.go *.go;
 	cd types && rm -f values_codecgen.go ; codecgen -o values_codecgen.go *.go;
 
+update-spectools: setup
 setup:
-	go install go.aporeto.io/regolithe/cmd/rego@52d85a5bef8391d0de2b74cb6226dd1281389b9d
-	go install go.aporeto.io/elemental/cmd/elegen@master
+	@ if [ -x $$APO_ROOT/bin/update-spectools ]; then \
+			$$APO_ROOT/bin/update-spectools ; \
+	else \
+		go install go.aporeto.io/regolithe/cmd/rego@master ; \
+		go install go.aporeto.io/elemental/cmd/elegen@master ; \
+	fi
