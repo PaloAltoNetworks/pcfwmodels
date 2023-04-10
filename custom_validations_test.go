@@ -976,10 +976,196 @@ func TestValidateMirrorRules(t *testing.T) {
 			false,
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := ValidateMirrorRules(tt.args.attribute, tt.args.mirrorrules); (err != nil) != tt.wantErr {
 				t.Errorf("ValidateMirrorRules() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateAthenaWorkGroup(t *testing.T) {
+	type args struct {
+		attribute       string
+		athenaWorkGroup string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty AthenaWorkGroup is invalid",
+			args: args{
+				"AthenaWorkGroup",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AthenaWorkGroup is to long",
+			args: args{
+				"AthenaWorkGroup",
+				"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AthenaWorkGroup is valid",
+			args: args{
+				"AthenaWorkGroup",
+				"This@is-valid-",
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateAthenaWorkGroup(tt.args.attribute, tt.args.athenaWorkGroup); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateAthenaWorkGroup() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateLogResourcePrefix(t *testing.T) {
+	type args struct {
+		attribute         string
+		logResourcePrefix string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty LogResourcePrefix is invalid",
+			args: args{
+				"LogResourcePrefix",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "LogResourcePrefix is to long",
+			args: args{
+				"LogResourcePrefix",
+				"aaaaaaaaaa",
+			},
+			wantErr: true,
+		},
+		{
+			name: "LogResourcePrefix is valid",
+			args: args{
+				"LogResourcePrefix",
+				"abcdefgh",
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateLogResourcePrefix(tt.args.attribute, tt.args.logResourcePrefix); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateLogResourcePrefix() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateRoleARN(t *testing.T) {
+	type args struct {
+		attribute string
+		roleARN   string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty RoleARN is invalid",
+			args: args{
+				"RoleARN",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AWSAccountID in RoleARN is to long",
+			args: args{
+				"RoleARN",
+				"arn:aws:iam::0197577444913:role/CustomerManagedEndpoint",
+			},
+			wantErr: true,
+		},
+		{
+			name: "RoleARN is valid",
+			args: args{
+				"RoleARN",
+				"arn:aws:iam::197577444913:role/CustomerManagedEndpoint",
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateRoleARN(tt.args.attribute, tt.args.roleARN); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateRoleARN() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateAWSAccountID(t *testing.T) {
+	type args struct {
+		attribute    string
+		AWSAccountID string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty AWSAccountID is invalid",
+			args: args{
+				"AWSAccountID",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AWSAccountID is to short",
+			args: args{
+				"AWSAccountID",
+				"019757744",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AWSAccountID is to long",
+			args: args{
+				"AWSAccountID",
+				"0197577444913",
+			},
+			wantErr: true,
+		},
+		{
+			name: "AWSAccountID is valid",
+			args: args{
+				"AWSAccountID",
+				"197577444913",
+			},
+			wantErr: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateAWSAccountID(tt.args.attribute, tt.args.AWSAccountID); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateAWSAccountID() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

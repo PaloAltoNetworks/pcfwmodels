@@ -696,12 +696,28 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateMaximumLength("athenaWorkgroup", o.AthenaWorkgroup, 127, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateAthenaWorkGroup("athenaWorkgroup", o.AthenaWorkgroup); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := ValidateRoleARN("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("endpointRoleARN", o.EndpointRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateRoleARN("endpointRoleARN", o.EndpointRoleARN); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("logDestination", o.LogDestination); err != nil {
@@ -720,8 +736,16 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := ValidateRoleARN("logPushRoleARN", o.LogPushRoleARN); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("logQueryRoleARN", o.LogQueryRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateRoleARN("logQueryRoleARN", o.LogQueryRoleARN); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
@@ -732,8 +756,24 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateMaximumLength("logResourcePrefix", o.LogResourcePrefix, 8, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateLogResourcePrefix("logResourcePrefix", o.LogResourcePrefix); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("primaryAWSAccountID", o.PrimaryAWSAccountID); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateMaximumLength("primaryAWSAccountID", o.PrimaryAWSAccountID, 12, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateAWSAccountID("primaryAWSAccountID", o.PrimaryAWSAccountID); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("primaryAccountNamespace", o.PrimaryAccountNamespace); err != nil {
@@ -927,6 +967,7 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
+		MaxLength:      127,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
@@ -1035,6 +1076,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		DefaultValue:   "pcfw",
 		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
+		MaxLength:      8,
 		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,
@@ -1079,6 +1121,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		ConvertedName:  "PrimaryAWSAccountID",
 		Description:    `The primary AWS Account ID.`,
 		Exposed:        true,
+		MaxLength:      12,
 		Name:           "primaryAWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1236,6 +1279,7 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
+		MaxLength:      127,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
@@ -1344,6 +1388,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		DefaultValue:   "pcfw",
 		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
+		MaxLength:      8,
 		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,
@@ -1388,6 +1433,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		ConvertedName:  "PrimaryAWSAccountID",
 		Description:    `The primary AWS Account ID.`,
 		Exposed:        true,
+		MaxLength:      12,
 		Name:           "primaryAWSAccountID",
 		Required:       true,
 		Stored:         true,

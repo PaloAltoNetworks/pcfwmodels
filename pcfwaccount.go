@@ -719,6 +719,14 @@ func (o *PCFWAccount) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateMaximumLength("AWSAccountID", o.AWSAccountID, 12, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateAWSAccountID("AWSAccountID", o.AWSAccountID); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := ValidateTagsWithoutReservedPrefixes("associatedTags", o.AssociatedTags); err != nil {
 		errors = errors.Append(err)
 	}
@@ -727,12 +735,28 @@ func (o *PCFWAccount) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateMaximumLength("athenaWorkgroup", o.AthenaWorkgroup, 127, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateAthenaWorkGroup("athenaWorkgroup", o.AthenaWorkgroup); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := ValidateRoleARN("decryptionRoleARN", o.DecryptionRoleARN); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("endpointRoleARN", o.EndpointRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateRoleARN("endpointRoleARN", o.EndpointRoleARN); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("logDestination", o.LogDestination); err != nil {
@@ -751,8 +775,16 @@ func (o *PCFWAccount) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := ValidateRoleARN("logPushRoleARN", o.LogPushRoleARN); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("logQueryRoleARN", o.LogQueryRoleARN); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := ValidateRoleARN("logQueryRoleARN", o.LogQueryRoleARN); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateRequiredString("logRegion", o.LogRegion); err != nil {
@@ -761,6 +793,14 @@ func (o *PCFWAccount) Validate() error {
 
 	if err := elemental.ValidateRequiredString("logResourcePrefix", o.LogResourcePrefix); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateMaximumLength("logResourcePrefix", o.LogResourcePrefix, 8, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateLogResourcePrefix("logResourcePrefix", o.LogResourcePrefix); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := elemental.ValidateStringInList("status", string(o.Status), []string{"Creating", "Pending", "Success", "Failed", "Deleting"}, true); err != nil {
@@ -878,6 +918,7 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		ConvertedName:  "AWSAccountID",
 		Description:    `AWS Account ID.`,
 		Exposed:        true,
+		MaxLength:      12,
 		Name:           "AWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1015,6 +1056,7 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
+		MaxLength:      127,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
@@ -1123,6 +1165,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		DefaultValue:   "pcfw",
 		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
+		MaxLength:      8,
 		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,
@@ -1235,6 +1278,7 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		ConvertedName:  "AWSAccountID",
 		Description:    `AWS Account ID.`,
 		Exposed:        true,
+		MaxLength:      12,
 		Name:           "AWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1372,6 +1416,7 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
+		MaxLength:      127,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
@@ -1480,6 +1525,7 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		DefaultValue:   "pcfw",
 		Description:    `Prefix to use for logging resources.`,
 		Exposed:        true,
+		MaxLength:      8,
 		Name:           "logResourcePrefix",
 		Required:       true,
 		Stored:         true,

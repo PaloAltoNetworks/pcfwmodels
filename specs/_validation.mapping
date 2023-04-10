@@ -1,3 +1,7 @@
+$athenaworkgroup:
+  elemental:
+    name: ValidateAthenaWorkGroup
+
 $availabilityzone:
   elemental:
     name: ValidateAvailabilityZone
@@ -5,6 +9,10 @@ $availabilityzone:
 $awsNetworkServicesFilter:
   elemental:
     name: ValidateAwsNetworkServices
+
+$awsaccount:
+  elemental:
+    name: ValidateAWSAccountID
 
 $cidr:
   elemental:
@@ -21,6 +29,10 @@ $fqdn:
 $fqdns:
   elemental:
     name: ValidateFQDNList
+
+$logresourceprefix:
+  elemental:
+    name: ValidateLogResourcePrefix
 
 $mirrorrules:
   elemental:
@@ -45,6 +57,10 @@ $optionalurls:
 $protoport:
   elemental:
     name: ValidateProtoPort
+
+$rolearn:
+  elemental:
+    name: ValidateRoleARN
 
 $tagsWithoutReservedPrefixes:
   elemental:

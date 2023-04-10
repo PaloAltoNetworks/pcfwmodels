@@ -320,3 +320,61 @@ func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) er
 	}
 	return nil
 }
+
+// athenaWorkGroupRegex is the regular expression to check the format of the athenaWorkGroup.
+var athenaWorkGroupRegex = regexp.MustCompile(`[0-9a-zA-Z_@\-]`)
+
+// ValidateAthenaWorkGroup validates an athena workgroup
+func ValidateAthenaWorkGroup(attribute string, athenaWorkGroup string) error {
+
+	if !athenaWorkGroupRegex.MatchString(athenaWorkGroup) {
+		return makeErr(attribute, fmt.Sprintf("'%s' must only contain a-z, A-Z, 0-9, _(underscore), @(at sign) and -(hyphen)", athenaWorkGroup))
+	}
+
+	if len(athenaWorkGroup) > 127 {
+		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 127 characters", athenaWorkGroup))
+	}
+
+	return nil
+}
+
+// logResourcePrefixRegex is the regular expression to check the format of the logResourcePrefix.
+var logResourcePrefixRegex = regexp.MustCompile(`[a-z]`)
+
+// ValidateLogResourcePrefix validates a log resource prefix
+func ValidateLogResourcePrefix(attribute string, logResourcePrefix string) error {
+
+	if !logResourcePrefixRegex.MatchString(logResourcePrefix) {
+		return makeErr(attribute, fmt.Sprintf("'%s' must only contain a-z", logResourcePrefix))
+	}
+
+	if len(logResourcePrefix) > 8 {
+		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 8 characters", logResourcePrefix))
+	}
+
+	return nil
+}
+
+// roleARNRegex is the regular expression to check the format of a roleARN.
+var roleARNRegex = regexp.MustCompile(`arn:aws:iam::[0-9]{12}:role\/.+`)
+
+// ValidateRoleARN validates a role ARN
+func ValidateRoleARN(attribute string, roleARN string) error {
+
+	if !roleARNRegex.MatchString(roleARN) {
+		return makeErr(attribute, fmt.Sprintf("'%s' is an invalid role ARN", roleARN))
+	}
+	return nil
+}
+
+// AWSAccountIDRegex is the regular expression to check the format of an AWS Account ID.
+var AWSAccountIDRegex = regexp.MustCompile(`^[0-9]{12}$`)
+
+// ValidateAWSAccountID validates an AWS account ID
+func ValidateAWSAccountID(attribute string, AWSAccountID string) error {
+
+	if !AWSAccountIDRegex.MatchString(AWSAccountID) {
+		return makeErr(attribute, fmt.Sprintf("'%s' is an invalid AWS Account ID", AWSAccountID))
+	}
+	return nil
+}

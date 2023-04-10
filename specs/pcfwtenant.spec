@@ -52,6 +52,9 @@ attributes:
     stored: true
     required: true
     default_value: logs_workgroup
+    max_length: 127
+    validations:
+    - $athenaworkgroup
 
   - name: decryptionRoleARN
     description: AWS rulestack decryption role ARN.
@@ -60,6 +63,8 @@ attributes:
     stored: true
     required: true
     example_value: arn:aws:iam::640574671726:role/DecryptionRole
+    validations:
+    - $rolearn
 
   - name: endpointRoleARN
     description: AWS endpoint role ARN.
@@ -68,6 +73,8 @@ attributes:
     stored: true
     required: true
     example_value: arn:aws:iam::640574671726:role/CustomerManagedEndpoint
+    validations:
+    - $rolearn
 
   - name: logDestination
     description: |-
@@ -100,6 +107,8 @@ attributes:
     stored: true
     required: true
     example_value: arn:aws:iam::1234567890:role/NGFWLogPushRole
+    validations:
+    - $rolearn
 
   - name: logQueryRoleARN
     description: ARN of AWS role that allows the PCFW to query logs.
@@ -108,6 +117,8 @@ attributes:
     stored: true
     required: true
     example_value: arn:aws:iam::1234567890:role/PCFWLogQueryRole
+    validations:
+    - $rolearn
 
   - name: logRegion
     description: The AWS region where logging data lives.
@@ -124,6 +135,9 @@ attributes:
     stored: true
     required: true
     default_value: pcfw
+    max_length: 8
+    validations:
+    - $logresourceprefix
 
   - name: offboardingTimestamp
     description: The timestamp when offboarding pending started.
@@ -137,6 +151,9 @@ attributes:
     stored: true
     required: true
     example_value: 640574671726
+    max_length: 12
+    validations:
+    - $awsaccount
 
   - name: primaryAccountNamespace
     description: The namespace where the primary pcfwaccount will be created.

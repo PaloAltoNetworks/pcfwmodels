@@ -16,6 +16,7 @@
       "$required": true,
       "anyOf": [
         {
+          "maxLength": 12,
           "type": "string"
         }
       ]
@@ -142,6 +143,7 @@
       "$required": true,
       "anyOf": [
         {
+          "maxLength": 127,
           "type": "string"
         }
       ]
@@ -225,6 +227,7 @@
       "$required": true,
       "anyOf": [
         {
+          "maxLength": 8,
           "type": "string"
         }
       ]

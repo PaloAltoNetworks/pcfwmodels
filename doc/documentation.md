@@ -4083,7 +4083,7 @@ retries updating the role ARNs with NGFW.
 
 #### Attributes
 
-##### `AWSAccountID` [`required`]
+##### `AWSAccountID` [`required`,`max_length=12`]
 
 Type: `string`
 
@@ -4149,7 +4149,7 @@ Type: `[]string`
 
 List of tags attached to an entity.
 
-##### `athenaWorkgroup` [`required`]
+##### `athenaWorkgroup` [`required`,`max_length=127`]
 
 Type: `string`
 
@@ -4217,7 +4217,7 @@ Type: `string`
 
 The AWS region where logging data lives.
 
-##### `logResourcePrefix` [`required`]
+##### `logResourcePrefix` [`required`,`max_length=8`]
 
 Type: `string`
 
@@ -4354,7 +4354,7 @@ Type: `[]string`
 
 List of tags attached to an entity.
 
-##### `athenaWorkgroup` [`required`]
+##### `athenaWorkgroup` [`required`,`max_length=127`]
 
 Type: `string`
 
@@ -4422,7 +4422,7 @@ Type: `string`
 
 The AWS region where logging data lives.
 
-##### `logResourcePrefix` [`required`]
+##### `logResourcePrefix` [`required`,`max_length=8`]
 
 Type: `string`
 
@@ -4446,7 +4446,7 @@ Type: `[]string`
 
 Contains the list of normalized tags of the entities.
 
-##### `primaryAWSAccountID` [`required`]
+##### `primaryAWSAccountID` [`required`,`max_length=12`]
 
 Type: `string`
 
