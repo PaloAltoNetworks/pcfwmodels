@@ -91,6 +91,7 @@
       ]
     },
     "endpointAbsent": {
+      "$readOnly": true,
       "anyOf": [
         {
           "type": "null"

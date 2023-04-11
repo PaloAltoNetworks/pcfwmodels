@@ -738,6 +738,7 @@ var PCFWAccountMirrorSourceAttributesMap = map[string]elemental.AttributeSpecifi
 		Description:    `Whether or not any required endpoint for any VPC is absent.`,
 		Exposed:        true,
 		Name:           "endpointAbsent",
+		ReadOnly:       true,
 		Type:           "boolean",
 	},
 	"Filter": {
@@ -932,6 +933,7 @@ var PCFWAccountMirrorSourceLowerCaseAttributesMap = map[string]elemental.Attribu
 		Description:    `Whether or not any required endpoint for any VPC is absent.`,
 		Exposed:        true,
 		Name:           "endpointAbsent",
+		ReadOnly:       true,
 		Type:           "boolean",
 	},
 	"filter": {

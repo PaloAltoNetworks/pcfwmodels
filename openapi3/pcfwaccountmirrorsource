@@ -45,6 +45,7 @@
           },
           "endpointAbsent": {
             "description": "Whether or not any required endpoint for any VPC is absent.",
+            "readOnly": true,
             "type": "boolean"
           },
           "filter": {
