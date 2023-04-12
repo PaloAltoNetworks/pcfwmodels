@@ -724,6 +724,10 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := ValidateLogDestination("logDestination", o.LogDestination); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("logDestinationType", string(o.LogDestinationType)); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}

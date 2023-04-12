@@ -1020,6 +1020,14 @@ func TestValidateAthenaWorkGroup(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name: "AthenaWorkGroup is not valid",
+			args: args{
+				"AthenaWorkGroup",
+				"This@is-not#valid-",
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -1064,6 +1072,14 @@ func TestValidateLogResourcePrefix(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name: "LogResourcePrefix is not valid",
+			args: args{
+				"LogResourcePrefix",
+				"aBcDeFgH",
+			},
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -1107,6 +1123,14 @@ func TestValidateRoleARN(t *testing.T) {
 				"arn:aws:iam::197577444913:role/CustomerManagedEndpoint",
 			},
 			wantErr: false,
+		},
+		{
+			name: "RoleARN is not valid",
+			args: args{
+				"RoleARN",
+				"xyzarn:aws:iam::197577444913:role/CustomerManagedEndpoint",
+			},
+			wantErr: true,
 		},
 	}
 	for _, tt := range tests {
@@ -1166,6 +1190,66 @@ func TestValidateAWSAccountID(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if err := ValidateAWSAccountID(tt.args.attribute, tt.args.AWSAccountID); (err != nil) != tt.wantErr {
 				t.Errorf("ValidateAWSAccountID() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestValidateLogDestination(t *testing.T) {
+	type args struct {
+		attribute      string
+		logDestination string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty LogDestination is invalid",
+			args: args{
+				"LogDestination",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "LogDestination is to long",
+			args: args{
+				"LogDestination",
+				"12345678901234567890123456789012345",
+			},
+			wantErr: true,
+		},
+		{
+			name: "LogDestination is valid",
+			args: args{
+				"LogDestination",
+				"this-1-is-valid-",
+			},
+			wantErr: false,
+		},
+		{
+			name: "LogDestination has uppercase",
+			args: args{
+				"LogDestination",
+				"this-1-is-NOT-valid",
+			},
+			wantErr: true,
+		},
+		{
+			name: "LogDestination has underscore",
+			args: args{
+				"LogDestination",
+				"this-1-is_also_invalid",
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateLogDestination(tt.args.attribute, tt.args.logDestination); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateLogDestination() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

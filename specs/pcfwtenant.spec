@@ -86,6 +86,8 @@ attributes:
     stored: true
     required: true
     example_value: logs
+    validations:
+    - $logdestination
 
   - name: logDestinationType
     description: Destination type for log output.

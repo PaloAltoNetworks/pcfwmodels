@@ -321,8 +321,25 @@ func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) er
 	return nil
 }
 
+// logDestinationRegex is the regular expression to check the format of the logDestination.
+var logDestinationRegex = regexp.MustCompile(`^[0-9a-z\-]+$`)
+
+// ValidateLogDestination validates a Log Destination string, used in constructing an S3 bucket name
+func ValidateLogDestination(attribute string, logDestination string) error {
+
+	if !logDestinationRegex.MatchString(logDestination) {
+		return makeErr(attribute, fmt.Sprintf("'%s' must only contain only lowercase alphanumeric characters and hyphens", logDestination))
+	}
+
+	if len(logDestination) > 30 {
+		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 30 characters", logDestination))
+	}
+
+	return nil
+}
+
 // athenaWorkGroupRegex is the regular expression to check the format of the athenaWorkGroup.
-var athenaWorkGroupRegex = regexp.MustCompile(`[0-9a-zA-Z_@\-]`)
+var athenaWorkGroupRegex = regexp.MustCompile(`^[0-9a-zA-Z_@\-]+$`)
 
 // ValidateAthenaWorkGroup validates an athena workgroup
 func ValidateAthenaWorkGroup(attribute string, athenaWorkGroup string) error {
@@ -339,7 +356,7 @@ func ValidateAthenaWorkGroup(attribute string, athenaWorkGroup string) error {
 }
 
 // logResourcePrefixRegex is the regular expression to check the format of the logResourcePrefix.
-var logResourcePrefixRegex = regexp.MustCompile(`[a-z]`)
+var logResourcePrefixRegex = regexp.MustCompile(`^[a-z]+$`)
 
 // ValidateLogResourcePrefix validates a log resource prefix
 func ValidateLogResourcePrefix(attribute string, logResourcePrefix string) error {
@@ -356,7 +373,7 @@ func ValidateLogResourcePrefix(attribute string, logResourcePrefix string) error
 }
 
 // roleARNRegex is the regular expression to check the format of a roleARN.
-var roleARNRegex = regexp.MustCompile(`arn:aws:iam::[0-9]{12}:role\/.+`)
+var roleARNRegex = regexp.MustCompile(`^arn:aws:iam::[0-9]{12}:role\/.+$`)
 
 // ValidateRoleARN validates a role ARN
 func ValidateRoleARN(attribute string, roleARN string) error {

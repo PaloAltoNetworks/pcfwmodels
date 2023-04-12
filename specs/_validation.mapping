@@ -30,6 +30,10 @@ $fqdns:
   elemental:
     name: ValidateFQDNList
 
+$logdestination:
+  elemental:
+    name: ValidateLogDestination
+
 $logresourceprefix:
   elemental:
     name: ValidateLogResourcePrefix
