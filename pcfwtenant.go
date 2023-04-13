@@ -724,6 +724,10 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
+	if err := elemental.ValidateMaximumLength("logDestination", o.LogDestination, 30, false); err != nil {
+		errors = errors.Append(err)
+	}
+
 	if err := ValidateLogDestination("logDestination", o.LogDestination); err != nil {
 		errors = errors.Append(err)
 	}
@@ -770,10 +774,6 @@ func (o *PCFWTenant) Validate() error {
 
 	if err := elemental.ValidateRequiredString("primaryAWSAccountID", o.PrimaryAWSAccountID); err != nil {
 		requiredErrors = requiredErrors.Append(err)
-	}
-
-	if err := elemental.ValidateMaximumLength("primaryAWSAccountID", o.PrimaryAWSAccountID, 12, false); err != nil {
-		errors = errors.Append(err)
 	}
 
 	if err := ValidateAWSAccountID("primaryAWSAccountID", o.PrimaryAWSAccountID); err != nil {
@@ -1022,11 +1022,12 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		Description: `The log destination for logging. The value will be converted to lower case and
 have the aws account id and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
-		Exposed:  true,
-		Name:     "logDestination",
-		Required: true,
-		Stored:   true,
-		Type:     "string",
+		Exposed:   true,
+		MaxLength: 30,
+		Name:      "logDestination",
+		Required:  true,
+		Stored:    true,
+		Type:      "string",
 	},
 	"LogDestinationType": {
 		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
@@ -1125,7 +1126,6 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		ConvertedName:  "PrimaryAWSAccountID",
 		Description:    `The primary AWS Account ID.`,
 		Exposed:        true,
-		MaxLength:      12,
 		Name:           "primaryAWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1334,11 +1334,12 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		Description: `The log destination for logging. The value will be converted to lower case and
 have the aws account id and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
-		Exposed:  true,
-		Name:     "logDestination",
-		Required: true,
-		Stored:   true,
-		Type:     "string",
+		Exposed:   true,
+		MaxLength: 30,
+		Name:      "logDestination",
+		Required:  true,
+		Stored:    true,
+		Type:      "string",
 	},
 	"logdestinationtype": {
 		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
@@ -1437,7 +1438,6 @@ logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
 		ConvertedName:  "PrimaryAWSAccountID",
 		Description:    `The primary AWS Account ID.`,
 		Exposed:        true,
-		MaxLength:      12,
 		Name:           "primaryAWSAccountID",
 		Required:       true,
 		Stored:         true,

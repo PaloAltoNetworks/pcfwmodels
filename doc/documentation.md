@@ -4083,7 +4083,7 @@ retries updating the role ARNs with NGFW.
 
 #### Attributes
 
-##### `AWSAccountID` [`required`,`max_length=12`]
+##### `AWSAccountID` [`required`]
 
 Type: `string`
 
@@ -4179,7 +4179,7 @@ Type: `string`
 
 AWS endpoint role ARN.
 
-##### `logDestination` [`required`]
+##### `logDestination` [`required`,`max_length=30`]
 
 Type: `string`
 
@@ -4384,7 +4384,7 @@ Type: `string`
 
 AWS endpoint role ARN.
 
-##### `logDestination` [`required`]
+##### `logDestination` [`required`,`max_length=30`]
 
 Type: `string`
 
@@ -4446,7 +4446,7 @@ Type: `[]string`
 
 Contains the list of normalized tags of the entities.
 
-##### `primaryAWSAccountID` [`required`,`max_length=12`]
+##### `primaryAWSAccountID` [`required`]
 
 Type: `string`
 

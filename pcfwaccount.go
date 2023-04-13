@@ -719,10 +719,6 @@ func (o *PCFWAccount) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateMaximumLength("AWSAccountID", o.AWSAccountID, 12, false); err != nil {
-		errors = errors.Append(err)
-	}
-
 	if err := ValidateAWSAccountID("AWSAccountID", o.AWSAccountID); err != nil {
 		errors = errors.Append(err)
 	}
@@ -761,6 +757,10 @@ func (o *PCFWAccount) Validate() error {
 
 	if err := elemental.ValidateRequiredString("logDestination", o.LogDestination); err != nil {
 		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateMaximumLength("logDestination", o.LogDestination, 30, false); err != nil {
+		errors = errors.Append(err)
 	}
 
 	if err := ValidateLogDestination("logDestination", o.LogDestination); err != nil {
@@ -922,7 +922,6 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		ConvertedName:  "AWSAccountID",
 		Description:    `AWS Account ID.`,
 		Exposed:        true,
-		MaxLength:      12,
 		Name:           "AWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1111,11 +1110,12 @@ var PCFWAccountAttributesMap = map[string]elemental.AttributeSpecification{
 		Description: `The log destination for logging. The value will be converted to lower case and
 have the aws account id and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
-		Exposed:  true,
-		Name:     "logDestination",
-		Required: true,
-		Stored:   true,
-		Type:     "string",
+		Exposed:   true,
+		MaxLength: 30,
+		Name:      "logDestination",
+		Required:  true,
+		Stored:    true,
+		Type:      "string",
 	},
 	"LogDestinationType": {
 		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},
@@ -1282,7 +1282,6 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		ConvertedName:  "AWSAccountID",
 		Description:    `AWS Account ID.`,
 		Exposed:        true,
-		MaxLength:      12,
 		Name:           "AWSAccountID",
 		Required:       true,
 		Stored:         true,
@@ -1471,11 +1470,12 @@ var PCFWAccountLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Description: `The log destination for logging. The value will be converted to lower case and
 have the aws account id and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.`,
-		Exposed:  true,
-		Name:     "logDestination",
-		Required: true,
-		Stored:   true,
-		Type:     "string",
+		Exposed:   true,
+		MaxLength: 30,
+		Name:      "logDestination",
+		Required:  true,
+		Stored:    true,
+		Type:      "string",
 	},
 	"logdestinationtype": {
 		AllowedChoices: []string{"Prisma", "S3", "Cloudwatch", "KinesisFirehose"},

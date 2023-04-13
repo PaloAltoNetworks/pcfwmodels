@@ -331,10 +331,6 @@ func ValidateLogDestination(attribute string, logDestination string) error {
 		return makeErr(attribute, fmt.Sprintf("'%s' must only contain only lowercase alphanumeric characters and hyphens", logDestination))
 	}
 
-	if len(logDestination) > 30 {
-		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 30 characters", logDestination))
-	}
-
 	return nil
 }
 
@@ -348,10 +344,6 @@ func ValidateAthenaWorkGroup(attribute string, athenaWorkGroup string) error {
 		return makeErr(attribute, fmt.Sprintf("'%s' must only contain a-z, A-Z, 0-9, _(underscore), @(at sign) and -(hyphen)", athenaWorkGroup))
 	}
 
-	if len(athenaWorkGroup) > 127 {
-		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 127 characters", athenaWorkGroup))
-	}
-
 	return nil
 }
 
@@ -363,10 +355,6 @@ func ValidateLogResourcePrefix(attribute string, logResourcePrefix string) error
 
 	if !logResourcePrefixRegex.MatchString(logResourcePrefix) {
 		return makeErr(attribute, fmt.Sprintf("'%s' must only contain a-z", logResourcePrefix))
-	}
-
-	if len(logResourcePrefix) > 8 {
-		return makeErr(attribute, fmt.Sprintf("'%s' must be less than or equal to 8 characters", logResourcePrefix))
 	}
 
 	return nil

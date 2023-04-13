@@ -29,7 +29,6 @@ attributes:
     stored: true
     required: true
     example_value: 640574671726
-    max_length: 12
     validations:
     - $awsaccount
 
@@ -131,6 +130,7 @@ attributes:
     stored: true
     required: true
     example_value: logs
+    max_length: 30
     validations:
     - $logdestination
 

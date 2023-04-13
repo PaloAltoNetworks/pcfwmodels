@@ -1005,14 +1005,6 @@ func TestValidateAthenaWorkGroup(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "AthenaWorkGroup is to long",
-			args: args{
-				"AthenaWorkGroup",
-				"111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
-			},
-			wantErr: true,
-		},
-		{
 			name: "AthenaWorkGroup is valid",
 			args: args{
 				"AthenaWorkGroup",
@@ -1053,14 +1045,6 @@ func TestValidateLogResourcePrefix(t *testing.T) {
 			args: args{
 				"LogResourcePrefix",
 				"",
-			},
-			wantErr: true,
-		},
-		{
-			name: "LogResourcePrefix is to long",
-			args: args{
-				"LogResourcePrefix",
-				"aaaaaaaaaa",
 			},
 			wantErr: true,
 		},
@@ -1210,14 +1194,6 @@ func TestValidateLogDestination(t *testing.T) {
 			args: args{
 				"LogDestination",
 				"",
-			},
-			wantErr: true,
-		},
-		{
-			name: "LogDestination is to long",
-			args: args{
-				"LogDestination",
-				"12345678901234567890123456789012345",
 			},
 			wantErr: true,
 		},
