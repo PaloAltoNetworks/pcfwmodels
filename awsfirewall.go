@@ -753,7 +753,11 @@ func (o *AWSFirewall) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateMaximumLength("name", o.Name, 256, false); err != nil {
+	if err := elemental.ValidateMaximumLength("name", o.Name, 30, false); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := ValidateNameStrict("name", o.Name); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -1037,7 +1041,7 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		Exposed:        true,
 		Filterable:     true,
 		Getter:         true,
-		MaxLength:      256,
+		MaxLength:      30,
 		Name:           "name",
 		Orderable:      true,
 		Required:       true,
@@ -1322,7 +1326,7 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Exposed:        true,
 		Filterable:     true,
 		Getter:         true,
-		MaxLength:      256,
+		MaxLength:      30,
 		Name:           "name",
 		Orderable:      true,
 		Required:       true,

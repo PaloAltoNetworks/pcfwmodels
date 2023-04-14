@@ -1230,3 +1230,47 @@ func TestValidateLogDestination(t *testing.T) {
 		})
 	}
 }
+
+func TestValidateNameStrict(t *testing.T) {
+	type args struct {
+		attribute string
+		name      string
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "empty Name is invalid",
+			args: args{
+				"Name",
+				"",
+			},
+			wantErr: true,
+		},
+		{
+			name: "Name is valid",
+			args: args{
+				"Name",
+				"this-1-is_VERY_valid",
+			},
+			wantErr: false,
+		},
+		{
+			name: "Name has odd character",
+			args: args{
+				"Name",
+				"this-1-is-NOT-v@lid",
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ValidateNameStrict(tt.args.attribute, tt.args.name); (err != nil) != tt.wantErr {
+				t.Errorf("ValidateNameStrict() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
