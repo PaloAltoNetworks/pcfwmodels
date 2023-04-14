@@ -1672,7 +1672,7 @@ Default value:
 "TAP"
 ```
 
-##### `name` [`required`,`max_length=30`]
+##### `name` [`required`,`max_length=256`]
 
 Type: `string`
 

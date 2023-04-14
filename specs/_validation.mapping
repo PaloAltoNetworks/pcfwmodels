@@ -42,10 +42,6 @@ $mirrorrules:
   elemental:
     name: ValidateMirrorRules
 
-$namestrict:
-  elemental:
-    name: ValidateNameStrict
-
 $optionalcidrs:
   elemental:
     name: ValidateOptionalCIDRList

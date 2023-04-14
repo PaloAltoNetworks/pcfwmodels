@@ -321,19 +321,6 @@ func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) er
 	return nil
 }
 
-// nameStrictRegex is the regular expression to check the format of a name with stricter character rules.
-var nameStrictRegex = regexp.MustCompile(`^[0-9a-zA-Z\-_]+$`)
-
-// ValidateNameStrict validates a Name that only allows alphanumeric characters, hyphen, or underscore
-func ValidateNameStrict(attribute string, name string) error {
-
-	if !nameStrictRegex.MatchString(name) {
-		return makeErr(attribute, fmt.Sprintf("'%s' must only contain only alphanumeric characters, hyphens, and underscores", name))
-	}
-
-	return nil
-}
-
 // logDestinationRegex is the regular expression to check the format of the logDestination.
 var logDestinationRegex = regexp.MustCompile(`^[0-9a-z\-]+$`)
 

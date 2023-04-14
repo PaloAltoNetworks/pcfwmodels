@@ -1,7 +1,7 @@
 {
   "$extends": [
     "@identifiable-stored",
-    "@namedstrict",
+    "@named",
     "@described",
     "@namespaced",
     "@base",
@@ -182,7 +182,7 @@
       "$required": true,
       "anyOf": [
         {
-          "maxLength": 30,
+          "maxLength": 256,
           "type": "string"
         }
       ]
