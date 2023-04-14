@@ -48,6 +48,11 @@
             "description": "Description of the object.",
             "type": "string"
           },
+          "firewallID": {
+            "description": "The firewall ID destination for traffic mirroring.",
+            "example": "642ab7410fa464137cabba1a",
+            "type": "string"
+          },
           "instanceID": {
             "description": "The instance ID that is the source of traffic mirroring.",
             "type": "string"
@@ -101,6 +106,7 @@
           }
         },
         "required": [
+          "firewallID",
           "name"
         ],
         "type": "object"

@@ -48,6 +48,14 @@ attributes:
     exposed: true
     stored: true
 
+  - name: firewallID
+    description: The firewall ID destination for traffic mirroring.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: 642ab7410fa464137cabba1a
+
   - name: instanceID
     description: The instance ID that is the source of traffic mirroring.
     type: string

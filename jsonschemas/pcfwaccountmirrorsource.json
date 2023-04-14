@@ -111,6 +111,14 @@
         }
       ]
     },
+    "firewallID": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
     "instanceIDs": {
       "anyOf": [
         {
@@ -182,6 +190,7 @@
     }
   },
   "required": [
+    "firewallID",
     "name"
   ],
   "title": "PCFWAccountMirrorSource",

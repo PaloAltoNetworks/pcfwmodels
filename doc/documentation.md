@@ -183,6 +183,7 @@ a customer account.
 
 ```json
 {
+  "firewallID": "642ab7410fa464137cabba1a",
   "name": "the name",
   "protected": false
 }
@@ -264,6 +265,12 @@ Type: [`mirrorfilter`](#mirrorfilter)
 
 Traffic mirror filter to specify what traffic is to be mirrored.
 
+##### `firewallID` [`required`]
+
+Type: `string`
+
+The firewall ID associated with this mirror source.
+
 ##### `instanceIDs`
 
 Type: `[]string`
@@ -309,6 +316,7 @@ network interface for a firewall associatd with a customer account.
 
 ```json
 {
+  "firewallID": "642ab7410fa464137cabba1a",
   "name": "the name",
   "protected": false,
   "status": "Success"
@@ -391,6 +399,12 @@ Creation date of the object.
 Type: `string`
 
 Description of the object.
+
+##### `firewallID` [`required`]
+
+Type: `string`
+
+The firewall ID destination for traffic mirroring.
 
 ##### `instanceID`
 

@@ -50,6 +50,14 @@ attributes:
     extensions:
       refMode: pointer
 
+  - name: firewallID
+    description: The firewall ID associated with this mirror source.
+    type: string
+    exposed: true
+    stored: true
+    required: true
+    example_value: 642ab7410fa464137cabba1a
+
   - name: instanceIDs
     description: The list of all instance IDs where traffic is to be monitored.
     type: list

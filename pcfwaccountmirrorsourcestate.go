@@ -125,6 +125,9 @@ type PCFWAccountMirrorSourceState struct {
 	// Description of the object.
 	Description string `json:"description" msgpack:"description" bson:"description" mapstructure:"description,omitempty"`
 
+	// The firewall ID destination for traffic mirroring.
+	FirewallID string `json:"firewallID" msgpack:"firewallID" bson:"firewallid" mapstructure:"firewallID,omitempty"`
+
 	// The instance ID that is the source of traffic mirroring.
 	InstanceID string `json:"instanceID" msgpack:"instanceID" bson:"instanceid" mapstructure:"instanceID,omitempty"`
 
@@ -218,6 +221,7 @@ func (o *PCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	s.CreateIdempotencyKey = o.CreateIdempotencyKey
 	s.CreateTime = o.CreateTime
 	s.Description = o.Description
+	s.FirewallID = o.FirewallID
 	s.InstanceID = o.InstanceID
 	s.Name = o.Name
 	s.Namespace = o.Namespace
@@ -257,6 +261,7 @@ func (o *PCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	o.CreateIdempotencyKey = s.CreateIdempotencyKey
 	o.CreateTime = s.CreateTime
 	o.Description = s.Description
+	o.FirewallID = s.FirewallID
 	o.InstanceID = s.InstanceID
 	o.Name = s.Name
 	o.Namespace = s.Namespace
@@ -430,6 +435,7 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 			CreateIdempotencyKey:   &o.CreateIdempotencyKey,
 			CreateTime:             &o.CreateTime,
 			Description:            &o.Description,
+			FirewallID:             &o.FirewallID,
 			InstanceID:             &o.InstanceID,
 			Name:                   &o.Name,
 			Namespace:              &o.Namespace,
@@ -467,6 +473,8 @@ func (o *PCFWAccountMirrorSourceState) ToSparse(fields ...string) elemental.Spar
 			sp.CreateTime = &(o.CreateTime)
 		case "description":
 			sp.Description = &(o.Description)
+		case "firewallID":
+			sp.FirewallID = &(o.FirewallID)
 		case "instanceID":
 			sp.InstanceID = &(o.InstanceID)
 		case "name":
@@ -532,6 +540,9 @@ func (o *PCFWAccountMirrorSourceState) Patch(sparse elemental.SparseIdentifiable
 	}
 	if so.Description != nil {
 		o.Description = *so.Description
+	}
+	if so.FirewallID != nil {
+		o.FirewallID = *so.FirewallID
 	}
 	if so.InstanceID != nil {
 		o.InstanceID = *so.InstanceID
@@ -612,6 +623,10 @@ func (o *PCFWAccountMirrorSourceState) Validate() error {
 		errors = errors.Append(err)
 	}
 
+	if err := elemental.ValidateRequiredString("firewallID", o.FirewallID); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -676,6 +691,8 @@ func (o *PCFWAccountMirrorSourceState) ValueForAttribute(name string) any {
 		return o.CreateTime
 	case "description":
 		return o.Description
+	case "firewallID":
+		return o.FirewallID
 	case "instanceID":
 		return o.InstanceID
 	case "name":
@@ -808,6 +825,17 @@ mirroring.`,
 		Name:           "description",
 		Orderable:      true,
 		Setter:         true,
+		Stored:         true,
+		Type:           "string",
+	},
+	"FirewallID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallid",
+		ConvertedName:  "FirewallID",
+		Description:    `The firewall ID destination for traffic mirroring.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Required:       true,
 		Stored:         true,
 		Type:           "string",
 	},
@@ -1044,6 +1072,17 @@ mirroring.`,
 		Stored:         true,
 		Type:           "string",
 	},
+	"firewallid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallid",
+		ConvertedName:  "FirewallID",
+		Description:    `The firewall ID destination for traffic mirroring.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"instanceid": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "instanceid",
@@ -1266,6 +1305,9 @@ type SparsePCFWAccountMirrorSourceState struct {
 	// Description of the object.
 	Description *string `json:"description,omitempty" msgpack:"description,omitempty" bson:"description,omitempty" mapstructure:"description,omitempty"`
 
+	// The firewall ID destination for traffic mirroring.
+	FirewallID *string `json:"firewallID,omitempty" msgpack:"firewallID,omitempty" bson:"firewallid,omitempty" mapstructure:"firewallID,omitempty"`
+
 	// The instance ID that is the source of traffic mirroring.
 	InstanceID *string `json:"instanceID,omitempty" msgpack:"instanceID,omitempty" bson:"instanceid,omitempty" mapstructure:"instanceID,omitempty"`
 
@@ -1376,6 +1418,9 @@ func (o *SparsePCFWAccountMirrorSourceState) GetBSON() (any, error) {
 	if o.Description != nil {
 		s.Description = o.Description
 	}
+	if o.FirewallID != nil {
+		s.FirewallID = o.FirewallID
+	}
 	if o.InstanceID != nil {
 		s.InstanceID = o.InstanceID
 	}
@@ -1458,6 +1503,9 @@ func (o *SparsePCFWAccountMirrorSourceState) SetBSON(raw bson.Raw) error {
 	if s.Description != nil {
 		o.Description = s.Description
 	}
+	if s.FirewallID != nil {
+		o.FirewallID = s.FirewallID
+	}
 	if s.InstanceID != nil {
 		o.InstanceID = s.InstanceID
 	}
@@ -1537,6 +1585,9 @@ func (o *SparsePCFWAccountMirrorSourceState) ToPlain() elemental.PlainIdentifiab
 	}
 	if o.Description != nil {
 		out.Description = *o.Description
+	}
+	if o.FirewallID != nil {
+		out.FirewallID = *o.FirewallID
 	}
 	if o.InstanceID != nil {
 		out.InstanceID = *o.InstanceID
@@ -1759,6 +1810,7 @@ type mongoAttributesPCFWAccountMirrorSourceState struct {
 	CreateIdempotencyKey   string                                  `bson:"createidempotencykey"`
 	CreateTime             time.Time                               `bson:"createtime"`
 	Description            string                                  `bson:"description"`
+	FirewallID             string                                  `bson:"firewallid"`
 	InstanceID             string                                  `bson:"instanceid"`
 	Name                   string                                  `bson:"name"`
 	Namespace              string                                  `bson:"namespace"`
@@ -1783,6 +1835,7 @@ type mongoAttributesSparsePCFWAccountMirrorSourceState struct {
 	CreateIdempotencyKey   *string                                  `bson:"createidempotencykey,omitempty"`
 	CreateTime             *time.Time                               `bson:"createtime,omitempty"`
 	Description            *string                                  `bson:"description,omitempty"`
+	FirewallID             *string                                  `bson:"firewallid,omitempty"`
 	InstanceID             *string                                  `bson:"instanceid,omitempty"`
 	Name                   *string                                  `bson:"name,omitempty"`
 	Namespace              *string                                  `bson:"namespace,omitempty"`

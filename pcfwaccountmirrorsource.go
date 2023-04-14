@@ -113,6 +113,9 @@ type PCFWAccountMirrorSource struct {
 	// Traffic mirror filter to specify what traffic is to be mirrored.
 	Filter *MirrorFilter `json:"filter" msgpack:"filter" bson:"filter" mapstructure:"filter,omitempty"`
 
+	// The firewall ID associated with this mirror source.
+	FirewallID string `json:"firewallID" msgpack:"firewallID" bson:"firewallid" mapstructure:"firewallID,omitempty"`
+
 	// The list of all instance IDs where traffic is to be monitored.
 	InstanceIDs []string `json:"instanceIDs" msgpack:"instanceIDs" bson:"instanceids" mapstructure:"instanceIDs,omitempty"`
 
@@ -196,6 +199,7 @@ func (o *PCFWAccountMirrorSource) GetBSON() (any, error) {
 	s.CreateTime = o.CreateTime
 	s.Description = o.Description
 	s.Filter = o.Filter
+	s.FirewallID = o.FirewallID
 	s.InstanceIDs = o.InstanceIDs
 	s.Name = o.Name
 	s.Namespace = o.Namespace
@@ -230,6 +234,7 @@ func (o *PCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 	o.CreateTime = s.CreateTime
 	o.Description = s.Description
 	o.Filter = s.Filter
+	o.FirewallID = s.FirewallID
 	o.InstanceIDs = s.InstanceIDs
 	o.Name = s.Name
 	o.Namespace = s.Namespace
@@ -399,6 +404,7 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 			Description:           &o.Description,
 			EndpointAbsent:        &o.EndpointAbsent,
 			Filter:                o.Filter,
+			FirewallID:            &o.FirewallID,
 			InstanceIDs:           &o.InstanceIDs,
 			Name:                  &o.Name,
 			Namespace:             &o.Namespace,
@@ -432,6 +438,8 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 			sp.EndpointAbsent = &(o.EndpointAbsent)
 		case "filter":
 			sp.Filter = o.Filter
+		case "firewallID":
+			sp.FirewallID = &(o.FirewallID)
 		case "instanceIDs":
 			sp.InstanceIDs = &(o.InstanceIDs)
 		case "name":
@@ -489,6 +497,9 @@ func (o *PCFWAccountMirrorSource) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.Filter != nil {
 		o.Filter = so.Filter
+	}
+	if so.FirewallID != nil {
+		o.FirewallID = *so.FirewallID
 	}
 	if so.InstanceIDs != nil {
 		o.InstanceIDs = *so.InstanceIDs
@@ -564,6 +575,10 @@ func (o *PCFWAccountMirrorSource) Validate() error {
 		}
 	}
 
+	if err := elemental.ValidateRequiredString("firewallID", o.FirewallID); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
 	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
@@ -624,6 +639,8 @@ func (o *PCFWAccountMirrorSource) ValueForAttribute(name string) any {
 		return o.EndpointAbsent
 	case "filter":
 		return o.Filter
+	case "firewallID":
+		return o.FirewallID
 	case "instanceIDs":
 		return o.InstanceIDs
 	case "name":
@@ -751,6 +768,17 @@ var PCFWAccountMirrorSourceAttributesMap = map[string]elemental.AttributeSpecifi
 		Stored:         true,
 		SubType:        "mirrorfilter",
 		Type:           "ref",
+	},
+	"FirewallID": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallid",
+		ConvertedName:  "FirewallID",
+		Description:    `The firewall ID associated with this mirror source.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
 	},
 	"InstanceIDs": {
 		AllowedChoices: []string{},
@@ -947,6 +975,17 @@ var PCFWAccountMirrorSourceLowerCaseAttributesMap = map[string]elemental.Attribu
 		SubType:        "mirrorfilter",
 		Type:           "ref",
 	},
+	"firewallid": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "firewallid",
+		ConvertedName:  "FirewallID",
+		Description:    `The firewall ID associated with this mirror source.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Required:       true,
+		Stored:         true,
+		Type:           "string",
+	},
 	"instanceids": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "instanceids",
@@ -1129,6 +1168,9 @@ type SparsePCFWAccountMirrorSource struct {
 	// Traffic mirror filter to specify what traffic is to be mirrored.
 	Filter *MirrorFilter `json:"filter,omitempty" msgpack:"filter,omitempty" bson:"filter,omitempty" mapstructure:"filter,omitempty"`
 
+	// The firewall ID associated with this mirror source.
+	FirewallID *string `json:"firewallID,omitempty" msgpack:"firewallID,omitempty" bson:"firewallid,omitempty" mapstructure:"firewallID,omitempty"`
+
 	// The list of all instance IDs where traffic is to be monitored.
 	InstanceIDs *[]string `json:"instanceIDs,omitempty" msgpack:"instanceIDs,omitempty" bson:"instanceids,omitempty" mapstructure:"instanceIDs,omitempty"`
 
@@ -1224,6 +1266,9 @@ func (o *SparsePCFWAccountMirrorSource) GetBSON() (any, error) {
 	if o.Filter != nil {
 		s.Filter = o.Filter
 	}
+	if o.FirewallID != nil {
+		s.FirewallID = o.FirewallID
+	}
 	if o.InstanceIDs != nil {
 		s.InstanceIDs = o.InstanceIDs
 	}
@@ -1290,6 +1335,9 @@ func (o *SparsePCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 	}
 	if s.Filter != nil {
 		o.Filter = s.Filter
+	}
+	if s.FirewallID != nil {
+		o.FirewallID = s.FirewallID
 	}
 	if s.InstanceIDs != nil {
 		o.InstanceIDs = s.InstanceIDs
@@ -1358,6 +1406,9 @@ func (o *SparsePCFWAccountMirrorSource) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.Filter != nil {
 		out.Filter = o.Filter
+	}
+	if o.FirewallID != nil {
+		out.FirewallID = *o.FirewallID
 	}
 	if o.InstanceIDs != nil {
 		out.InstanceIDs = *o.InstanceIDs
@@ -1567,6 +1618,7 @@ type mongoAttributesPCFWAccountMirrorSource struct {
 	CreateTime            time.Time           `bson:"createtime"`
 	Description           string              `bson:"description"`
 	Filter                *MirrorFilter       `bson:"filter"`
+	FirewallID            string              `bson:"firewallid"`
 	InstanceIDs           []string            `bson:"instanceids"`
 	Name                  string              `bson:"name"`
 	Namespace             string              `bson:"namespace"`
@@ -1586,6 +1638,7 @@ type mongoAttributesSparsePCFWAccountMirrorSource struct {
 	CreateTime            *time.Time           `bson:"createtime,omitempty"`
 	Description           *string              `bson:"description,omitempty"`
 	Filter                *MirrorFilter        `bson:"filter,omitempty"`
+	FirewallID            *string              `bson:"firewallid,omitempty"`
 	InstanceIDs           *[]string            `bson:"instanceids,omitempty"`
 	Name                  *string              `bson:"name,omitempty"`
 	Namespace             *string              `bson:"namespace,omitempty"`
