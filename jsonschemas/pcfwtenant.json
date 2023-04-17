@@ -90,7 +90,7 @@
       "$required": true,
       "anyOf": [
         {
-          "maxLength": 127,
+          "maxLength": 118,
           "type": "string"
         }
       ]

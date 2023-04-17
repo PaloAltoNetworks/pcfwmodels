@@ -52,7 +52,7 @@ attributes:
     stored: true
     required: true
     default_value: logs_workgroup
-    max_length: 127
+    max_length: 118
     validations:
     - $athenaworkgroup
 

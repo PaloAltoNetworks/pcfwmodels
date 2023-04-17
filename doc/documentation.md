@@ -4163,7 +4163,7 @@ Type: `[]string`
 
 List of tags attached to an entity.
 
-##### `athenaWorkgroup` [`required`,`max_length=127`]
+##### `athenaWorkgroup` [`required`,`max_length=118`]
 
 Type: `string`
 
@@ -4368,7 +4368,7 @@ Type: `[]string`
 
 List of tags attached to an entity.
 
-##### `athenaWorkgroup` [`required`,`max_length=127`]
+##### `athenaWorkgroup` [`required`,`max_length=118`]
 
 Type: `string`
 

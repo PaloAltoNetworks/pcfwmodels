@@ -696,7 +696,7 @@ func (o *PCFWTenant) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateMaximumLength("athenaWorkgroup", o.AthenaWorkgroup, 127, false); err != nil {
+	if err := elemental.ValidateMaximumLength("athenaWorkgroup", o.AthenaWorkgroup, 118, false); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -971,7 +971,7 @@ var PCFWTenantAttributesMap = map[string]elemental.AttributeSpecification{
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
-		MaxLength:      127,
+		MaxLength:      118,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
@@ -1283,7 +1283,7 @@ var PCFWTenantLowerCaseAttributesMap = map[string]elemental.AttributeSpecificati
 		DefaultValue:   "logs_workgroup",
 		Description:    `Athena workgroup to execute queries in.`,
 		Exposed:        true,
-		MaxLength:      127,
+		MaxLength:      118,
 		Name:           "athenaWorkgroup",
 		Required:       true,
 		Stored:         true,
