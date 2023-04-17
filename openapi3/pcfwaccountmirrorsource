@@ -63,11 +63,6 @@
             },
             "type": "array"
           },
-          "name": {
-            "description": "Name of the entity.",
-            "example": "the name",
-            "type": "string"
-          },
           "namespace": {
             "description": "Namespace tag attached to an entity.",
             "readOnly": true,
@@ -93,8 +88,7 @@
           }
         },
         "required": [
-          "firewallID",
-          "name"
+          "firewallID"
         ],
         "type": "object"
       }

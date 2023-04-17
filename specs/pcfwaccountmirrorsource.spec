@@ -16,7 +16,6 @@ model:
     description: Deletes the pcfwaccountmirrorsource object with the given ID.
   extends:
   - '@identifiable-stored'
-  - '@named'
   - '@described'
   - '@namespaced'
   - '@base'

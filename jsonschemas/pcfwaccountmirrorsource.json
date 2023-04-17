@@ -1,7 +1,6 @@
 {
   "$extends": [
     "@identifiable-stored",
-    "@named",
     "@described",
     "@namespaced",
     "@base",
@@ -132,15 +131,6 @@
         }
       ]
     },
-    "name": {
-      "$required": true,
-      "anyOf": [
-        {
-          "maxLength": 256,
-          "type": "string"
-        }
-      ]
-    },
     "namespace": {
       "$readOnly": true,
       "anyOf": [
@@ -190,8 +180,7 @@
     }
   },
   "required": [
-    "firewallID",
-    "name"
+    "firewallID"
   ],
   "title": "PCFWAccountMirrorSource",
   "type": "object"

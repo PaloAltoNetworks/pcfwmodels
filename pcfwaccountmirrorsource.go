@@ -61,9 +61,7 @@ func (o PCFWAccountMirrorSourcesList) List() elemental.IdentifiablesList {
 // DefaultOrder returns the default ordering fields of the content.
 func (o PCFWAccountMirrorSourcesList) DefaultOrder() []string {
 
-	return []string{
-		"name",
-	}
+	return []string{}
 }
 
 // ToSparse returns the PCFWAccountMirrorSourcesList converted to SparsePCFWAccountMirrorSourcesList.
@@ -118,9 +116,6 @@ type PCFWAccountMirrorSource struct {
 
 	// The list of all instance IDs where traffic is to be monitored.
 	InstanceIDs []string `json:"instanceIDs" msgpack:"instanceIDs" bson:"instanceids" mapstructure:"instanceIDs,omitempty"`
-
-	// Name of the entity.
-	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace string `json:"namespace" msgpack:"namespace" bson:"namespace" mapstructure:"namespace,omitempty"`
@@ -201,7 +196,6 @@ func (o *PCFWAccountMirrorSource) GetBSON() (any, error) {
 	s.Filter = o.Filter
 	s.FirewallID = o.FirewallID
 	s.InstanceIDs = o.InstanceIDs
-	s.Name = o.Name
 	s.Namespace = o.Namespace
 	s.NormalizedTags = o.NormalizedTags
 	s.Protected = o.Protected
@@ -236,7 +230,6 @@ func (o *PCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 	o.Filter = s.Filter
 	o.FirewallID = s.FirewallID
 	o.InstanceIDs = s.InstanceIDs
-	o.Name = s.Name
 	o.Namespace = s.Namespace
 	o.NormalizedTags = s.NormalizedTags
 	o.Protected = s.Protected
@@ -263,9 +256,7 @@ func (o *PCFWAccountMirrorSource) BleveType() string {
 // DefaultOrder returns the list of default ordering fields.
 func (o *PCFWAccountMirrorSource) DefaultOrder() []string {
 
-	return []string{
-		"name",
-	}
+	return []string{}
 }
 
 // Doc returns the documentation for the object
@@ -326,18 +317,6 @@ func (o *PCFWAccountMirrorSource) GetDescription() string {
 func (o *PCFWAccountMirrorSource) SetDescription(description string) {
 
 	o.Description = description
-}
-
-// GetName returns the Name of the receiver.
-func (o *PCFWAccountMirrorSource) GetName() string {
-
-	return o.Name
-}
-
-// SetName sets the property Name of the receiver using the given value.
-func (o *PCFWAccountMirrorSource) SetName(name string) {
-
-	o.Name = name
 }
 
 // GetNamespace returns the Namespace of the receiver.
@@ -406,7 +385,6 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 			Filter:                o.Filter,
 			FirewallID:            &o.FirewallID,
 			InstanceIDs:           &o.InstanceIDs,
-			Name:                  &o.Name,
 			Namespace:             &o.Namespace,
 			NormalizedTags:        &o.NormalizedTags,
 			Protected:             &o.Protected,
@@ -442,8 +420,6 @@ func (o *PCFWAccountMirrorSource) ToSparse(fields ...string) elemental.SparseIde
 			sp.FirewallID = &(o.FirewallID)
 		case "instanceIDs":
 			sp.InstanceIDs = &(o.InstanceIDs)
-		case "name":
-			sp.Name = &(o.Name)
 		case "namespace":
 			sp.Namespace = &(o.Namespace)
 		case "normalizedTags":
@@ -503,9 +479,6 @@ func (o *PCFWAccountMirrorSource) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.InstanceIDs != nil {
 		o.InstanceIDs = *so.InstanceIDs
-	}
-	if so.Name != nil {
-		o.Name = *so.Name
 	}
 	if so.Namespace != nil {
 		o.Namespace = *so.Namespace
@@ -579,14 +552,6 @@ func (o *PCFWAccountMirrorSource) Validate() error {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
-	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
-		requiredErrors = requiredErrors.Append(err)
-	}
-
-	if err := elemental.ValidateMaximumLength("name", o.Name, 256, false); err != nil {
-		errors = errors.Append(err)
-	}
-
 	if len(requiredErrors) > 0 {
 		return requiredErrors
 	}
@@ -643,8 +608,6 @@ func (o *PCFWAccountMirrorSource) ValueForAttribute(name string) any {
 		return o.FirewallID
 	case "instanceIDs":
 		return o.InstanceIDs
-	case "name":
-		return o.Name
 	case "namespace":
 		return o.Namespace
 	case "normalizedTags":
@@ -790,22 +753,6 @@ var PCFWAccountMirrorSourceAttributesMap = map[string]elemental.AttributeSpecifi
 		Stored:         true,
 		SubType:        "string",
 		Type:           "list",
-	},
-	"Name": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "name",
-		ConvertedName:  "Name",
-		Description:    `Name of the entity.`,
-		Exposed:        true,
-		Filterable:     true,
-		Getter:         true,
-		MaxLength:      256,
-		Name:           "name",
-		Orderable:      true,
-		Required:       true,
-		Setter:         true,
-		Stored:         true,
-		Type:           "string",
 	},
 	"Namespace": {
 		AllowedChoices: []string{},
@@ -997,22 +944,6 @@ var PCFWAccountMirrorSourceLowerCaseAttributesMap = map[string]elemental.Attribu
 		SubType:        "string",
 		Type:           "list",
 	},
-	"name": {
-		AllowedChoices: []string{},
-		BSONFieldName:  "name",
-		ConvertedName:  "Name",
-		Description:    `Name of the entity.`,
-		Exposed:        true,
-		Filterable:     true,
-		Getter:         true,
-		MaxLength:      256,
-		Name:           "name",
-		Orderable:      true,
-		Required:       true,
-		Setter:         true,
-		Stored:         true,
-		Type:           "string",
-	},
 	"namespace": {
 		AllowedChoices: []string{},
 		Autogenerated:  true,
@@ -1117,9 +1048,7 @@ func (o SparsePCFWAccountMirrorSourcesList) List() elemental.IdentifiablesList {
 // DefaultOrder returns the default ordering fields of the content.
 func (o SparsePCFWAccountMirrorSourcesList) DefaultOrder() []string {
 
-	return []string{
-		"name",
-	}
+	return []string{}
 }
 
 // ToPlain returns the SparsePCFWAccountMirrorSourcesList converted to PCFWAccountMirrorSourcesList.
@@ -1173,9 +1102,6 @@ type SparsePCFWAccountMirrorSource struct {
 
 	// The list of all instance IDs where traffic is to be monitored.
 	InstanceIDs *[]string `json:"instanceIDs,omitempty" msgpack:"instanceIDs,omitempty" bson:"instanceids,omitempty" mapstructure:"instanceIDs,omitempty"`
-
-	// Name of the entity.
-	Name *string `json:"name,omitempty" msgpack:"name,omitempty" bson:"name,omitempty" mapstructure:"name,omitempty"`
 
 	// Namespace tag attached to an entity.
 	Namespace *string `json:"namespace,omitempty" msgpack:"namespace,omitempty" bson:"namespace,omitempty" mapstructure:"namespace,omitempty"`
@@ -1272,9 +1198,6 @@ func (o *SparsePCFWAccountMirrorSource) GetBSON() (any, error) {
 	if o.InstanceIDs != nil {
 		s.InstanceIDs = o.InstanceIDs
 	}
-	if o.Name != nil {
-		s.Name = o.Name
-	}
 	if o.Namespace != nil {
 		s.Namespace = o.Namespace
 	}
@@ -1341,9 +1264,6 @@ func (o *SparsePCFWAccountMirrorSource) SetBSON(raw bson.Raw) error {
 	}
 	if s.InstanceIDs != nil {
 		o.InstanceIDs = s.InstanceIDs
-	}
-	if s.Name != nil {
-		o.Name = s.Name
 	}
 	if s.Namespace != nil {
 		o.Namespace = s.Namespace
@@ -1412,9 +1332,6 @@ func (o *SparsePCFWAccountMirrorSource) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.InstanceIDs != nil {
 		out.InstanceIDs = *o.InstanceIDs
-	}
-	if o.Name != nil {
-		out.Name = *o.Name
 	}
 	if o.Namespace != nil {
 		out.Namespace = *o.Namespace
@@ -1503,22 +1420,6 @@ func (o *SparsePCFWAccountMirrorSource) GetDescription() (out string) {
 func (o *SparsePCFWAccountMirrorSource) SetDescription(description string) {
 
 	o.Description = &description
-}
-
-// GetName returns the Name of the receiver.
-func (o *SparsePCFWAccountMirrorSource) GetName() (out string) {
-
-	if o.Name == nil {
-		return
-	}
-
-	return *o.Name
-}
-
-// SetName sets the property Name of the receiver using the address of the given value.
-func (o *SparsePCFWAccountMirrorSource) SetName(name string) {
-
-	o.Name = &name
 }
 
 // GetNamespace returns the Namespace of the receiver.
@@ -1620,7 +1521,6 @@ type mongoAttributesPCFWAccountMirrorSource struct {
 	Filter                *MirrorFilter       `bson:"filter"`
 	FirewallID            string              `bson:"firewallid"`
 	InstanceIDs           []string            `bson:"instanceids"`
-	Name                  string              `bson:"name"`
 	Namespace             string              `bson:"namespace"`
 	NormalizedTags        []string            `bson:"normalizedtags"`
 	Protected             bool                `bson:"protected"`
@@ -1640,7 +1540,6 @@ type mongoAttributesSparsePCFWAccountMirrorSource struct {
 	Filter                *MirrorFilter        `bson:"filter,omitempty"`
 	FirewallID            *string              `bson:"firewallid,omitempty"`
 	InstanceIDs           *[]string            `bson:"instanceids,omitempty"`
-	Name                  *string              `bson:"name,omitempty"`
 	Namespace             *string              `bson:"namespace,omitempty"`
 	NormalizedTags        *[]string            `bson:"normalizedtags,omitempty"`
 	Protected             *bool                `bson:"protected,omitempty"`

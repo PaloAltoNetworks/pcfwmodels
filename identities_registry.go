@@ -254,17 +254,13 @@ var (
 		"pcfwaccountmirrorsource": {
 			{":shard", ":unique", "zone", "zHash"},
 			{"createIdempotencyKey"},
-			{"name"},
 			{"namespace"},
-			{"namespace", "name"},
 			{"updateIdempotencyKey"},
 		},
 		"pcfwaccountmirrorsourcestate": {
 			{":shard", ":unique", "zone", "zHash"},
 			{"createIdempotencyKey"},
-			{"name"},
 			{"namespace"},
-			{"namespace", "name"},
 			{"updateIdempotencyKey"},
 		},
 		"pcfwfirewallconfigterraform": {
