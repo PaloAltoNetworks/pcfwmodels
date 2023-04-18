@@ -20,7 +20,7 @@
         }
       ]
     },
-    "firewallName": {
+    "firewallID": {
       "$required": true,
       "anyOf": [
         {
@@ -44,7 +44,7 @@
     }
   },
   "required": [
-    "firewallName"
+    "firewallID"
   ],
   "title": "MirrorSourceOption",
   "type": "object"

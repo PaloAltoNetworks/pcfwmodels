@@ -86,8 +86,8 @@ type MirrorSourceOption struct {
 	// List of discovered auto-scaling groups.
 	AutoScalingGroupNames []string `json:"autoScalingGroupNames" msgpack:"autoScalingGroupNames" bson:"-" mapstructure:"autoScalingGroupNames,omitempty"`
 
-	// The firewall name whose VPCs/AZs should be used to search for instances.
-	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"-" mapstructure:"firewallName,omitempty"`
+	// The ID of the firewall whose VPCs/AZs should be used to search for instances.
+	FirewallID string `json:"firewallID" msgpack:"firewallID" bson:"-" mapstructure:"firewallID,omitempty"`
 
 	// List of discovered mirror source instances.
 	Instances []*MirrorInstance `json:"instances" msgpack:"instances" bson:"-" mapstructure:"instances,omitempty"`
@@ -188,7 +188,7 @@ func (o *MirrorSourceOption) ToSparse(fields ...string) elemental.SparseIdentifi
 		// nolint: goimports
 		return &SparseMirrorSourceOption{
 			AutoScalingGroupNames: &o.AutoScalingGroupNames,
-			FirewallName:          &o.FirewallName,
+			FirewallID:            &o.FirewallID,
 			Instances:             &o.Instances,
 		}
 	}
@@ -198,8 +198,8 @@ func (o *MirrorSourceOption) ToSparse(fields ...string) elemental.SparseIdentifi
 		switch f {
 		case "autoScalingGroupNames":
 			sp.AutoScalingGroupNames = &(o.AutoScalingGroupNames)
-		case "firewallName":
-			sp.FirewallName = &(o.FirewallName)
+		case "firewallID":
+			sp.FirewallID = &(o.FirewallID)
 		case "instances":
 			sp.Instances = &(o.Instances)
 		}
@@ -218,8 +218,8 @@ func (o *MirrorSourceOption) Patch(sparse elemental.SparseIdentifiable) {
 	if so.AutoScalingGroupNames != nil {
 		o.AutoScalingGroupNames = *so.AutoScalingGroupNames
 	}
-	if so.FirewallName != nil {
-		o.FirewallName = *so.FirewallName
+	if so.FirewallID != nil {
+		o.FirewallID = *so.FirewallID
 	}
 	if so.Instances != nil {
 		o.Instances = *so.Instances
@@ -256,7 +256,7 @@ func (o *MirrorSourceOption) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := elemental.ValidateRequiredString("firewallName", o.FirewallName); err != nil {
+	if err := elemental.ValidateRequiredString("firewallID", o.FirewallID); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
@@ -306,8 +306,8 @@ func (o *MirrorSourceOption) ValueForAttribute(name string) any {
 	switch name {
 	case "autoScalingGroupNames":
 		return o.AutoScalingGroupNames
-	case "firewallName":
-		return o.FirewallName
+	case "firewallID":
+		return o.FirewallID
 	case "instances":
 		return o.Instances
 	}
@@ -328,12 +328,12 @@ var MirrorSourceOptionAttributesMap = map[string]elemental.AttributeSpecificatio
 		SubType:        "string",
 		Type:           "list",
 	},
-	"FirewallName": {
+	"FirewallID": {
 		AllowedChoices: []string{},
-		ConvertedName:  "FirewallName",
-		Description:    `The firewall name whose VPCs/AZs should be used to search for instances.`,
+		ConvertedName:  "FirewallID",
+		Description:    `The ID of the firewall whose VPCs/AZs should be used to search for instances.`,
 		Exposed:        true,
-		Name:           "firewallName",
+		Name:           "firewallID",
 		Required:       true,
 		Type:           "string",
 	},
@@ -363,12 +363,12 @@ var MirrorSourceOptionLowerCaseAttributesMap = map[string]elemental.AttributeSpe
 		SubType:        "string",
 		Type:           "list",
 	},
-	"firewallname": {
+	"firewallid": {
 		AllowedChoices: []string{},
-		ConvertedName:  "FirewallName",
-		Description:    `The firewall name whose VPCs/AZs should be used to search for instances.`,
+		ConvertedName:  "FirewallID",
+		Description:    `The ID of the firewall whose VPCs/AZs should be used to search for instances.`,
 		Exposed:        true,
-		Name:           "firewallName",
+		Name:           "firewallID",
 		Required:       true,
 		Type:           "string",
 	},
@@ -451,8 +451,8 @@ type SparseMirrorSourceOption struct {
 	// List of discovered auto-scaling groups.
 	AutoScalingGroupNames *[]string `json:"autoScalingGroupNames,omitempty" msgpack:"autoScalingGroupNames,omitempty" bson:"-" mapstructure:"autoScalingGroupNames,omitempty"`
 
-	// The firewall name whose VPCs/AZs should be used to search for instances.
-	FirewallName *string `json:"firewallName,omitempty" msgpack:"firewallName,omitempty" bson:"-" mapstructure:"firewallName,omitempty"`
+	// The ID of the firewall whose VPCs/AZs should be used to search for instances.
+	FirewallID *string `json:"firewallID,omitempty" msgpack:"firewallID,omitempty" bson:"-" mapstructure:"firewallID,omitempty"`
 
 	// List of discovered mirror source instances.
 	Instances *[]*MirrorInstance `json:"instances,omitempty" msgpack:"instances,omitempty" bson:"-" mapstructure:"instances,omitempty"`
@@ -524,8 +524,8 @@ func (o *SparseMirrorSourceOption) ToPlain() elemental.PlainIdentifiable {
 	if o.AutoScalingGroupNames != nil {
 		out.AutoScalingGroupNames = *o.AutoScalingGroupNames
 	}
-	if o.FirewallName != nil {
-		out.FirewallName = *o.FirewallName
+	if o.FirewallID != nil {
+		out.FirewallID = *o.FirewallID
 	}
 	if o.Instances != nil {
 		out.Instances = *o.Instances

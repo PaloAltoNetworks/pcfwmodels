@@ -12,9 +12,9 @@
             "readOnly": true,
             "type": "array"
           },
-          "firewallName": {
-            "description": "The firewall name whose VPCs/AZs should be used to search for instances.",
-            "example": "firewall1",
+          "firewallID": {
+            "description": "The ID of the firewall whose VPCs/AZs should be used to search for instances.",
+            "example": "642ab7410fa464137cabba1a",
             "type": "string"
           },
           "instances": {
@@ -27,7 +27,7 @@
           }
         },
         "required": [
-          "firewallName"
+          "firewallID"
         ],
         "type": "object"
       }
