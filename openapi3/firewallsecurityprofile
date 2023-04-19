@@ -57,13 +57,13 @@
             "type": "boolean"
           },
           "lastCommittedTime": {
-            "description": "The date when the securityprofile was last committed.",
+            "description": "The date when the security profile was last committed.",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "lastUpdatedTime": {
-            "description": "The date when the securityprofile was last updated.",
+            "description": "The date when the security profile was last updated.",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
@@ -127,7 +127,7 @@
   "paths": {
     "/firewallsecurityprofiles": {
       "get": {
-        "description": "Retrieves the list of firewallsecurityprofiles.",
+        "description": "Retrieves the list of firewall security profiles.",
         "operationId": "get-all-firewallsecurityprofiles",
         "parameters": [
           {
@@ -161,7 +161,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallsecurityprofile.",
+        "description": "Creates a new firewall security profile.",
         "operationId": "create-a-new-firewallsecurityprofile",
         "requestBody": {
           "content": {
@@ -192,7 +192,7 @@
     },
     "/firewallsecurityprofiles/{id}": {
       "delete": {
-        "description": "Deletes the firewallsecurityprofile with the given ID.",
+        "description": "Deletes the firewall security profile with the given ID.",
         "operationId": "delete-firewallsecurityprofile-by-ID",
         "responses": {
           "200": {
@@ -212,7 +212,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallsecurityprofile with the given ID.",
+        "description": "Retrieves the firewall security profile with the given ID.",
         "operationId": "get-firewallsecurityprofile-by-ID",
         "responses": {
           "200": {
@@ -242,7 +242,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallsecurityprofile with the given ID.",
+        "description": "Updates the firewall security profile with the given ID.",
         "operationId": "update-firewallsecurityprofile-by-ID",
         "requestBody": {
           "content": {

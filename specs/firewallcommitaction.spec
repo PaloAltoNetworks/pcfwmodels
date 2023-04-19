@@ -5,8 +5,9 @@ model:
   entity_name: FirewallCommitAction
   package: ngfw
   group: core/ngfw
-  description: "Represents committing FilewallRulesets, FilewallTemplates,\nFilewallSecurityProfiles,
-    \nand AWSLogDefinitions to a firewall."
+  description: |-
+    Represents committing FirewallRulesets, FirewallTemplates,
+    FirewallSecurityProfiles, and AWSLogDefinitions to a firewall.
 
 # Attributes
 attributes:

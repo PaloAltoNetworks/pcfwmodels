@@ -11,8 +11,8 @@ import (
 	"go.aporeto.io/elemental"
 )
 
-// VpcUsedSubnet represents the model of a vpcusedsubnet
-type VpcUsedSubnet struct {
+// VPCUsedSubnet represents the model of a vpcusedsubnet
+type VPCUsedSubnet struct {
 	// The CIDR block of the VPC.
 	CIDRBlock string `json:"CIDRBlock" msgpack:"CIDRBlock" bson:"cidrblock" mapstructure:"CIDRBlock,omitempty"`
 
@@ -28,10 +28,10 @@ type VpcUsedSubnet struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewVpcUsedSubnet returns a new *VpcUsedSubnet
-func NewVpcUsedSubnet() *VpcUsedSubnet {
+// NewVPCUsedSubnet returns a new *VPCUsedSubnet
+func NewVPCUsedSubnet() *VPCUsedSubnet {
 
-	return &VpcUsedSubnet{
+	return &VPCUsedSubnet{
 		ModelVersion:      1,
 		AvailabilityZones: []string{},
 		SubnetCIDRs:       []string{},
@@ -40,13 +40,13 @@ func NewVpcUsedSubnet() *VpcUsedSubnet {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *VpcUsedSubnet) GetBSON() (any, error) {
+func (o *VPCUsedSubnet) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesVpcUsedSubnet{}
+	s := &mongoAttributesVPCUsedSubnet{}
 
 	s.CIDRBlock = o.CIDRBlock
 	s.VPCID = o.VPCID
@@ -58,13 +58,13 @@ func (o *VpcUsedSubnet) GetBSON() (any, error) {
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *VpcUsedSubnet) SetBSON(raw bson.Raw) error {
+func (o *VPCUsedSubnet) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesVpcUsedSubnet{}
+	s := &mongoAttributesVPCUsedSubnet{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -78,37 +78,37 @@ func (o *VpcUsedSubnet) SetBSON(raw bson.Raw) error {
 }
 
 // BleveType implements the bleve.Classifier Interface.
-func (o *VpcUsedSubnet) BleveType() string {
+func (o *VPCUsedSubnet) BleveType() string {
 
 	return "vpcusedsubnet"
 }
 
-// DeepCopy returns a deep copy if the VpcUsedSubnet.
-func (o *VpcUsedSubnet) DeepCopy() *VpcUsedSubnet {
+// DeepCopy returns a deep copy if the VPCUsedSubnet.
+func (o *VPCUsedSubnet) DeepCopy() *VPCUsedSubnet {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &VpcUsedSubnet{}
+	out := &VPCUsedSubnet{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *VpcUsedSubnet.
-func (o *VpcUsedSubnet) DeepCopyInto(out *VpcUsedSubnet) {
+// DeepCopyInto copies the receiver into the given *VPCUsedSubnet.
+func (o *VPCUsedSubnet) DeepCopyInto(out *VPCUsedSubnet) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy VpcUsedSubnet: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy VPCUsedSubnet: %s", err))
 	}
 
-	*out = *target.(*VpcUsedSubnet)
+	*out = *target.(*VPCUsedSubnet)
 }
 
 // Validate valides the current information stored into the structure.
-func (o *VpcUsedSubnet) Validate() error {
+func (o *VPCUsedSubnet) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
@@ -137,26 +137,26 @@ func (o *VpcUsedSubnet) Validate() error {
 }
 
 // SpecificationForAttribute returns the AttributeSpecification for the given attribute name key.
-func (*VpcUsedSubnet) SpecificationForAttribute(name string) elemental.AttributeSpecification {
+func (*VPCUsedSubnet) SpecificationForAttribute(name string) elemental.AttributeSpecification {
 
-	if v, ok := VpcUsedSubnetAttributesMap[name]; ok {
+	if v, ok := VPCUsedSubnetAttributesMap[name]; ok {
 		return v
 	}
 
 	// We could not find it, so let's check on the lower case indexed spec map
-	return VpcUsedSubnetLowerCaseAttributesMap[name]
+	return VPCUsedSubnetLowerCaseAttributesMap[name]
 }
 
 // AttributeSpecifications returns the full attribute specifications map.
-func (*VpcUsedSubnet) AttributeSpecifications() map[string]elemental.AttributeSpecification {
+func (*VPCUsedSubnet) AttributeSpecifications() map[string]elemental.AttributeSpecification {
 
-	return VpcUsedSubnetAttributesMap
+	return VPCUsedSubnetAttributesMap
 }
 
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *VpcUsedSubnet) ValueForAttribute(name string) any {
+func (o *VPCUsedSubnet) ValueForAttribute(name string) any {
 
 	switch name {
 	case "CIDRBlock":
@@ -172,8 +172,8 @@ func (o *VpcUsedSubnet) ValueForAttribute(name string) any {
 	return nil
 }
 
-// VpcUsedSubnetAttributesMap represents the map of attribute for VpcUsedSubnet.
-var VpcUsedSubnetAttributesMap = map[string]elemental.AttributeSpecification{
+// VPCUsedSubnetAttributesMap represents the map of attribute for VPCUsedSubnet.
+var VPCUsedSubnetAttributesMap = map[string]elemental.AttributeSpecification{
 	"CIDRBlock": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "cidrblock",
@@ -218,8 +218,8 @@ var VpcUsedSubnetAttributesMap = map[string]elemental.AttributeSpecification{
 	},
 }
 
-// VpcUsedSubnetLowerCaseAttributesMap represents the map of attribute for VpcUsedSubnet.
-var VpcUsedSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+// VPCUsedSubnetLowerCaseAttributesMap represents the map of attribute for VPCUsedSubnet.
+var VPCUsedSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
 	"cidrblock": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "cidrblock",
@@ -264,7 +264,7 @@ var VpcUsedSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecific
 	},
 }
 
-type mongoAttributesVpcUsedSubnet struct {
+type mongoAttributesVPCUsedSubnet struct {
 	CIDRBlock         string   `bson:"cidrblock"`
 	VPCID             string   `bson:"vpcid"`
 	AvailabilityZones []string `bson:"availabilityzones"`

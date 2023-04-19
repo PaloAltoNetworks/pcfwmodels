@@ -38,14 +38,14 @@
             "type": "array"
           },
           "customExternalFeedIDs": {
-            "description": "List of FirewallCustomeExternalFeed IDs that are of type IPList.",
+            "description": "List of firewall custom external feed IDs that are of type IPList.",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "externalFeedIDs": {
-            "description": "List of FirewallExternalFeed IDs that are of type IPList.",
+            "description": "List of firewall external feed IDs that are of type IPList.",
             "example": [
               "PaloAltoNetworks-BulletproofIPAddresses",
               "PaloAltoNetworks-HighRiskIPAddresses",
@@ -57,14 +57,14 @@
             "type": "array"
           },
           "firewallCIDRListIDs": {
-            "description": "List of FirewallCIDRList IDs.",
+            "description": "List of Firewall CIDR list IDs.",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "firewallFQDNListIDs": {
-            "description": "List of FQDNList IDs.",
+            "description": "List of FQDN list IDs.",
             "items": {
               "type": "string"
             },

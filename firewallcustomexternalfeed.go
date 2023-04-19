@@ -147,7 +147,7 @@ type FirewallCustomExternalFeed struct {
 	// The URL of the external feed.
 	SourceURL string `json:"sourceURL" msgpack:"sourceURL" bson:"sourceurl" mapstructure:"sourceURL,omitempty"`
 
-	// Specifies the time of day when the updateFrequency is Daily.
+	// Specifies the time of day when the update frequency is daily.
 	UpdateDailyTime time.Time `json:"updateDailyTime" msgpack:"updateDailyTime" bson:"updatedailytime" mapstructure:"updateDailyTime,omitempty"`
 
 	// How often is the external feed updated.
@@ -294,7 +294,7 @@ func (o *FirewallCustomExternalFeed) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCustomExternalFeed) Doc() string {
 
-	return `Represents an external intelligence feed referenced by TargetCriteria.`
+	return `Represents an external intelligence feed referenced by target criteria.`
 }
 
 func (o *FirewallCustomExternalFeed) String() string {
@@ -861,7 +861,7 @@ var FirewallCustomExternalFeedAttributesMap = map[string]elemental.AttributeSpec
 		AllowedChoices: []string{},
 		BSONFieldName:  "updatedailytime",
 		ConvertedName:  "UpdateDailyTime",
-		Description:    `Specifies the time of day when the updateFrequency is Daily.`,
+		Description:    `Specifies the time of day when the update frequency is daily.`,
 		Exposed:        true,
 		Name:           "updateDailyTime",
 		Stored:         true,
@@ -1066,7 +1066,7 @@ var FirewallCustomExternalFeedLowerCaseAttributesMap = map[string]elemental.Attr
 		AllowedChoices: []string{},
 		BSONFieldName:  "updatedailytime",
 		ConvertedName:  "UpdateDailyTime",
-		Description:    `Specifies the time of day when the updateFrequency is Daily.`,
+		Description:    `Specifies the time of day when the update frequency is daily.`,
 		Exposed:        true,
 		Name:           "updateDailyTime",
 		Stored:         true,
@@ -1205,7 +1205,7 @@ type SparseFirewallCustomExternalFeed struct {
 	// The URL of the external feed.
 	SourceURL *string `json:"sourceURL,omitempty" msgpack:"sourceURL,omitempty" bson:"sourceurl,omitempty" mapstructure:"sourceURL,omitempty"`
 
-	// Specifies the time of day when the updateFrequency is Daily.
+	// Specifies the time of day when the update frequency is daily.
 	UpdateDailyTime *time.Time `json:"updateDailyTime,omitempty" msgpack:"updateDailyTime,omitempty" bson:"updatedailytime,omitempty" mapstructure:"updateDailyTime,omitempty"`
 
 	// How often is the external feed updated.

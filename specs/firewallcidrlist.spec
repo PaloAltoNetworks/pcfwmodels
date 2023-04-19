@@ -5,13 +5,13 @@ model:
   entity_name: FirewallCIDRlist
   package: ngfw
   group: core/ngfw
-  description: Represents a list of CIDRs referenced by a TargetCriteria object.
+  description: Represents a list of CIDRs referenced by a target criteria object.
   get:
-    description: Retrieves the firewallcidrlist with the given ID.
+    description: Retrieves the firewall CIDR list with the given ID.
   update:
-    description: Updates the firewallcidrlist with the given ID.
+    description: Updates the firewall CIDR list with the given ID.
   delete:
-    description: Deletes the firewallcidrlist with the given ID.
+    description: Deletes the firewall CIDR list with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

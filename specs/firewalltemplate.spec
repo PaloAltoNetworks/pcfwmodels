@@ -6,14 +6,14 @@ model:
   package: ngfw
   group: core/ngfw
   description: |-
-    Represents a list of filewall rules that have a priority from 1-100.
+    Represents a list of firewall rules that have a priority from 1-100.
     This object can be created by the user and referenced by the Group object.
   get:
-    description: Retrieves the firewalltemplate with the given ID.
+    description: Retrieves the firewall template with the given ID.
   update:
-    description: Updates the firewalltemplate with the given ID.
+    description: Updates the firewall template with the given ID.
   delete:
-    description: Deletes the firewalltemplate with the given ID.
+    description: Deletes the firewall template with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

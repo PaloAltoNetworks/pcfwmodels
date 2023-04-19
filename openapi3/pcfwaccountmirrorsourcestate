@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "pcfwaccountmirrorsourcestate": {
-        "description": "Represents state of traffic mirror session setup associated with an instance and\nnetwork interface for a firewall associatd with a customer account.",
+        "description": "Represents state of traffic mirror session setup associated with an instance and\nnetwork interface for a firewall associated with a customer account.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -187,7 +187,7 @@
     },
     "/pcfwaccountmirrorsourcestates/{id}": {
       "delete": {
-        "description": "Deletes the pcfwaccountmirrorsourcestate object with the given ID.",
+        "description": "Deletes the PCFW account mirror source state object with the given ID.",
         "operationId": "delete-pcfwaccountmirrorsourcestate-by-ID",
         "responses": {
           "200": {
@@ -207,7 +207,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the pcfwaccountmirrorsourcestate object with the given ID.",
+        "description": "Retrieves the PCFW account mirror source state object with the given ID.",
         "operationId": "get-pcfwaccountmirrorsourcestate-by-ID",
         "responses": {
           "200": {
@@ -237,7 +237,7 @@
         }
       ],
       "put": {
-        "description": "Updates the pcfwaccountmirrorsourcestate object with the given ID.",
+        "description": "Updates the PCFW account mirror source state object with the given ID.",
         "operationId": "update-pcfwaccountmirrorsourcestate-by-ID",
         "requestBody": {
           "content": {

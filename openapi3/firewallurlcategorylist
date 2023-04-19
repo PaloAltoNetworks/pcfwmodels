@@ -2,10 +2,10 @@
   "components": {
     "schemas": {
       "firewallurlcategorylist": {
-        "description": "This a readonly list that returns the default NGFW URLCategories.",
+        "description": "This a read-only list that returns the default NGFW URL categories.",
         "properties": {
           "categories": {
-            "description": "A list of NGFW URLCategory objects.",
+            "description": "A list of NGFW URL category objects.",
             "items": {
               "$ref": "./firewallurlcategory#/components/schemas/firewallurlcategory"
             },
@@ -37,7 +37,7 @@
   "paths": {
     "/firewallurlcategorylists": {
       "get": {
-        "description": "Retrieves a firewallurlcategorylist.",
+        "description": "Retrieves a firewall URL category list.",
         "operationId": "get-all-firewallurlcategorylists",
         "parameters": [
           {

@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallcustomurlcategory": {
-        "description": "Represents a custom URL category that is referenced by a RuleURLCategory object.",
+        "description": "Represents a custom URL category that is referenced by a rule URL category\nobject.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -109,7 +109,7 @@
   "paths": {
     "/firewallcustomurlcategories": {
       "get": {
-        "description": "Retrieves the list of firewallcustomurlcategorys.",
+        "description": "Retrieves the list of firewall custom URL categories.",
         "operationId": "get-all-firewallcustomurlcategories",
         "parameters": [
           {
@@ -143,7 +143,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallcustomurlcategory.",
+        "description": "Creates a new firewall custom URL category.",
         "operationId": "create-a-new-firewallcustomurlcategory",
         "requestBody": {
           "content": {
@@ -174,7 +174,7 @@
     },
     "/firewallcustomurlcategories/{id}": {
       "delete": {
-        "description": "Deletes the customurlcategory with the given ID.",
+        "description": "Deletes the custom URL category with the given ID.",
         "operationId": "delete-firewallcustomurlcategory-by-ID",
         "responses": {
           "200": {
@@ -194,7 +194,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the customurlcategory with the given ID.",
+        "description": "Retrieves the custom URL category with the given ID.",
         "operationId": "get-firewallcustomurlcategory-by-ID",
         "responses": {
           "200": {
@@ -224,7 +224,7 @@
         }
       ],
       "put": {
-        "description": "Updates the customurlcategory with the given ID.",
+        "description": "Updates the custom URL category with the given ID.",
         "operationId": "update-firewallcustomurlcategory-by-ID",
         "requestBody": {
           "content": {

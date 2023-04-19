@@ -13,7 +13,7 @@ import (
 
 // FirewallApplicationCriteria represents the model of a firewallapplicationcriteria
 type FirewallApplicationCriteria struct {
-	// List of NGFW App IDs.  See AppIDList.
+	// List of NGFW App IDs. See AppIDList.
 	AppIDs []string `json:"appIDs" msgpack:"appIDs" bson:"appids" mapstructure:"appIDs,omitempty"`
 
 	// A list of FirewallApplicationGroup IDs.
@@ -152,7 +152,7 @@ var FirewallApplicationCriteriaAttributesMap = map[string]elemental.AttributeSpe
 		AllowedChoices: []string{},
 		BSONFieldName:  "appids",
 		ConvertedName:  "AppIDs",
-		Description:    `List of NGFW App IDs.  See AppIDList.`,
+		Description:    `List of NGFW App IDs. See AppIDList.`,
 		Exposed:        true,
 		Name:           "appIDs",
 		Stored:         true,
@@ -178,7 +178,7 @@ var FirewallApplicationCriteriaLowerCaseAttributesMap = map[string]elemental.Att
 		AllowedChoices: []string{},
 		BSONFieldName:  "appids",
 		ConvertedName:  "AppIDs",
-		Description:    `List of NGFW App IDs.  See AppIDList.`,
+		Description:    `List of NGFW App IDs. See AppIDList.`,
 		Exposed:        true,
 		Name:           "appIDs",
 		Stored:         true,

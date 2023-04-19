@@ -2,7 +2,7 @@
 model:
   rest_name: vpcusedsubnet
   resource_name: vpcusedsubnets
-  entity_name: VpcUsedSubnet
+  entity_name: VPCUsedSubnet
   package: deploymentadvisor
   group: core/deploymentadvisor
   description: |-

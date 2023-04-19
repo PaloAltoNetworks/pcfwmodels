@@ -85,11 +85,11 @@ func (o PCFWSubnetHelpersList) Version() int {
 type PCFWSubnetHelper struct {
 	// Returns the list of AWS VPC IDs and information about available subnets for
 	// every availability zones in a VPC.
-	VPCAvailableSubnets []*VpcAvailableSubnet `json:"VPCAvailableSubnets" msgpack:"VPCAvailableSubnets" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
+	VPCAvailableSubnets []*VPCAvailableSubnet `json:"VPCAvailableSubnets" msgpack:"VPCAvailableSubnets" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
 
 	// List of AWS VPC IDs with information about associated availability zones and
 	// used subnets to check for available subnets.
-	VPCUsedSubnets []*VpcUsedSubnet `json:"VPCUsedSubnets" msgpack:"VPCUsedSubnets" bson:"vpcusedsubnets" mapstructure:"VPCUsedSubnets,omitempty"`
+	VPCUsedSubnets []*VPCUsedSubnet `json:"VPCUsedSubnets" msgpack:"VPCUsedSubnets" bson:"vpcusedsubnets" mapstructure:"VPCUsedSubnets,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -99,8 +99,8 @@ func NewPCFWSubnetHelper() *PCFWSubnetHelper {
 
 	return &PCFWSubnetHelper{
 		ModelVersion:        1,
-		VPCAvailableSubnets: []*VpcAvailableSubnet{},
-		VPCUsedSubnets:      []*VpcUsedSubnet{},
+		VPCAvailableSubnets: []*VPCAvailableSubnet{},
+		VPCUsedSubnets:      []*VPCUsedSubnet{},
 	}
 }
 
@@ -442,11 +442,11 @@ func (o SparsePCFWSubnetHelpersList) Version() int {
 type SparsePCFWSubnetHelper struct {
 	// Returns the list of AWS VPC IDs and information about available subnets for
 	// every availability zones in a VPC.
-	VPCAvailableSubnets *[]*VpcAvailableSubnet `json:"VPCAvailableSubnets,omitempty" msgpack:"VPCAvailableSubnets,omitempty" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
+	VPCAvailableSubnets *[]*VPCAvailableSubnet `json:"VPCAvailableSubnets,omitempty" msgpack:"VPCAvailableSubnets,omitempty" bson:"-" mapstructure:"VPCAvailableSubnets,omitempty"`
 
 	// List of AWS VPC IDs with information about associated availability zones and
 	// used subnets to check for available subnets.
-	VPCUsedSubnets *[]*VpcUsedSubnet `json:"VPCUsedSubnets,omitempty" msgpack:"VPCUsedSubnets,omitempty" bson:"vpcusedsubnets,omitempty" mapstructure:"VPCUsedSubnets,omitempty"`
+	VPCUsedSubnets *[]*VPCUsedSubnet `json:"VPCUsedSubnets,omitempty" msgpack:"VPCUsedSubnets,omitempty" bson:"vpcusedsubnets,omitempty" mapstructure:"VPCUsedSubnets,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -555,8 +555,8 @@ func (o *SparsePCFWSubnetHelper) DeepCopyInto(out *SparsePCFWSubnetHelper) {
 }
 
 type mongoAttributesPCFWSubnetHelper struct {
-	VPCUsedSubnets []*VpcUsedSubnet `bson:"vpcusedsubnets"`
+	VPCUsedSubnets []*VPCUsedSubnet `bson:"vpcusedsubnets"`
 }
 type mongoAttributesSparsePCFWSubnetHelper struct {
-	VPCUsedSubnets *[]*VpcUsedSubnet `bson:"vpcusedsubnets,omitempty"`
+	VPCUsedSubnets *[]*VPCUsedSubnet `bson:"vpcusedsubnets,omitempty"`
 }

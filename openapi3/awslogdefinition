@@ -138,7 +138,7 @@
   "paths": {
     "/awslogdefinitions": {
       "get": {
-        "description": "Retrieves the list of awslogdefinitions.",
+        "description": "Retrieves the list of AWS log definitions.",
         "operationId": "get-all-awslogdefinitions",
         "parameters": [
           {
@@ -172,7 +172,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new awslogdefinition.",
+        "description": "Creates a new AWS log definition.",
         "operationId": "create-a-new-awslogdefinition",
         "requestBody": {
           "content": {
@@ -203,7 +203,7 @@
     },
     "/awslogdefinitions/{id}": {
       "delete": {
-        "description": "Deletes the logdefinition with the given ID.",
+        "description": "Deletes the AWS log definition with the given ID.",
         "operationId": "delete-awslogdefinition-by-ID",
         "responses": {
           "200": {
@@ -223,7 +223,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the logdefinition with the given ID.",
+        "description": "Retrieves the AWS log definition with the given ID.",
         "operationId": "get-awslogdefinition-by-ID",
         "responses": {
           "200": {
@@ -253,7 +253,7 @@
         }
       ],
       "put": {
-        "description": "Updates the logdefinition with the given ID.",
+        "description": "Updates the AWS log definition with the given ID.",
         "operationId": "update-awslogdefinition-by-ID",
         "requestBody": {
           "content": {

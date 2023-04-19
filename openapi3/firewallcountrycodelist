@@ -37,7 +37,7 @@
   "paths": {
     "/firewallcountrycodelist": {
       "get": {
-        "description": "Retrieves a firewallcountrycodelist.",
+        "description": "Retrieves a firewall country code list.",
         "operationId": "get-all-firewallcountrycodelist",
         "parameters": [
           {

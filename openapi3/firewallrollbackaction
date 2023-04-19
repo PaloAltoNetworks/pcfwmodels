@@ -26,7 +26,7 @@
             "type": "array"
           },
           "committedFirewallRulesetID": {
-            "description": "The ID of the committedfirewallruleset that we are rolling back to.",
+            "description": "The ID of the committed firewall ruleset that we are rolling back to.",
             "example": "xxxxxxxxx",
             "type": "string"
           }
@@ -53,7 +53,7 @@
   "paths": {
     "/firewallrollbackactions": {
       "post": {
-        "description": "Creates a new firewallrollbackaction.",
+        "description": "Creates a new firewall rollback action.",
         "operationId": "create-a-new-firewallrollbackaction",
         "requestBody": {
           "content": {

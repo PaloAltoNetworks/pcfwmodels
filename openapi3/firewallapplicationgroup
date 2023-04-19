@@ -20,7 +20,7 @@
             "type": "object"
           },
           "appIDs": {
-            "description": "List of NGFW AppIDs.  See FirewallAppIDList.",
+            "description": "List of NGFW AppIDs. See FirewallAppIDList.",
             "example": [
               "“ssh“",
               "“ftp“"
@@ -99,7 +99,7 @@
   "paths": {
     "/firewallapplicationgroups": {
       "get": {
-        "description": "Retrieves the list of firewallapplicationgroups.",
+        "description": "Retrieves the list of firewall application groups.",
         "operationId": "get-all-firewallapplicationgroups",
         "parameters": [
           {
@@ -133,7 +133,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallapplicationgroup.",
+        "description": "Creates a new firewall application group.",
         "operationId": "create-a-new-firewallapplicationgroup",
         "requestBody": {
           "content": {
@@ -164,7 +164,7 @@
     },
     "/firewallapplicationgroups/{id}": {
       "delete": {
-        "description": "Deletes the firewallapplicationgroup with the given ID.",
+        "description": "Deletes the firewall application group with the given ID.",
         "operationId": "delete-firewallapplicationgroup-by-ID",
         "responses": {
           "200": {
@@ -184,7 +184,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallapplicationgroup with the given ID.",
+        "description": "Retrieves the firewall application group with the given ID.",
         "operationId": "get-firewallapplicationgroup-by-ID",
         "responses": {
           "200": {
@@ -214,7 +214,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallapplicationgroup with the given ID.",
+        "description": "Updates the firewall application group with the given ID.",
         "operationId": "update-firewallapplicationgroup-by-ID",
         "requestBody": {
           "content": {

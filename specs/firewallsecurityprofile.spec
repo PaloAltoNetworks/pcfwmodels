@@ -8,11 +8,11 @@ model:
   description: "Represents firewall security setting.  \nThis object can be created
     by the user and referenced by a Group object."
   get:
-    description: Retrieves the firewallsecurityprofile with the given ID.
+    description: Retrieves the firewall security profile with the given ID.
   update:
-    description: Updates the firewallsecurityprofile with the given ID.
+    description: Updates the firewall security profile with the given ID.
   delete:
-    description: Deletes the firewallsecurityprofile with the given ID.
+    description: Deletes the firewall security profile with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'
@@ -56,14 +56,14 @@ attributes:
     stored: true
 
   - name: lastCommittedTime
-    description: The date when the securityprofile was last committed.
+    description: The date when the security profile was last committed.
     type: time
     exposed: true
     stored: true
     read_only: true
 
   - name: lastUpdatedTime
-    description: The date when the securityprofile was last updated.
+    description: The date when the security profile was last updated.
     type: time
     exposed: true
     stored: true

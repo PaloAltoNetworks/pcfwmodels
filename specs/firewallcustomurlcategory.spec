@@ -5,14 +5,15 @@ model:
   entity_name: FirewallCustomURLCategory
   package: ngfw
   group: core/ngfw
-  description: Represents a custom URL category that is referenced by a RuleURLCategory
+  description: |-
+    Represents a custom URL category that is referenced by a rule URL category
     object.
   get:
-    description: Retrieves the customurlcategory with the given ID.
+    description: Retrieves the custom URL category with the given ID.
   update:
-    description: Updates the customurlcategory with the given ID.
+    description: Updates the custom URL category with the given ID.
   delete:
-    description: Deletes the customurlcategory with the given ID.
+    description: Deletes the custom URL category with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

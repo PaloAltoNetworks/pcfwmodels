@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallcidrlist": {
-        "description": "Represents a list of CIDRs referenced by a TargetCriteria object.",
+        "description": "Represents a list of CIDRs referenced by a target criteria object.",
         "properties": {
           "CIDRs": {
             "description": "List of CIDRs.",
@@ -99,7 +99,7 @@
   "paths": {
     "/firewallcidrlists": {
       "get": {
-        "description": "Retrieves the list of firewallcidrlists.",
+        "description": "Retrieves the list of firewall CIDR lists.",
         "operationId": "get-all-firewallcidrlists",
         "parameters": [
           {
@@ -133,7 +133,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallcidrlist.",
+        "description": "Creates a new firewall CIDR list.",
         "operationId": "create-a-new-firewallcidrlist",
         "requestBody": {
           "content": {
@@ -164,7 +164,7 @@
     },
     "/firewallcidrlists/{id}": {
       "delete": {
-        "description": "Deletes the firewallcidrlist with the given ID.",
+        "description": "Deletes the firewall CIDR list with the given ID.",
         "operationId": "delete-firewallcidrlist-by-ID",
         "responses": {
           "200": {
@@ -184,7 +184,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallcidrlist with the given ID.",
+        "description": "Retrieves the firewall CIDR list with the given ID.",
         "operationId": "get-firewallcidrlist-by-ID",
         "responses": {
           "200": {
@@ -214,7 +214,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallcidrlist with the given ID.",
+        "description": "Updates the firewall CIDR list with the given ID.",
         "operationId": "update-firewallcidrlist-by-ID",
         "requestBody": {
           "content": {

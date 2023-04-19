@@ -95,7 +95,7 @@
   "paths": {
     "/firewallcertificates": {
       "get": {
-        "description": "Retrieves the list of firewallcertificates.",
+        "description": "Retrieves the list of firewall certificates.",
         "operationId": "get-all-firewallcertificates",
         "parameters": [
           {
@@ -129,7 +129,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallcertificate.",
+        "description": "Creates a new firewall certificate.",
         "operationId": "create-a-new-firewallcertificate",
         "requestBody": {
           "content": {

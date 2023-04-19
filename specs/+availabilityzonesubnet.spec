@@ -6,7 +6,7 @@ model:
   package: deploymentadvisor
   group: core/deploymentadvisor
   description: |-
-    Represents association of an availability zone and an avaialble subnet in that
+    Represents association of an availability zone and an available subnet in that
     zone.
   detached: true
 

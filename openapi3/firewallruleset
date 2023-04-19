@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallruleset": {
-        "description": "Represents a list of filewall rules that have a priority from 101+.\nThis object can be created by the user and referenced by the AWSFirewall object.",
+        "description": "Represents a list of firewall rules that have a priority from 101+.\nThis object can be created by the user and referenced by the AWSFirewall object.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -98,7 +98,7 @@
   "paths": {
     "/firewallrulesets": {
       "get": {
-        "description": "Retrieves the list of firewallrulesets.",
+        "description": "Retrieves the list of firewall rulesets.",
         "operationId": "get-all-firewallrulesets",
         "parameters": [
           {
@@ -132,7 +132,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallruleset.",
+        "description": "Creates a new firewall ruleset.",
         "operationId": "create-a-new-firewallruleset",
         "requestBody": {
           "content": {
@@ -163,7 +163,7 @@
     },
     "/firewallrulesets/{id}": {
       "delete": {
-        "description": "Deletes the firewallruleset with the given ID.",
+        "description": "Deletes the firewall ruleset with the given ID.",
         "operationId": "delete-firewallruleset-by-ID",
         "responses": {
           "200": {
@@ -183,7 +183,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallruleset with the given ID.",
+        "description": "Retrieves the firewall ruleset with the given ID.",
         "operationId": "get-firewallruleset-by-ID",
         "responses": {
           "200": {
@@ -213,7 +213,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallruleset with the given ID.",
+        "description": "Updates the firewall ruleset with the given ID.",
         "operationId": "update-firewallruleset-by-ID",
         "requestBody": {
           "content": {

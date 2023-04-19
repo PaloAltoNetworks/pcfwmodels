@@ -83,7 +83,7 @@ func (o FirewallURLCategoryListsList) Version() int {
 
 // FirewallURLCategoryList represents the model of a firewallurlcategorylist
 type FirewallURLCategoryList struct {
-	// A list of NGFW URLCategory objects.
+	// A list of NGFW URL category objects.
 	Categories []*FirewallURLCategory `json:"categories" msgpack:"categories" bson:"-" mapstructure:"categories,omitempty"`
 
 	// Namespace tag attached to an entity.
@@ -172,7 +172,7 @@ func (o *FirewallURLCategoryList) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallURLCategoryList) Doc() string {
 
-	return `This a readonly list that returns the default NGFW URLCategories.`
+	return `This a read-only list that returns the default NGFW URL categories.`
 }
 
 func (o *FirewallURLCategoryList) String() string {
@@ -320,7 +320,7 @@ var FirewallURLCategoryListAttributesMap = map[string]elemental.AttributeSpecifi
 	"Categories": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Categories",
-		Description:    `A list of NGFW URLCategory objects.`,
+		Description:    `A list of NGFW URL category objects.`,
 		Exposed:        true,
 		Name:           "categories",
 		ReadOnly:       true,
@@ -350,7 +350,7 @@ var FirewallURLCategoryListLowerCaseAttributesMap = map[string]elemental.Attribu
 	"categories": {
 		AllowedChoices: []string{},
 		ConvertedName:  "Categories",
-		Description:    `A list of NGFW URLCategory objects.`,
+		Description:    `A list of NGFW URL category objects.`,
 		Exposed:        true,
 		Name:           "categories",
 		ReadOnly:       true,
@@ -438,7 +438,7 @@ func (o SparseFirewallURLCategoryListsList) Version() int {
 
 // SparseFirewallURLCategoryList represents the sparse version of a firewallurlcategorylist.
 type SparseFirewallURLCategoryList struct {
-	// A list of NGFW URLCategory objects.
+	// A list of NGFW URL category objects.
 	Categories *[]*FirewallURLCategory `json:"categories,omitempty" msgpack:"categories,omitempty" bson:"-" mapstructure:"categories,omitempty"`
 
 	// Namespace tag attached to an entity.

@@ -83,7 +83,7 @@ func (o FirewallExternalFeedListsList) Version() int {
 
 // FirewallExternalFeedList represents the model of a firewallexternalfeedlist
 type FirewallExternalFeedList struct {
-	// A list of ExternalFeed objects.
+	// A list of external feed objects.
 	Feeds []*FirewallExternalFeed `json:"feeds" msgpack:"feeds" bson:"feeds" mapstructure:"feeds,omitempty"`
 
 	// Namespace tag attached to an entity.
@@ -174,7 +174,7 @@ func (o *FirewallExternalFeedList) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallExternalFeedList) Doc() string {
 
-	return `This a readonly list that returns all of the NGFW external feeds.`
+	return `This a read-only list that returns all of the NGFW external feeds.`
 }
 
 func (o *FirewallExternalFeedList) String() string {
@@ -323,7 +323,7 @@ var FirewallExternalFeedListAttributesMap = map[string]elemental.AttributeSpecif
 		AllowedChoices: []string{},
 		BSONFieldName:  "feeds",
 		ConvertedName:  "Feeds",
-		Description:    `A list of ExternalFeed objects.`,
+		Description:    `A list of external feed objects.`,
 		Exposed:        true,
 		Name:           "feeds",
 		ReadOnly:       true,
@@ -355,7 +355,7 @@ var FirewallExternalFeedListLowerCaseAttributesMap = map[string]elemental.Attrib
 		AllowedChoices: []string{},
 		BSONFieldName:  "feeds",
 		ConvertedName:  "Feeds",
-		Description:    `A list of ExternalFeed objects.`,
+		Description:    `A list of external feed objects.`,
 		Exposed:        true,
 		Name:           "feeds",
 		ReadOnly:       true,
@@ -444,7 +444,7 @@ func (o SparseFirewallExternalFeedListsList) Version() int {
 
 // SparseFirewallExternalFeedList represents the sparse version of a firewallexternalfeedlist.
 type SparseFirewallExternalFeedList struct {
-	// A list of ExternalFeed objects.
+	// A list of external feed objects.
 	Feeds *[]*FirewallExternalFeed `json:"feeds,omitempty" msgpack:"feeds,omitempty" bson:"feeds,omitempty" mapstructure:"feeds,omitempty"`
 
 	// Namespace tag attached to an entity.

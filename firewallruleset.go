@@ -255,7 +255,7 @@ func (o *FirewallRuleset) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallRuleset) Doc() string {
 
-	return `Represents a list of filewall rules that have a priority from 101+.
+	return `Represents a list of firewall rules that have a priority from 101+.
 This object can be created by the user and referenced by the AWSFirewall object.`
 }
 

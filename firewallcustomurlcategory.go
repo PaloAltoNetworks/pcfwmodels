@@ -274,7 +274,8 @@ func (o *FirewallCustomURLCategory) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCustomURLCategory) Doc() string {
 
-	return `Represents a custom URL category that is referenced by a RuleURLCategory object.`
+	return `Represents a custom URL category that is referenced by a rule URL category
+object.`
 }
 
 func (o *FirewallCustomURLCategory) String() string {

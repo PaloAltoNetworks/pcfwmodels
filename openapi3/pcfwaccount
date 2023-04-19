@@ -15,7 +15,7 @@
             "type": "string"
           },
           "LogQueryExternalID": {
-            "description": "External ID used in logQueryRole.",
+            "description": "External ID used in log query role.",
             "readOnly": true,
             "type": "string"
           },
@@ -45,7 +45,7 @@
             "type": "string"
           },
           "PCTenantIssuer": {
-            "description": "Issuer for Prisma Cloud tenant (identifies the PC stack for IAM role usage).",
+            "description": "Issuer for Prisma Cloud tenant (identifies the Prisma Cloud stack for IAM role\nusage).",
             "readOnly": true,
             "type": "string"
           },
@@ -88,7 +88,7 @@
             "type": "string"
           },
           "logDestination": {
-            "description": "The log destination for logging. The value will be converted to lower case and\nhave the aws account id and logging region appended to it (ie.\nlogs-1234-us-east-2) when used to create an S3 bucket for logging.",
+            "description": "The log destination for logging. The value will be converted to lower case and\nhave the AWS account ID and logging region appended to it (ie.\nlogs-1234-us-east-2) when used to create an S3 bucket for logging.",
             "example": "logs",
             "type": "string"
           },

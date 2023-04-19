@@ -1,6 +1,6 @@
 {
   "$extends": [],
-  "$modelName": "VpcAvailableSubnet",
+  "$modelName": "VPCAvailableSubnet",
   "$modelPackage": "deploymentadvisor",
   "$modelResourceName": "vpcavailablesubnets",
   "$modelRestName": "vpcavailablesubnet",
@@ -31,6 +31,6 @@
     }
   },
   "required": [],
-  "title": "VpcAvailableSubnet",
+  "title": "VPCAvailableSubnet",
   "type": "object"
 }

@@ -7,11 +7,11 @@ model:
   group: core/ngfw
   description: Represents a grouping of application IDs.
   get:
-    description: Retrieves the firewallapplicationgroup with the given ID.
+    description: Retrieves the firewall application group with the given ID.
   update:
-    description: Updates the firewallapplicationgroup with the given ID.
+    description: Updates the firewall application group with the given ID.
   delete:
-    description: Deletes the firewallapplicationgroup with the given ID.
+    description: Deletes the firewall application group with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'
@@ -25,7 +25,7 @@ model:
 attributes:
   v1:
   - name: appIDs
-    description: List of NGFW AppIDs.  See FirewallAppIDList.
+    description: List of NGFW AppIDs. See FirewallAppIDList.
     type: list
     exposed: true
     subtype: string

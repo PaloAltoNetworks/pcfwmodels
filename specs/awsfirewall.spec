@@ -7,16 +7,16 @@ model:
   group: core/ngfw
   description: Represents an AWS firewall instance.
   get:
-    description: Retrieves the awsfirewall with the given ID.
+    description: Retrieves the AWS firewall with the given ID.
   update:
-    description: Updates the awsfirewall with the given ID.
+    description: Updates the AWS firewall with the given ID.
   delete:
-    description: Deletes the awsfirewall with the given ID.
+    description: Deletes the AWS firewall with the given ID.
     parameters:
       entries:
       - name: purge
-        description: Parameter to delete the awsfireall record without cleaning up
-          the NGFW resources.
+        description: Parameter to delete the AWS firewall record without cleaning
+          up the NGFW resources.
         type: boolean
         default_value: false
   extends:
@@ -88,7 +88,7 @@ attributes:
       refMode: pointer
 
   - name: lastCommitTime
-    description: The date when the fireall was last committed.
+    description: The date when the firewall was last committed.
     type: time
     exposed: true
     stored: true

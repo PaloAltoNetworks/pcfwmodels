@@ -93,7 +93,7 @@ type FirewallLicensingCredits struct {
 	// Identifier of the object.
 	ID string `json:"ID" msgpack:"ID" bson:"-" mapstructure:"ID,omitempty"`
 
-	// Represents prisma cloud management credits.
+	// Represents Prisma Cloud management credits.
 	PrismaCloudCredits int `json:"PrismaCloudCredits" msgpack:"PrismaCloudCredits" bson:"prismacloudcredits" mapstructure:"PrismaCloudCredits,omitempty"`
 
 	// Represents threat prevention usage credits.
@@ -102,7 +102,7 @@ type FirewallLicensingCredits struct {
 	// Represents traffic secured usage credits.
 	TrafficSecuredCredits int `json:"TrafficSecuredCredits" msgpack:"TrafficSecuredCredits" bson:"trafficsecuredcredits" mapstructure:"TrafficSecuredCredits,omitempty"`
 
-	// Represents url filtering usage credits.
+	// Represents URL filtering usage credits.
 	URLFUsageCredits int `json:"URLFUsageCredits" msgpack:"URLFUsageCredits" bson:"urlfusagecredits" mapstructure:"URLFUsageCredits,omitempty"`
 
 	// Stores additional information about an entity.
@@ -707,7 +707,7 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		AllowedChoices: []string{},
 		BSONFieldName:  "prismacloudcredits",
 		ConvertedName:  "PrismaCloudCredits",
-		Description:    `Represents prisma cloud management credits.`,
+		Description:    `Represents Prisma Cloud management credits.`,
 		Exposed:        true,
 		Name:           "PrismaCloudCredits",
 		Stored:         true,
@@ -737,7 +737,7 @@ var FirewallLicensingCreditsAttributesMap = map[string]elemental.AttributeSpecif
 		AllowedChoices: []string{},
 		BSONFieldName:  "urlfusagecredits",
 		ConvertedName:  "URLFUsageCredits",
-		Description:    `Represents url filtering usage credits.`,
+		Description:    `Represents URL filtering usage credits.`,
 		Exposed:        true,
 		Name:           "URLFUsageCredits",
 		Stored:         true,
@@ -933,7 +933,7 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		AllowedChoices: []string{},
 		BSONFieldName:  "prismacloudcredits",
 		ConvertedName:  "PrismaCloudCredits",
-		Description:    `Represents prisma cloud management credits.`,
+		Description:    `Represents Prisma Cloud management credits.`,
 		Exposed:        true,
 		Name:           "PrismaCloudCredits",
 		Stored:         true,
@@ -963,7 +963,7 @@ var FirewallLicensingCreditsLowerCaseAttributesMap = map[string]elemental.Attrib
 		AllowedChoices: []string{},
 		BSONFieldName:  "urlfusagecredits",
 		ConvertedName:  "URLFUsageCredits",
-		Description:    `Represents url filtering usage credits.`,
+		Description:    `Represents URL filtering usage credits.`,
 		Exposed:        true,
 		Name:           "URLFUsageCredits",
 		Stored:         true,
@@ -1190,7 +1190,7 @@ type SparseFirewallLicensingCredits struct {
 	// Identifier of the object.
 	ID *string `json:"ID,omitempty" msgpack:"ID,omitempty" bson:"-" mapstructure:"ID,omitempty"`
 
-	// Represents prisma cloud management credits.
+	// Represents Prisma Cloud management credits.
 	PrismaCloudCredits *int `json:"PrismaCloudCredits,omitempty" msgpack:"PrismaCloudCredits,omitempty" bson:"prismacloudcredits,omitempty" mapstructure:"PrismaCloudCredits,omitempty"`
 
 	// Represents threat prevention usage credits.
@@ -1199,7 +1199,7 @@ type SparseFirewallLicensingCredits struct {
 	// Represents traffic secured usage credits.
 	TrafficSecuredCredits *int `json:"TrafficSecuredCredits,omitempty" msgpack:"TrafficSecuredCredits,omitempty" bson:"trafficsecuredcredits,omitempty" mapstructure:"TrafficSecuredCredits,omitempty"`
 
-	// Represents url filtering usage credits.
+	// Represents URL filtering usage credits.
 	URLFUsageCredits *int `json:"URLFUsageCredits,omitempty" msgpack:"URLFUsageCredits,omitempty" bson:"urlfusagecredits,omitempty" mapstructure:"URLFUsageCredits,omitempty"`
 
 	// Stores additional information about an entity.

@@ -23,7 +23,7 @@ attributes:
     default_value: Alert
 
   - name: name
-    description: The name of the URL Catgory.
+    description: The name of the URL category.
     type: string
     exposed: true
     stored: true

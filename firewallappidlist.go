@@ -172,7 +172,7 @@ func (o *FirewallAppIDList) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallAppIDList) Doc() string {
 
-	return `This a readonly list that returns all of the NGFW AppIDs that the user can
+	return `This a read-only list that returns all of the NGFW AppIDs that the user can
 select.`
 }
 

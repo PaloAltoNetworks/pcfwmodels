@@ -251,7 +251,7 @@ func (o *FirewallCIDRlist) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCIDRlist) Doc() string {
 
-	return `Represents a list of CIDRs referenced by a TargetCriteria object.`
+	return `Represents a list of CIDRs referenced by a target criteria object.`
 }
 
 func (o *FirewallCIDRlist) String() string {

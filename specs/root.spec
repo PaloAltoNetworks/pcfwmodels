@@ -14,95 +14,95 @@ model:
 relations:
 - rest_name: awsfirewall
   get:
-    description: Retrieves the list of awsfirewalls.
+    description: Retrieves the list of AWS firewalls.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new awsfirewall.
+    description: Creates a new AWS firewall.
 
 - rest_name: awslogdefinition
   get:
-    description: Retrieves the list of awslogdefinitions.
+    description: Retrieves the list of AWS log definitions.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new awslogdefinition.
+    description: Creates a new AWS log definition.
 
 - rest_name: firewallappidlist
   get:
-    description: Retrieves a firewallappidlist.
+    description: Retrieves a firewall AppID list.
     global_parameters:
     - $queryable
 
 - rest_name: firewallapplicationgroup
   get:
-    description: Retrieves the list of firewallapplicationgroups.
+    description: Retrieves the list of firewall application groups.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallapplicationgroup.
+    description: Creates a new firewall application group.
 
 - rest_name: firewallcertificate
   get:
-    description: Retrieves the list of firewallcertificates.
+    description: Retrieves the list of firewall certificates.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallcertificate.
+    description: Creates a new firewall certificate.
 
 - rest_name: firewallcidrlist
   get:
-    description: Retrieves the list of firewallcidrlists.
+    description: Retrieves the list of firewall CIDR lists.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallcidrlist.
+    description: Creates a new firewall CIDR list.
 
 - rest_name: firewallcommitaction
   create:
-    description: Creates a new firewallcommitaction.
+    description: Creates a new firewall commit action.
 
 - rest_name: firewallcommittedruleset
   get:
-    description: Retrieves the list of firewallcommittedrulesets.
+    description: Retrieves the list of firewall committed rulesets.
     global_parameters:
     - $queryable
 
 - rest_name: firewallcountrycodelist
   get:
-    description: Retrieves a firewallcountrycodelist.
+    description: Retrieves a firewall country code list.
     global_parameters:
     - $queryable
 
 - rest_name: firewallcustomexternalfeed
   get:
-    description: Retrieves the list of firewallcustomexternalfeeds.
+    description: Retrieves the list of firewall custom external feeds.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallcustomexternalfeed.
+    description: Creates a new firewall custom external feed.
 
 - rest_name: firewallcustomurlcategory
   get:
-    description: Retrieves the list of firewallcustomurlcategorys.
+    description: Retrieves the list of firewall custom URL categories.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallcustomurlcategory.
+    description: Creates a new firewall custom URL category.
 
 - rest_name: firewallexternalfeedlist
   get:
-    description: Retrieves a firewallexternalfeedlist.
+    description: Retrieves a firewall external feed list.
     global_parameters:
     - $queryable
 
 - rest_name: firewallfqdnlist
   get:
-    description: Retrieves a the list of firewallfqdnlists.
+    description: Retrieves a the list of firewall FQDN lists.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallfqdnlist.
+    description: Creates a new firewall FQDN list.
 
 - rest_name: firewalllicensingcredits
   get:
@@ -126,41 +126,41 @@ relations:
 
 - rest_name: firewallrollbackaction
   create:
-    description: Creates a new firewallrollbackaction.
+    description: Creates a new firewall rollback action.
 
 - rest_name: firewallrule
   get:
-    description: Retrieves the list of firewallrules.
+    description: Retrieves the list of firewall rules.
     global_parameters:
     - $queryable
 
 - rest_name: firewallruleset
   get:
-    description: Retrieves the list of firewallrulesets.
+    description: Retrieves the list of firewall rulesets.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallruleset.
+    description: Creates a new firewall ruleset.
 
 - rest_name: firewallsecurityprofile
   get:
-    description: Retrieves the list of firewallsecurityprofiles.
+    description: Retrieves the list of firewall security profiles.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewallsecurityprofile.
+    description: Creates a new firewall security profile.
 
 - rest_name: firewalltemplate
   get:
-    description: Retrieves the list of firewalltemplates.
+    description: Retrieves the list of firewall templates.
     global_parameters:
     - $queryable
   create:
-    description: Creates a new firewalltemplate.
+    description: Creates a new firewall template.
 
 - rest_name: firewallurlcategorylist
   get:
-    description: Retrieves a firewallurlcategorylist.
+    description: Retrieves a firewall URL category list.
     global_parameters:
     - $queryable
 
@@ -228,7 +228,7 @@ relations:
     global_parameters:
     - $queryable
   create:
-    description: Onboards Prisma Cloud tenant on PC Firewall.
+    description: Onboards Prisma Cloud tenant on Prisma Cloud Firewall.
 
 - rest_name: pcfwtenantaccountterraform
   create:

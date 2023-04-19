@@ -258,7 +258,7 @@ func (o *FirewallCommittedRuleset) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCommittedRuleset) Doc() string {
 
-	return `Represents a list of committed filewall rules.`
+	return `Represents a list of committed firewall rules.`
 }
 
 func (o *FirewallCommittedRuleset) String() string {

@@ -48,14 +48,14 @@ attributes:
     - “US“
 
   - name: customExternalFeedIDs
-    description: List of FirewallCustomeExternalFeed IDs that are of type IPList.
+    description: List of firewall custom external feed IDs that are of type IPList.
     type: list
     exposed: true
     subtype: string
     stored: true
 
   - name: externalFeedIDs
-    description: List of FirewallExternalFeed IDs that are of type IPList.
+    description: List of firewall external feed IDs that are of type IPList.
     type: list
     exposed: true
     subtype: string
@@ -66,14 +66,14 @@ attributes:
     - PaloAltoNetworks-KnownMaliciousIPAddresses
 
   - name: firewallCIDRListIDs
-    description: List of FirewallCIDRList IDs.
+    description: List of Firewall CIDR list IDs.
     type: list
     exposed: true
     subtype: string
     stored: true
 
   - name: firewallFQDNListIDs
-    description: List of FQDNList IDs.
+    description: List of FQDN list IDs.
     type: list
     exposed: true
     subtype: string

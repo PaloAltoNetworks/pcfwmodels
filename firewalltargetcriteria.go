@@ -22,16 +22,16 @@ type FirewallTargetCriteria struct {
 	// List of country codes.
 	CountryCodes []string `json:"countryCodes" msgpack:"countryCodes" bson:"countrycodes" mapstructure:"countryCodes,omitempty"`
 
-	// List of FirewallCustomeExternalFeed IDs that are of type IPList.
+	// List of firewall custom external feed IDs that are of type IPList.
 	CustomExternalFeedIDs []string `json:"customExternalFeedIDs" msgpack:"customExternalFeedIDs" bson:"customexternalfeedids" mapstructure:"customExternalFeedIDs,omitempty"`
 
-	// List of FirewallExternalFeed IDs that are of type IPList.
+	// List of firewall external feed IDs that are of type IPList.
 	ExternalFeedIDs []string `json:"externalFeedIDs" msgpack:"externalFeedIDs" bson:"externalfeedids" mapstructure:"externalFeedIDs,omitempty"`
 
-	// List of FirewallCIDRList IDs.
+	// List of Firewall CIDR list IDs.
 	FirewallCIDRListIDs []string `json:"firewallCIDRListIDs" msgpack:"firewallCIDRListIDs" bson:"firewallcidrlistids" mapstructure:"firewallCIDRListIDs,omitempty"`
 
-	// List of FQDNList IDs.
+	// List of FQDN list IDs.
 	FirewallFQDNListIDs []string `json:"firewallFQDNListIDs" msgpack:"firewallFQDNListIDs" bson:"firewallfqdnlistids" mapstructure:"firewallFQDNListIDs,omitempty"`
 
 	// Negates this match criteria.
@@ -240,7 +240,7 @@ var FirewallTargetCriteriaAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "customexternalfeedids",
 		ConvertedName:  "CustomExternalFeedIDs",
-		Description:    `List of FirewallCustomeExternalFeed IDs that are of type IPList.`,
+		Description:    `List of firewall custom external feed IDs that are of type IPList.`,
 		Exposed:        true,
 		Name:           "customExternalFeedIDs",
 		Stored:         true,
@@ -251,7 +251,7 @@ var FirewallTargetCriteriaAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "externalfeedids",
 		ConvertedName:  "ExternalFeedIDs",
-		Description:    `List of FirewallExternalFeed IDs that are of type IPList.`,
+		Description:    `List of firewall external feed IDs that are of type IPList.`,
 		Exposed:        true,
 		Name:           "externalFeedIDs",
 		Stored:         true,
@@ -262,7 +262,7 @@ var FirewallTargetCriteriaAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "firewallcidrlistids",
 		ConvertedName:  "FirewallCIDRListIDs",
-		Description:    `List of FirewallCIDRList IDs.`,
+		Description:    `List of Firewall CIDR list IDs.`,
 		Exposed:        true,
 		Name:           "firewallCIDRListIDs",
 		Stored:         true,
@@ -273,7 +273,7 @@ var FirewallTargetCriteriaAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "firewallfqdnlistids",
 		ConvertedName:  "FirewallFQDNListIDs",
-		Description:    `List of FQDNList IDs.`,
+		Description:    `List of FQDN list IDs.`,
 		Exposed:        true,
 		Name:           "firewallFQDNListIDs",
 		Stored:         true,
@@ -331,7 +331,7 @@ var FirewallTargetCriteriaLowerCaseAttributesMap = map[string]elemental.Attribut
 		AllowedChoices: []string{},
 		BSONFieldName:  "customexternalfeedids",
 		ConvertedName:  "CustomExternalFeedIDs",
-		Description:    `List of FirewallCustomeExternalFeed IDs that are of type IPList.`,
+		Description:    `List of firewall custom external feed IDs that are of type IPList.`,
 		Exposed:        true,
 		Name:           "customExternalFeedIDs",
 		Stored:         true,
@@ -342,7 +342,7 @@ var FirewallTargetCriteriaLowerCaseAttributesMap = map[string]elemental.Attribut
 		AllowedChoices: []string{},
 		BSONFieldName:  "externalfeedids",
 		ConvertedName:  "ExternalFeedIDs",
-		Description:    `List of FirewallExternalFeed IDs that are of type IPList.`,
+		Description:    `List of firewall external feed IDs that are of type IPList.`,
 		Exposed:        true,
 		Name:           "externalFeedIDs",
 		Stored:         true,
@@ -353,7 +353,7 @@ var FirewallTargetCriteriaLowerCaseAttributesMap = map[string]elemental.Attribut
 		AllowedChoices: []string{},
 		BSONFieldName:  "firewallcidrlistids",
 		ConvertedName:  "FirewallCIDRListIDs",
-		Description:    `List of FirewallCIDRList IDs.`,
+		Description:    `List of Firewall CIDR list IDs.`,
 		Exposed:        true,
 		Name:           "firewallCIDRListIDs",
 		Stored:         true,
@@ -364,7 +364,7 @@ var FirewallTargetCriteriaLowerCaseAttributesMap = map[string]elemental.Attribut
 		AllowedChoices: []string{},
 		BSONFieldName:  "firewallfqdnlistids",
 		ConvertedName:  "FirewallFQDNListIDs",
-		Description:    `List of FQDNList IDs.`,
+		Description:    `List of FQDN list IDs.`,
 		Exposed:        true,
 		Name:           "firewallFQDNListIDs",
 		Stored:         true,

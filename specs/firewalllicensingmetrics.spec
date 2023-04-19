@@ -51,7 +51,7 @@ attributes:
     stored: true
 
   - name: URLFUsageHours
-    description: Represents url filtering usage hours.
+    description: Represents URL filtering usage hours.
     type: integer
     exposed: true
     stored: true

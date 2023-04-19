@@ -5,13 +5,13 @@ model:
   entity_name: FirewallCommittedRuleset
   package: ngfw
   group: core/ngfw
-  description: Represents a list of committed filewall rules.
+  description: Represents a list of committed firewall rules.
   get:
-    description: Retrieves the firewallcommittedruleset with the given ID.
+    description: Retrieves the firewall committed ruleset with the given ID.
   update:
-    description: Updates the firewallcommittedruleset with the given ID.
+    description: Updates the firewall committed ruleset with the given ID.
   delete:
-    description: Deletes the firewallcommittedruleset with the given ID.
+    description: Deletes the firewall committed ruleset with the given ID.
   extends:
   - '@identifiable-stored'
   - '@namespaced'

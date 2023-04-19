@@ -95,7 +95,7 @@ type FirewallGroup struct {
 	// List of tags attached to an entity.
 	AssociatedTags []string `json:"associatedTags" msgpack:"associatedTags" bson:"associatedtags" mapstructure:"associatedTags,omitempty"`
 
-	// A profile used to attach newly created firewalls to this FirewallGroup.
+	// A profile used to attach newly created firewalls to this firewall group.
 	AutoIncludeProfile *FirewallAutoIncludeProfile `json:"autoIncludeProfile" msgpack:"autoIncludeProfile" bson:"autoincludeprofile" mapstructure:"autoIncludeProfile,omitempty"`
 
 	// internal idempotency key for a create operation.
@@ -693,7 +693,7 @@ var FirewallGroupAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "autoincludeprofile",
 		ConvertedName:  "AutoIncludeProfile",
-		Description:    `A profile used to attach newly created firewalls to this FirewallGroup.`,
+		Description:    `A profile used to attach newly created firewalls to this firewall group.`,
 		Exposed:        true,
 		Name:           "autoIncludeProfile",
 		Stored:         true,
@@ -886,7 +886,7 @@ var FirewallGroupLowerCaseAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "autoincludeprofile",
 		ConvertedName:  "AutoIncludeProfile",
-		Description:    `A profile used to attach newly created firewalls to this FirewallGroup.`,
+		Description:    `A profile used to attach newly created firewalls to this firewall group.`,
 		Exposed:        true,
 		Name:           "autoIncludeProfile",
 		Stored:         true,
@@ -1106,7 +1106,7 @@ type SparseFirewallGroup struct {
 	// List of tags attached to an entity.
 	AssociatedTags *[]string `json:"associatedTags,omitempty" msgpack:"associatedTags,omitempty" bson:"associatedtags,omitempty" mapstructure:"associatedTags,omitempty"`
 
-	// A profile used to attach newly created firewalls to this FirewallGroup.
+	// A profile used to attach newly created firewalls to this firewall group.
 	AutoIncludeProfile *FirewallAutoIncludeProfile `json:"autoIncludeProfile,omitempty" msgpack:"autoIncludeProfile,omitempty" bson:"autoincludeprofile,omitempty" mapstructure:"autoIncludeProfile,omitempty"`
 
 	// internal idempotency key for a create operation.

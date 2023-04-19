@@ -5,7 +5,7 @@ model:
   entity_name: FirewallURLCategoryList
   package: ngfw
   group: core/ngfw
-  description: This a readonly list that returns the default NGFW URLCategories.
+  description: This a read-only list that returns the default NGFW URL categories.
   extends:
   - '@namespaced'
 
@@ -13,7 +13,7 @@ model:
 attributes:
   v1:
   - name: categories
-    description: A list of NGFW URLCategory objects.
+    description: A list of NGFW URL category objects.
     type: refList
     exposed: true
     subtype: firewallurlcategory

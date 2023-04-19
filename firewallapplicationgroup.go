@@ -92,7 +92,7 @@ type FirewallApplicationGroup struct {
 	// Stores additional information about an entity.
 	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
 
-	// List of NGFW AppIDs.  See FirewallAppIDList.
+	// List of NGFW AppIDs. See FirewallAppIDList.
 	AppIDs []string `json:"appIDs" msgpack:"appIDs" bson:"appids" mapstructure:"appIDs,omitempty"`
 
 	// List of tags attached to an entity.
@@ -638,7 +638,7 @@ var FirewallApplicationGroupAttributesMap = map[string]elemental.AttributeSpecif
 		AllowedChoices: []string{},
 		BSONFieldName:  "appids",
 		ConvertedName:  "AppIDs",
-		Description:    `List of NGFW AppIDs.  See FirewallAppIDList.`,
+		Description:    `List of NGFW AppIDs. See FirewallAppIDList.`,
 		Exposed:        true,
 		Name:           "appIDs",
 		Required:       true,
@@ -802,7 +802,7 @@ var FirewallApplicationGroupLowerCaseAttributesMap = map[string]elemental.Attrib
 		AllowedChoices: []string{},
 		BSONFieldName:  "appids",
 		ConvertedName:  "AppIDs",
-		Description:    `List of NGFW AppIDs.  See FirewallAppIDList.`,
+		Description:    `List of NGFW AppIDs. See FirewallAppIDList.`,
 		Exposed:        true,
 		Name:           "appIDs",
 		Required:       true,
@@ -1003,7 +1003,7 @@ type SparseFirewallApplicationGroup struct {
 	// Stores additional information about an entity.
 	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
 
-	// List of NGFW AppIDs.  See FirewallAppIDList.
+	// List of NGFW AppIDs. See FirewallAppIDList.
 	AppIDs *[]string `json:"appIDs,omitempty" msgpack:"appIDs,omitempty" bson:"appids,omitempty" mapstructure:"appIDs,omitempty"`
 
 	// List of tags attached to an entity.

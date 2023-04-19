@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewalllog": {
-        "description": "Represents a log line in a logquery result.",
+        "description": "Represents a log line in a log query result.",
         "properties": {
           "XFFIP": {
             "description": "The IP address of the user who requested the web page or the IP address of the\nnext to last device that the request traversed. If the request goes through one\nor more proxies, load balancers, or other upstream devices, the firewall\ndisplays the IP address of the most recent device.",

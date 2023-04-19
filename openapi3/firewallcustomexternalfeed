@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallcustomexternalfeed": {
-        "description": "Represents an external intelligence feed referenced by TargetCriteria.",
+        "description": "Represents an external intelligence feed referenced by target criteria.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -76,7 +76,7 @@
             "type": "string"
           },
           "updateDailyTime": {
-            "description": "Specifies the time of day when the updateFrequency is Daily.",
+            "description": "Specifies the time of day when the update frequency is daily.",
             "format": "date-time",
             "type": "string"
           },
@@ -118,7 +118,7 @@
   "paths": {
     "/firewallcustomexternalfeeds": {
       "get": {
-        "description": "Retrieves the list of firewallcustomexternalfeeds.",
+        "description": "Retrieves the list of firewall custom external feeds.",
         "operationId": "get-all-firewallcustomexternalfeeds",
         "parameters": [
           {
@@ -152,7 +152,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallcustomexternalfeed.",
+        "description": "Creates a new firewall custom external feed.",
         "operationId": "create-a-new-firewallcustomexternalfeed",
         "requestBody": {
           "content": {
@@ -183,7 +183,7 @@
     },
     "/firewallcustomexternalfeeds/{id}": {
       "delete": {
-        "description": "Deletes the externalfeed with the given ID.",
+        "description": "Deletes the external feed with the given ID.",
         "operationId": "delete-firewallcustomexternalfeed-by-ID",
         "responses": {
           "200": {
@@ -203,7 +203,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the externalfeed with the given ID.",
+        "description": "Retrieves the external feed with the given ID.",
         "operationId": "get-firewallcustomexternalfeed-by-ID",
         "responses": {
           "200": {
@@ -233,7 +233,7 @@
         }
       ],
       "put": {
-        "description": "Updates the externalfeed with the given ID.",
+        "description": "Updates the external feed with the given ID.",
         "operationId": "update-firewallcustomexternalfeed-by-ID",
         "requestBody": {
           "content": {

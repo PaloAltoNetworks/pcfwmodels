@@ -30,7 +30,7 @@ type FirewallURLCategory struct {
 	// The action the firewall should take.
 	Action FirewallURLCategoryActionValue `json:"action" msgpack:"action" bson:"action" mapstructure:"action,omitempty"`
 
-	// The name of the URL Catgory.
+	// The name of the URL category.
 	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
@@ -184,7 +184,7 @@ var FirewallURLCategoryAttributesMap = map[string]elemental.AttributeSpecificati
 		AllowedChoices: []string{},
 		BSONFieldName:  "name",
 		ConvertedName:  "Name",
-		Description:    `The name of the URL Catgory.`,
+		Description:    `The name of the URL category.`,
 		Exposed:        true,
 		Name:           "name",
 		Required:       true,
@@ -210,7 +210,7 @@ var FirewallURLCategoryLowerCaseAttributesMap = map[string]elemental.AttributeSp
 		AllowedChoices: []string{},
 		BSONFieldName:  "name",
 		ConvertedName:  "Name",
-		Description:    `The name of the URL Catgory.`,
+		Description:    `The name of the URL category.`,
 		Exposed:        true,
 		Name:           "name",
 		Required:       true,

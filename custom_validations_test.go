@@ -732,7 +732,7 @@ func TestValidateVPCID(t *testing.T) {
 func TestValidateVpcSubnetInfo(t *testing.T) {
 	type args struct {
 		attribute      string
-		VpcUsedSubnets []*VpcUsedSubnet
+		VPCUsedSubnets []*VPCUsedSubnet
 	}
 	tests := []struct {
 		name    string
@@ -740,18 +740,18 @@ func TestValidateVpcSubnetInfo(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "empty VpcUsedSubnets is invalid",
+			name: "empty VPCUsedSubnets is invalid",
 			args: args{
-				"VpcUsedSubnets",
-				[]*VpcUsedSubnet{},
+				"VPCUsedSubnets",
+				[]*VPCUsedSubnet{},
 			},
 			wantErr: true,
 		},
 		{
 			name: "empty AvailabilityZones is invalid",
 			args: args{
-				"VpcUsedSubnets",
-				[]*VpcUsedSubnet{
+				"VPCUsedSubnets",
+				[]*VPCUsedSubnet{
 					{
 						VPCID:             "vpc1",
 						AvailabilityZones: []string{},
@@ -763,8 +763,8 @@ func TestValidateVpcSubnetInfo(t *testing.T) {
 		{
 			name: "valid list",
 			args: args{
-				"VpcUsedSubnets",
-				[]*VpcUsedSubnet{
+				"VPCUsedSubnets",
+				[]*VPCUsedSubnet{
 					{
 						VPCID:             "vpc1",
 						AvailabilityZones: []string{"us-west-1a"},
@@ -776,7 +776,7 @@ func TestValidateVpcSubnetInfo(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := ValidateVpcSubnetInfo(tt.args.attribute, tt.args.VpcUsedSubnets); (err != nil) != tt.wantErr {
+			if err := ValidateVpcSubnetInfo(tt.args.attribute, tt.args.VPCUsedSubnets); (err != nil) != tt.wantErr {
 				t.Errorf("ValidateVpcSubnetInfo() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})

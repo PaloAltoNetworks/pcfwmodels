@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallcommitaction": {
-        "description": "Represents committing FilewallRulesets, FilewallTemplates,\nFilewallSecurityProfiles, \nand AWSLogDefinitions to a firewall.",
+        "description": "Represents committing FirewallRulesets, FirewallTemplates,\nFirewallSecurityProfiles, and AWSLogDefinitions to a firewall.",
         "properties": {
           "actionStatus": {
             "description": "The status of action.",
@@ -63,7 +63,7 @@
   "paths": {
     "/firewallcommitactions": {
       "post": {
-        "description": "Creates a new firewallcommitaction.",
+        "description": "Creates a new firewall commit action.",
         "operationId": "create-a-new-firewallcommitaction",
         "requestBody": {
           "content": {

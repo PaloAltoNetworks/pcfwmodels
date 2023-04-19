@@ -8,7 +8,7 @@
 
 ### AvailabilityZoneSubnet
 
-Represents association of an availability zone and an avaialble subnet in that
+Represents association of an availability zone and an available subnet in that
 zone.
 
 #### Attributes
@@ -176,8 +176,8 @@ Default value:
 
 ### PCFWAccountMirrorSource
 
-Represents the traffic mirror source configuration for a firewall associatd with
-a customer account.
+Represents the traffic mirror source configuration for a firewall associated
+with a customer account.
 
 #### Example
 
@@ -204,15 +204,15 @@ Retrieves the mirror configuration of a firewall for a cloud account.
 
 ##### `DELETE /pcfwaccountmirrorsources/:id`
 
-Deletes the pcfwaccountmirrorsource object with the given ID.
+Deletes the PCFW account mirror source object with the given ID.
 
 ##### `GET /pcfwaccountmirrorsources/:id`
 
-Retrieves the pcfwaccountmirrorsource object with the given ID.
+Retrieves the PCFW account mirror source object with the given ID.
 
 ##### `PUT /pcfwaccountmirrorsources/:id`
 
-Updates the pcfwaccountmirrorsource object with the given ID.
+Updates the PCFW account mirror source object with the given ID.
 
 #### Attributes
 
@@ -303,7 +303,7 @@ Last update date of the object.
 ### PCFWAccountMirrorSourceState
 
 Represents state of traffic mirror session setup associated with an instance and
-network interface for a firewall associatd with a customer account.
+network interface for a firewall associated with a customer account.
 
 #### Example
 
@@ -331,15 +331,15 @@ Retrieves the mirror source status of a firewall for a cloud account.
 
 ##### `DELETE /pcfwaccountmirrorsourcestates/:id`
 
-Deletes the pcfwaccountmirrorsourcestate object with the given ID.
+Deletes the PCFW account mirror source state object with the given ID.
 
 ##### `GET /pcfwaccountmirrorsourcestates/:id`
 
-Retrieves the pcfwaccountmirrorsourcestate object with the given ID.
+Retrieves the PCFW account mirror source state object with the given ID.
 
 ##### `PUT /pcfwaccountmirrorsourcestates/:id`
 
-Updates the pcfwaccountmirrorsourcestate object with the given ID.
+Updates the PCFW account mirror source state object with the given ID.
 
 #### Attributes
 
@@ -561,10 +561,10 @@ Type: `string`
 
 Namespace tag attached to an entity.
 
-### VpcAvailableSubnet
+### VPCAvailableSubnet
 
 Represents association of a VPC ID to corresponding availability zones and one
-avaialble subnet every zone.
+available subnet every zone.
 
 #### Attributes
 
@@ -581,7 +581,7 @@ Type: [`[]availabilityzonesubnet`](#availabilityzonesubnet)
 The list of all availability zones and associated subnets for every VPC
 specified.
 
-### VpcUsedSubnet
+### VPCUsedSubnet
 
 Represents association of a VPC ID to corresponding availability zones and used
 subnet CIDR blocks in the VPC.
@@ -819,7 +819,7 @@ Identifier of the object.
 
 Type: `integer`
 
-Represents prisma cloud management credits.
+Represents Prisma Cloud management credits.
 
 ##### `TPUsageCredits`
 
@@ -837,7 +837,7 @@ Represents traffic secured usage credits.
 
 Type: `integer`
 
-Represents url filtering usage credits.
+Represents URL filtering usage credits.
 
 ##### `annotations`
 
@@ -909,7 +909,7 @@ Last update date of the object.
 
 ### FirewallLog
 
-Represents a log line in a logquery result.
+Represents a log line in a log query result.
 
 #### Example
 
@@ -1210,7 +1210,7 @@ The type of firewall log to query.
 
 ### LogQueryItem
 
-Represents a log line in a logquery result.
+Represents a log line in a log query result.
 
 #### Example
 
@@ -1287,7 +1287,7 @@ The type of field to get top results for.
 
 ### TopQueryItem
 
-Represents an item in a topquery result.
+Represents an item in a top query result.
 
 #### Attributes
 
@@ -1421,7 +1421,7 @@ The type of field to get trends for.
 
 ### TrendQueryItem
 
-Represents an item in a trendquery result.
+Represents an item in a trend query result.
 
 #### Example
 
@@ -1456,7 +1456,7 @@ The timestamp of the trend.
 ### AWSAttachment
 
 Represents an AWS VPC ID and subnets where the NGFW attaches.
-This object is a sub-object of AWSFirewall.
+This object is a subobject of AWSFirewall.
 
 #### Example
 
@@ -1479,7 +1479,7 @@ AWS VPC ID.
 
 Type: [`[]awsendpoint`](#awsendpoint)
 
-A list of awsendpoint objects.
+A list of AWSEndpoint objects.
 
 ### AWSEndpoint
 
@@ -1554,7 +1554,7 @@ Represents an AWS firewall instance.
 
 ##### `GET /awsfirewalls`
 
-Retrieves the list of awsfirewalls.
+Retrieves the list of AWS firewalls.
 
 Parameters:
 
@@ -1562,23 +1562,23 @@ Parameters:
 
 ##### `POST /awsfirewalls`
 
-Creates a new awsfirewall.
+Creates a new AWS firewall.
 
 ##### `DELETE /awsfirewalls/:id`
 
-Deletes the awsfirewall with the given ID.
+Deletes the AWS firewall with the given ID.
 
 Parameters:
 
-- `purge` (`boolean`): Parameter to delete the awsfireall record without cleaning up the NGFW resources.
+- `purge` (`boolean`): Parameter to delete the AWS firewall record without cleaning up the NGFW resources.
 
 ##### `GET /awsfirewalls/:id`
 
-Retrieves the awsfirewall with the given ID.
+Retrieves the AWS firewall with the given ID.
 
 ##### `PUT /awsfirewalls/:id`
 
-Updates the awsfirewall with the given ID.
+Updates the AWS firewall with the given ID.
 
 #### Attributes
 
@@ -1646,7 +1646,7 @@ The firewall endpoints.
 
 Type: `time`
 
-The date when the fireall was last committed.
+The date when the firewall was last committed.
 
 ##### `licenseType` [`autogenerated`,`read_only`]
 
@@ -1752,7 +1752,7 @@ Represents a Log Definition.
 
 ##### `GET /awslogdefinitions`
 
-Retrieves the list of awslogdefinitions.
+Retrieves the list of AWS log definitions.
 
 Parameters:
 
@@ -1760,19 +1760,19 @@ Parameters:
 
 ##### `POST /awslogdefinitions`
 
-Creates a new awslogdefinition.
+Creates a new AWS log definition.
 
 ##### `DELETE /awslogdefinitions/:id`
 
-Deletes the logdefinition with the given ID.
+Deletes the AWS log definition with the given ID.
 
 ##### `GET /awslogdefinitions/:id`
 
-Retrieves the logdefinition with the given ID.
+Retrieves the AWS log definition with the given ID.
 
 ##### `PUT /awslogdefinitions/:id`
 
-Updates the logdefinition with the given ID.
+Updates the AWS log definition with the given ID.
 
 #### Attributes
 
@@ -1898,14 +1898,14 @@ Last update date of the object.
 
 ### FirewallAppIDList
 
-This a readonly list that returns all of the NGFW AppIDs that the user can
+This a read-only list that returns all of the NGFW AppIDs that the user can
 select.
 
 #### Relations
 
 ##### `GET /firewallappidlist`
 
-Retrieves a firewallappidlist.
+Retrieves a firewall AppID list.
 
 Parameters:
 
@@ -1927,7 +1927,7 @@ Namespace tag attached to an entity.
 
 ### FirewallApplicationCriteria
 
-Represents rule criteria for specifying AppIds.
+Represents rule criteria for specifying AppIDs.
 This is not an external object but a child object used by the Rule object.
 
 #### Example
@@ -1948,7 +1948,7 @@ This is not an external object but a child object used by the Rule object.
 
 Type: `[]string`
 
-List of NGFW App IDs.  See AppIDList.
+List of NGFW App IDs. See AppIDList.
 
 ##### `applicationGroupIDs`
 
@@ -1977,7 +1977,7 @@ Represents a grouping of application IDs.
 
 ##### `GET /firewallapplicationgroups`
 
-Retrieves the list of firewallapplicationgroups.
+Retrieves the list of firewall application groups.
 
 Parameters:
 
@@ -1985,19 +1985,19 @@ Parameters:
 
 ##### `POST /firewallapplicationgroups`
 
-Creates a new firewallapplicationgroup.
+Creates a new firewall application group.
 
 ##### `DELETE /firewallapplicationgroups/:id`
 
-Deletes the firewallapplicationgroup with the given ID.
+Deletes the firewall application group with the given ID.
 
 ##### `GET /firewallapplicationgroups/:id`
 
-Retrieves the firewallapplicationgroup with the given ID.
+Retrieves the firewall application group with the given ID.
 
 ##### `PUT /firewallapplicationgroups/:id`
 
-Updates the firewallapplicationgroup with the given ID.
+Updates the firewall application group with the given ID.
 
 #### Attributes
 
@@ -2017,7 +2017,7 @@ Stores additional information about an entity.
 
 Type: `[]string`
 
-List of NGFW AppIDs.  See FirewallAppIDList.
+List of NGFW AppIDs. See FirewallAppIDList.
 
 ##### `associatedTags`
 
@@ -2115,7 +2115,7 @@ Represents a cloud certificate.
 
 ##### `GET /firewallcertificates`
 
-Retrieves the list of firewallcertificates.
+Retrieves the list of firewall certificates.
 
 Parameters:
 
@@ -2123,7 +2123,7 @@ Parameters:
 
 ##### `POST /firewallcertificates`
 
-Creates a new firewallcertificate.
+Creates a new firewall certificate.
 
 ##### `DELETE /firewallcertificates/:id`
 
@@ -2213,7 +2213,7 @@ Last update date of the object.
 
 ### FirewallCIDRlist
 
-Represents a list of CIDRs referenced by a TargetCriteria object.
+Represents a list of CIDRs referenced by a target criteria object.
 
 #### Example
 
@@ -2232,7 +2232,7 @@ Represents a list of CIDRs referenced by a TargetCriteria object.
 
 ##### `GET /firewallcidrlists`
 
-Retrieves the list of firewallcidrlists.
+Retrieves the list of firewall CIDR lists.
 
 Parameters:
 
@@ -2240,19 +2240,19 @@ Parameters:
 
 ##### `POST /firewallcidrlists`
 
-Creates a new firewallcidrlist.
+Creates a new firewall CIDR list.
 
 ##### `DELETE /firewallcidrlists/:id`
 
-Deletes the firewallcidrlist with the given ID.
+Deletes the firewall CIDR list with the given ID.
 
 ##### `GET /firewallcidrlists/:id`
 
-Retrieves the firewallcidrlist with the given ID.
+Retrieves the firewall CIDR list with the given ID.
 
 ##### `PUT /firewallcidrlists/:id`
 
-Updates the firewallcidrlist with the given ID.
+Updates the firewall CIDR list with the given ID.
 
 #### Attributes
 
@@ -2324,9 +2324,8 @@ Last update date of the object.
 
 ### FirewallCommitAction
 
-Represents committing FilewallRulesets, FilewallTemplates,
-FilewallSecurityProfiles,
-and AWSLogDefinitions to a firewall.
+Represents committing FirewallRulesets, FirewallTemplates,
+FirewallSecurityProfiles, and AWSLogDefinitions to a firewall.
 
 #### Example
 
@@ -2342,7 +2341,7 @@ and AWSLogDefinitions to a firewall.
 
 ##### `POST /firewallcommitactions`
 
-Creates a new firewallcommitaction.
+Creates a new firewall commit action.
 
 #### Attributes
 
@@ -2384,7 +2383,7 @@ Default value:
 
 ### FirewallCommittedRuleset
 
-Represents a list of committed filewall rules.
+Represents a list of committed firewall rules.
 
 #### Example
 
@@ -2399,7 +2398,7 @@ Represents a list of committed filewall rules.
 
 ##### `GET /firewallcommittedrulesets`
 
-Retrieves the list of firewallcommittedrulesets.
+Retrieves the list of firewall committed rulesets.
 
 Parameters:
 
@@ -2407,15 +2406,15 @@ Parameters:
 
 ##### `DELETE /firewallcommittedrulesets/:id`
 
-Deletes the firewallcommittedruleset with the given ID.
+Deletes the firewall committed ruleset with the given ID.
 
 ##### `GET /firewallcommittedrulesets/:id`
 
-Retrieves the firewallcommittedruleset with the given ID.
+Retrieves the firewall committed ruleset with the given ID.
 
 ##### `PUT /firewallcommittedrulesets/:id`
 
-Updates the firewallcommittedruleset with the given ID.
+Updates the firewall committed ruleset with the given ID.
 
 ##### `GET /firewallcommittedrulesets/:id/firewallrules`
 
@@ -2534,7 +2533,7 @@ A list of NGFW Country codes.
 
 ##### `GET /firewallcountrycodelist`
 
-Retrieves a firewallcountrycodelist.
+Retrieves a firewall country code list.
 
 Parameters:
 
@@ -2556,7 +2555,7 @@ Namespace tag attached to an entity.
 
 ### FirewallCustomExternalFeed
 
-Represents an external intelligence feed referenced by TargetCriteria.
+Represents an external intelligence feed referenced by target criteria.
 
 #### Example
 
@@ -2574,7 +2573,7 @@ Represents an external intelligence feed referenced by TargetCriteria.
 
 ##### `GET /firewallcustomexternalfeeds`
 
-Retrieves the list of firewallcustomexternalfeeds.
+Retrieves the list of firewall custom external feeds.
 
 Parameters:
 
@@ -2582,19 +2581,19 @@ Parameters:
 
 ##### `POST /firewallcustomexternalfeeds`
 
-Creates a new firewallcustomexternalfeed.
+Creates a new firewall custom external feed.
 
 ##### `DELETE /firewallcustomexternalfeeds/:id`
 
-Deletes the externalfeed with the given ID.
+Deletes the external feed with the given ID.
 
 ##### `GET /firewallcustomexternalfeeds/:id`
 
-Retrieves the externalfeed with the given ID.
+Retrieves the external feed with the given ID.
 
 ##### `PUT /firewallcustomexternalfeeds/:id`
 
-Updates the externalfeed with the given ID.
+Updates the external feed with the given ID.
 
 #### Attributes
 
@@ -2680,7 +2679,7 @@ The URL of the external feed.
 
 Type: `time`
 
-Specifies the time of day when the updateFrequency is Daily.
+Specifies the time of day when the update frequency is daily.
 
 ##### `updateFrequency`
 
@@ -2702,7 +2701,8 @@ Last update date of the object.
 
 ### FirewallCustomURLCategory
 
-Represents a custom URL category that is referenced by a RuleURLCategory object.
+Represents a custom URL category that is referenced by a rule URL category
+object.
 
 #### Example
 
@@ -2722,7 +2722,7 @@ Represents a custom URL category that is referenced by a RuleURLCategory object.
 
 ##### `GET /firewallcustomurlcategories`
 
-Retrieves the list of firewallcustomurlcategorys.
+Retrieves the list of firewall custom URL categories.
 
 Parameters:
 
@@ -2730,19 +2730,19 @@ Parameters:
 
 ##### `POST /firewallcustomurlcategories`
 
-Creates a new firewallcustomurlcategory.
+Creates a new firewall custom URL category.
 
 ##### `DELETE /firewallcustomurlcategories/:id`
 
-Deletes the customurlcategory with the given ID.
+Deletes the custom URL category with the given ID.
 
 ##### `GET /firewallcustomurlcategories/:id`
 
-Retrieves the customurlcategory with the given ID.
+Retrieves the custom URL category with the given ID.
 
 ##### `PUT /firewallcustomurlcategories/:id`
 
-Updates the customurlcategory with the given ID.
+Updates the custom URL category with the given ID.
 
 #### Attributes
 
@@ -2859,13 +2859,13 @@ External feed name.
 
 ### FirewallExternalFeedList
 
-This a readonly list that returns all of the NGFW external feeds.
+This a read-only list that returns all of the NGFW external feeds.
 
 #### Relations
 
 ##### `GET /firewallexternalfeedlists`
 
-Retrieves a firewallexternalfeedlist.
+Retrieves a firewall external feed list.
 
 Parameters:
 
@@ -2877,7 +2877,7 @@ Parameters:
 
 Type: [`[]firewallexternalfeed`](#firewallexternalfeed)
 
-A list of ExternalFeed objects.
+A list of external feed objects.
 
 ##### `namespace` [`autogenerated`,`read_only`]
 
@@ -2887,7 +2887,7 @@ Namespace tag attached to an entity.
 
 ### FirewallFQDNList
 
-Represents a list of FQDNs referenced by a RuleMatchCriteria object.
+Represents a list of FQDNs referenced by a rule match criteria object.
 
 #### Example
 
@@ -2906,7 +2906,7 @@ Represents a list of FQDNs referenced by a RuleMatchCriteria object.
 
 ##### `GET /firewallfqdnlists`
 
-Retrieves a the list of firewallfqdnlists.
+Retrieves a the list of firewall FQDN lists.
 
 Parameters:
 
@@ -2914,19 +2914,19 @@ Parameters:
 
 ##### `POST /firewallfqdnlists`
 
-Creates a new firewallfqdnlist.
+Creates a new firewall FQDN list.
 
 ##### `DELETE /firewallfqdnlists/:id`
 
-Deletes the fqdnlist with the given ID.
+Deletes the FQDN list with the given ID.
 
 ##### `GET /firewallfqdnlists/:id`
 
-Retrieves the fqdnlist with the given ID.
+Retrieves the FQDN list with the given ID.
 
 ##### `PUT /firewallfqdnlists/:id`
 
-Updates the fqdnlist with the given ID.
+Updates the FQDN list with the given ID.
 
 #### Attributes
 
@@ -3013,15 +3013,15 @@ Represents common configuration for 1 or more AWSFirewall objects.
 
 ##### `DELETE /firewallgroups/:id`
 
-Deletes the firewallgroup with the given ID.
+Deletes the firewall group with the given ID.
 
 ##### `GET /firewallgroups/:id`
 
-Retrieves the firewallgroup with the given ID.
+Retrieves the firewall group with the given ID.
 
 ##### `PUT /firewallgroups/:id`
 
-Updates the firewallgroup with the given ID.
+Updates the firewall group with the given ID.
 
 #### Attributes
 
@@ -3047,7 +3047,7 @@ List of tags attached to an entity.
 
 Type: [`firewallautoincludeprofile`](#firewallautoincludeprofile)
 
-A profile used to attach newly created firewalls to this FirewallGroup.
+A profile used to attach newly created firewalls to this firewall group.
 
 ##### `createTime` [`autogenerated`,`read_only`]
 
@@ -3157,7 +3157,7 @@ Represents rolling back a committed Rulesets.
 
 ##### `POST /firewallrollbackactions`
 
-Creates a new firewallrollbackaction.
+Creates a new firewall rollback action.
 
 #### Attributes
 
@@ -3183,7 +3183,7 @@ The firewalls affected by the rollback action.
 
 Type: `string`
 
-The ID of the committedfirewallruleset that we are rolling back to.
+The ID of the committed firewall ruleset that we are rolling back to.
 
 ### FirewallRule
 
@@ -3205,7 +3205,7 @@ Represents a firewall rule.
 
 ##### `GET /firewallrules`
 
-Retrieves the list of firewallrules.
+Retrieves the list of firewall rules.
 
 Parameters:
 
@@ -3213,15 +3213,15 @@ Parameters:
 
 ##### `DELETE /firewallrules/:id`
 
-Deletes the firewallrule with the given ID.
+Deletes the firewall rule with the given ID.
 
 ##### `GET /firewallrules/:id`
 
-Retrieves the firewallrule with the given ID.
+Retrieves the firewall rule with the given ID.
 
 ##### `PUT /firewallrules/:id`
 
-Updates the firewallrule with the given ID.
+Updates the firewall rule with the given ID.
 
 ##### `GET /firewallcommittedrulesets/:id/firewallrules`
 
@@ -3350,7 +3350,7 @@ to which the rule belongs.
 
 Type: `string`
 
-The type of parentID to which the rule belongs.
+The type of parent ID to which the rule belongs.
 
 ##### `priority` [`required`,`min_value=1.000000`]
 
@@ -3384,7 +3384,7 @@ Last update date of the object.
 
 ### FirewallRuleset
 
-Represents a list of filewall rules that have a priority from 101+.
+Represents a list of firewall rules that have a priority from 101+.
 This object can be created by the user and referenced by the AWSFirewall object.
 
 #### Example
@@ -3400,7 +3400,7 @@ This object can be created by the user and referenced by the AWSFirewall object.
 
 ##### `GET /firewallrulesets`
 
-Retrieves the list of firewallrulesets.
+Retrieves the list of firewall rulesets.
 
 Parameters:
 
@@ -3408,19 +3408,19 @@ Parameters:
 
 ##### `POST /firewallrulesets`
 
-Creates a new firewallruleset.
+Creates a new firewall ruleset.
 
 ##### `DELETE /firewallrulesets/:id`
 
-Deletes the firewallruleset with the given ID.
+Deletes the firewall ruleset with the given ID.
 
 ##### `GET /firewallrulesets/:id`
 
-Retrieves the firewallruleset with the given ID.
+Retrieves the firewall ruleset with the given ID.
 
 ##### `PUT /firewallrulesets/:id`
 
-Updates the firewallruleset with the given ID.
+Updates the firewall ruleset with the given ID.
 
 ##### `GET /firewallrulesets/:id/firewallrules`
 
@@ -3527,7 +3527,7 @@ This object can be created by the user and referenced by a Group object.
 
 ##### `GET /firewallsecurityprofiles`
 
-Retrieves the list of firewallsecurityprofiles.
+Retrieves the list of firewall security profiles.
 
 Parameters:
 
@@ -3535,19 +3535,19 @@ Parameters:
 
 ##### `POST /firewallsecurityprofiles`
 
-Creates a new firewallsecurityprofile.
+Creates a new firewall security profile.
 
 ##### `DELETE /firewallsecurityprofiles/:id`
 
-Deletes the firewallsecurityprofile with the given ID.
+Deletes the firewall security profile with the given ID.
 
 ##### `GET /firewallsecurityprofiles/:id`
 
-Retrieves the firewallsecurityprofile with the given ID.
+Retrieves the firewall security profile with the given ID.
 
 ##### `PUT /firewallsecurityprofiles/:id`
 
-Updates the firewallsecurityprofile with the given ID.
+Updates the firewall security profile with the given ID.
 
 #### Attributes
 
@@ -3615,13 +3615,13 @@ Enables file blocking.
 
 Type: `time`
 
-The date when the securityprofile was last committed.
+The date when the security profile was last committed.
 
 ##### `lastUpdatedTime` [`read_only`]
 
 Type: `time`
 
-The date when the securityprofile was last updated.
+The date when the security profile was last updated.
 
 ##### `name` [`required`,`max_length=256`]
 
@@ -3770,25 +3770,25 @@ List of country codes.
 
 Type: `[]string`
 
-List of FirewallCustomeExternalFeed IDs that are of type IPList.
+List of firewall custom external feed IDs that are of type IPList.
 
 ##### `externalFeedIDs`
 
 Type: `[]string`
 
-List of FirewallExternalFeed IDs that are of type IPList.
+List of firewall external feed IDs that are of type IPList.
 
 ##### `firewallCIDRListIDs`
 
 Type: `[]string`
 
-List of FirewallCIDRList IDs.
+List of Firewall CIDR list IDs.
 
 ##### `firewallFQDNListIDs`
 
 Type: `[]string`
 
-List of FQDNList IDs.
+List of FQDN list IDs.
 
 ##### `negate`
 
@@ -3798,7 +3798,7 @@ Negates this match criteria.
 
 ### FirewallTemplate
 
-Represents a list of filewall rules that have a priority from 1-100.
+Represents a list of firewall rules that have a priority from 1-100.
 This object can be created by the user and referenced by the Group object.
 
 #### Example
@@ -3814,7 +3814,7 @@ This object can be created by the user and referenced by the Group object.
 
 ##### `GET /firewalltemplates`
 
-Retrieves the list of firewalltemplates.
+Retrieves the list of firewall templates.
 
 Parameters:
 
@@ -3822,19 +3822,19 @@ Parameters:
 
 ##### `POST /firewalltemplates`
 
-Creates a new firewalltemplate.
+Creates a new firewall template.
 
 ##### `DELETE /firewalltemplates/:id`
 
-Deletes the firewalltemplate with the given ID.
+Deletes the firewall template with the given ID.
 
 ##### `GET /firewalltemplates/:id`
 
-Retrieves the firewalltemplate with the given ID.
+Retrieves the firewall template with the given ID.
 
 ##### `PUT /firewalltemplates/:id`
 
-Updates the firewalltemplate with the given ID.
+Updates the firewall template with the given ID.
 
 ##### `GET /firewalltemplates/:id/firewallrules`
 
@@ -3955,7 +3955,7 @@ Default value:
 
 Type: `string`
 
-The name of the URL Catgory.
+The name of the URL category.
 
 ### FirewallURLCategoryCriteria
 
@@ -3983,19 +3983,19 @@ This is not an external object but a child object used by the Rule object.
 
 Type: `[]string`
 
-NGFW URL categories.  See FirewallURLCategoryList for the list.
+NGFW URL categories. See FirewallURLCategoryList for the list.
 
 ##### `customExternalFeedIDs`
 
 Type: `[]string`
 
-List FirewallCustomExternalFeed IDs that are of type URLList.
+List firewall custom external feed IDs that are of type URLList.
 
 ##### `customURLCategoryIDs`
 
 Type: `[]string`
 
-List of FirewallCustomURLCategory IDs.
+List of firewall custom URL category IDs.
 
 ##### `externalFeedIDs`
 
@@ -4005,13 +4005,13 @@ List of URL intelligence feeds.
 
 ### FirewallURLCategoryList
 
-This a readonly list that returns the default NGFW URLCategories.
+This a read-only list that returns the default NGFW URL categories.
 
 #### Relations
 
 ##### `GET /firewallurlcategorylists`
 
-Retrieves a firewallurlcategorylist.
+Retrieves a firewall URL category list.
 
 Parameters:
 
@@ -4023,7 +4023,7 @@ Parameters:
 
 Type: [`[]firewallurlcategory`](#firewallurlcategory)
 
-A list of NGFW URLCategory objects.
+A list of NGFW URL category objects.
 
 ##### `namespace` [`autogenerated`,`read_only`]
 
@@ -4099,7 +4099,7 @@ Identifier of the object.
 
 Type: `string`
 
-External ID used in logQueryRole.
+External ID used in log query role.
 
 ##### `NGFWCFTHash` [`autogenerated`,`read_only`]
 
@@ -4135,7 +4135,8 @@ NGFW tenant ID.
 
 Type: `string`
 
-Issuer for Prisma Cloud tenant (identifies the PC stack for IAM role usage).
+Issuer for Prisma Cloud tenant (identifies the Prisma Cloud stack for IAM role
+usage).
 
 ##### `annotations`
 
@@ -4184,7 +4185,7 @@ AWS endpoint role ARN.
 Type: `string`
 
 The log destination for logging. The value will be converted to lower case and
-have the aws account id and logging region appended to it (ie.
+have the AWS account ID and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
@@ -4306,7 +4307,7 @@ Parameters:
 
 ##### `POST /pcfwtenants`
 
-Onboards Prisma Cloud tenant on PC Firewall.
+Onboards Prisma Cloud tenant on Prisma Cloud Firewall.
 
 ##### `DELETE /pcfwtenants/:id`
 
@@ -4340,7 +4341,8 @@ NGFW tenant ID.
 
 Type: `string`
 
-Issuer for Prisma Cloud tenant (identifies the PC stack for IAM role usage).
+Issuer for Prisma Cloud tenant (identifies the Prisma Cloud stack for IAM role
+usage).
 
 ##### `annotations`
 
@@ -4389,7 +4391,7 @@ AWS endpoint role ARN.
 Type: `string`
 
 The log destination for logging. The value will be converted to lower case and
-have the aws account id and logging region appended to it (ie.
+have the AWS account ID and logging region appended to it (ie.
 logs-1234-us-east-2) when used to create an S3 bucket for logging.
 
 ##### `logDestinationType` [`required`]
@@ -4456,7 +4458,7 @@ The primary AWS Account ID.
 
 Type: `string`
 
-The namespace where the primary pcfwaccount will be created.
+The namespace where the primary PCFW account will be created.
 
 ##### `protected`
 

@@ -5,7 +5,7 @@ model:
   entity_name: TrendQueryItem
   package: logging
   group: core/log
-  description: Represents an item in a trendquery result.
+  description: Represents an item in a trend query result.
   detached: true
 
 # Attributes

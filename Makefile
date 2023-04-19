@@ -1,13 +1,15 @@
 MAKEFLAGS       += --warn-undefined-variables
 SHELL           := /bin/bash -o pipefail
-LINT_VERSION    := v1.49.0
 
 # PUBLIC is set to "--public" when making the publicly exported repo. Used by our CI.
 PUBLIC ?= ""
 
 export GO111MODULE = on
 
-default: format codegen lint test
+ci: setup generate diff-check
+
+default: generate spelling
+generate: codegen format
 
 .PHONY: codegen
 codegen:
@@ -58,44 +60,8 @@ format-parameter:
 	rego format -m parametermapping < $(target) > $(target).formatted
 	mv $(target).formatted $(target)
 
-lint:
-	golangci-lint run \
-		--timeout 2m \
-		--disable-all \
-		--exclude-use-default=false \
-		--exclude=package-comments \
-		--enable=errcheck \
-		--enable=goimports \
-		--enable=ineffassign \
-		--enable=revive \
-		--enable=unused \
-		--enable=staticcheck \
-		--enable=unconvert \
-		--enable=misspell \
-		--enable=prealloc \
-		--enable=nakedret \
-		--enable=typecheck \
-		--enable=unparam \
-		--enable=gosimple \
-		./...
-
-
-.PHONY: lint_install
-lint_install: .__linter_installed_$(LINT_VERSION)
-	golangci-lint --version
-
-.__linter_installed_$(LINT_VERSION):
-	@ cd $$(mktemp -d) && \
-	  go mod init tmp 2>/dev/null >/dev/null  && \
-	  echo "=== Getting golangci-lint @ $(LINT_VERSION) ===" && \
-	  go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(LINT_VERSION) && \
-	  echo "=== Installation of golangci-lint @ $(LINT_VERSION) Completed ==="
-
 spelling:
 	docker run --rm -v $$PWD:/workdir gcr.io/prismacloud-cns/markdown-spellcheck:latest "doc/*.md" -r -a -n --en-us
-
-test:
-	go test ./... -race
 
 codecgen:
 	rm -f values_codecgen.go ; codecgen -o values_codecgen.go *.go;

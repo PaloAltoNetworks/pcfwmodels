@@ -18,7 +18,7 @@
             "type": "string"
           },
           "PrismaCloudCredits": {
-            "description": "Represents prisma cloud management credits.",
+            "description": "Represents Prisma Cloud management credits.",
             "type": "integer"
           },
           "TPUsageCredits": {
@@ -30,7 +30,7 @@
             "type": "integer"
           },
           "URLFUsageCredits": {
-            "description": "Represents url filtering usage credits.",
+            "description": "Represents URL filtering usage credits.",
             "type": "integer"
           },
           "annotations": {

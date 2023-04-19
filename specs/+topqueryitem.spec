@@ -5,7 +5,7 @@ model:
   entity_name: TopQueryItem
   package: logging
   group: core/log
-  description: Represents an item in a topquery result.
+  description: Represents an item in a top query result.
   detached: true
 
 # Attributes

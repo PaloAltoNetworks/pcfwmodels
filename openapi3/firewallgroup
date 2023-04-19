@@ -102,7 +102,7 @@
   "paths": {
     "/firewallgroups/{id}": {
       "delete": {
-        "description": "Deletes the firewallgroup with the given ID.",
+        "description": "Deletes the firewall group with the given ID.",
         "operationId": "delete-firewallgroup-by-ID",
         "responses": {
           "200": {
@@ -122,7 +122,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallgroup with the given ID.",
+        "description": "Retrieves the firewall group with the given ID.",
         "operationId": "get-firewallgroup-by-ID",
         "responses": {
           "200": {
@@ -152,7 +152,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallgroup with the given ID.",
+        "description": "Updates the firewall group with the given ID.",
         "operationId": "update-firewallgroup-by-ID",
         "requestBody": {
           "content": {

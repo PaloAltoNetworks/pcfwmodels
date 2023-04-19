@@ -71,7 +71,7 @@
             "type": "array"
           },
           "lastCommitTime": {
-            "description": "The date when the fireall was last committed.",
+            "description": "The date when the firewall was last committed.",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
@@ -172,7 +172,7 @@
   "paths": {
     "/awsfirewalls": {
       "get": {
-        "description": "Retrieves the list of awsfirewalls.",
+        "description": "Retrieves the list of AWS firewalls.",
         "operationId": "get-all-awsfirewalls",
         "parameters": [
           {
@@ -206,7 +206,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new awsfirewall.",
+        "description": "Creates a new AWS firewall.",
         "operationId": "create-a-new-awsfirewall",
         "requestBody": {
           "content": {
@@ -237,11 +237,11 @@
     },
     "/awsfirewalls/{id}": {
       "delete": {
-        "description": "Deletes the awsfirewall with the given ID.",
+        "description": "Deletes the AWS firewall with the given ID.",
         "operationId": "delete-awsfirewall-by-ID",
         "parameters": [
           {
-            "description": "Parameter to delete the awsfireall record without cleaning up the NGFW resources.",
+            "description": "Parameter to delete the AWS firewall record without cleaning up the NGFW resources.",
             "example": false,
             "in": "query",
             "name": "purge",
@@ -268,7 +268,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the awsfirewall with the given ID.",
+        "description": "Retrieves the AWS firewall with the given ID.",
         "operationId": "get-awsfirewall-by-ID",
         "responses": {
           "200": {
@@ -298,7 +298,7 @@
         }
       ],
       "put": {
-        "description": "Updates the awsfirewall with the given ID.",
+        "description": "Updates the AWS firewall with the given ID.",
         "operationId": "update-awsfirewall-by-ID",
         "requestBody": {
           "content": {

@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallfqdnlist": {
-        "description": "Represents a list of FQDNs referenced by a RuleMatchCriteria object.",
+        "description": "Represents a list of FQDNs referenced by a rule match criteria object.",
         "properties": {
           "FQDNs": {
             "description": "List of FQDNs.",
@@ -99,7 +99,7 @@
   "paths": {
     "/firewallfqdnlists": {
       "get": {
-        "description": "Retrieves a the list of firewallfqdnlists.",
+        "description": "Retrieves a the list of firewall FQDN lists.",
         "operationId": "get-all-firewallfqdnlists",
         "parameters": [
           {
@@ -133,7 +133,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new firewallfqdnlist.",
+        "description": "Creates a new firewall FQDN list.",
         "operationId": "create-a-new-firewallfqdnlist",
         "requestBody": {
           "content": {
@@ -164,7 +164,7 @@
     },
     "/firewallfqdnlists/{id}": {
       "delete": {
-        "description": "Deletes the fqdnlist with the given ID.",
+        "description": "Deletes the FQDN list with the given ID.",
         "operationId": "delete-firewallfqdnlist-by-ID",
         "responses": {
           "200": {
@@ -184,7 +184,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the fqdnlist with the given ID.",
+        "description": "Retrieves the FQDN list with the given ID.",
         "operationId": "get-firewallfqdnlist-by-ID",
         "responses": {
           "200": {
@@ -214,7 +214,7 @@
         }
       ],
       "put": {
-        "description": "Updates the fqdnlist with the given ID.",
+        "description": "Updates the FQDN list with the given ID.",
         "operationId": "update-firewallfqdnlist-by-ID",
         "requestBody": {
           "content": {

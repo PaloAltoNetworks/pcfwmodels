@@ -262,8 +262,8 @@ func (o *PCFWAccountMirrorSource) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *PCFWAccountMirrorSource) Doc() string {
 
-	return `Represents the traffic mirror source configuration for a firewall associatd with
-a customer account.`
+	return `Represents the traffic mirror source configuration for a firewall associated
+with a customer account.`
 }
 
 func (o *PCFWAccountMirrorSource) String() string {

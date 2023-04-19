@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "pcfwaccountmirrorsource": {
-        "description": "Represents the traffic mirror source configuration for a firewall associatd with\na customer account.",
+        "description": "Represents the traffic mirror source configuration for a firewall associated\nwith a customer account.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -174,7 +174,7 @@
     },
     "/pcfwaccountmirrorsources/{id}": {
       "delete": {
-        "description": "Deletes the pcfwaccountmirrorsource object with the given ID.",
+        "description": "Deletes the PCFW account mirror source object with the given ID.",
         "operationId": "delete-pcfwaccountmirrorsource-by-ID",
         "responses": {
           "200": {
@@ -194,7 +194,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the pcfwaccountmirrorsource object with the given ID.",
+        "description": "Retrieves the PCFW account mirror source object with the given ID.",
         "operationId": "get-pcfwaccountmirrorsource-by-ID",
         "responses": {
           "200": {
@@ -224,7 +224,7 @@
         }
       ],
       "put": {
-        "description": "Updates the pcfwaccountmirrorsource object with the given ID.",
+        "description": "Updates the PCFW account mirror source object with the given ID.",
         "operationId": "update-pcfwaccountmirrorsource-by-ID",
         "requestBody": {
           "content": {

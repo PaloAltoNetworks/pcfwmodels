@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "awsattachment": {
-        "description": "Represents an AWS VPC ID and subnets where the NGFW attaches.\nThis object is a sub-object of AWSFirewall.",
+        "description": "Represents an AWS VPC ID and subnets where the NGFW attaches.\nThis object is a subobject of AWSFirewall.",
         "properties": {
           "VPC": {
             "description": "AWS VPC ID.",
@@ -10,7 +10,7 @@
             "type": "string"
           },
           "endpoints": {
-            "description": "A list of awsendpoint objects.",
+            "description": "A list of AWSEndpoint objects.",
             "example": "awsendpoint list",
             "items": {
               "$ref": "./awsendpoint#/components/schemas/awsendpoint"

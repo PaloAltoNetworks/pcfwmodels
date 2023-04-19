@@ -294,7 +294,7 @@ func (o *PCFWAccountMirrorSourceState) DefaultOrder() []string {
 func (o *PCFWAccountMirrorSourceState) Doc() string {
 
 	return `Represents state of traffic mirror session setup associated with an instance and
-network interface for a firewall associatd with a customer account.`
+network interface for a firewall associated with a customer account.`
 }
 
 func (o *PCFWAccountMirrorSourceState) String() string {

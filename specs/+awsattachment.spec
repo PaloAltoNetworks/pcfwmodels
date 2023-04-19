@@ -7,7 +7,7 @@ model:
   group: core/ngfw
   description: |-
     Represents an AWS VPC ID and subnets where the NGFW attaches.
-    This object is a sub-object of AWSFirewall.
+    This object is a subobject of AWSFirewall.
   detached: true
 
 # Attributes
@@ -22,7 +22,7 @@ attributes:
     example_value: vpc-23af3b89cd23
 
   - name: endpoints
-    description: A list of awsendpoint objects.
+    description: A list of AWSEndpoint objects.
     type: refList
     exposed: true
     subtype: awsendpoint

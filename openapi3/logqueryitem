@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "logqueryitem": {
-        "description": "Represents a log line in a logquery result.",
+        "description": "Represents a log line in a log query result.",
         "properties": {
           "fields": {
             "additionalProperties": {

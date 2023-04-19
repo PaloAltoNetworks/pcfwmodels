@@ -38,7 +38,7 @@ attributes:
     stored: true
 
   - name: PrismaCloudCredits
-    description: Represents prisma cloud management credits.
+    description: Represents Prisma Cloud management credits.
     type: integer
     exposed: true
     stored: true
@@ -56,7 +56,7 @@ attributes:
     stored: true
 
   - name: URLFUsageCredits
-    description: Represents url filtering usage credits.
+    description: Represents URL filtering usage credits.
     type: integer
     exposed: true
     stored: true

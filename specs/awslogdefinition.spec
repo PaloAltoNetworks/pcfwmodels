@@ -7,11 +7,11 @@ model:
   group: core/ngfw
   description: Represents a Log Definition.
   get:
-    description: Retrieves the logdefinition with the given ID.
+    description: Retrieves the AWS log definition with the given ID.
   update:
-    description: Updates the logdefinition with the given ID.
+    description: Updates the AWS log definition with the given ID.
   delete:
-    description: Deletes the logdefinition with the given ID.
+    description: Deletes the AWS log definition with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

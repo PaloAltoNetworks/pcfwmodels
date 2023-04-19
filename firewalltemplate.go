@@ -260,7 +260,7 @@ func (o *FirewallTemplate) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallTemplate) Doc() string {
 
-	return `Represents a list of filewall rules that have a priority from 1-100.
+	return `Represents a list of firewall rules that have a priority from 1-100.
 This object can be created by the user and referenced by the Group object.`
 }
 

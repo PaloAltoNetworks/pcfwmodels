@@ -6,14 +6,14 @@ model:
   package: ngfw
   group: core/ngfw
   description: |-
-    Represents a list of filewall rules that have a priority from 101+.
+    Represents a list of firewall rules that have a priority from 101+.
     This object can be created by the user and referenced by the AWSFirewall object.
   get:
-    description: Retrieves the firewallruleset with the given ID.
+    description: Retrieves the firewall ruleset with the given ID.
   update:
-    description: Updates the firewallruleset with the given ID.
+    description: Updates the firewall ruleset with the given ID.
   delete:
-    description: Deletes the firewallruleset with the given ID.
+    description: Deletes the firewall ruleset with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

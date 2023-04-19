@@ -5,13 +5,13 @@ model:
   entity_name: FirewallFQDNList
   package: ngfw
   group: core/ngfw
-  description: Represents a list of FQDNs referenced by a RuleMatchCriteria object.
+  description: Represents a list of FQDNs referenced by a rule match criteria object.
   get:
-    description: Retrieves the fqdnlist with the given ID.
+    description: Retrieves the FQDN list with the given ID.
   update:
-    description: Updates the fqdnlist with the given ID.
+    description: Updates the FQDN list with the given ID.
   delete:
-    description: Deletes the fqdnlist with the given ID.
+    description: Deletes the FQDN list with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'

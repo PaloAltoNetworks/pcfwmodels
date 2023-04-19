@@ -2,12 +2,12 @@
 model:
   rest_name: vpcavailablesubnet
   resource_name: vpcavailablesubnets
-  entity_name: VpcAvailableSubnet
+  entity_name: VPCAvailableSubnet
   package: deploymentadvisor
   group: core/deploymentadvisor
   description: |-
     Represents association of a VPC ID to corresponding availability zones and one
-    avaialble subnet every zone.
+    available subnet every zone.
   detached: true
 
 # Attributes

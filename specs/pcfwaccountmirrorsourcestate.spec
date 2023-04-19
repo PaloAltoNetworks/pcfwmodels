@@ -7,14 +7,16 @@ model:
   group: core/deploymentadvisor
   description: |-
     Represents state of traffic mirror session setup associated with an instance and
-    network interface for a firewall associatd with a customer account.
+    network interface for a firewall associated with a customer account.
   get:
-    description: Retrieves the pcfwaccountmirrorsourcestate object with the given
+    description: Retrieves the PCFW account mirror source state object with the given
       ID.
   update:
-    description: Updates the pcfwaccountmirrorsourcestate object with the given ID.
+    description: Updates the PCFW account mirror source state object with the given
+      ID.
   delete:
-    description: Deletes the pcfwaccountmirrorsourcestate object with the given ID.
+    description: Deletes the PCFW account mirror source state object with the given
+      ID.
   extends:
   - '@identifiable-stored'
   - '@described'

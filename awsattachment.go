@@ -16,7 +16,7 @@ type AWSAttachment struct {
 	// AWS VPC ID.
 	VPC string `json:"VPC" msgpack:"VPC" bson:"vpc" mapstructure:"VPC,omitempty"`
 
-	// A list of awsendpoint objects.
+	// A list of AWSEndpoint objects.
 	Endpoints []*AWSEndpoint `json:"endpoints" msgpack:"endpoints" bson:"endpoints" mapstructure:"endpoints,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
@@ -176,7 +176,7 @@ var AWSAttachmentAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "endpoints",
 		ConvertedName:  "Endpoints",
-		Description:    `A list of awsendpoint objects.`,
+		Description:    `A list of AWSEndpoint objects.`,
 		Exposed:        true,
 		Name:           "endpoints",
 		Required:       true,
@@ -203,7 +203,7 @@ var AWSAttachmentLowerCaseAttributesMap = map[string]elemental.AttributeSpecific
 		AllowedChoices: []string{},
 		BSONFieldName:  "endpoints",
 		ConvertedName:  "Endpoints",
-		Description:    `A list of awsendpoint objects.`,
+		Description:    `A list of AWSEndpoint objects.`,
 		Exposed:        true,
 		Name:           "endpoints",
 		Required:       true,

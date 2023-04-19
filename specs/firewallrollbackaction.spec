@@ -36,7 +36,8 @@ attributes:
       refMode: pointer
 
   - name: committedFirewallRulesetID
-    description: The ID of the committedfirewallruleset that we are rolling back to.
+    description: The ID of the committed firewall ruleset that we are rolling back
+      to.
     type: string
     exposed: true
     required: true

@@ -14,7 +14,7 @@
             ]
           },
           "name": {
-            "description": "The name of the URL Catgory.",
+            "description": "The name of the URL category.",
             "example": "abused-drugs",
             "type": "string"
           }

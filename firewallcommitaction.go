@@ -210,9 +210,8 @@ func (o *FirewallCommitAction) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallCommitAction) Doc() string {
 
-	return `Represents committing FilewallRulesets, FilewallTemplates,
-FilewallSecurityProfiles, 
-and AWSLogDefinitions to a firewall.`
+	return `Represents committing FirewallRulesets, FirewallTemplates,
+FirewallSecurityProfiles, and AWSLogDefinitions to a firewall.`
 }
 
 func (o *FirewallCommitAction) String() string {

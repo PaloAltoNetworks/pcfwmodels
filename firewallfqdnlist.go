@@ -249,7 +249,7 @@ func (o *FirewallFQDNList) DefaultOrder() []string {
 // Doc returns the documentation for the object
 func (o *FirewallFQDNList) Doc() string {
 
-	return `Represents a list of FQDNs referenced by a RuleMatchCriteria object.`
+	return `Represents a list of FQDNs referenced by a rule match criteria object.`
 }
 
 func (o *FirewallFQDNList) String() string {

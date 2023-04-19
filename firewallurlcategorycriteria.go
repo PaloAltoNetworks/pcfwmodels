@@ -13,13 +13,13 @@ import (
 
 // FirewallURLCategoryCriteria represents the model of a firewallurlcategorycriteria
 type FirewallURLCategoryCriteria struct {
-	// NGFW URL categories.  See FirewallURLCategoryList for the list.
+	// NGFW URL categories. See FirewallURLCategoryList for the list.
 	URLCategories []string `json:"URLCategories" msgpack:"URLCategories" bson:"urlcategories" mapstructure:"URLCategories,omitempty"`
 
-	// List FirewallCustomExternalFeed IDs that are of type URLList.
+	// List firewall custom external feed IDs that are of type URLList.
 	CustomExternalFeedIDs []string `json:"customExternalFeedIDs" msgpack:"customExternalFeedIDs" bson:"customexternalfeedids" mapstructure:"customExternalFeedIDs,omitempty"`
 
-	// List of FirewallCustomURLCategory IDs.
+	// List of firewall custom URL category IDs.
 	CustomURLCategoryIDs []string `json:"customURLCategoryIDs" msgpack:"customURLCategoryIDs" bson:"customurlcategoryids" mapstructure:"customURLCategoryIDs,omitempty"`
 
 	// List of URL intelligence feeds.
@@ -168,7 +168,7 @@ var FirewallURLCategoryCriteriaAttributesMap = map[string]elemental.AttributeSpe
 		AllowedChoices: []string{},
 		BSONFieldName:  "urlcategories",
 		ConvertedName:  "URLCategories",
-		Description:    `NGFW URL categories.  See FirewallURLCategoryList for the list.`,
+		Description:    `NGFW URL categories. See FirewallURLCategoryList for the list.`,
 		Exposed:        true,
 		Name:           "URLCategories",
 		Stored:         true,
@@ -179,7 +179,7 @@ var FirewallURLCategoryCriteriaAttributesMap = map[string]elemental.AttributeSpe
 		AllowedChoices: []string{},
 		BSONFieldName:  "customexternalfeedids",
 		ConvertedName:  "CustomExternalFeedIDs",
-		Description:    `List FirewallCustomExternalFeed IDs that are of type URLList.`,
+		Description:    `List firewall custom external feed IDs that are of type URLList.`,
 		Exposed:        true,
 		Name:           "customExternalFeedIDs",
 		Stored:         true,
@@ -190,7 +190,7 @@ var FirewallURLCategoryCriteriaAttributesMap = map[string]elemental.AttributeSpe
 		AllowedChoices: []string{},
 		BSONFieldName:  "customurlcategoryids",
 		ConvertedName:  "CustomURLCategoryIDs",
-		Description:    `List of FirewallCustomURLCategory IDs.`,
+		Description:    `List of firewall custom URL category IDs.`,
 		Exposed:        true,
 		Name:           "customURLCategoryIDs",
 		Stored:         true,
@@ -216,7 +216,7 @@ var FirewallURLCategoryCriteriaLowerCaseAttributesMap = map[string]elemental.Att
 		AllowedChoices: []string{},
 		BSONFieldName:  "urlcategories",
 		ConvertedName:  "URLCategories",
-		Description:    `NGFW URL categories.  See FirewallURLCategoryList for the list.`,
+		Description:    `NGFW URL categories. See FirewallURLCategoryList for the list.`,
 		Exposed:        true,
 		Name:           "URLCategories",
 		Stored:         true,
@@ -227,7 +227,7 @@ var FirewallURLCategoryCriteriaLowerCaseAttributesMap = map[string]elemental.Att
 		AllowedChoices: []string{},
 		BSONFieldName:  "customexternalfeedids",
 		ConvertedName:  "CustomExternalFeedIDs",
-		Description:    `List FirewallCustomExternalFeed IDs that are of type URLList.`,
+		Description:    `List firewall custom external feed IDs that are of type URLList.`,
 		Exposed:        true,
 		Name:           "customExternalFeedIDs",
 		Stored:         true,
@@ -238,7 +238,7 @@ var FirewallURLCategoryCriteriaLowerCaseAttributesMap = map[string]elemental.Att
 		AllowedChoices: []string{},
 		BSONFieldName:  "customurlcategoryids",
 		ConvertedName:  "CustomURLCategoryIDs",
-		Description:    `List of FirewallCustomURLCategory IDs.`,
+		Description:    `List of firewall custom URL category IDs.`,
 		Exposed:        true,
 		Name:           "customURLCategoryIDs",
 		Stored:         true,

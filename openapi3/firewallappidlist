@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallappidlist": {
-        "description": "This a readonly list that returns all of the NGFW AppIDs that the user can\nselect.",
+        "description": "This a read-only list that returns all of the NGFW AppIDs that the user can\nselect.",
         "properties": {
           "appIDs": {
             "description": "A list of NGFW AppIDs.",
@@ -37,7 +37,7 @@
   "paths": {
     "/firewallappidlist": {
       "get": {
-        "description": "Retrieves a firewallappidlist.",
+        "description": "Retrieves a firewall AppID list.",
         "operationId": "get-all-firewallappidlist",
         "parameters": [
           {

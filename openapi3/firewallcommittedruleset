@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "firewallcommittedruleset": {
-        "description": "Represents a list of committed filewall rules.",
+        "description": "Represents a list of committed firewall rules.",
         "properties": {
           "ID": {
             "description": "Identifier of the object.",
@@ -95,7 +95,7 @@
   "paths": {
     "/firewallcommittedrulesets": {
       "get": {
-        "description": "Retrieves the list of firewallcommittedrulesets.",
+        "description": "Retrieves the list of firewall committed rulesets.",
         "operationId": "get-all-firewallcommittedrulesets",
         "parameters": [
           {
@@ -131,7 +131,7 @@
     },
     "/firewallcommittedrulesets/{id}": {
       "delete": {
-        "description": "Deletes the firewallcommittedruleset with the given ID.",
+        "description": "Deletes the firewall committed ruleset with the given ID.",
         "operationId": "delete-firewallcommittedruleset-by-ID",
         "responses": {
           "200": {
@@ -151,7 +151,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallcommittedruleset with the given ID.",
+        "description": "Retrieves the firewall committed ruleset with the given ID.",
         "operationId": "get-firewallcommittedruleset-by-ID",
         "responses": {
           "200": {
@@ -181,7 +181,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallcommittedruleset with the given ID.",
+        "description": "Updates the firewall committed ruleset with the given ID.",
         "operationId": "update-firewallcommittedruleset-by-ID",
         "requestBody": {
           "content": {

@@ -5,13 +5,13 @@ model:
   entity_name: FirewallCustomExternalFeed
   package: ngfw
   group: core/ngfw
-  description: Represents an external intelligence feed referenced by TargetCriteria.
+  description: Represents an external intelligence feed referenced by target criteria.
   get:
-    description: Retrieves the externalfeed with the given ID.
+    description: Retrieves the external feed with the given ID.
   update:
-    description: Updates the externalfeed with the given ID.
+    description: Updates the external feed with the given ID.
   delete:
-    description: Deletes the externalfeed with the given ID.
+    description: Deletes the external feed with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'
@@ -51,7 +51,7 @@ attributes:
     - $url
 
   - name: updateDailyTime
-    description: Specifies the time of day when the updateFrequency is Daily.
+    description: Specifies the time of day when the update frequency is daily.
     type: time
     exposed: true
     stored: true

@@ -103,7 +103,7 @@ type FirewallRollbackAction struct {
 	// The firewalls affected by the rollback action.
 	AffectedFirewalls []*FirewallStatus `json:"affectedFirewalls" msgpack:"affectedFirewalls" bson:"affectedfirewalls" mapstructure:"affectedFirewalls,omitempty"`
 
-	// The ID of the committedfirewallruleset that we are rolling back to.
+	// The ID of the committed firewall ruleset that we are rolling back to.
 	CommittedFirewallRulesetID string `json:"committedFirewallRulesetID" msgpack:"committedFirewallRulesetID" bson:"-" mapstructure:"committedFirewallRulesetID,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
@@ -378,7 +378,7 @@ var FirewallRollbackActionAttributesMap = map[string]elemental.AttributeSpecific
 	"CommittedFirewallRulesetID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "CommittedFirewallRulesetID",
-		Description:    `The ID of the committedfirewallruleset that we are rolling back to.`,
+		Description:    `The ID of the committed firewall ruleset that we are rolling back to.`,
 		Exposed:        true,
 		Name:           "committedFirewallRulesetID",
 		Required:       true,
@@ -420,7 +420,7 @@ var FirewallRollbackActionLowerCaseAttributesMap = map[string]elemental.Attribut
 	"committedfirewallrulesetid": {
 		AllowedChoices: []string{},
 		ConvertedName:  "CommittedFirewallRulesetID",
-		Description:    `The ID of the committedfirewallruleset that we are rolling back to.`,
+		Description:    `The ID of the committed firewall ruleset that we are rolling back to.`,
 		Exposed:        true,
 		Name:           "committedFirewallRulesetID",
 		Required:       true,
@@ -500,7 +500,7 @@ type SparseFirewallRollbackAction struct {
 	// The firewalls affected by the rollback action.
 	AffectedFirewalls *[]*FirewallStatus `json:"affectedFirewalls,omitempty" msgpack:"affectedFirewalls,omitempty" bson:"affectedfirewalls,omitempty" mapstructure:"affectedFirewalls,omitempty"`
 
-	// The ID of the committedfirewallruleset that we are rolling back to.
+	// The ID of the committed firewall ruleset that we are rolling back to.
 	CommittedFirewallRulesetID *string `json:"committedFirewallRulesetID,omitempty" msgpack:"committedFirewallRulesetID,omitempty" bson:"-" mapstructure:"committedFirewallRulesetID,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`

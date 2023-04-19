@@ -87,7 +87,7 @@
             "type": "string"
           },
           "parentType": {
-            "description": "The type of parentID to which the rule belongs.",
+            "description": "The type of parent ID to which the rule belongs.",
             "readOnly": true,
             "type": "string"
           },
@@ -135,7 +135,7 @@
   "paths": {
     "/firewallrules": {
       "get": {
-        "description": "Retrieves the list of firewallrules.",
+        "description": "Retrieves the list of firewall rules.",
         "operationId": "get-all-firewallrules",
         "parameters": [
           {
@@ -171,7 +171,7 @@
     },
     "/firewallrules/{id}": {
       "delete": {
-        "description": "Deletes the firewallrule with the given ID.",
+        "description": "Deletes the firewall rule with the given ID.",
         "operationId": "delete-firewallrule-by-ID",
         "responses": {
           "200": {
@@ -191,7 +191,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the firewallrule with the given ID.",
+        "description": "Retrieves the firewall rule with the given ID.",
         "operationId": "get-firewallrule-by-ID",
         "responses": {
           "200": {
@@ -221,7 +221,7 @@
         }
       ],
       "put": {
-        "description": "Updates the firewallrule with the given ID.",
+        "description": "Updates the firewall rule with the given ID.",
         "operationId": "update-firewallrule-by-ID",
         "requestBody": {
           "content": {

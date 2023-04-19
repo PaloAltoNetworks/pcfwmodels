@@ -7,11 +7,11 @@ model:
   group: core/ngfw
   description: Represents common configuration for 1 or more AWSFirewall objects.
   get:
-    description: Retrieves the firewallgroup with the given ID.
+    description: Retrieves the firewall group with the given ID.
   update:
-    description: Updates the firewallgroup with the given ID.
+    description: Updates the firewall group with the given ID.
   delete:
-    description: Deletes the firewallgroup with the given ID.
+    description: Deletes the firewall group with the given ID.
   extends:
   - '@identifiable-stored'
   - '@named'
@@ -25,7 +25,8 @@ model:
 attributes:
   v1:
   - name: autoIncludeProfile
-    description: A profile used to attach newly created firewalls to this FirewallGroup.
+    description: A profile used to attach newly created firewalls to this firewall
+      group.
     type: ref
     exposed: true
     subtype: firewallautoincludeprofile

@@ -11,8 +11,8 @@ import (
 	"go.aporeto.io/elemental"
 )
 
-// VpcAvailableSubnet represents the model of a vpcavailablesubnet
-type VpcAvailableSubnet struct {
+// VPCAvailableSubnet represents the model of a vpcavailablesubnet
+type VPCAvailableSubnet struct {
 	// An AWS VPC ID.
 	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"-" mapstructure:"VPCID,omitempty"`
 
@@ -23,10 +23,10 @@ type VpcAvailableSubnet struct {
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
-// NewVpcAvailableSubnet returns a new *VpcAvailableSubnet
-func NewVpcAvailableSubnet() *VpcAvailableSubnet {
+// NewVPCAvailableSubnet returns a new *VPCAvailableSubnet
+func NewVPCAvailableSubnet() *VPCAvailableSubnet {
 
-	return &VpcAvailableSubnet{
+	return &VPCAvailableSubnet{
 		ModelVersion:            1,
 		AvailabilityZoneSubnets: []*AvailabilityZoneSubnet{},
 	}
@@ -34,26 +34,26 @@ func NewVpcAvailableSubnet() *VpcAvailableSubnet {
 
 // GetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *VpcAvailableSubnet) GetBSON() (any, error) {
+func (o *VPCAvailableSubnet) GetBSON() (any, error) {
 
 	if o == nil {
 		return nil, nil
 	}
 
-	s := &mongoAttributesVpcAvailableSubnet{}
+	s := &mongoAttributesVPCAvailableSubnet{}
 
 	return s, nil
 }
 
 // SetBSON implements the bson marshaling interface.
 // This is used to transparently convert ID to MongoDBID as ObectID.
-func (o *VpcAvailableSubnet) SetBSON(raw bson.Raw) error {
+func (o *VPCAvailableSubnet) SetBSON(raw bson.Raw) error {
 
 	if o == nil {
 		return nil
 	}
 
-	s := &mongoAttributesVpcAvailableSubnet{}
+	s := &mongoAttributesVPCAvailableSubnet{}
 	if err := raw.Unmarshal(s); err != nil {
 		return err
 	}
@@ -62,37 +62,37 @@ func (o *VpcAvailableSubnet) SetBSON(raw bson.Raw) error {
 }
 
 // BleveType implements the bleve.Classifier Interface.
-func (o *VpcAvailableSubnet) BleveType() string {
+func (o *VPCAvailableSubnet) BleveType() string {
 
 	return "vpcavailablesubnet"
 }
 
-// DeepCopy returns a deep copy if the VpcAvailableSubnet.
-func (o *VpcAvailableSubnet) DeepCopy() *VpcAvailableSubnet {
+// DeepCopy returns a deep copy if the VPCAvailableSubnet.
+func (o *VPCAvailableSubnet) DeepCopy() *VPCAvailableSubnet {
 
 	if o == nil {
 		return nil
 	}
 
-	out := &VpcAvailableSubnet{}
+	out := &VPCAvailableSubnet{}
 	o.DeepCopyInto(out)
 
 	return out
 }
 
-// DeepCopyInto copies the receiver into the given *VpcAvailableSubnet.
-func (o *VpcAvailableSubnet) DeepCopyInto(out *VpcAvailableSubnet) {
+// DeepCopyInto copies the receiver into the given *VPCAvailableSubnet.
+func (o *VPCAvailableSubnet) DeepCopyInto(out *VPCAvailableSubnet) {
 
 	target, err := copystructure.Copy(o)
 	if err != nil {
-		panic(fmt.Sprintf("Unable to deepcopy VpcAvailableSubnet: %s", err))
+		panic(fmt.Sprintf("Unable to deepcopy VPCAvailableSubnet: %s", err))
 	}
 
-	*out = *target.(*VpcAvailableSubnet)
+	*out = *target.(*VPCAvailableSubnet)
 }
 
 // Validate valides the current information stored into the structure.
-func (o *VpcAvailableSubnet) Validate() error {
+func (o *VPCAvailableSubnet) Validate() error {
 
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
@@ -123,26 +123,26 @@ func (o *VpcAvailableSubnet) Validate() error {
 }
 
 // SpecificationForAttribute returns the AttributeSpecification for the given attribute name key.
-func (*VpcAvailableSubnet) SpecificationForAttribute(name string) elemental.AttributeSpecification {
+func (*VPCAvailableSubnet) SpecificationForAttribute(name string) elemental.AttributeSpecification {
 
-	if v, ok := VpcAvailableSubnetAttributesMap[name]; ok {
+	if v, ok := VPCAvailableSubnetAttributesMap[name]; ok {
 		return v
 	}
 
 	// We could not find it, so let's check on the lower case indexed spec map
-	return VpcAvailableSubnetLowerCaseAttributesMap[name]
+	return VPCAvailableSubnetLowerCaseAttributesMap[name]
 }
 
 // AttributeSpecifications returns the full attribute specifications map.
-func (*VpcAvailableSubnet) AttributeSpecifications() map[string]elemental.AttributeSpecification {
+func (*VPCAvailableSubnet) AttributeSpecifications() map[string]elemental.AttributeSpecification {
 
-	return VpcAvailableSubnetAttributesMap
+	return VPCAvailableSubnetAttributesMap
 }
 
 // ValueForAttribute returns the value for the given attribute.
 // This is a very advanced function that you should not need but in some
 // very specific use cases.
-func (o *VpcAvailableSubnet) ValueForAttribute(name string) any {
+func (o *VPCAvailableSubnet) ValueForAttribute(name string) any {
 
 	switch name {
 	case "VPCID":
@@ -154,8 +154,8 @@ func (o *VpcAvailableSubnet) ValueForAttribute(name string) any {
 	return nil
 }
 
-// VpcAvailableSubnetAttributesMap represents the map of attribute for VpcAvailableSubnet.
-var VpcAvailableSubnetAttributesMap = map[string]elemental.AttributeSpecification{
+// VPCAvailableSubnetAttributesMap represents the map of attribute for VPCAvailableSubnet.
+var VPCAvailableSubnetAttributesMap = map[string]elemental.AttributeSpecification{
 	"VPCID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "VPCID",
@@ -176,8 +176,8 @@ specified.`,
 	},
 }
 
-// VpcAvailableSubnetLowerCaseAttributesMap represents the map of attribute for VpcAvailableSubnet.
-var VpcAvailableSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+// VPCAvailableSubnetLowerCaseAttributesMap represents the map of attribute for VPCAvailableSubnet.
+var VPCAvailableSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
 	"vpcid": {
 		AllowedChoices: []string{},
 		ConvertedName:  "VPCID",
@@ -198,5 +198,5 @@ specified.`,
 	},
 }
 
-type mongoAttributesVpcAvailableSubnet struct {
+type mongoAttributesVPCAvailableSubnet struct {
 }

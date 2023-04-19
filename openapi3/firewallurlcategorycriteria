@@ -5,7 +5,7 @@
         "description": "Represents rule URL category criteria.\nThis is not an external object but a child object used by the Rule object.",
         "properties": {
           "URLCategories": {
-            "description": "NGFW URL categories.  See FirewallURLCategoryList for the list.",
+            "description": "NGFW URL categories. See FirewallURLCategoryList for the list.",
             "example": [
               "adult",
               "high-risk",
@@ -17,14 +17,14 @@
             "type": "array"
           },
           "customExternalFeedIDs": {
-            "description": "List FirewallCustomExternalFeed IDs that are of type URLList.",
+            "description": "List firewall custom external feed IDs that are of type URLList.",
             "items": {
               "type": "string"
             },
             "type": "array"
           },
           "customURLCategoryIDs": {
-            "description": "List of FirewallCustomURLCategory IDs.",
+            "description": "List of firewall custom URL category IDs.",
             "items": {
               "type": "string"
             },

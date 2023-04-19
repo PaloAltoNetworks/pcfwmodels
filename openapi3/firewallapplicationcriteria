@@ -2,10 +2,10 @@
   "components": {
     "schemas": {
       "firewallapplicationcriteria": {
-        "description": "Represents rule criteria for specifying AppIds.\nThis is not an external object but a child object used by the Rule object.",
+        "description": "Represents rule criteria for specifying AppIDs.\nThis is not an external object but a child object used by the Rule object.",
         "properties": {
           "appIDs": {
-            "description": "List of NGFW App IDs.  See AppIDList.",
+            "description": "List of NGFW App IDs. See AppIDList.",
             "example": [
               "ftp",
               "http-proxy",

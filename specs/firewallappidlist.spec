@@ -6,7 +6,7 @@ model:
   package: ngfw
   group: core/ngfw
   description: |-
-    This a readonly list that returns all of the NGFW AppIDs that the user can
+    This a read-only list that returns all of the NGFW AppIDs that the user can
     select.
   extends:
   - '@namespaced'

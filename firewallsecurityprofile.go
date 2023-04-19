@@ -119,10 +119,10 @@ type FirewallSecurityProfile struct {
 	// Enables file blocking.
 	FileBlockingEnabled bool `json:"fileBlockingEnabled" msgpack:"fileBlockingEnabled" bson:"fileblockingenabled" mapstructure:"fileBlockingEnabled,omitempty"`
 
-	// The date when the securityprofile was last committed.
+	// The date when the security profile was last committed.
 	LastCommittedTime time.Time `json:"lastCommittedTime" msgpack:"lastCommittedTime" bson:"lastcommittedtime" mapstructure:"lastCommittedTime,omitempty"`
 
-	// The date when the securityprofile was last updated.
+	// The date when the security profile was last updated.
 	LastUpdatedTime time.Time `json:"lastUpdatedTime" msgpack:"lastUpdatedTime" bson:"lastupdatedtime" mapstructure:"lastUpdatedTime,omitempty"`
 
 	// Name of the entity.
@@ -831,7 +831,7 @@ var FirewallSecurityProfileAttributesMap = map[string]elemental.AttributeSpecifi
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastcommittedtime",
 		ConvertedName:  "LastCommittedTime",
-		Description:    `The date when the securityprofile was last committed.`,
+		Description:    `The date when the security profile was last committed.`,
 		Exposed:        true,
 		Name:           "lastCommittedTime",
 		ReadOnly:       true,
@@ -842,7 +842,7 @@ var FirewallSecurityProfileAttributesMap = map[string]elemental.AttributeSpecifi
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastupdatedtime",
 		ConvertedName:  "LastUpdatedTime",
-		Description:    `The date when the securityprofile was last updated.`,
+		Description:    `The date when the security profile was last updated.`,
 		Exposed:        true,
 		Name:           "lastUpdatedTime",
 		ReadOnly:       true,
@@ -1075,7 +1075,7 @@ var FirewallSecurityProfileLowerCaseAttributesMap = map[string]elemental.Attribu
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastcommittedtime",
 		ConvertedName:  "LastCommittedTime",
-		Description:    `The date when the securityprofile was last committed.`,
+		Description:    `The date when the security profile was last committed.`,
 		Exposed:        true,
 		Name:           "lastCommittedTime",
 		ReadOnly:       true,
@@ -1086,7 +1086,7 @@ var FirewallSecurityProfileLowerCaseAttributesMap = map[string]elemental.Attribu
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastupdatedtime",
 		ConvertedName:  "LastUpdatedTime",
-		Description:    `The date when the securityprofile was last updated.`,
+		Description:    `The date when the security profile was last updated.`,
 		Exposed:        true,
 		Name:           "lastUpdatedTime",
 		ReadOnly:       true,
@@ -1290,10 +1290,10 @@ type SparseFirewallSecurityProfile struct {
 	// Enables file blocking.
 	FileBlockingEnabled *bool `json:"fileBlockingEnabled,omitempty" msgpack:"fileBlockingEnabled,omitempty" bson:"fileblockingenabled,omitempty" mapstructure:"fileBlockingEnabled,omitempty"`
 
-	// The date when the securityprofile was last committed.
+	// The date when the security profile was last committed.
 	LastCommittedTime *time.Time `json:"lastCommittedTime,omitempty" msgpack:"lastCommittedTime,omitempty" bson:"lastcommittedtime,omitempty" mapstructure:"lastCommittedTime,omitempty"`
 
-	// The date when the securityprofile was last updated.
+	// The date when the security profile was last updated.
 	LastUpdatedTime *time.Time `json:"lastUpdatedTime,omitempty" msgpack:"lastUpdatedTime,omitempty" bson:"lastupdatedtime,omitempty" mapstructure:"lastUpdatedTime,omitempty"`
 
 	// Name of the entity.

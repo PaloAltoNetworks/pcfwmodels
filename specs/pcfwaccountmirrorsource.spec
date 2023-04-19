@@ -6,14 +6,14 @@ model:
   package: deploymentadvisor
   group: core/deploymentadvisor
   description: |-
-    Represents the traffic mirror source configuration for a firewall associatd with
-    a customer account.
+    Represents the traffic mirror source configuration for a firewall associated
+    with a customer account.
   get:
-    description: Retrieves the pcfwaccountmirrorsource object with the given ID.
+    description: Retrieves the PCFW account mirror source object with the given ID.
   update:
-    description: Updates the pcfwaccountmirrorsource object with the given ID.
+    description: Updates the PCFW account mirror source object with the given ID.
   delete:
-    description: Deletes the pcfwaccountmirrorsource object with the given ID.
+    description: Deletes the PCFW account mirror source object with the given ID.
   extends:
   - '@identifiable-stored'
   - '@described'

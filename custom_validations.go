@@ -306,14 +306,14 @@ func ValidateVPCIDs(attribute string, vpcids []string) error {
 }
 
 // ValidateVpcSubnetInfo validates all the information in VPCUsedSubnets list
-func ValidateVpcSubnetInfo(attribute string, VpcUsedSubnets []*VpcUsedSubnet) error {
+func ValidateVpcSubnetInfo(attribute string, VPCUsedSubnets []*VPCUsedSubnet) error {
 
 	// Empty list is invalid
-	if len(VpcUsedSubnets) == 0 {
-		return makeErr(attribute, "VpcUsedSubnets list cannot be empty")
+	if len(VPCUsedSubnets) == 0 {
+		return makeErr(attribute, "VPCUsedSubnets list cannot be empty")
 	}
 	// Walk through each entry and validate it
-	for _, vpc := range VpcUsedSubnets {
+	for _, vpc := range VPCUsedSubnets {
 		if len(vpc.AvailabilityZones) == 0 {
 			return makeErr(attribute, fmt.Sprintf("AvailabilityZones list for VPC %s cannot be empty", vpc.VPCID))
 		}

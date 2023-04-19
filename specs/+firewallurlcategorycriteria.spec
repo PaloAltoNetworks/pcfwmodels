@@ -14,7 +14,7 @@ model:
 attributes:
   v1:
   - name: URLCategories
-    description: NGFW URL categories.  See FirewallURLCategoryList for the list.
+    description: NGFW URL categories. See FirewallURLCategoryList for the list.
     type: list
     exposed: true
     subtype: string
@@ -25,14 +25,14 @@ attributes:
     - hacking
 
   - name: customExternalFeedIDs
-    description: List FirewallCustomExternalFeed IDs that are of type URLList.
+    description: List firewall custom external feed IDs that are of type URLList.
     type: list
     exposed: true
     subtype: string
     stored: true
 
   - name: customURLCategoryIDs
-    description: List of FirewallCustomURLCategory IDs.
+    description: List of firewall custom URL category IDs.
     type: list
     exposed: true
     subtype: string

@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "availabilityzonesubnet": {
-        "description": "Represents association of an availability zone and an avaialble subnet in that\nzone.",
+        "description": "Represents association of an availability zone and an available subnet in that\nzone.",
         "properties": {
           "availabilityZone": {
             "description": "The availability zone.",

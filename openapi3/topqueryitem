@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "topqueryitem": {
-        "description": "Represents an item in a topquery result.",
+        "description": "Represents an item in a top query result.",
         "properties": {
           "count": {
             "description": "The count of the field.",

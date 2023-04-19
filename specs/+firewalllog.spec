@@ -5,7 +5,7 @@ model:
   entity_name: FirewallLog
   package: logging
   group: core/log
-  description: Represents a log line in a logquery result.
+  description: Represents a log line in a log query result.
   detached: true
 
 # Attributes

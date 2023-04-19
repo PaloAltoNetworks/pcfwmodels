@@ -173,7 +173,7 @@ type AWSFirewall struct {
 	// The firewall endpoints.
 	Endpoints []*AWSEndpoint `json:"endpoints" msgpack:"endpoints" bson:"endpoints" mapstructure:"endpoints,omitempty"`
 
-	// The date when the fireall was last committed.
+	// The date when the firewall was last committed.
 	LastCommitTime time.Time `json:"lastCommitTime" msgpack:"lastCommitTime" bson:"lastcommittime" mapstructure:"lastCommitTime,omitempty"`
 
 	// The license type of the firewall.
@@ -997,7 +997,7 @@ var AWSFirewallAttributesMap = map[string]elemental.AttributeSpecification{
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastcommittime",
 		ConvertedName:  "LastCommitTime",
-		Description:    `The date when the fireall was last committed.`,
+		Description:    `The date when the firewall was last committed.`,
 		Exposed:        true,
 		Name:           "lastCommitTime",
 		ReadOnly:       true,
@@ -1282,7 +1282,7 @@ var AWSFirewallLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		AllowedChoices: []string{},
 		BSONFieldName:  "lastcommittime",
 		ConvertedName:  "LastCommitTime",
-		Description:    `The date when the fireall was last committed.`,
+		Description:    `The date when the firewall was last committed.`,
 		Exposed:        true,
 		Name:           "lastCommitTime",
 		ReadOnly:       true,
@@ -1534,7 +1534,7 @@ type SparseAWSFirewall struct {
 	// The firewall endpoints.
 	Endpoints *[]*AWSEndpoint `json:"endpoints,omitempty" msgpack:"endpoints,omitempty" bson:"endpoints,omitempty" mapstructure:"endpoints,omitempty"`
 
-	// The date when the fireall was last committed.
+	// The date when the firewall was last committed.
 	LastCommitTime *time.Time `json:"lastCommitTime,omitempty" msgpack:"lastCommitTime,omitempty" bson:"lastcommittime,omitempty" mapstructure:"lastCommitTime,omitempty"`
 
 	// The license type of the firewall.

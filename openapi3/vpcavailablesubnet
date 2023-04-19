@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "vpcavailablesubnet": {
-        "description": "Represents association of a VPC ID to corresponding availability zones and one\navaialble subnet every zone.",
+        "description": "Represents association of a VPC ID to corresponding availability zones and one\navailable subnet every zone.",
         "properties": {
           "VPCID": {
             "description": "An AWS VPC ID.",
