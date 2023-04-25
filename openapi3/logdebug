@@ -1,0 +1,121 @@
+{
+  "components": {
+    "schemas": {
+      "logdebug": {
+        "description": "Get debug information or initiate debug commands.",
+        "properties": {
+          "command": {
+            "description": "The command to perform.",
+            "type": "string"
+          },
+          "firewallName": {
+            "description": "The NGFW name.",
+            "example": "firewall1",
+            "type": "string"
+          },
+          "information": {
+            "description": "Additional information returned to caller.",
+            "readOnly": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "logdebug",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/logdebugs": {
+      "post": {
+        "description": "Initiate a log debug command.",
+        "operationId": "create-a-new-logdebug",
+        "parameters": [
+          {
+            "description": "Set the absolute end of the time window.",
+            "example": "2018/04/08 10:42",
+            "in": "query",
+            "name": "endAbsolute",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the relative end of the time window.",
+            "example": "-1h",
+            "in": "query",
+            "name": "endRelative",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the absolute start of the time window.",
+            "example": "2018/03/08 10:42",
+            "in": "query",
+            "name": "startAbsolute",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Set the relative start of the time window.",
+            "example": "-1h",
+            "in": "query",
+            "name": "startRelative",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/logdebug"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logdebug"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "core/log",
+          "logging"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logging'",
+      "name": "logging"
+    }
+  ]
+}

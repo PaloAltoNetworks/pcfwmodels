@@ -222,6 +222,12 @@
       },
       "type": "array"
     },
+    "logdebugs": {
+      "items": {
+        "$ref": "logdebug.json"
+      },
+      "type": "array"
+    },
     "logqueries": {
       "items": {
         "$ref": "logquery.json"

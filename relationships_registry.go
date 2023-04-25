@@ -710,6 +710,59 @@ func init() {
 		},
 	}
 
+	relationshipsRegistry[LogDebugIdentity] = &elemental.Relationship{
+		Create: map[string]*elemental.RelationshipInfo{
+			"root": {
+				RequiredParameters: elemental.NewParametersRequirement(
+					[][][]string{
+						{
+							{
+								"endRelative",
+							},
+							{
+								"startRelative",
+							},
+							{
+								"startRelative",
+								"endRelative",
+							},
+							{
+								"startRelative",
+								"endAbsolute",
+							},
+							{
+								"startAbsolute",
+								"endRelative",
+							},
+							{
+								"startAbsolute",
+								"endAbsolute",
+							},
+						},
+					},
+				),
+				Parameters: []elemental.ParameterDefinition{
+					{
+						Name: "endAbsolute",
+						Type: "time",
+					},
+					{
+						Name: "endRelative",
+						Type: "duration",
+					},
+					{
+						Name: "startAbsolute",
+						Type: "time",
+					},
+					{
+						Name: "startRelative",
+						Type: "duration",
+					},
+				},
+			},
+		},
+	}
+
 	relationshipsRegistry[LogQueryIdentity] = &elemental.Relationship{
 		Create: map[string]*elemental.RelationshipInfo{
 			"root": {

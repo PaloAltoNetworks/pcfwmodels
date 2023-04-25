@@ -164,6 +164,12 @@ relations:
     global_parameters:
     - $queryable
 
+- rest_name: logdebug
+  create:
+    description: Initiate a log debug command.
+    global_parameters:
+    - $timewindow
+
 - rest_name: logfieldstat
   get:
     description: Retrieves statistics for a log field.

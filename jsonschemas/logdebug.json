@@ -1,0 +1,44 @@
+{
+  "$extends": [],
+  "$modelName": "LogDebug",
+  "$modelPackage": "logging",
+  "$modelResourceName": "logdebugs",
+  "$modelRestName": "logdebug",
+  "additionalProperties": true,
+  "properties": {
+    "command": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "firewallName": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "information": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "LogDebug",
+  "type": "object"
+}

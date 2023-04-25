@@ -1151,6 +1151,55 @@ Type: `time`
 
 Time of session start.
 
+### LogDebug
+
+Get debug information or initiate debug commands.
+
+#### Example
+
+```json
+{
+  "firewallName": "firewall1"
+}
+```
+
+#### Relations
+
+##### `POST /logdebugs`
+
+Initiate a log debug command.
+
+Parameters:
+
+- `endAbsolute` (`time`): Set the absolute end of the time window.
+- `endRelative` (`duration`): Set the relative end of the time window.
+- `startAbsolute` (`time`): Set the absolute start of the time window.
+- `startRelative` (`duration`): Set the relative start of the time window.
+
+Mandatory Parameters
+
+(`endRelative`) or (`startRelative`) or (`startRelative` and `endRelative`) or (`startRelative` and `endAbsolute`) or (`startAbsolute` and `endRelative`) or (`startAbsolute` and `endAbsolute`)
+
+#### Attributes
+
+##### `command`
+
+Type: `string`
+
+The command to perform.
+
+##### `firewallName`
+
+Type: `string`
+
+The NGFW name.
+
+##### `information` [`read_only`]
+
+Type: `string`
+
+Additional information returned to caller.
+
 ### LogQuery
 
 Answer general queries on firewall logs.

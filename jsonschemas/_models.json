@@ -111,6 +111,9 @@
     "firewallurlcategorylist": {
       "$ref": "firewallurlcategorylist.json"
     },
+    "logdebug": {
+      "$ref": "logdebug.json"
+    },
     "logquery": {
       "$ref": "logquery.json"
     },

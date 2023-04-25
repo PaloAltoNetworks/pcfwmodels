@@ -38,6 +38,7 @@ var (
 		"firewalltemplate": FirewallTemplateIdentity,
 
 		"firewallurlcategorylist": FirewallURLCategoryListIdentity,
+		"logdebug":                LogDebugIdentity,
 
 		"logquery": LogQueryIdentity,
 
@@ -90,6 +91,7 @@ var (
 		"firewalltemplates": FirewallTemplateIdentity,
 
 		"firewallurlcategorylists": FirewallURLCategoryListIdentity,
+		"logdebugs":                LogDebugIdentity,
 
 		"logqueries": LogQueryIdentity,
 
@@ -243,6 +245,7 @@ var (
 		"firewallurlcategorylist": {
 			{"namespace"},
 		},
+		"logdebug":           nil,
 		"logquery":           nil,
 		"mirrorsourceoption": nil,
 		"pcfwaccount": {
@@ -367,6 +370,8 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewFirewallTemplate()
 	case FirewallURLCategoryListIdentity:
 		return NewFirewallURLCategoryList()
+	case LogDebugIdentity:
+		return NewLogDebug()
 	case LogQueryIdentity:
 		return NewLogQuery()
 	case MirrorSourceOptionIdentity:
@@ -448,6 +453,8 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseFirewallTemplate()
 	case FirewallURLCategoryListIdentity:
 		return NewSparseFirewallURLCategoryList()
+	case LogDebugIdentity:
+		return NewSparseLogDebug()
 	case LogQueryIdentity:
 		return NewSparseLogQuery()
 	case MirrorSourceOptionIdentity:
@@ -537,6 +544,8 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &FirewallTemplatesList{}
 	case FirewallURLCategoryListIdentity:
 		return &FirewallURLCategoryListsList{}
+	case LogDebugIdentity:
+		return &LogDebugsList{}
 	case LogQueryIdentity:
 		return &LogQueriesList{}
 	case MirrorSourceOptionIdentity:
@@ -616,6 +625,8 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseFirewallTemplatesList{}
 	case FirewallURLCategoryListIdentity:
 		return &SparseFirewallURLCategoryListsList{}
+	case LogDebugIdentity:
+		return &SparseLogDebugsList{}
 	case LogQueryIdentity:
 		return &SparseLogQueriesList{}
 	case MirrorSourceOptionIdentity:
@@ -692,6 +703,7 @@ func AllIdentities() []elemental.Identity {
 		FirewallSecurityProfileIdentity,
 		FirewallTemplateIdentity,
 		FirewallURLCategoryListIdentity,
+		LogDebugIdentity,
 		LogQueryIdentity,
 		MirrorSourceOptionIdentity,
 		PCFWAccountIdentity,
@@ -756,6 +768,8 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case FirewallTemplateIdentity:
 		return []string{}
 	case FirewallURLCategoryListIdentity:
+		return []string{}
+	case LogDebugIdentity:
 		return []string{}
 	case LogQueryIdentity:
 		return []string{}
