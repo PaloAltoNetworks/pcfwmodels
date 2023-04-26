@@ -108,6 +108,18 @@
         }
       ]
     },
+    "activationDate": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "format": "date-time",
+          "type": "string"
+        }
+      ]
+    },
     "annotations": {
       "anyOf": [
         {

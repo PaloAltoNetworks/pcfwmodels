@@ -4187,6 +4187,12 @@ Type: `string`
 Issuer for Prisma Cloud tenant (identifies the Prisma Cloud stack for IAM role
 usage).
 
+##### `activationDate` [`read_only`]
+
+Type: `time`
+
+The date when the account was activated.
+
 ##### `annotations`
 
 Type: `map[string][]string`
@@ -4365,6 +4371,10 @@ Delete the tenant with the given PrismaID.
 ##### `GET /pcfwtenants/:id`
 
 Retrieve the tenant with the given PrismaID.
+
+##### `PUT /pcfwtenants/:id`
+
+Unsubscribe the tenant.
 
 #### Attributes
 

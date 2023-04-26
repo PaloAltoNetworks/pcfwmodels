@@ -8,6 +8,8 @@ model:
   description: Represents Prisma Cloud Firewall Tenant.
   get:
     description: Retrieve the tenant with the given PrismaID.
+  update:
+    description: Unsubscribe the tenant.
   delete:
     description: Delete the tenant with the given PrismaID.
   extends:

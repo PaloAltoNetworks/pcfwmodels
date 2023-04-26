@@ -49,6 +49,12 @@
             "readOnly": true,
             "type": "string"
           },
+          "activationDate": {
+            "description": "The date when the account was activated.",
+            "format": "date-time",
+            "readOnly": true,
+            "type": "string"
+          },
           "annotations": {
             "additionalProperties": {
               "items": {

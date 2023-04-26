@@ -294,7 +294,36 @@
             "type": "string"
           }
         }
-      ]
+      ],
+      "put": {
+        "description": "Unsubscribe the tenant.",
+        "operationId": "update-pcfwtenant-by-ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pcfwtenant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pcfwtenant"
+                }
+              }
+            },
+            "description": "n/a"
+          }
+        },
+        "tags": [
+          "onboarding",
+          "ngfw"
+        ]
+      }
     }
   },
   "tags": [

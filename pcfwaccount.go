@@ -149,6 +149,9 @@ type PCFWAccount struct {
 	// usage).
 	PCTenantIssuer string `json:"PCTenantIssuer" msgpack:"PCTenantIssuer" bson:"pctenantissuer" mapstructure:"PCTenantIssuer,omitempty"`
 
+	// The date when the account was activated.
+	ActivationDate time.Time `json:"activationDate" msgpack:"activationDate" bson:"activationdate" mapstructure:"activationDate,omitempty"`
+
 	// Stores additional information about an entity.
 	Annotations map[string][]string `json:"annotations" msgpack:"annotations" bson:"annotations" mapstructure:"annotations,omitempty"`
 
@@ -277,6 +280,7 @@ func (o *PCFWAccount) GetBSON() (any, error) {
 	s.NGFWServiceAccountID = o.NGFWServiceAccountID
 	s.NGFWTenantID = o.NGFWTenantID
 	s.PCTenantIssuer = o.PCTenantIssuer
+	s.ActivationDate = o.ActivationDate
 	s.Annotations = o.Annotations
 	s.AssociatedTags = o.AssociatedTags
 	s.AthenaWorkgroup = o.AthenaWorkgroup
@@ -326,6 +330,7 @@ func (o *PCFWAccount) SetBSON(raw bson.Raw) error {
 	o.NGFWServiceAccountID = s.NGFWServiceAccountID
 	o.NGFWTenantID = s.NGFWTenantID
 	o.PCTenantIssuer = s.PCTenantIssuer
+	o.ActivationDate = s.ActivationDate
 	o.Annotations = s.Annotations
 	o.AssociatedTags = s.AssociatedTags
 	o.AthenaWorkgroup = s.AthenaWorkgroup
@@ -482,6 +487,7 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			NGFWServiceAccountID: &o.NGFWServiceAccountID,
 			NGFWTenantID:         &o.NGFWTenantID,
 			PCTenantIssuer:       &o.PCTenantIssuer,
+			ActivationDate:       &o.ActivationDate,
 			Annotations:          &o.Annotations,
 			AssociatedTags:       &o.AssociatedTags,
 			AthenaWorkgroup:      &o.AthenaWorkgroup,
@@ -529,6 +535,8 @@ func (o *PCFWAccount) ToSparse(fields ...string) elemental.SparseIdentifiable {
 			sp.NGFWTenantID = &(o.NGFWTenantID)
 		case "PCTenantIssuer":
 			sp.PCTenantIssuer = &(o.PCTenantIssuer)
+		case "activationDate":
+			sp.ActivationDate = &(o.ActivationDate)
 		case "annotations":
 			sp.Annotations = &(o.Annotations)
 		case "associatedTags":
@@ -614,6 +622,9 @@ func (o *PCFWAccount) Patch(sparse elemental.SparseIdentifiable) {
 	}
 	if so.PCTenantIssuer != nil {
 		o.PCTenantIssuer = *so.PCTenantIssuer
+	}
+	if so.ActivationDate != nil {
+		o.ActivationDate = *so.ActivationDate
 	}
 	if so.Annotations != nil {
 		o.Annotations = *so.Annotations
@@ -864,6 +875,8 @@ func (o *PCFWAccount) ValueForAttribute(name string) any {
 		return o.NGFWTenantID
 	case "PCTenantIssuer":
 		return o.PCTenantIssuer
+	case "activationDate":
+		return o.ActivationDate
 	case "annotations":
 		return o.Annotations
 	case "associatedTags":
@@ -1027,6 +1040,17 @@ usage).`,
 		ReadOnly: true,
 		Stored:   true,
 		Type:     "string",
+	},
+	"ActivationDate": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "activationdate",
+		ConvertedName:  "ActivationDate",
+		Description:    `The date when the account was activated.`,
+		Exposed:        true,
+		Name:           "activationDate",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "time",
 	},
 	"Annotations": {
 		AllowedChoices: []string{},
@@ -1389,6 +1413,17 @@ usage).`,
 		Stored:   true,
 		Type:     "string",
 	},
+	"activationdate": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "activationdate",
+		ConvertedName:  "ActivationDate",
+		Description:    `The date when the account was activated.`,
+		Exposed:        true,
+		Name:           "activationDate",
+		ReadOnly:       true,
+		Stored:         true,
+		Type:           "time",
+	},
 	"annotations": {
 		AllowedChoices: []string{},
 		BSONFieldName:  "annotations",
@@ -1728,6 +1763,9 @@ type SparsePCFWAccount struct {
 	// usage).
 	PCTenantIssuer *string `json:"PCTenantIssuer,omitempty" msgpack:"PCTenantIssuer,omitempty" bson:"pctenantissuer,omitempty" mapstructure:"PCTenantIssuer,omitempty"`
 
+	// The date when the account was activated.
+	ActivationDate *time.Time `json:"activationDate,omitempty" msgpack:"activationDate,omitempty" bson:"activationdate,omitempty" mapstructure:"activationDate,omitempty"`
+
 	// Stores additional information about an entity.
 	Annotations *map[string][]string `json:"annotations,omitempty" msgpack:"annotations,omitempty" bson:"annotations,omitempty" mapstructure:"annotations,omitempty"`
 
@@ -1870,6 +1908,9 @@ func (o *SparsePCFWAccount) GetBSON() (any, error) {
 	if o.PCTenantIssuer != nil {
 		s.PCTenantIssuer = o.PCTenantIssuer
 	}
+	if o.ActivationDate != nil {
+		s.ActivationDate = o.ActivationDate
+	}
 	if o.Annotations != nil {
 		s.Annotations = o.Annotations
 	}
@@ -1982,6 +2023,9 @@ func (o *SparsePCFWAccount) SetBSON(raw bson.Raw) error {
 	if s.PCTenantIssuer != nil {
 		o.PCTenantIssuer = s.PCTenantIssuer
 	}
+	if s.ActivationDate != nil {
+		o.ActivationDate = s.ActivationDate
+	}
 	if s.Annotations != nil {
 		o.Annotations = s.Annotations
 	}
@@ -2091,6 +2135,9 @@ func (o *SparsePCFWAccount) ToPlain() elemental.PlainIdentifiable {
 	}
 	if o.PCTenantIssuer != nil {
 		out.PCTenantIssuer = *o.PCTenantIssuer
+	}
+	if o.ActivationDate != nil {
+		out.ActivationDate = *o.ActivationDate
 	}
 	if o.Annotations != nil {
 		out.Annotations = *o.Annotations
@@ -2311,6 +2358,7 @@ type mongoAttributesPCFWAccount struct {
 	NGFWServiceAccountID string                             `bson:"ngfwserviceaccountid"`
 	NGFWTenantID         string                             `bson:"ngfwtenantid"`
 	PCTenantIssuer       string                             `bson:"pctenantissuer"`
+	ActivationDate       time.Time                          `bson:"activationdate"`
 	Annotations          map[string][]string                `bson:"annotations"`
 	AssociatedTags       []string                           `bson:"associatedtags"`
 	AthenaWorkgroup      string                             `bson:"athenaworkgroup"`
@@ -2345,6 +2393,7 @@ type mongoAttributesSparsePCFWAccount struct {
 	NGFWServiceAccountID *string                             `bson:"ngfwserviceaccountid,omitempty"`
 	NGFWTenantID         *string                             `bson:"ngfwtenantid,omitempty"`
 	PCTenantIssuer       *string                             `bson:"pctenantissuer,omitempty"`
+	ActivationDate       *time.Time                          `bson:"activationdate,omitempty"`
 	Annotations          *map[string][]string                `bson:"annotations,omitempty"`
 	AssociatedTags       *[]string                           `bson:"associatedtags,omitempty"`
 	AthenaWorkgroup      *string                             `bson:"athenaworkgroup,omitempty"`
