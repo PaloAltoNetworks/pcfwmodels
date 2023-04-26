@@ -588,11 +588,11 @@ subnet CIDR blocks in the VPC.
 
 #### Attributes
 
-##### `CIDRBlock`
+##### `CIDRBlocks`
 
-Type: `string`
+Type: `[]string`
 
-The CIDR block of the VPC.
+The CIDR blocks of the VPC.
 
 ##### `VPCID`
 

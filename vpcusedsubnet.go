@@ -13,8 +13,8 @@ import (
 
 // VPCUsedSubnet represents the model of a vpcusedsubnet
 type VPCUsedSubnet struct {
-	// The CIDR block of the VPC.
-	CIDRBlock string `json:"CIDRBlock" msgpack:"CIDRBlock" bson:"cidrblock" mapstructure:"CIDRBlock,omitempty"`
+	// The CIDR blocks of the VPC.
+	CIDRBlocks []string `json:"CIDRBlocks" msgpack:"CIDRBlocks" bson:"cidrblocks" mapstructure:"CIDRBlocks,omitempty"`
 
 	// An AWS VPC ID.
 	VPCID string `json:"VPCID" msgpack:"VPCID" bson:"vpcid" mapstructure:"VPCID,omitempty"`
@@ -33,6 +33,7 @@ func NewVPCUsedSubnet() *VPCUsedSubnet {
 
 	return &VPCUsedSubnet{
 		ModelVersion:      1,
+		CIDRBlocks:        []string{},
 		AvailabilityZones: []string{},
 		SubnetCIDRs:       []string{},
 	}
@@ -48,7 +49,7 @@ func (o *VPCUsedSubnet) GetBSON() (any, error) {
 
 	s := &mongoAttributesVPCUsedSubnet{}
 
-	s.CIDRBlock = o.CIDRBlock
+	s.CIDRBlocks = o.CIDRBlocks
 	s.VPCID = o.VPCID
 	s.AvailabilityZones = o.AvailabilityZones
 	s.SubnetCIDRs = o.SubnetCIDRs
@@ -69,7 +70,7 @@ func (o *VPCUsedSubnet) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
-	o.CIDRBlock = s.CIDRBlock
+	o.CIDRBlocks = s.CIDRBlocks
 	o.VPCID = s.VPCID
 	o.AvailabilityZones = s.AvailabilityZones
 	o.SubnetCIDRs = s.SubnetCIDRs
@@ -113,7 +114,7 @@ func (o *VPCUsedSubnet) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := ValidateCIDR("CIDRBlock", o.CIDRBlock); err != nil {
+	if err := ValidateCIDRList("CIDRBlocks", o.CIDRBlocks); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -159,8 +160,8 @@ func (*VPCUsedSubnet) AttributeSpecifications() map[string]elemental.AttributeSp
 func (o *VPCUsedSubnet) ValueForAttribute(name string) any {
 
 	switch name {
-	case "CIDRBlock":
-		return o.CIDRBlock
+	case "CIDRBlocks":
+		return o.CIDRBlocks
 	case "VPCID":
 		return o.VPCID
 	case "availabilityZones":
@@ -174,15 +175,16 @@ func (o *VPCUsedSubnet) ValueForAttribute(name string) any {
 
 // VPCUsedSubnetAttributesMap represents the map of attribute for VPCUsedSubnet.
 var VPCUsedSubnetAttributesMap = map[string]elemental.AttributeSpecification{
-	"CIDRBlock": {
+	"CIDRBlocks": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "cidrblock",
-		ConvertedName:  "CIDRBlock",
-		Description:    `The CIDR block of the VPC.`,
+		BSONFieldName:  "cidrblocks",
+		ConvertedName:  "CIDRBlocks",
+		Description:    `The CIDR blocks of the VPC.`,
 		Exposed:        true,
-		Name:           "CIDRBlock",
+		Name:           "CIDRBlocks",
 		Stored:         true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"VPCID": {
 		AllowedChoices: []string{},
@@ -220,15 +222,16 @@ var VPCUsedSubnetAttributesMap = map[string]elemental.AttributeSpecification{
 
 // VPCUsedSubnetLowerCaseAttributesMap represents the map of attribute for VPCUsedSubnet.
 var VPCUsedSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"cidrblock": {
+	"cidrblocks": {
 		AllowedChoices: []string{},
-		BSONFieldName:  "cidrblock",
-		ConvertedName:  "CIDRBlock",
-		Description:    `The CIDR block of the VPC.`,
+		BSONFieldName:  "cidrblocks",
+		ConvertedName:  "CIDRBlocks",
+		Description:    `The CIDR blocks of the VPC.`,
 		Exposed:        true,
-		Name:           "CIDRBlock",
+		Name:           "CIDRBlocks",
 		Stored:         true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"vpcid": {
 		AllowedChoices: []string{},
@@ -265,7 +268,7 @@ var VPCUsedSubnetLowerCaseAttributesMap = map[string]elemental.AttributeSpecific
 }
 
 type mongoAttributesVPCUsedSubnet struct {
-	CIDRBlock         string   `bson:"cidrblock"`
+	CIDRBlocks        []string `bson:"cidrblocks"`
 	VPCID             string   `bson:"vpcid"`
 	AvailabilityZones []string `bson:"availabilityzones"`
 	SubnetCIDRs       []string `bson:"subnetcidrs"`
