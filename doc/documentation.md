@@ -1721,7 +1721,7 @@ Default value:
 "TAP"
 ```
 
-##### `name` [`required`,`max_length=256`]
+##### `name` [`required`,`creation_only`,`max_length=256`]
 
 Type: `string`
 
@@ -1903,7 +1903,7 @@ Default value:
 "pcfw"
 ```
 
-##### `name` [`required`,`max_length=256`]
+##### `name` [`required`,`creation_only`,`max_length=256`]
 
 Type: `string`
 

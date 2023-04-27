@@ -21,7 +21,7 @@ model:
         default_value: false
   extends:
   - '@identifiable-stored'
-  - '@named'
+  - '@named-createonly'
   - '@described'
   - '@namespaced'
   - '@base'

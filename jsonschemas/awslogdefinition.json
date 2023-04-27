@@ -1,7 +1,7 @@
 {
   "$extends": [
     "@identifiable-stored",
-    "@named",
+    "@named-createonly",
     "@described",
     "@namespaced",
     "@base",
@@ -146,6 +146,7 @@
       ]
     },
     "name": {
+      "$creationOnly": true,
       "$required": true,
       "anyOf": [
         {

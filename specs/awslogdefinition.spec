@@ -14,7 +14,7 @@ model:
     description: Deletes the AWS log definition with the given ID.
   extends:
   - '@identifiable-stored'
-  - '@named'
+  - '@named-createonly'
   - '@described'
   - '@namespaced'
   - '@base'
