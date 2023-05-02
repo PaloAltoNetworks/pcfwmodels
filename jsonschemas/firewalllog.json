@@ -50,6 +50,17 @@
         }
       ]
     },
+    "destinationDAG": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "destinationIP": {
       "$readOnly": true,
       "anyOf": [
@@ -128,6 +139,17 @@
       ]
     },
     "sessionID": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "sourceDAG": {
       "$readOnly": true,
       "anyOf": [
         {

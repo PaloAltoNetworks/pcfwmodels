@@ -24,6 +24,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "destinationDAG": {
+            "description": "Original destination source dynamic address group.",
+            "readOnly": true,
+            "type": "string"
+          },
           "destinationIP": {
             "description": "Original session destination IP address.",
             "readOnly": true,
@@ -61,6 +66,11 @@
           },
           "sessionID": {
             "description": "An internal numerical identifier applied to each session.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "sourceDAG": {
+            "description": "Original session source dynamic address group.",
             "readOnly": true,
             "type": "string"
           },

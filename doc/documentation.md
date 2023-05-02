@@ -951,6 +951,12 @@ Type: `string`
 
 Application associated with the session.
 
+##### `destinationDAG` [`read_only`]
+
+Type: `string`
+
+Original destination source dynamic address group.
+
 ##### `destinationIP` [`read_only`]
 
 Type: `string`
@@ -999,6 +1005,12 @@ Name of the rule that the session matched.
 Type: `string`
 
 An internal numerical identifier applied to each session.
+
+##### `sourceDAG` [`read_only`]
+
+Type: `string`
+
+Original session source dynamic address group.
 
 ##### `sourceIP` [`read_only`]
 

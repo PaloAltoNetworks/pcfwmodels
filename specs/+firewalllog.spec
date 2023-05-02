@@ -39,6 +39,12 @@ attributes:
     exposed: true
     read_only: true
 
+  - name: destinationDAG
+    description: Original destination source dynamic address group.
+    type: string
+    exposed: true
+    read_only: true
+
   - name: destinationIP
     description: Original session destination IP address.
     type: string
@@ -85,6 +91,12 @@ attributes:
 
   - name: sessionID
     description: An internal numerical identifier applied to each session.
+    type: string
+    exposed: true
+    read_only: true
+
+  - name: sourceDAG
+    description: Original session source dynamic address group.
     type: string
     exposed: true
     read_only: true

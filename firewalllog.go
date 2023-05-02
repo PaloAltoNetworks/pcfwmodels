@@ -43,6 +43,9 @@ type FirewallLog struct {
 	// Application associated with the session.
 	App string `json:"app" msgpack:"app" bson:"-" mapstructure:"app,omitempty"`
 
+	// Original destination source dynamic address group.
+	DestinationDAG string `json:"destinationDAG" msgpack:"destinationDAG" bson:"-" mapstructure:"destinationDAG,omitempty"`
+
 	// Original session destination IP address.
 	DestinationIP string `json:"destinationIP" msgpack:"destinationIP" bson:"-" mapstructure:"destinationIP,omitempty"`
 
@@ -67,6 +70,9 @@ type FirewallLog struct {
 
 	// An internal numerical identifier applied to each session.
 	SessionID string `json:"sessionID" msgpack:"sessionID" bson:"-" mapstructure:"sessionID,omitempty"`
+
+	// Original session source dynamic address group.
+	SourceDAG string `json:"sourceDAG" msgpack:"sourceDAG" bson:"-" mapstructure:"sourceDAG,omitempty"`
 
 	// Original session source IP address.
 	SourceIP string `json:"sourceIP" msgpack:"sourceIP" bson:"-" mapstructure:"sourceIP,omitempty"`
@@ -269,6 +275,8 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.Action
 	case "app":
 		return o.App
+	case "destinationDAG":
+		return o.DestinationDAG
 	case "destinationIP":
 		return o.DestinationIP
 	case "destinationPort":
@@ -285,6 +293,8 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.Rule
 	case "sessionID":
 		return o.SessionID
+	case "sourceDAG":
+		return o.SourceDAG
 	case "sourceIP":
 		return o.SourceIP
 	case "sourcePort":
@@ -379,6 +389,15 @@ displays the IP address of the most recent device.`,
 		ReadOnly:       true,
 		Type:           "string",
 	},
+	"DestinationDAG": {
+		AllowedChoices: []string{},
+		ConvertedName:  "DestinationDAG",
+		Description:    `Original destination source dynamic address group.`,
+		Exposed:        true,
+		Name:           "destinationDAG",
+		ReadOnly:       true,
+		Type:           "string",
+	},
 	"DestinationIP": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationIP",
@@ -449,6 +468,15 @@ seen within 5 seconds.`,
 		Description:    `An internal numerical identifier applied to each session.`,
 		Exposed:        true,
 		Name:           "sessionID",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"SourceDAG": {
+		AllowedChoices: []string{},
+		ConvertedName:  "SourceDAG",
+		Description:    `Original session source dynamic address group.`,
+		Exposed:        true,
+		Name:           "sourceDAG",
 		ReadOnly:       true,
 		Type:           "string",
 	},
@@ -718,6 +746,15 @@ displays the IP address of the most recent device.`,
 		ReadOnly:       true,
 		Type:           "string",
 	},
+	"destinationdag": {
+		AllowedChoices: []string{},
+		ConvertedName:  "DestinationDAG",
+		Description:    `Original destination source dynamic address group.`,
+		Exposed:        true,
+		Name:           "destinationDAG",
+		ReadOnly:       true,
+		Type:           "string",
+	},
 	"destinationip": {
 		AllowedChoices: []string{},
 		ConvertedName:  "DestinationIP",
@@ -788,6 +825,15 @@ seen within 5 seconds.`,
 		Description:    `An internal numerical identifier applied to each session.`,
 		Exposed:        true,
 		Name:           "sessionID",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"sourcedag": {
+		AllowedChoices: []string{},
+		ConvertedName:  "SourceDAG",
+		Description:    `Original session source dynamic address group.`,
+		Exposed:        true,
+		Name:           "sourceDAG",
 		ReadOnly:       true,
 		Type:           "string",
 	},
