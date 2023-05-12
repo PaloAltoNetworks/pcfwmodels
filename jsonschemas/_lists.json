@@ -228,6 +228,24 @@
       },
       "type": "array"
     },
+    "logincidentdetailsqueries": {
+      "items": {
+        "$ref": "logincidentdetailsquery.json"
+      },
+      "type": "array"
+    },
+    "logincidentqueries": {
+      "items": {
+        "$ref": "logincidentquery.json"
+      },
+      "type": "array"
+    },
+    "logincidents": {
+      "items": {
+        "$ref": "logincident.json"
+      },
+      "type": "array"
+    },
     "logqueries": {
       "items": {
         "$ref": "logquery.json"

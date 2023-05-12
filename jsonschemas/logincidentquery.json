@@ -1,0 +1,37 @@
+{
+  "$extends": [],
+  "$modelName": "LogIncidentQuery",
+  "$modelPackage": "logging",
+  "$modelResourceName": "logincidentqueries",
+  "$modelRestName": "logincidentquery",
+  "additionalProperties": true,
+  "properties": {
+    "firewallName": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logResult": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "logincident.json"
+          },
+          "type": "array"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "title": "LogIncidentQuery",
+  "type": "object"
+}

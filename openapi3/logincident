@@ -1,0 +1,93 @@
+{
+  "components": {
+    "schemas": {
+      "logincident": {
+        "description": "Represents a security incident.",
+        "properties": {
+          "attackerID": {
+            "description": "The attacker ID (EC2 instance ID).",
+            "example": "i-450224347700",
+            "type": "string"
+          },
+          "attackerIP": {
+            "description": "The attacker IP address.",
+            "example": "212.44.7.91",
+            "type": "string"
+          },
+          "attackerName": {
+            "description": "The attacker name.",
+            "type": "string"
+          },
+          "attackerPort": {
+            "description": "The attacker port.",
+            "type": "integer"
+          },
+          "firewallName": {
+            "description": "The NGFW name.",
+            "type": "string"
+          },
+          "threatCategory": {
+            "description": "The threat category.",
+            "type": "string"
+          },
+          "threatName": {
+            "description": "The threat name.",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "The timestamp of the incident.",
+            "example": "2018-06-14T23:10:46.420397985Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "victimID": {
+            "description": "The victim ID (EC2 instance ID).",
+            "example": "i-450224347700",
+            "type": "string"
+          },
+          "victimIP": {
+            "description": "The victim IP address.",
+            "example": "212.3.41.8",
+            "type": "string"
+          },
+          "victimName": {
+            "description": "The victim name.",
+            "type": "string"
+          },
+          "victimPort": {
+            "description": "The victim port.",
+            "example": 80,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "timestamp"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "logincident",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/log'",
+      "name": "core/log"
+    },
+    {
+      "description": "This tag is for package 'logging'",
+      "name": "logging"
+    }
+  ]
+}

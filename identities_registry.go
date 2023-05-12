@@ -40,7 +40,9 @@ var (
 		"firewallurlcategorylist": FirewallURLCategoryListIdentity,
 		"logdebug":                LogDebugIdentity,
 
-		"logquery": LogQueryIdentity,
+		"logincidentdetailsquery": LogIncidentDetailsQueryIdentity,
+		"logincidentquery":        LogIncidentQueryIdentity,
+		"logquery":                LogQueryIdentity,
 
 		"mirrorsourceoption":           MirrorSourceOptionIdentity,
 		"pcfwaccount":                  PCFWAccountIdentity,
@@ -93,7 +95,9 @@ var (
 		"firewallurlcategorylists": FirewallURLCategoryListIdentity,
 		"logdebugs":                LogDebugIdentity,
 
-		"logqueries": LogQueryIdentity,
+		"logincidentdetailsqueries": LogIncidentDetailsQueryIdentity,
+		"logincidentqueries":        LogIncidentQueryIdentity,
+		"logqueries":                LogQueryIdentity,
 
 		"mirrorsourceoptions":           MirrorSourceOptionIdentity,
 		"pcfwaccounts":                  PCFWAccountIdentity,
@@ -245,9 +249,11 @@ var (
 		"firewallurlcategorylist": {
 			{"namespace"},
 		},
-		"logdebug":           nil,
-		"logquery":           nil,
-		"mirrorsourceoption": nil,
+		"logdebug":                nil,
+		"logincidentdetailsquery": nil,
+		"logincidentquery":        nil,
+		"logquery":                nil,
+		"mirrorsourceoption":      nil,
 		"pcfwaccount": {
 			{":shard", ":unique", "zone", "zHash"},
 			{"createIdempotencyKey"},
@@ -372,6 +378,10 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewFirewallURLCategoryList()
 	case LogDebugIdentity:
 		return NewLogDebug()
+	case LogIncidentDetailsQueryIdentity:
+		return NewLogIncidentDetailsQuery()
+	case LogIncidentQueryIdentity:
+		return NewLogIncidentQuery()
 	case LogQueryIdentity:
 		return NewLogQuery()
 	case MirrorSourceOptionIdentity:
@@ -455,6 +465,10 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparseFirewallURLCategoryList()
 	case LogDebugIdentity:
 		return NewSparseLogDebug()
+	case LogIncidentDetailsQueryIdentity:
+		return NewSparseLogIncidentDetailsQuery()
+	case LogIncidentQueryIdentity:
+		return NewSparseLogIncidentQuery()
 	case LogQueryIdentity:
 		return NewSparseLogQuery()
 	case MirrorSourceOptionIdentity:
@@ -546,6 +560,10 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &FirewallURLCategoryListsList{}
 	case LogDebugIdentity:
 		return &LogDebugsList{}
+	case LogIncidentDetailsQueryIdentity:
+		return &LogIncidentDetailsQueriesList{}
+	case LogIncidentQueryIdentity:
+		return &LogIncidentQueriesList{}
 	case LogQueryIdentity:
 		return &LogQueriesList{}
 	case MirrorSourceOptionIdentity:
@@ -627,6 +645,10 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparseFirewallURLCategoryListsList{}
 	case LogDebugIdentity:
 		return &SparseLogDebugsList{}
+	case LogIncidentDetailsQueryIdentity:
+		return &SparseLogIncidentDetailsQueriesList{}
+	case LogIncidentQueryIdentity:
+		return &SparseLogIncidentQueriesList{}
 	case LogQueryIdentity:
 		return &SparseLogQueriesList{}
 	case MirrorSourceOptionIdentity:
@@ -704,6 +726,8 @@ func AllIdentities() []elemental.Identity {
 		FirewallTemplateIdentity,
 		FirewallURLCategoryListIdentity,
 		LogDebugIdentity,
+		LogIncidentDetailsQueryIdentity,
+		LogIncidentQueryIdentity,
 		LogQueryIdentity,
 		MirrorSourceOptionIdentity,
 		PCFWAccountIdentity,
@@ -770,6 +794,10 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case FirewallURLCategoryListIdentity:
 		return []string{}
 	case LogDebugIdentity:
+		return []string{}
+	case LogIncidentDetailsQueryIdentity:
+		return []string{}
+	case LogIncidentQueryIdentity:
 		return []string{}
 	case LogQueryIdentity:
 		return []string{}

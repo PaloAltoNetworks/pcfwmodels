@@ -179,6 +179,18 @@ relations:
   create:
     description: Creates a statistic for a log field.
 
+- rest_name: logincidentdetailsquery
+  create:
+    description: Creates a new log incident details query.
+    global_parameters:
+    - $timewindow
+
+- rest_name: logincidentquery
+  create:
+    description: Creates a new log incident query.
+    global_parameters:
+    - $timewindow
+
 - rest_name: logquery
   create:
     description: Creates a new log query.

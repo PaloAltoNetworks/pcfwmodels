@@ -114,6 +114,15 @@
     "logdebug": {
       "$ref": "logdebug.json"
     },
+    "logincident": {
+      "$ref": "logincident.json"
+    },
+    "logincidentdetailsquery": {
+      "$ref": "logincidentdetailsquery.json"
+    },
+    "logincidentquery": {
+      "$ref": "logincidentquery.json"
+    },
     "logquery": {
       "$ref": "logquery.json"
     },

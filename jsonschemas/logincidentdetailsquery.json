@@ -1,0 +1,55 @@
+{
+  "$extends": [],
+  "$modelName": "LogIncidentDetailsQuery",
+  "$modelPackage": "logging",
+  "$modelResourceName": "logincidentdetailsqueries",
+  "$modelRestName": "logincidentdetailsquery",
+  "additionalProperties": true,
+  "properties": {
+    "attackerIP": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "firewallName": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "logResult": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "$ref": "firewalllog.json"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "victimIP": {
+      "$required": true,
+      "anyOf": [
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "attackerIP",
+    "firewallName",
+    "victimIP"
+  ],
+  "title": "LogIncidentDetailsQuery",
+  "type": "object"
+}
