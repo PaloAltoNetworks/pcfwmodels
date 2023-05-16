@@ -11,6 +11,12 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: attackerAlternateIPs
+    description: Other IP addresses for the attacker instance.
+    type: list
+    exposed: true
+    subtype: string
+
   - name: attackerID
     description: The attacker ID (EC2 instance ID).
     type: string
@@ -54,6 +60,12 @@ attributes:
     exposed: true
     required: true
     example_value: "2018-06-14T23:10:46.420397985Z"
+
+  - name: victimAlternateIPs
+    description: Other IP addresses for the victim instance.
+    type: list
+    exposed: true
+    subtype: string
 
   - name: victimID
     description: The victim ID (EC2 instance ID).

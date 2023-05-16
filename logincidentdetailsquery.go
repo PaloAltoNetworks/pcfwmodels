@@ -83,8 +83,8 @@ func (o LogIncidentDetailsQueriesList) Version() int {
 
 // LogIncidentDetailsQuery represents the model of a logincidentdetailsquery
 type LogIncidentDetailsQuery struct {
-	// The attacker IP address.
-	AttackerIP string `json:"attackerIP" msgpack:"attackerIP" bson:"-" mapstructure:"attackerIP,omitempty"`
+	// IP addresses for the attacker.
+	AttackerIPs []string `json:"attackerIPs" msgpack:"attackerIPs" bson:"-" mapstructure:"attackerIPs,omitempty"`
 
 	// The NGFW name.
 	FirewallName string `json:"firewallName" msgpack:"firewallName" bson:"-" mapstructure:"firewallName,omitempty"`
@@ -92,8 +92,8 @@ type LogIncidentDetailsQuery struct {
 	// The result of the query.
 	LogResult []*FirewallLog `json:"logResult" msgpack:"logResult" bson:"-" mapstructure:"logResult,omitempty"`
 
-	// The victim IP address.
-	VictimIP string `json:"victimIP" msgpack:"victimIP" bson:"-" mapstructure:"victimIP,omitempty"`
+	// IP addresses for the victim.
+	VictimIPs []string `json:"victimIPs" msgpack:"victimIPs" bson:"-" mapstructure:"victimIPs,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -103,7 +103,9 @@ func NewLogIncidentDetailsQuery() *LogIncidentDetailsQuery {
 
 	return &LogIncidentDetailsQuery{
 		ModelVersion: 1,
+		AttackerIPs:  []string{},
 		LogResult:    []*FirewallLog{},
+		VictimIPs:    []string{},
 	}
 }
 
@@ -189,24 +191,24 @@ func (o *LogIncidentDetailsQuery) ToSparse(fields ...string) elemental.SparseIde
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseLogIncidentDetailsQuery{
-			AttackerIP:   &o.AttackerIP,
+			AttackerIPs:  &o.AttackerIPs,
 			FirewallName: &o.FirewallName,
 			LogResult:    &o.LogResult,
-			VictimIP:     &o.VictimIP,
+			VictimIPs:    &o.VictimIPs,
 		}
 	}
 
 	sp := &SparseLogIncidentDetailsQuery{}
 	for _, f := range fields {
 		switch f {
-		case "attackerIP":
-			sp.AttackerIP = &(o.AttackerIP)
+		case "attackerIPs":
+			sp.AttackerIPs = &(o.AttackerIPs)
 		case "firewallName":
 			sp.FirewallName = &(o.FirewallName)
 		case "logResult":
 			sp.LogResult = &(o.LogResult)
-		case "victimIP":
-			sp.VictimIP = &(o.VictimIP)
+		case "victimIPs":
+			sp.VictimIPs = &(o.VictimIPs)
 		}
 	}
 
@@ -220,8 +222,8 @@ func (o *LogIncidentDetailsQuery) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparseLogIncidentDetailsQuery)
-	if so.AttackerIP != nil {
-		o.AttackerIP = *so.AttackerIP
+	if so.AttackerIPs != nil {
+		o.AttackerIPs = *so.AttackerIPs
 	}
 	if so.FirewallName != nil {
 		o.FirewallName = *so.FirewallName
@@ -229,8 +231,8 @@ func (o *LogIncidentDetailsQuery) Patch(sparse elemental.SparseIdentifiable) {
 	if so.LogResult != nil {
 		o.LogResult = *so.LogResult
 	}
-	if so.VictimIP != nil {
-		o.VictimIP = *so.VictimIP
+	if so.VictimIPs != nil {
+		o.VictimIPs = *so.VictimIPs
 	}
 }
 
@@ -264,7 +266,7 @@ func (o *LogIncidentDetailsQuery) Validate() error {
 	errors := elemental.Errors{}
 	requiredErrors := elemental.Errors{}
 
-	if err := elemental.ValidateRequiredString("attackerIP", o.AttackerIP); err != nil {
+	if err := elemental.ValidateRequiredExternal("attackerIPs", o.AttackerIPs); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
@@ -282,7 +284,7 @@ func (o *LogIncidentDetailsQuery) Validate() error {
 		}
 	}
 
-	if err := elemental.ValidateRequiredString("victimIP", o.VictimIP); err != nil {
+	if err := elemental.ValidateRequiredExternal("victimIPs", o.VictimIPs); err != nil {
 		requiredErrors = requiredErrors.Append(err)
 	}
 
@@ -320,14 +322,14 @@ func (*LogIncidentDetailsQuery) AttributeSpecifications() map[string]elemental.A
 func (o *LogIncidentDetailsQuery) ValueForAttribute(name string) any {
 
 	switch name {
-	case "attackerIP":
-		return o.AttackerIP
+	case "attackerIPs":
+		return o.AttackerIPs
 	case "firewallName":
 		return o.FirewallName
 	case "logResult":
 		return o.LogResult
-	case "victimIP":
-		return o.VictimIP
+	case "victimIPs":
+		return o.VictimIPs
 	}
 
 	return nil
@@ -335,14 +337,15 @@ func (o *LogIncidentDetailsQuery) ValueForAttribute(name string) any {
 
 // LogIncidentDetailsQueryAttributesMap represents the map of attribute for LogIncidentDetailsQuery.
 var LogIncidentDetailsQueryAttributesMap = map[string]elemental.AttributeSpecification{
-	"AttackerIP": {
+	"AttackerIPs": {
 		AllowedChoices: []string{},
-		ConvertedName:  "AttackerIP",
-		Description:    `The attacker IP address.`,
+		ConvertedName:  "AttackerIPs",
+		Description:    `IP addresses for the attacker.`,
 		Exposed:        true,
-		Name:           "attackerIP",
+		Name:           "attackerIPs",
 		Required:       true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"FirewallName": {
 		AllowedChoices: []string{},
@@ -364,27 +367,29 @@ var LogIncidentDetailsQueryAttributesMap = map[string]elemental.AttributeSpecifi
 		SubType:        "firewalllog",
 		Type:           "refList",
 	},
-	"VictimIP": {
+	"VictimIPs": {
 		AllowedChoices: []string{},
-		ConvertedName:  "VictimIP",
-		Description:    `The victim IP address.`,
+		ConvertedName:  "VictimIPs",
+		Description:    `IP addresses for the victim.`,
 		Exposed:        true,
-		Name:           "victimIP",
+		Name:           "victimIPs",
 		Required:       true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 }
 
 // LogIncidentDetailsQueryLowerCaseAttributesMap represents the map of attribute for LogIncidentDetailsQuery.
 var LogIncidentDetailsQueryLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
-	"attackerip": {
+	"attackerips": {
 		AllowedChoices: []string{},
-		ConvertedName:  "AttackerIP",
-		Description:    `The attacker IP address.`,
+		ConvertedName:  "AttackerIPs",
+		Description:    `IP addresses for the attacker.`,
 		Exposed:        true,
-		Name:           "attackerIP",
+		Name:           "attackerIPs",
 		Required:       true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"firewallname": {
 		AllowedChoices: []string{},
@@ -406,14 +411,15 @@ var LogIncidentDetailsQueryLowerCaseAttributesMap = map[string]elemental.Attribu
 		SubType:        "firewalllog",
 		Type:           "refList",
 	},
-	"victimip": {
+	"victimips": {
 		AllowedChoices: []string{},
-		ConvertedName:  "VictimIP",
-		Description:    `The victim IP address.`,
+		ConvertedName:  "VictimIPs",
+		Description:    `IP addresses for the victim.`,
 		Exposed:        true,
-		Name:           "victimIP",
+		Name:           "victimIPs",
 		Required:       true,
-		Type:           "string",
+		SubType:        "string",
+		Type:           "list",
 	},
 }
 
@@ -480,8 +486,8 @@ func (o SparseLogIncidentDetailsQueriesList) Version() int {
 
 // SparseLogIncidentDetailsQuery represents the sparse version of a logincidentdetailsquery.
 type SparseLogIncidentDetailsQuery struct {
-	// The attacker IP address.
-	AttackerIP *string `json:"attackerIP,omitempty" msgpack:"attackerIP,omitempty" bson:"-" mapstructure:"attackerIP,omitempty"`
+	// IP addresses for the attacker.
+	AttackerIPs *[]string `json:"attackerIPs,omitempty" msgpack:"attackerIPs,omitempty" bson:"-" mapstructure:"attackerIPs,omitempty"`
 
 	// The NGFW name.
 	FirewallName *string `json:"firewallName,omitempty" msgpack:"firewallName,omitempty" bson:"-" mapstructure:"firewallName,omitempty"`
@@ -489,8 +495,8 @@ type SparseLogIncidentDetailsQuery struct {
 	// The result of the query.
 	LogResult *[]*FirewallLog `json:"logResult,omitempty" msgpack:"logResult,omitempty" bson:"-" mapstructure:"logResult,omitempty"`
 
-	// The victim IP address.
-	VictimIP *string `json:"victimIP,omitempty" msgpack:"victimIP,omitempty" bson:"-" mapstructure:"victimIP,omitempty"`
+	// IP addresses for the victim.
+	VictimIPs *[]string `json:"victimIPs,omitempty" msgpack:"victimIPs,omitempty" bson:"-" mapstructure:"victimIPs,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -556,8 +562,8 @@ func (o *SparseLogIncidentDetailsQuery) Version() int {
 func (o *SparseLogIncidentDetailsQuery) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewLogIncidentDetailsQuery()
-	if o.AttackerIP != nil {
-		out.AttackerIP = *o.AttackerIP
+	if o.AttackerIPs != nil {
+		out.AttackerIPs = *o.AttackerIPs
 	}
 	if o.FirewallName != nil {
 		out.FirewallName = *o.FirewallName
@@ -565,8 +571,8 @@ func (o *SparseLogIncidentDetailsQuery) ToPlain() elemental.PlainIdentifiable {
 	if o.LogResult != nil {
 		out.LogResult = *o.LogResult
 	}
-	if o.VictimIP != nil {
-		out.VictimIP = *o.VictimIP
+	if o.VictimIPs != nil {
+		out.VictimIPs = *o.VictimIPs
 	}
 
 	return out

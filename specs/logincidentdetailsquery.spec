@@ -11,12 +11,15 @@ model:
 # Attributes
 attributes:
   v1:
-  - name: attackerIP
-    description: The attacker IP address.
-    type: string
+  - name: attackerIPs
+    description: IP addresses for the attacker.
+    type: list
     exposed: true
+    subtype: string
     required: true
-    example_value: 212.44.7.91
+    example_value:
+    - 212.44.7.91
+    - 10.10.1.1
 
   - name: firewallName
     description: The NGFW name.
@@ -35,9 +38,12 @@ attributes:
     extensions:
       refMode: pointer
 
-  - name: victimIP
-    description: The victim IP address.
-    type: string
+  - name: victimIPs
+    description: IP addresses for the victim.
+    type: list
     exposed: true
+    subtype: string
     required: true
-    example_value: 212.3.41.8
+    example_value:
+    - 212.44.7.92
+    - 10.10.1.2

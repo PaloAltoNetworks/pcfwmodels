@@ -4,6 +4,13 @@
       "logincident": {
         "description": "Represents a security incident.",
         "properties": {
+          "attackerAlternateIPs": {
+            "description": "Other IP addresses for the attacker instance.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "attackerID": {
             "description": "The attacker ID (EC2 instance ID).",
             "example": "i-450224347700",
@@ -39,6 +46,13 @@
             "example": "2018-06-14T23:10:46.420397985Z",
             "format": "date-time",
             "type": "string"
+          },
+          "victimAlternateIPs": {
+            "description": "Other IP addresses for the victim instance.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "victimID": {
             "description": "The victim ID (EC2 instance ID).",

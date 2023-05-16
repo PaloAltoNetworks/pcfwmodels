@@ -1231,6 +1231,12 @@ Represents a security incident.
 
 #### Attributes
 
+##### `attackerAlternateIPs`
+
+Type: `[]string`
+
+Other IP addresses for the attacker instance.
+
 ##### `attackerID`
 
 Type: `string`
@@ -1279,6 +1285,12 @@ Type: `time`
 
 The timestamp of the incident.
 
+##### `victimAlternateIPs`
+
+Type: `[]string`
+
+Other IP addresses for the victim instance.
+
 ##### `victimID`
 
 Type: `string`
@@ -1311,9 +1323,15 @@ Provide details on a Log Incident, including traffic and threat log information.
 
 ```json
 {
-  "attackerIP": "212.44.7.91",
+  "attackerIPs": [
+    "212.44.7.91",
+    "10.10.1.1"
+  ],
   "firewallName": "firewall1",
-  "victimIP": "212.3.41.8"
+  "victimIPs": [
+    "212.44.7.92",
+    "10.10.1.2"
+  ]
 }
 ```
 
@@ -1336,11 +1354,11 @@ Mandatory Parameters
 
 #### Attributes
 
-##### `attackerIP` [`required`]
+##### `attackerIPs` [`required`]
 
-Type: `string`
+Type: `[]string`
 
-The attacker IP address.
+IP addresses for the attacker.
 
 ##### `firewallName` [`required`]
 
@@ -1354,11 +1372,11 @@ Type: [`[]firewalllog`](#firewalllog)
 
 The result of the query.
 
-##### `victimIP` [`required`]
+##### `victimIPs` [`required`]
 
-Type: `string`
+Type: `[]string`
 
-The victim IP address.
+IP addresses for the victim.
 
 ### LogIncidentQuery
 

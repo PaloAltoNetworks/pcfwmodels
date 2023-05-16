@@ -6,6 +6,19 @@
   "$modelRestName": "logincident",
   "additionalProperties": true,
   "properties": {
+    "attackerAlternateIPs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "attackerID": {
       "anyOf": [
         {
@@ -82,6 +95,19 @@
         {
           "format": "date-time",
           "type": "string"
+        }
+      ]
+    },
+    "victimAlternateIPs": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ]
     },

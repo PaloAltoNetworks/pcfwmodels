@@ -14,6 +14,9 @@ import (
 
 // LogIncident represents the model of a logincident
 type LogIncident struct {
+	// Other IP addresses for the attacker instance.
+	AttackerAlternateIPs []string `json:"attackerAlternateIPs" msgpack:"attackerAlternateIPs" bson:"-" mapstructure:"attackerAlternateIPs,omitempty"`
+
 	// The attacker ID (EC2 instance ID).
 	AttackerID string `json:"attackerID" msgpack:"attackerID" bson:"-" mapstructure:"attackerID,omitempty"`
 
@@ -38,6 +41,9 @@ type LogIncident struct {
 	// The timestamp of the incident.
 	Timestamp time.Time `json:"timestamp" msgpack:"timestamp" bson:"-" mapstructure:"timestamp,omitempty"`
 
+	// Other IP addresses for the victim instance.
+	VictimAlternateIPs []string `json:"victimAlternateIPs" msgpack:"victimAlternateIPs" bson:"-" mapstructure:"victimAlternateIPs,omitempty"`
+
 	// The victim ID (EC2 instance ID).
 	VictimID string `json:"victimID" msgpack:"victimID" bson:"-" mapstructure:"victimID,omitempty"`
 
@@ -57,7 +63,9 @@ type LogIncident struct {
 func NewLogIncident() *LogIncident {
 
 	return &LogIncident{
-		ModelVersion: 1,
+		ModelVersion:         1,
+		AttackerAlternateIPs: []string{},
+		VictimAlternateIPs:   []string{},
 	}
 }
 
@@ -164,6 +172,8 @@ func (*LogIncident) AttributeSpecifications() map[string]elemental.AttributeSpec
 func (o *LogIncident) ValueForAttribute(name string) any {
 
 	switch name {
+	case "attackerAlternateIPs":
+		return o.AttackerAlternateIPs
 	case "attackerID":
 		return o.AttackerID
 	case "attackerIP":
@@ -180,6 +190,8 @@ func (o *LogIncident) ValueForAttribute(name string) any {
 		return o.ThreatName
 	case "timestamp":
 		return o.Timestamp
+	case "victimAlternateIPs":
+		return o.VictimAlternateIPs
 	case "victimID":
 		return o.VictimID
 	case "victimIP":
@@ -195,6 +207,15 @@ func (o *LogIncident) ValueForAttribute(name string) any {
 
 // LogIncidentAttributesMap represents the map of attribute for LogIncident.
 var LogIncidentAttributesMap = map[string]elemental.AttributeSpecification{
+	"AttackerAlternateIPs": {
+		AllowedChoices: []string{},
+		ConvertedName:  "AttackerAlternateIPs",
+		Description:    `Other IP addresses for the attacker instance.`,
+		Exposed:        true,
+		Name:           "attackerAlternateIPs",
+		SubType:        "string",
+		Type:           "list",
+	},
 	"AttackerID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "AttackerID",
@@ -260,6 +281,15 @@ var LogIncidentAttributesMap = map[string]elemental.AttributeSpecification{
 		Required:       true,
 		Type:           "time",
 	},
+	"VictimAlternateIPs": {
+		AllowedChoices: []string{},
+		ConvertedName:  "VictimAlternateIPs",
+		Description:    `Other IP addresses for the victim instance.`,
+		Exposed:        true,
+		Name:           "victimAlternateIPs",
+		SubType:        "string",
+		Type:           "list",
+	},
 	"VictimID": {
 		AllowedChoices: []string{},
 		ConvertedName:  "VictimID",
@@ -296,6 +326,15 @@ var LogIncidentAttributesMap = map[string]elemental.AttributeSpecification{
 
 // LogIncidentLowerCaseAttributesMap represents the map of attribute for LogIncident.
 var LogIncidentLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+	"attackeralternateips": {
+		AllowedChoices: []string{},
+		ConvertedName:  "AttackerAlternateIPs",
+		Description:    `Other IP addresses for the attacker instance.`,
+		Exposed:        true,
+		Name:           "attackerAlternateIPs",
+		SubType:        "string",
+		Type:           "list",
+	},
 	"attackerid": {
 		AllowedChoices: []string{},
 		ConvertedName:  "AttackerID",
@@ -360,6 +399,15 @@ var LogIncidentLowerCaseAttributesMap = map[string]elemental.AttributeSpecificat
 		Name:           "timestamp",
 		Required:       true,
 		Type:           "time",
+	},
+	"victimalternateips": {
+		AllowedChoices: []string{},
+		ConvertedName:  "VictimAlternateIPs",
+		Description:    `Other IP addresses for the victim instance.`,
+		Exposed:        true,
+		Name:           "victimAlternateIPs",
+		SubType:        "string",
+		Type:           "list",
 	},
 	"victimid": {
 		AllowedChoices: []string{},

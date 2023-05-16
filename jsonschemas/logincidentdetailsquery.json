@@ -6,11 +6,14 @@
   "$modelRestName": "logincidentdetailsquery",
   "additionalProperties": true,
   "properties": {
-    "attackerIP": {
+    "attackerIPs": {
       "$required": true,
       "anyOf": [
         {
-          "type": "string"
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ]
     },
@@ -36,19 +39,22 @@
         }
       ]
     },
-    "victimIP": {
+    "victimIPs": {
       "$required": true,
       "anyOf": [
         {
-          "type": "string"
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       ]
     }
   },
   "required": [
-    "attackerIP",
+    "attackerIPs",
     "firewallName",
-    "victimIP"
+    "victimIPs"
   ],
   "title": "LogIncidentDetailsQuery",
   "type": "object"

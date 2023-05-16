@@ -4,10 +4,16 @@
       "logincidentdetailsquery": {
         "description": "Provide details on a Log Incident, including traffic and threat log information.",
         "properties": {
-          "attackerIP": {
-            "description": "The attacker IP address.",
-            "example": "212.44.7.91",
-            "type": "string"
+          "attackerIPs": {
+            "description": "IP addresses for the attacker.",
+            "example": [
+              "212.44.7.91",
+              "10.10.1.1"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           },
           "firewallName": {
             "description": "The NGFW name.",
@@ -22,16 +28,22 @@
             "readOnly": true,
             "type": "array"
           },
-          "victimIP": {
-            "description": "The victim IP address.",
-            "example": "212.3.41.8",
-            "type": "string"
+          "victimIPs": {
+            "description": "IP addresses for the victim.",
+            "example": [
+              "212.44.7.92",
+              "10.10.1.2"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
-          "attackerIP",
+          "attackerIPs",
           "firewallName",
-          "victimIP"
+          "victimIPs"
         ],
         "type": "object"
       }
