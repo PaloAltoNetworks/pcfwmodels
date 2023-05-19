@@ -5,9 +5,17 @@
         "description": "Discovers eligible traffic mirror source instances and auto-scaling groups.",
         "properties": {
           "autoScalingGroupNames": {
-            "description": "List of discovered auto-scaling groups.",
+            "description": "TODO remove me.",
             "items": {
               "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "autoScalingGroups": {
+            "description": "List of discovered auto-scaling groups.",
+            "items": {
+              "$ref": "./mirrorscalegroup#/components/schemas/mirrorscalegroup"
             },
             "readOnly": true,
             "type": "array"

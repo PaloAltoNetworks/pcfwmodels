@@ -276,6 +276,12 @@
       },
       "type": "array"
     },
+    "mirrorscalegroups": {
+      "items": {
+        "$ref": "mirrorscalegroup.json"
+      },
+      "type": "array"
+    },
     "mirrorsourceoptions": {
       "items": {
         "$ref": "mirrorsourceoption.json"

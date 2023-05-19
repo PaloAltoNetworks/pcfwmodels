@@ -1,12 +1,14 @@
 {
-  "$extends": [],
-  "$modelName": "MirrorSourceOption",
+  "$extends": [
+    "@named"
+  ],
+  "$modelName": "MirrorScaleGroup",
   "$modelPackage": "discovery",
-  "$modelResourceName": "mirrorsourceoptions",
-  "$modelRestName": "mirrorsourceoption",
+  "$modelResourceName": "mirrorscalegroups",
+  "$modelRestName": "mirrorscalegroup",
   "additionalProperties": true,
   "properties": {
-    "autoScalingGroupNames": {
+    "availabilityZones": {
       "$readOnly": true,
       "anyOf": [
         {
@@ -20,29 +22,16 @@
         }
       ]
     },
-    "autoScalingGroups": {
-      "$readOnly": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "items": {
-            "$ref": "mirrorscalegroup.json"
-          },
-          "type": "array"
-        }
-      ]
-    },
-    "firewallID": {
+    "name": {
       "$required": true,
       "anyOf": [
         {
+          "maxLength": 256,
           "type": "string"
         }
       ]
     },
-    "instances": {
+    "unmatchedAvailabilityZones": {
       "$readOnly": true,
       "anyOf": [
         {
@@ -50,7 +39,7 @@
         },
         {
           "items": {
-            "$ref": "mirrorinstance.json"
+            "type": "string"
           },
           "type": "array"
         }
@@ -58,8 +47,8 @@
     }
   },
   "required": [
-    "firewallID"
+    "name"
   ],
-  "title": "MirrorSourceOption",
+  "title": "MirrorScaleGroup",
   "type": "object"
 }

@@ -1,0 +1,59 @@
+{
+  "components": {
+    "schemas": {
+      "mirrorscalegroup": {
+        "description": "Includes name and availability zones of an auto-scaling group that may be\neligible for traffic mirroring.",
+        "properties": {
+          "availabilityZones": {
+            "description": "The availability zones associated with the auto-scaling group.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
+          },
+          "unmatchedAvailabilityZones": {
+            "description": "The availability zones associated with the auto-scaling group that are not\nassociated with the firewall.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "contact": {
+      "name": "Sibi Chakravarthy"
+    },
+    "license": {
+      "name": "TODO"
+    },
+    "termsOfService": "https://localhost/TODO",
+    "title": "mirrorscalegroup",
+    "version": "1.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {},
+  "tags": [
+    {
+      "description": "This tag is for group 'core/discovery'",
+      "name": "core/discovery"
+    },
+    {
+      "description": "This tag is for package 'discovery'",
+      "name": "discovery"
+    }
+  ]
+}

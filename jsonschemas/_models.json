@@ -138,6 +138,9 @@
     "mirrorrule": {
       "$ref": "mirrorrule.json"
     },
+    "mirrorscalegroup": {
+      "$ref": "mirrorscalegroup.json"
+    },
     "mirrorsourceoption": {
       "$ref": "mirrorsourceoption.json"
     },
