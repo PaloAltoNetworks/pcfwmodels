@@ -958,7 +958,15 @@ Represents a log line in a log query result.
   "timeGenerated": "2023-03-06T20:50:56Z",
   "trafficStartTime": "2023-03-06T20:50:56Z",
   "type": "Traffic",
-  "urlFilteringStartTime": "2023-03-06T20:50:56Z"
+  "urlFilteringCategories": [
+    "news",
+    "low-risk"
+  ],
+  "urlFilteringHTTP2Connection": 22749,
+  "urlFilteringHTTPMethod": "get",
+  "urlFilteringReferer": "https://example.com/",
+  "urlFilteringStartTime": "2023-03-06T20:50:56Z",
+  "urlFilteringURLIdx": 1
 }
 ```
 
@@ -1191,17 +1199,74 @@ Type: `enum(Traffic | Threat | URLFiltering)`
 
 Type of the log.
 
+##### `urlFilteringCategories` [`read_only`]
+
+Type: `[]string`
+
+Lists the URL filtering categories that the firewall used to enforce policy.
+
 ##### `urlFilteringCategory` [`read_only`]
 
 Type: `string`
 
 URL category associated with the session (if applicable).
 
+##### `urlFilteringContentType` [`read_only`]
+
+Type: `string`
+
+Content type of the HTTP response data. Maximum length 32 bytes.
+
+##### `urlFilteringDirection` [`read_only`]
+
+Type: `string`
+
+Indicates the direction of the attack, client-to-server or server-to-client.
+
+##### `urlFilteringHTTP2Connection` [`read_only`]
+
+Type: `string`
+
+Identifies if traffic used an HTTP/2 connection by displaying one
+of the following values: TCP connection session ID—session is HTTP/2 0—session
+is not HTTP/2.
+
+##### `urlFilteringHTTPMethod` [`read_only`]
+
+Type: `string`
+
+Describes the HTTP Method used in the web request. Only the following
+methods are logged: Connect, Delete, Get, Head, Options, Post, Put.
+
+##### `urlFilteringReferer` [`read_only`]
+
+Type: `string`
+
+The Referer field in the HTTP header contains the URL of the web
+page that linked the user to another web page; it is the source that redirected
+(referred) the user to the web page that is being requested.
+
 ##### `urlFilteringStartTime` [`read_only`]
 
 Type: `time`
 
 Time of session start.
+
+##### `urlFilteringURLFilename` [`read_only`]
+
+Type: `string`
+
+The actual URI of the request.
+
+##### `urlFilteringURLIdx` [`read_only`]
+
+Type: `integer`
+
+When an application uses TCP keep-alives to keep a connection open
+for a length of time, all the log entries for that session have a single session
+ID. In such cases, when you have a single threat log (and session ID) that
+includes multiple URL entries, the url_idx is a counter that allows you to
+correlate the order of each log entry within the single session.
 
 ### LogDebug
 

@@ -253,11 +253,63 @@ attributes:
     - Threat
     - URLFiltering
 
+  - name: urlFilteringCategories
+    description: Lists the URL filtering categories that the firewall used to enforce
+      policy.
+    type: list
+    exposed: true
+    subtype: string
+    read_only: true
+    example_value:
+    - news
+    - low-risk
+
   - name: urlFilteringCategory
     description: URL category associated with the session (if applicable).
     type: string
     exposed: true
     read_only: true
+
+  - name: urlFilteringContentType
+    description: Content type of the HTTP response data. Maximum length 32 bytes.
+    type: string
+    exposed: true
+    read_only: true
+
+  - name: urlFilteringDirection
+    description: Indicates the direction of the attack, client-to-server or server-to-client.
+    type: string
+    exposed: true
+    read_only: true
+
+  - name: urlFilteringHTTP2Connection
+    description: |-
+      Identifies if traffic used an HTTP/2 connection by displaying one
+      of the following values: TCP connection session ID—session is HTTP/2 0—session
+      is not HTTP/2.
+    type: string
+    exposed: true
+    read_only: true
+    example_value: 22749
+
+  - name: urlFilteringHTTPMethod
+    description: |-
+      Describes the HTTP Method used in the web request. Only the following
+      methods are logged: Connect, Delete, Get, Head, Options, Post, Put.
+    type: string
+    exposed: true
+    read_only: true
+    example_value: get
+
+  - name: urlFilteringReferer
+    description: |-
+      The Referer field in the HTTP header contains the URL of the web
+      page that linked the user to another web page; it is the source that redirected
+      (referred) the user to the web page that is being requested.
+    type: string
+    exposed: true
+    read_only: true
+    example_value: https://example.com/
 
   - name: urlFilteringStartTime
     description: Time of session start.
@@ -265,3 +317,21 @@ attributes:
     exposed: true
     read_only: true
     example_value: "2023-03-06T20:50:56Z"
+
+  - name: urlFilteringURLFilename
+    description: The actual URI of the request.
+    type: string
+    exposed: true
+    read_only: true
+
+  - name: urlFilteringURLIdx
+    description: |-
+      When an application uses TCP keep-alives to keep a connection open
+      for a length of time, all the log entries for that session have a single session
+      ID. In such cases, when you have a single threat log (and session ID) that
+      includes multiple URL entries, the url_idx is a counter that allows you to
+      correlate the order of each log entry within the single session.
+    type: integer
+    exposed: true
+    read_only: true
+    example_value: 1

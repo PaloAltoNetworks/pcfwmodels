@@ -147,11 +147,44 @@ type FirewallLog struct {
 	// Type of the log.
 	Type FirewallLogTypeValue `json:"type" msgpack:"type" bson:"-" mapstructure:"type,omitempty"`
 
+	// Lists the URL filtering categories that the firewall used to enforce policy.
+	UrlFilteringCategories []string `json:"urlFilteringCategories" msgpack:"urlFilteringCategories" bson:"-" mapstructure:"urlFilteringCategories,omitempty"`
+
 	// URL category associated with the session (if applicable).
 	UrlFilteringCategory string `json:"urlFilteringCategory" msgpack:"urlFilteringCategory" bson:"-" mapstructure:"urlFilteringCategory,omitempty"`
 
+	// Content type of the HTTP response data. Maximum length 32 bytes.
+	UrlFilteringContentType string `json:"urlFilteringContentType" msgpack:"urlFilteringContentType" bson:"-" mapstructure:"urlFilteringContentType,omitempty"`
+
+	// Indicates the direction of the attack, client-to-server or server-to-client.
+	UrlFilteringDirection string `json:"urlFilteringDirection" msgpack:"urlFilteringDirection" bson:"-" mapstructure:"urlFilteringDirection,omitempty"`
+
+	// Identifies if traffic used an HTTP/2 connection by displaying one
+	// of the following values: TCP connection session ID—session is HTTP/2 0—session
+	// is not HTTP/2.
+	UrlFilteringHTTP2Connection string `json:"urlFilteringHTTP2Connection" msgpack:"urlFilteringHTTP2Connection" bson:"-" mapstructure:"urlFilteringHTTP2Connection,omitempty"`
+
+	// Describes the HTTP Method used in the web request. Only the following
+	// methods are logged: Connect, Delete, Get, Head, Options, Post, Put.
+	UrlFilteringHTTPMethod string `json:"urlFilteringHTTPMethod" msgpack:"urlFilteringHTTPMethod" bson:"-" mapstructure:"urlFilteringHTTPMethod,omitempty"`
+
+	// The Referer field in the HTTP header contains the URL of the web
+	// page that linked the user to another web page; it is the source that redirected
+	// (referred) the user to the web page that is being requested.
+	UrlFilteringReferer string `json:"urlFilteringReferer" msgpack:"urlFilteringReferer" bson:"-" mapstructure:"urlFilteringReferer,omitempty"`
+
 	// Time of session start.
 	UrlFilteringStartTime time.Time `json:"urlFilteringStartTime" msgpack:"urlFilteringStartTime" bson:"-" mapstructure:"urlFilteringStartTime,omitempty"`
+
+	// The actual URI of the request.
+	UrlFilteringURLFilename string `json:"urlFilteringURLFilename" msgpack:"urlFilteringURLFilename" bson:"-" mapstructure:"urlFilteringURLFilename,omitempty"`
+
+	// When an application uses TCP keep-alives to keep a connection open
+	// for a length of time, all the log entries for that session have a single session
+	// ID. In such cases, when you have a single threat log (and session ID) that
+	// includes multiple URL entries, the url_idx is a counter that allows you to
+	// correlate the order of each log entry within the single session.
+	UrlFilteringURLIdx int `json:"urlFilteringURLIdx" msgpack:"urlFilteringURLIdx" bson:"-" mapstructure:"urlFilteringURLIdx,omitempty"`
 
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
@@ -160,7 +193,8 @@ type FirewallLog struct {
 func NewFirewallLog() *FirewallLog {
 
 	return &FirewallLog{
-		ModelVersion: 1,
+		ModelVersion:           1,
+		UrlFilteringCategories: []string{},
 	}
 }
 
@@ -339,10 +373,26 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.TrafficStartTime
 	case "type":
 		return o.Type
+	case "urlFilteringCategories":
+		return o.UrlFilteringCategories
 	case "urlFilteringCategory":
 		return o.UrlFilteringCategory
+	case "urlFilteringContentType":
+		return o.UrlFilteringContentType
+	case "urlFilteringDirection":
+		return o.UrlFilteringDirection
+	case "urlFilteringHTTP2Connection":
+		return o.UrlFilteringHTTP2Connection
+	case "urlFilteringHTTPMethod":
+		return o.UrlFilteringHTTPMethod
+	case "urlFilteringReferer":
+		return o.UrlFilteringReferer
 	case "urlFilteringStartTime":
 		return o.UrlFilteringStartTime
+	case "urlFilteringURLFilename":
+		return o.UrlFilteringURLFilename
+	case "urlFilteringURLIdx":
+		return o.UrlFilteringURLIdx
 	}
 
 	return nil
@@ -685,6 +735,16 @@ bytes.`,
 		ReadOnly:       true,
 		Type:           "enum",
 	},
+	"UrlFilteringCategories": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringCategories",
+		Description:    `Lists the URL filtering categories that the firewall used to enforce policy.`,
+		Exposed:        true,
+		Name:           "urlFilteringCategories",
+		ReadOnly:       true,
+		SubType:        "string",
+		Type:           "list",
+	},
 	"UrlFilteringCategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringCategory",
@@ -694,6 +754,56 @@ bytes.`,
 		ReadOnly:       true,
 		Type:           "string",
 	},
+	"UrlFilteringContentType": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringContentType",
+		Description:    `Content type of the HTTP response data. Maximum length 32 bytes.`,
+		Exposed:        true,
+		Name:           "urlFilteringContentType",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"UrlFilteringDirection": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringDirection",
+		Description:    `Indicates the direction of the attack, client-to-server or server-to-client.`,
+		Exposed:        true,
+		Name:           "urlFilteringDirection",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"UrlFilteringHTTP2Connection": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringHTTP2Connection",
+		Description: `Identifies if traffic used an HTTP/2 connection by displaying one
+of the following values: TCP connection session ID—session is HTTP/2 0—session
+is not HTTP/2.`,
+		Exposed:  true,
+		Name:     "urlFilteringHTTP2Connection",
+		ReadOnly: true,
+		Type:     "string",
+	},
+	"UrlFilteringHTTPMethod": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringHTTPMethod",
+		Description: `Describes the HTTP Method used in the web request. Only the following
+methods are logged: Connect, Delete, Get, Head, Options, Post, Put.`,
+		Exposed:  true,
+		Name:     "urlFilteringHTTPMethod",
+		ReadOnly: true,
+		Type:     "string",
+	},
+	"UrlFilteringReferer": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringReferer",
+		Description: `The Referer field in the HTTP header contains the URL of the web
+page that linked the user to another web page; it is the source that redirected
+(referred) the user to the web page that is being requested.`,
+		Exposed:  true,
+		Name:     "urlFilteringReferer",
+		ReadOnly: true,
+		Type:     "string",
+	},
 	"UrlFilteringStartTime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringStartTime",
@@ -702,6 +812,28 @@ bytes.`,
 		Name:           "urlFilteringStartTime",
 		ReadOnly:       true,
 		Type:           "time",
+	},
+	"UrlFilteringURLFilename": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringURLFilename",
+		Description:    `The actual URI of the request.`,
+		Exposed:        true,
+		Name:           "urlFilteringURLFilename",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"UrlFilteringURLIdx": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringURLIdx",
+		Description: `When an application uses TCP keep-alives to keep a connection open
+for a length of time, all the log entries for that session have a single session
+ID. In such cases, when you have a single threat log (and session ID) that
+includes multiple URL entries, the url_idx is a counter that allows you to
+correlate the order of each log entry within the single session.`,
+		Exposed:  true,
+		Name:     "urlFilteringURLIdx",
+		ReadOnly: true,
+		Type:     "integer",
 	},
 }
 
@@ -1042,6 +1174,16 @@ bytes.`,
 		ReadOnly:       true,
 		Type:           "enum",
 	},
+	"urlfilteringcategories": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringCategories",
+		Description:    `Lists the URL filtering categories that the firewall used to enforce policy.`,
+		Exposed:        true,
+		Name:           "urlFilteringCategories",
+		ReadOnly:       true,
+		SubType:        "string",
+		Type:           "list",
+	},
 	"urlfilteringcategory": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringCategory",
@@ -1051,6 +1193,56 @@ bytes.`,
 		ReadOnly:       true,
 		Type:           "string",
 	},
+	"urlfilteringcontenttype": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringContentType",
+		Description:    `Content type of the HTTP response data. Maximum length 32 bytes.`,
+		Exposed:        true,
+		Name:           "urlFilteringContentType",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"urlfilteringdirection": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringDirection",
+		Description:    `Indicates the direction of the attack, client-to-server or server-to-client.`,
+		Exposed:        true,
+		Name:           "urlFilteringDirection",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"urlfilteringhttp2connection": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringHTTP2Connection",
+		Description: `Identifies if traffic used an HTTP/2 connection by displaying one
+of the following values: TCP connection session ID—session is HTTP/2 0—session
+is not HTTP/2.`,
+		Exposed:  true,
+		Name:     "urlFilteringHTTP2Connection",
+		ReadOnly: true,
+		Type:     "string",
+	},
+	"urlfilteringhttpmethod": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringHTTPMethod",
+		Description: `Describes the HTTP Method used in the web request. Only the following
+methods are logged: Connect, Delete, Get, Head, Options, Post, Put.`,
+		Exposed:  true,
+		Name:     "urlFilteringHTTPMethod",
+		ReadOnly: true,
+		Type:     "string",
+	},
+	"urlfilteringreferer": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringReferer",
+		Description: `The Referer field in the HTTP header contains the URL of the web
+page that linked the user to another web page; it is the source that redirected
+(referred) the user to the web page that is being requested.`,
+		Exposed:  true,
+		Name:     "urlFilteringReferer",
+		ReadOnly: true,
+		Type:     "string",
+	},
 	"urlfilteringstarttime": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringStartTime",
@@ -1059,6 +1251,28 @@ bytes.`,
 		Name:           "urlFilteringStartTime",
 		ReadOnly:       true,
 		Type:           "time",
+	},
+	"urlfilteringurlfilename": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringURLFilename",
+		Description:    `The actual URI of the request.`,
+		Exposed:        true,
+		Name:           "urlFilteringURLFilename",
+		ReadOnly:       true,
+		Type:           "string",
+	},
+	"urlfilteringurlidx": {
+		AllowedChoices: []string{},
+		ConvertedName:  "UrlFilteringURLIdx",
+		Description: `When an application uses TCP keep-alives to keep a connection open
+for a length of time, all the log entries for that session have a single session
+ID. In such cases, when you have a single threat log (and session ID) that
+includes multiple URL entries, the url_idx is a counter that allows you to
+correlate the order of each log entry within the single session.`,
+		Exposed:  true,
+		Name:     "urlFilteringURLIdx",
+		ReadOnly: true,
+		Type:     "integer",
 	},
 }
 
