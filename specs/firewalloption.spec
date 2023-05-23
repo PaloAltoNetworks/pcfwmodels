@@ -18,7 +18,7 @@ attributes:
     example_value: us-east-1
 
   - name: regionVPCs
-    description: List of VPC IDs and their region and associated availability zones.
+    description: List of VPCs and their region and associated availability zones.
     type: refList
     exposed: true
     subtype: firewalloptionregion

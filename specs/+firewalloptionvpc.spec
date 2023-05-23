@@ -6,6 +6,8 @@ model:
   package: discovery
   group: core/discovery
   description: Includes information about a VPC for use in firewall configuration.
+  extends:
+  - '@named'
   detached: true
 
 # Attributes

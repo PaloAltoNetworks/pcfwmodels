@@ -5,7 +5,7 @@
         "description": "Includes information about region, along with its VPCs, for use in firewall\nconfiguration.",
         "properties": {
           "VPCAvailabilityZones": {
-            "description": "List of VPC IDs and their associated availability zones.",
+            "description": "List of VPCs and their associated availability zones.",
             "items": {
               "$ref": "./firewalloptionvpc#/components/schemas/firewalloptionvpc"
             },

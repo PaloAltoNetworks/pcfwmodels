@@ -10,7 +10,7 @@
             "type": "string"
           },
           "regionVPCs": {
-            "description": "List of VPC IDs and their region and associated availability zones.",
+            "description": "List of VPCs and their region and associated availability zones.",
             "items": {
               "$ref": "./firewalloptionregion#/components/schemas/firewalloptionregion"
             },

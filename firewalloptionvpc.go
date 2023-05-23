@@ -19,6 +19,9 @@ type FirewallOptionVPC struct {
 	// The availability zones associated with the VPC.
 	AvailabilityZones []string `json:"availabilityZones" msgpack:"availabilityZones" bson:"-" mapstructure:"availabilityZones,omitempty"`
 
+	// Name of the entity.
+	Name string `json:"name" msgpack:"name" bson:"name" mapstructure:"name,omitempty"`
+
 	ModelVersion int `json:"-" msgpack:"-" bson:"_modelversion"`
 }
 
@@ -41,6 +44,8 @@ func (o *FirewallOptionVPC) GetBSON() (any, error) {
 
 	s := &mongoAttributesFirewallOptionVPC{}
 
+	s.Name = o.Name
+
 	return s, nil
 }
 
@@ -57,6 +62,8 @@ func (o *FirewallOptionVPC) SetBSON(raw bson.Raw) error {
 		return err
 	}
 
+	o.Name = s.Name
+
 	return nil
 }
 
@@ -64,6 +71,18 @@ func (o *FirewallOptionVPC) SetBSON(raw bson.Raw) error {
 func (o *FirewallOptionVPC) BleveType() string {
 
 	return "firewalloptionvpc"
+}
+
+// GetName returns the Name of the receiver.
+func (o *FirewallOptionVPC) GetName() string {
+
+	return o.Name
+}
+
+// SetName sets the property Name of the receiver using the given value.
+func (o *FirewallOptionVPC) SetName(name string) {
+
+	o.Name = name
 }
 
 // DeepCopy returns a deep copy if the FirewallOptionVPC.
@@ -97,6 +116,14 @@ func (o *FirewallOptionVPC) Validate() error {
 	requiredErrors := elemental.Errors{}
 
 	if err := ValidateVPCID("ID", o.ID); err != nil {
+		errors = errors.Append(err)
+	}
+
+	if err := elemental.ValidateRequiredString("name", o.Name); err != nil {
+		requiredErrors = requiredErrors.Append(err)
+	}
+
+	if err := elemental.ValidateMaximumLength("name", o.Name, 256, false); err != nil {
 		errors = errors.Append(err)
 	}
 
@@ -138,6 +165,8 @@ func (o *FirewallOptionVPC) ValueForAttribute(name string) any {
 		return o.ID
 	case "availabilityZones":
 		return o.AvailabilityZones
+	case "name":
+		return o.Name
 	}
 
 	return nil
@@ -166,6 +195,22 @@ var FirewallOptionVPCAttributesMap = map[string]elemental.AttributeSpecification
 		SubType:        "string",
 		Type:           "list",
 	},
+	"Name": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "name",
+		ConvertedName:  "Name",
+		Description:    `Name of the entity.`,
+		Exposed:        true,
+		Filterable:     true,
+		Getter:         true,
+		MaxLength:      256,
+		Name:           "name",
+		Orderable:      true,
+		Required:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "string",
+	},
 }
 
 // FirewallOptionVPCLowerCaseAttributesMap represents the map of attribute for FirewallOptionVPC.
@@ -191,7 +236,24 @@ var FirewallOptionVPCLowerCaseAttributesMap = map[string]elemental.AttributeSpec
 		SubType:        "string",
 		Type:           "list",
 	},
+	"name": {
+		AllowedChoices: []string{},
+		BSONFieldName:  "name",
+		ConvertedName:  "Name",
+		Description:    `Name of the entity.`,
+		Exposed:        true,
+		Filterable:     true,
+		Getter:         true,
+		MaxLength:      256,
+		Name:           "name",
+		Orderable:      true,
+		Required:       true,
+		Setter:         true,
+		Stored:         true,
+		Type:           "string",
+	},
 }
 
 type mongoAttributesFirewallOptionVPC struct {
+	Name string `bson:"name"`
 }

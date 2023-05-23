@@ -16,8 +16,16 @@
             },
             "readOnly": true,
             "type": "array"
+          },
+          "name": {
+            "description": "Name of the entity.",
+            "example": "the name",
+            "type": "string"
           }
         },
+        "required": [
+          "name"
+        ],
         "type": "object"
       }
     }

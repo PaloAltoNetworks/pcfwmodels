@@ -1,5 +1,7 @@
 {
-  "$extends": [],
+  "$extends": [
+    "@named"
+  ],
   "$modelName": "FirewallOptionVPC",
   "$modelPackage": "discovery",
   "$modelResourceName": "firewalloptionvpcs",
@@ -30,9 +32,20 @@
           "type": "array"
         }
       ]
+    },
+    "name": {
+      "$required": true,
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        }
+      ]
     }
   },
-  "required": [],
+  "required": [
+    "name"
+  ],
   "title": "FirewallOptionVPC",
   "type": "object"
 }

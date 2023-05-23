@@ -14,7 +14,7 @@ model:
 attributes:
   v1:
   - name: VPCAvailabilityZones
-    description: List of VPC IDs and their associated availability zones.
+    description: List of VPCs and their associated availability zones.
     type: refList
     exposed: true
     subtype: firewalloptionvpc
