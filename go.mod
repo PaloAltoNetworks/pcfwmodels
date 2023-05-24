@@ -1,4 +1,4 @@
-module go.aporeto.com/pcfwmodels
+module go.aporeto.io/pcfwmodels
 
 go 1.18
 
