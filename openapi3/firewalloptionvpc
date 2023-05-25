@@ -17,6 +17,14 @@
             "readOnly": true,
             "type": "array"
           },
+          "existingFirewalls": {
+            "description": "Names of any firewalls already associated with the VPC.",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true,
+            "type": "array"
+          },
           "name": {
             "description": "Name of the entity.",
             "example": "the name",

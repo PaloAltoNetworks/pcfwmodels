@@ -4,6 +4,10 @@
       "firewalloption": {
         "description": "Discovers firewall deployment options.",
         "properties": {
+          "firewallID": {
+            "description": "Pass firewall ID if editing an existing firewall.",
+            "type": "string"
+          },
           "regionFilter": {
             "description": "Optionally restrict results to this AWS region.",
             "example": "us-east-1",

@@ -83,6 +83,9 @@ func (o FirewallOptionsList) Version() int {
 
 // FirewallOption represents the model of a firewalloption
 type FirewallOption struct {
+	// Pass firewall ID if editing an existing firewall.
+	FirewallID string `json:"firewallID" msgpack:"firewallID" bson:"-" mapstructure:"firewallID,omitempty"`
+
 	// Optionally restrict results to this AWS region.
 	RegionFilter string `json:"regionFilter" msgpack:"regionFilter" bson:"-" mapstructure:"regionFilter,omitempty"`
 
@@ -183,6 +186,7 @@ func (o *FirewallOption) ToSparse(fields ...string) elemental.SparseIdentifiable
 	if len(fields) == 0 {
 		// nolint: goimports
 		return &SparseFirewallOption{
+			FirewallID:   &o.FirewallID,
 			RegionFilter: &o.RegionFilter,
 			RegionVPCs:   &o.RegionVPCs,
 		}
@@ -191,6 +195,8 @@ func (o *FirewallOption) ToSparse(fields ...string) elemental.SparseIdentifiable
 	sp := &SparseFirewallOption{}
 	for _, f := range fields {
 		switch f {
+		case "firewallID":
+			sp.FirewallID = &(o.FirewallID)
 		case "regionFilter":
 			sp.RegionFilter = &(o.RegionFilter)
 		case "regionVPCs":
@@ -208,6 +214,9 @@ func (o *FirewallOption) Patch(sparse elemental.SparseIdentifiable) {
 	}
 
 	so := sparse.(*SparseFirewallOption)
+	if so.FirewallID != nil {
+		o.FirewallID = *so.FirewallID
+	}
 	if so.RegionFilter != nil {
 		o.RegionFilter = *so.RegionFilter
 	}
@@ -290,6 +299,8 @@ func (*FirewallOption) AttributeSpecifications() map[string]elemental.AttributeS
 func (o *FirewallOption) ValueForAttribute(name string) any {
 
 	switch name {
+	case "firewallID":
+		return o.FirewallID
 	case "regionFilter":
 		return o.RegionFilter
 	case "regionVPCs":
@@ -301,6 +312,15 @@ func (o *FirewallOption) ValueForAttribute(name string) any {
 
 // FirewallOptionAttributesMap represents the map of attribute for FirewallOption.
 var FirewallOptionAttributesMap = map[string]elemental.AttributeSpecification{
+	"FirewallID": {
+		AllowedChoices: []string{},
+		ConvertedName:  "FirewallID",
+		CreationOnly:   true,
+		Description:    `Pass firewall ID if editing an existing firewall.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Type:           "string",
+	},
 	"RegionFilter": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RegionFilter",
@@ -325,6 +345,15 @@ var FirewallOptionAttributesMap = map[string]elemental.AttributeSpecification{
 
 // FirewallOptionLowerCaseAttributesMap represents the map of attribute for FirewallOption.
 var FirewallOptionLowerCaseAttributesMap = map[string]elemental.AttributeSpecification{
+	"firewallid": {
+		AllowedChoices: []string{},
+		ConvertedName:  "FirewallID",
+		CreationOnly:   true,
+		Description:    `Pass firewall ID if editing an existing firewall.`,
+		Exposed:        true,
+		Name:           "firewallID",
+		Type:           "string",
+	},
 	"regionfilter": {
 		AllowedChoices: []string{},
 		ConvertedName:  "RegionFilter",
@@ -410,6 +439,9 @@ func (o SparseFirewallOptionsList) Version() int {
 
 // SparseFirewallOption represents the sparse version of a firewalloption.
 type SparseFirewallOption struct {
+	// Pass firewall ID if editing an existing firewall.
+	FirewallID *string `json:"firewallID,omitempty" msgpack:"firewallID,omitempty" bson:"-" mapstructure:"firewallID,omitempty"`
+
 	// Optionally restrict results to this AWS region.
 	RegionFilter *string `json:"regionFilter,omitempty" msgpack:"regionFilter,omitempty" bson:"-" mapstructure:"regionFilter,omitempty"`
 
@@ -480,6 +512,9 @@ func (o *SparseFirewallOption) Version() int {
 func (o *SparseFirewallOption) ToPlain() elemental.PlainIdentifiable {
 
 	out := NewFirewallOption()
+	if o.FirewallID != nil {
+		out.FirewallID = *o.FirewallID
+	}
 	if o.RegionFilter != nil {
 		out.RegionFilter = *o.RegionFilter
 	}

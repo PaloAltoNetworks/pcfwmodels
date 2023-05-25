@@ -10,6 +10,12 @@ model:
 # Attributes
 attributes:
   v1:
+  - name: firewallID
+    description: Pass firewall ID if editing an existing firewall.
+    type: string
+    exposed: true
+    creation_only: true
+
   - name: regionFilter
     description: Optionally restrict results to this AWS region.
     type: string

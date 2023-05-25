@@ -33,6 +33,20 @@
         }
       ]
     },
+    "existingFirewalls": {
+      "$readOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "name": {
       "$required": true,
       "anyOf": [

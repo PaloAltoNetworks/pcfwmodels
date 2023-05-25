@@ -6,6 +6,17 @@
   "$modelRestName": "firewalloption",
   "additionalProperties": true,
   "properties": {
+    "firewallID": {
+      "$creationOnly": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
     "regionFilter": {
       "$creationOnly": true,
       "anyOf": [
