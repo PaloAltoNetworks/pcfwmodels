@@ -422,17 +422,6 @@
         }
       ]
     },
-    "urlFilteringCategory": {
-      "$readOnly": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "string"
-        }
-      ]
-    },
     "urlFilteringContentType": {
       "$readOnly": true,
       "anyOf": [
@@ -484,18 +473,6 @@
           "type": "null"
         },
         {
-          "type": "string"
-        }
-      ]
-    },
-    "urlFilteringStartTime": {
-      "$readOnly": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "format": "date-time",
           "type": "string"
         }
       ]

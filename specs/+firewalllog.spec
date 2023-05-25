@@ -264,12 +264,6 @@ attributes:
     - news
     - low-risk
 
-  - name: urlFilteringCategory
-    description: URL category associated with the session (if applicable).
-    type: string
-    exposed: true
-    read_only: true
-
   - name: urlFilteringContentType
     description: Content type of the HTTP response data. Maximum length 32 bytes.
     type: string
@@ -310,13 +304,6 @@ attributes:
     exposed: true
     read_only: true
     example_value: https://example.com/
-
-  - name: urlFilteringStartTime
-    description: Time of session start.
-    type: time
-    exposed: true
-    read_only: true
-    example_value: "2023-03-06T20:50:56Z"
 
   - name: urlFilteringURLFilename
     description: The actual URI of the request.

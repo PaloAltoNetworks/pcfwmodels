@@ -150,9 +150,6 @@ type FirewallLog struct {
 	// Lists the URL filtering categories that the firewall used to enforce policy.
 	UrlFilteringCategories []string `json:"urlFilteringCategories" msgpack:"urlFilteringCategories" bson:"-" mapstructure:"urlFilteringCategories,omitempty"`
 
-	// URL category associated with the session (if applicable).
-	UrlFilteringCategory string `json:"urlFilteringCategory" msgpack:"urlFilteringCategory" bson:"-" mapstructure:"urlFilteringCategory,omitempty"`
-
 	// Content type of the HTTP response data. Maximum length 32 bytes.
 	UrlFilteringContentType string `json:"urlFilteringContentType" msgpack:"urlFilteringContentType" bson:"-" mapstructure:"urlFilteringContentType,omitempty"`
 
@@ -172,9 +169,6 @@ type FirewallLog struct {
 	// page that linked the user to another web page; it is the source that redirected
 	// (referred) the user to the web page that is being requested.
 	UrlFilteringReferer string `json:"urlFilteringReferer" msgpack:"urlFilteringReferer" bson:"-" mapstructure:"urlFilteringReferer,omitempty"`
-
-	// Time of session start.
-	UrlFilteringStartTime time.Time `json:"urlFilteringStartTime" msgpack:"urlFilteringStartTime" bson:"-" mapstructure:"urlFilteringStartTime,omitempty"`
 
 	// The actual URI of the request.
 	UrlFilteringURLFilename string `json:"urlFilteringURLFilename" msgpack:"urlFilteringURLFilename" bson:"-" mapstructure:"urlFilteringURLFilename,omitempty"`
@@ -375,8 +369,6 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.Type
 	case "urlFilteringCategories":
 		return o.UrlFilteringCategories
-	case "urlFilteringCategory":
-		return o.UrlFilteringCategory
 	case "urlFilteringContentType":
 		return o.UrlFilteringContentType
 	case "urlFilteringDirection":
@@ -387,8 +379,6 @@ func (o *FirewallLog) ValueForAttribute(name string) any {
 		return o.UrlFilteringHTTPMethod
 	case "urlFilteringReferer":
 		return o.UrlFilteringReferer
-	case "urlFilteringStartTime":
-		return o.UrlFilteringStartTime
 	case "urlFilteringURLFilename":
 		return o.UrlFilteringURLFilename
 	case "urlFilteringURLIdx":
@@ -745,15 +735,6 @@ bytes.`,
 		SubType:        "string",
 		Type:           "list",
 	},
-	"UrlFilteringCategory": {
-		AllowedChoices: []string{},
-		ConvertedName:  "UrlFilteringCategory",
-		Description:    `URL category associated with the session (if applicable).`,
-		Exposed:        true,
-		Name:           "urlFilteringCategory",
-		ReadOnly:       true,
-		Type:           "string",
-	},
 	"UrlFilteringContentType": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringContentType",
@@ -803,15 +784,6 @@ page that linked the user to another web page; it is the source that redirected
 		Name:     "urlFilteringReferer",
 		ReadOnly: true,
 		Type:     "string",
-	},
-	"UrlFilteringStartTime": {
-		AllowedChoices: []string{},
-		ConvertedName:  "UrlFilteringStartTime",
-		Description:    `Time of session start.`,
-		Exposed:        true,
-		Name:           "urlFilteringStartTime",
-		ReadOnly:       true,
-		Type:           "time",
 	},
 	"UrlFilteringURLFilename": {
 		AllowedChoices: []string{},
@@ -1184,15 +1156,6 @@ bytes.`,
 		SubType:        "string",
 		Type:           "list",
 	},
-	"urlfilteringcategory": {
-		AllowedChoices: []string{},
-		ConvertedName:  "UrlFilteringCategory",
-		Description:    `URL category associated with the session (if applicable).`,
-		Exposed:        true,
-		Name:           "urlFilteringCategory",
-		ReadOnly:       true,
-		Type:           "string",
-	},
 	"urlfilteringcontenttype": {
 		AllowedChoices: []string{},
 		ConvertedName:  "UrlFilteringContentType",
@@ -1242,15 +1205,6 @@ page that linked the user to another web page; it is the source that redirected
 		Name:     "urlFilteringReferer",
 		ReadOnly: true,
 		Type:     "string",
-	},
-	"urlfilteringstarttime": {
-		AllowedChoices: []string{},
-		ConvertedName:  "UrlFilteringStartTime",
-		Description:    `Time of session start.`,
-		Exposed:        true,
-		Name:           "urlFilteringStartTime",
-		ReadOnly:       true,
-		Type:           "time",
 	},
 	"urlfilteringurlfilename": {
 		AllowedChoices: []string{},

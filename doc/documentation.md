@@ -991,7 +991,6 @@ Represents a log line in a log query result.
   "urlFilteringHTTP2Connection": 22749,
   "urlFilteringHTTPMethod": "get",
   "urlFilteringReferer": "https://example.com/",
-  "urlFilteringStartTime": "2023-03-06T20:50:56Z",
   "urlFilteringURLIdx": 1
 }
 ```
@@ -1231,12 +1230,6 @@ Type: `[]string`
 
 Lists the URL filtering categories that the firewall used to enforce policy.
 
-##### `urlFilteringCategory` [`read_only`]
-
-Type: `string`
-
-URL category associated with the session (if applicable).
-
 ##### `urlFilteringContentType` [`read_only`]
 
 Type: `string`
@@ -1271,12 +1264,6 @@ Type: `string`
 The Referer field in the HTTP header contains the URL of the web
 page that linked the user to another web page; it is the source that redirected
 (referred) the user to the web page that is being requested.
-
-##### `urlFilteringStartTime` [`read_only`]
-
-Type: `time`
-
-Time of session start.
 
 ##### `urlFilteringURLFilename` [`read_only`]
 
