@@ -312,6 +312,12 @@
       },
       "type": "array"
     },
+    "pcfwlambdahealths": {
+      "items": {
+        "$ref": "pcfwlambdahealth.json"
+      },
+      "type": "array"
+    },
     "pcfwsubnethelpers": {
       "items": {
         "$ref": "pcfwsubnethelper.json"

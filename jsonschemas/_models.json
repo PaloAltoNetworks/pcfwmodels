@@ -156,6 +156,9 @@
     "pcfwfirewallconfigterraform": {
       "$ref": "pcfwfirewallconfigterraform.json"
     },
+    "pcfwlambdahealth": {
+      "$ref": "pcfwlambdahealth.json"
+    },
     "pcfwsubnethelper": {
       "$ref": "pcfwsubnethelper.json"
     },

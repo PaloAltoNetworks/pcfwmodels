@@ -234,6 +234,14 @@ relations:
     global_parameters:
     - $queryable
 
+- rest_name: pcfwlambdahealth
+  get:
+    description: Retrieves the health status of a lambda for a cloud account.
+    global_parameters:
+    - $queryable
+  create:
+    description: Creates the health status of a lambda for a cloud account.
+
 - rest_name: pcfwsubnethelper
   create:
     description: Creates a list of free subnets per availability zone.

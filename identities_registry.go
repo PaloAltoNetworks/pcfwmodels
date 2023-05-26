@@ -49,6 +49,7 @@ var (
 		"pcfwaccountmirrorsource":      PCFWAccountMirrorSourceIdentity,
 		"pcfwaccountmirrorsourcestate": PCFWAccountMirrorSourceStateIdentity,
 		"pcfwfirewallconfigterraform":  PCFWFirewallConfigTerraformIdentity,
+		"pcfwlambdahealth":             PCFWLambdaHealthIdentity,
 		"pcfwsubnethelper":             PCFWSubnetHelperIdentity,
 		"pcfwtenant":                   PCFWTenantIdentity,
 		"pcfwtenantaccountterraform":   PCFWTenantAccountTerraformIdentity,
@@ -104,6 +105,7 @@ var (
 		"pcfwaccountmirrorsources":      PCFWAccountMirrorSourceIdentity,
 		"pcfwaccountmirrorsourcestates": PCFWAccountMirrorSourceStateIdentity,
 		"pcfwfirewallconfigterraform":   PCFWFirewallConfigTerraformIdentity,
+		"pcfwlambdahealths":             PCFWLambdaHealthIdentity,
 		"pcfwsubnethelpers":             PCFWSubnetHelperIdentity,
 		"pcfwtenants":                   PCFWTenantIdentity,
 		"pcfwtenantaccountterraform":    PCFWTenantAccountTerraformIdentity,
@@ -275,6 +277,12 @@ var (
 		"pcfwfirewallconfigterraform": {
 			{"namespace"},
 		},
+		"pcfwlambdahealth": {
+			{":shard", ":unique", "zone", "zHash"},
+			{"createIdempotencyKey"},
+			{"namespace"},
+			{"updateIdempotencyKey"},
+		},
 		"pcfwsubnethelper": nil,
 		"pcfwtenant": {
 			{":shard", ":unique", "zone", "zHash"},
@@ -394,6 +402,8 @@ func (f modelManager) Identifiable(identity elemental.Identity) elemental.Identi
 		return NewPCFWAccountMirrorSourceState()
 	case PCFWFirewallConfigTerraformIdentity:
 		return NewPCFWFirewallConfigTerraform()
+	case PCFWLambdaHealthIdentity:
+		return NewPCFWLambdaHealth()
 	case PCFWSubnetHelperIdentity:
 		return NewPCFWSubnetHelper()
 	case PCFWTenantIdentity:
@@ -481,6 +491,8 @@ func (f modelManager) SparseIdentifiable(identity elemental.Identity) elemental.
 		return NewSparsePCFWAccountMirrorSourceState()
 	case PCFWFirewallConfigTerraformIdentity:
 		return NewSparsePCFWFirewallConfigTerraform()
+	case PCFWLambdaHealthIdentity:
+		return NewSparsePCFWLambdaHealth()
 	case PCFWSubnetHelperIdentity:
 		return NewSparsePCFWSubnetHelper()
 	case PCFWTenantIdentity:
@@ -576,6 +588,8 @@ func (f modelManager) Identifiables(identity elemental.Identity) elemental.Ident
 		return &PCFWAccountMirrorSourceStatesList{}
 	case PCFWFirewallConfigTerraformIdentity:
 		return &PCFWFirewallConfigTerraformsList{}
+	case PCFWLambdaHealthIdentity:
+		return &PCFWLambdaHealthsList{}
 	case PCFWSubnetHelperIdentity:
 		return &PCFWSubnetHelpersList{}
 	case PCFWTenantIdentity:
@@ -661,6 +675,8 @@ func (f modelManager) SparseIdentifiables(identity elemental.Identity) elemental
 		return &SparsePCFWAccountMirrorSourceStatesList{}
 	case PCFWFirewallConfigTerraformIdentity:
 		return &SparsePCFWFirewallConfigTerraformsList{}
+	case PCFWLambdaHealthIdentity:
+		return &SparsePCFWLambdaHealthsList{}
 	case PCFWSubnetHelperIdentity:
 		return &SparsePCFWSubnetHelpersList{}
 	case PCFWTenantIdentity:
@@ -734,6 +750,7 @@ func AllIdentities() []elemental.Identity {
 		PCFWAccountMirrorSourceIdentity,
 		PCFWAccountMirrorSourceStateIdentity,
 		PCFWFirewallConfigTerraformIdentity,
+		PCFWLambdaHealthIdentity,
 		PCFWSubnetHelperIdentity,
 		PCFWTenantIdentity,
 		PCFWTenantAccountTerraformIdentity,
@@ -810,6 +827,8 @@ func AliasesForIdentity(identity elemental.Identity) []string {
 	case PCFWAccountMirrorSourceStateIdentity:
 		return []string{}
 	case PCFWFirewallConfigTerraformIdentity:
+		return []string{}
+	case PCFWLambdaHealthIdentity:
 		return []string{}
 	case PCFWSubnetHelperIdentity:
 		return []string{}
