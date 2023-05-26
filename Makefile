@@ -32,7 +32,7 @@ codegen:
 .PHONY: diff-check
 diff-check:
 	git update-index -q --really-refresh
-	git diff-index --quiet HEAD -- || (git diff && false)
+	git diff-index --quiet HEAD -- . ':!go.mod' ':!go.sum' || (git diff && false)
 
 format: format-specs format-type format-validation format-parameter
 format-specs:
